@@ -1,0 +1,5 @@
+next.config.mjs
+node_modules
+postcss.config.mjs
+tailwind.config.ts
+.next
