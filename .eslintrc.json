@@ -19,10 +19,33 @@
 
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "no-implicit-coercion": "error",
+    "no-warning-comments": [
+      "warn",
+      {
+        "terms": ["TODO", "FIXME", "XXX", "BUG"],
+        "location": "anywhere"
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "spaced-comment": "error",
     "quotes": ["error", "single"],
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "no-unused-vars": "warn",
+    "eqeqeq": "error",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+        "selector": "variable",
+        "leadingUnderscore": "allow"
+      },
+      { "format": ["camelCase", "PascalCase"], "selector": "function" },
+      { "format": ["PascalCase"], "selector": "interface" },
+      { "format": ["PascalCase"], "selector": "typeAlias" }
+    ],
+    "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }]
   },
   "settings": {
     "import/parsers": {
