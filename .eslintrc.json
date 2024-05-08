@@ -9,7 +9,8 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:arrow-return-style/recommended"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -21,7 +22,7 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "no-implicit-coercion": "error",
+    "no-implicit-coercion": ["error", { "boolean": false }],
     "no-warning-comments": [
       "warn",
       {
@@ -36,6 +37,7 @@
     "no-unused-vars": "warn",
     "eqeqeq": "error",
     "no-multiple-empty-lines": "error",
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "@typescript-eslint/naming-convention": [
       "error",
       {
