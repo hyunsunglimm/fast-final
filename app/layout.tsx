@@ -22,7 +22,7 @@ const RootLayout = ({
             {/* XXX 
               바디 구분 위해 의도적으로 색상 넣어놨습니다.
              */}
-            <main className='bg-slate-200'>
+            <main className='bg-slate-200 px-5'>
               {children}
               <Navbar />
             </main>
