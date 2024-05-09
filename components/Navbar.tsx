@@ -10,10 +10,10 @@ const Navbar = () => {
         <Link href='/asset-management'>자산 관리</Link>
       </li>
       <li>
-        <Link href='/budget-calendar'>금융 상품</Link>
+        <Link href='/budget-calendar'>가계부</Link>
       </li>
       <li>
-        <Link href='/financial-product'>가계부</Link>
+        <Link href='/financial-product'>금융 상품</Link>
       </li>
     </ul>
   );
