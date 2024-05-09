@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import QueryProviders from '@/context/queryProvider';
 import AuthProvider from '@/context/authProvider';
+import Navbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
   // FIXME -> 추후 메타데이터 수정
@@ -21,7 +22,10 @@ const RootLayout = ({
             {/* XXX 
               바디 구분 위해 의도적으로 색상 넣어놨습니다.
              */}
-            <main className='bg-slate-200'>{children}</main>
+            <main className='bg-slate-200'>
+              {children}
+              <Navbar />
+            </main>
           </QueryProviders>
         </AuthProvider>
       </body>
