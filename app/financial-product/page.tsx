@@ -2,6 +2,7 @@
 
 import Text from '@/components/ui/Text';
 import RecommendationCard from './_components/RecommendationCard';
+import ProductCard from './_components/ProductCard';
 
 const recommendationArray = [
   {
@@ -24,13 +25,32 @@ const recommendationArray = [
   }
 ];
 
+const productArray = [
+  {
+    title: '#차근차근 모아봐요',
+    products: [{ title: '입출금' }, { title: '예적금' }, { title: '청약' }]
+  },
+  {
+    title: '#똑똑하게 소비해요',
+    products: [{ title: '체크카드' }, { title: '신용카드' }]
+  },
+  {
+    title: '#신중하게 빌려봐요',
+    products: [{ title: '신용대출' }, { title: '비상금대출' }, { title: '전세대출' }]
+  },
+  {
+    title: '#쑥쑥 불려봐요',
+    products: [{ title: '펀드' }, { title: '주식투자' }, { title: 'ISA' }]
+  }
+];
+
 const FinancialProductPage = () => {
   return (
     <div>
       <Text sizes='title20' variant='h1'>
         맞춤탐색
       </Text>
-      <div className='flex flex-col gap-8'>
+      <div className='mb-16 mt-8 flex flex-col gap-8'>
         {recommendationArray.map((recommendationInfo) => {
           return (
             <RecommendationCard
@@ -39,6 +59,14 @@ const FinancialProductPage = () => {
             />
           );
         })}
+      </div>
+      <Text sizes='title20' variant='h1'>
+        금융상품
+      </Text>
+      <div className='mt-8 flex flex-col gap-[12px]'>
+        {productArray.map((productInfo) => (
+          <ProductCard key={productInfo.title} productInfo={productInfo} />
+        ))}
       </div>
     </div>
   );
