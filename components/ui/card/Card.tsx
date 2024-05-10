@@ -19,9 +19,9 @@ const cardVariants = cva('bg-white shadow text-card-foreground border', {
 
 type CardPropsType = HTMLAttributes<HTMLDivElement> & VariantProps<typeof cardVariants>;
 
-const Card = forwardRef<HTMLDivElement, CardPropsType>(({ className, rounded, ...props }, ref) => {
-  return <div ref={ref} className={cn(cardVariants({ className, rounded }))} {...props} />;
-});
+export const Card = forwardRef<HTMLDivElement, CardPropsType>(
+  ({ className, rounded, ...props }, ref) => {
+    return <div ref={ref} className={cn(cardVariants({ className, rounded }))} {...props} />;
+  }
+);
 Card.displayName = 'Card';
-
-export default Card;
