@@ -1,8 +1,8 @@
 // 금융상품
 
 import Text from '@/components/ui/Text';
-import RecommendationCard from './_components/RecommendationCard';
 import ProductCard from './_components/ProductCard';
+import RecommendationCard from './_components/RecommendationCard';
 
 const recommendationArray = [
   {
