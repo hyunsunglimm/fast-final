@@ -5,7 +5,7 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 const buttonVariants = cva('', {
   variants: {
     variant: {
-      default: 'bg-black text-white rounded-[16px] px-[16px] h-[56px] text-body16'
+      default: 'bg-black text-white rounded-[8px] px-[16px] h-[48px] text-body16'
     },
     size: {
       default: 'w-full',
