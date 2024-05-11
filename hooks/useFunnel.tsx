@@ -1,6 +1,7 @@
 'use client';
 import React, { ReactElement, ReactNode } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import type { NoEmptyArray } from '@/types/noEmptyArray';
 
 type StepProps = {
   stepsElement: string;
@@ -11,22 +12,21 @@ type FunnelProps = {
 };
 type SetStepOptions = {
   stepChangeType?: 'push' | 'replace';
-  preserveQuery?: boolean;
-  query?: Record<string, any>;
 };
 
-export const useFunnel = <Steps extends string[]>(
-  param: string,
-  options?: {
-    stepQueryKey?: string;
-    initialStep?: Steps[number];
-    onStepChange?: (name: Steps[number]) => void;
-  }
+/**
+ * @param stepQueryKey 쿼리 파라미터의 'Key'을 결정
+ * @param initialStep 쿼리 파라미터의 'Default Value'를 결정
+ * @returns Funnel, ShowStep, setStep
+ */
+export const useFunnel = <Steps extends NoEmptyArray<string>>(
+  stepQueryKey: string,
+  initialStep?: Steps[number]
 ) => {
   const router = useRouter();
   const params = useSearchParams();
   const pathname = usePathname();
-  const currentStep = params.get(param) ?? options?.initialStep;
+  const currentStep = params.get(stepQueryKey) ?? initialStep;
 
   /**
    * @param stepsElement:steps[]중 보여져야 할 요소,
@@ -38,8 +38,14 @@ export const useFunnel = <Steps extends string[]>(
     }
     return null;
   };
-  const setStep = (step: Steps[number], setStepOptions?: SetStepOptions) => {
-    const url = `${pathname}?${param}=${step}`;
+
+  /**
+   * @param nextStep 다음 스텝의 값
+   * @param setStepOptions router 방식을 결정
+   * @returns
+   */
+  const setStep = (nextStep: Steps[number], setStepOptions?: SetStepOptions) => {
+    const url = `${pathname}?${stepQueryKey}=${nextStep}`;
     switch (setStepOptions?.stepChangeType) {
       case 'replace':
         router.replace(url);
@@ -50,8 +56,11 @@ export const useFunnel = <Steps extends string[]>(
         return;
     }
   };
-  // 여러 단계의 Step 컴포넌트 중 현재 활성화된 스텝을 렌더링하는 Funnel
-  // find를 통해 Step 중 현재 Step을 찾아 렌더링
+
+  /**
+   * @param children[]
+   * @returns 현재 Step을 찾아 렌더링
+   */
   const Funnel = ({ children }: FunnelProps) => {
     const targetStep = children.find((childStep) => childStep.props.stepsElement === currentStep);
 
