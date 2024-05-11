@@ -1,30 +1,23 @@
 import { CardContent } from '@/components/ui/card';
-import React, { ChangeEvent } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { InputValueType } from '../StepFourForm';
 
 type CheckedGenderProps = {
-  setStepFourInput: React.Dispatch<
-    React.SetStateAction<{
-      address: string;
-      gender: string;
-    }>
-  >;
+  register: UseFormRegister<InputValueType>;
 };
 
 const genderChoiceBtnClass =
   'w-40 cursor-pointer rounded-md border border-black py-5 text-center transition duration-200 hover:bg-gray-400';
 
-const CheckedGender = ({ setStepFourInput }: CheckedGenderProps) => {
-  const handleGenderChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStepFourInput((prev) => ({ ...prev, gender: e.target.id }));
-  };
+const CheckedGender = ({ register }: CheckedGenderProps) => {
   return (
     <CardContent justifyContent='center' className='w-full gap-x-4'>
       <input
+        {...register('gender', { required: true })}
         type='radio'
         className='peer/male hidden'
         id='male'
-        name='gender'
-        onChange={handleGenderChange}
+        value='male'
       />
       <label
         htmlFor='male'
@@ -33,11 +26,11 @@ const CheckedGender = ({ setStepFourInput }: CheckedGenderProps) => {
         남성
       </label>
       <input
+        {...register('gender', { required: true })}
         type='radio'
         id='female'
+        value='female'
         className='peer/female hidden'
-        name='gender'
-        onChange={handleGenderChange}
       />
       <label
         htmlFor='female'
