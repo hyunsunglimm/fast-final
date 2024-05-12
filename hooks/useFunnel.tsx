@@ -4,7 +4,7 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import type { NoEmptyArray } from '@/types/noEmptyArray';
 
 type StepProps = {
-  stepsElement: string;
+  targetStep: string;
   children: ReactNode;
 };
 type FunnelProps = {
@@ -29,15 +29,10 @@ export const useFunnel = <Steps extends NoEmptyArray<string>>(
   const currentStep = params.get(stepQueryKey) ?? initialStep;
 
   /**
-   * @param stepsElement:steps[]중 보여져야 할 요소,
+   * @param targetStep:steps[]중 보여져야 할 요소,
    * @returns children || null
    */
-  const ShowStep = ({ stepsElement, children }: StepProps) => {
-    if (stepsElement === currentStep) {
-      return children;
-    }
-    return null;
-  };
+  const ShowStepComponent = ({ children }: StepProps) => <>{children}</>;
 
   /**
    * @param nextStep 다음 스텝의 값
@@ -61,11 +56,11 @@ export const useFunnel = <Steps extends NoEmptyArray<string>>(
    * @param children[]
    * @returns 현재 Step을 찾아 렌더링
    */
-  const Funnel = ({ children }: FunnelProps) => {
-    const targetStep = children.find((childStep) => childStep.props.stepsElement === currentStep);
+  const FunnelCompnent = ({ children }: FunnelProps) => {
+    const TargetStepComp = children.find((childStep) => childStep.props.targetStep === currentStep);
 
-    return <>{targetStep}</>;
+    return <>{TargetStepComp}</>;
   };
 
-  return { Funnel, ShowStep, setStep } as const;
+  return { FunnelCompnent, ShowStepComponent, setStep } as const;
 };
