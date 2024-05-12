@@ -14,7 +14,7 @@ export const StepOneForm = () => {
       <form className='flex flex-col'>
         <label htmlFor='password'>비밀번호를 입력해주세요</label>
         <input type='password' id='password' autoComplete='off' />
-        <label htmlFor='confirmPassword'>비비밀번호를 한번 더 입력해주세요</label>
+        <label htmlFor='confirmPassword'>비밀번호를 한번 더 입력해주세요</label>
         <input type='password' id='confirmPassword' autoComplete='off' />
       </form>
       <Button>다음</Button>
