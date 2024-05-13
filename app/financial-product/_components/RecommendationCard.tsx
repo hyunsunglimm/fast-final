@@ -29,15 +29,14 @@ const RecommendationCard = ({
         {description}
       </Text>
       <div className='mb-[2.8rem] flex justify-center'>
-        <div className='relative inset-0 h-[14.2rem] w-[17rem]'>
-          <Image
-            src='/images/search-products.png'
-            alt='search products'
-            fill
-            sizes='auto'
-            priority
-          />
-        </div>
+        <Image
+          src={`/images/${href}.png`}
+          alt='search products'
+          width={1000}
+          height={0}
+          priority
+          className='w-[17rem]'
+        />
       </div>
       <Link href={`/financial-product/${href}`}>
         <Button>{linkTitle}</Button>
