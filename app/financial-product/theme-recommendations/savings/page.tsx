@@ -1,9 +1,10 @@
 import Text from '@/components/ui/Text';
+import React from 'react';
 
-const SeasonRecommendationsPage = () => {
+const page = () => {
   return (
     <section>
-      <Text variant='h1' sizes='title32'>
+      <Text variant='h1' sizes='title24'>
         올 겨울에 6개월 적금 들고 내년 여름 여행가자
       </Text>
       <div className='flex flex-col gap-4'>
@@ -32,4 +33,4 @@ const SeasonRecommendationsPage = () => {
   );
 };
 
-export default SeasonRecommendationsPage;
+export default page;
