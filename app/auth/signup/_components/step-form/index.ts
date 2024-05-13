@@ -1,3 +1,4 @@
-export { StepOneForm } from './StepOneForm';
-export { StepTwoForm } from './StepTwoForm';
-export { StepThreeForm } from './StepThreeForm';
+export * from './StepOneForm';
+export * from './StepTwoForm';
+export * from './StepFourForm';
+export * from './StepFiveForm';

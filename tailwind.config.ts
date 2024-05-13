@@ -9,25 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       backgroundColor: {
-        'bg-gray-100': '#f0f0f0',
-        'bg-gray-200': '#e8e8e8',
-        'bg-gray-300': '#d0d0d0',
-        'bg-gray-500': '#949494',
-        'bg-gray-700': '#505050'
+        'gray-100': '#f0f0f0',
+        'gray-200': '#e8e8e8',
+        'gray-300': '#d0d0d0',
+        'gray-500': '#949494',
+        'gray-700': '#505050'
       },
       fontSize: {
-        data48: ['48px', { lineHeight: '72px' }],
-        data40: ['40px', { lineHeight: '60px' }],
-        data36: ['36px', { lineHeight: '52px' }],
-        title32: ['32px', { lineHeight: '48px' }],
-        title28: ['28px', { lineHeight: '40px' }],
-        title24: ['24px', { lineHeight: '32px' }],
-        title20: ['20px', { lineHeight: '28px' }],
-        title18: ['18px', { lineHeight: '26px' }],
-        body16: ['16px', { lineHeight: '24px' }],
-        body14: ['14px', { lineHeight: '20px' }],
-        caption12: ['12px', { lineHeight: '18px' }],
-        caption10: ['10px', { lineHeight: '16px' }]
+        '48': ['4.8rem', { lineHeight: '7.2rem' }],
+        '40': ['4rem', { lineHeight: '6rem' }],
+        '36': ['3.6rem', { lineHeight: '5.2rem' }],
+        '32': ['3.2rem', { lineHeight: '4.8rem' }],
+        '28': ['2.8rem', { lineHeight: '4rem' }],
+        '24': ['2.4rem', { lineHeight: '3.2rem' }],
+        '20': ['2rem', { lineHeight: '2.8rem' }],
+        '18': ['1.8rem', { lineHeight: '2.6rem' }],
+        '16': ['1.6rem', { lineHeight: '2.4rem' }],
+        '14': ['1.4rem', { lineHeight: '2rem' }],
+        '12': ['1.2rem', { lineHeight: '1.8rem' }],
+        '10': ['1rem', { lineHeight: '1.6rem' }]
       }
     }
   },
