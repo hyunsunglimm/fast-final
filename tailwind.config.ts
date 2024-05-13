@@ -28,6 +28,10 @@ const config: Config = {
         body14: ['14px', { lineHeight: '20px' }],
         caption12: ['12px', { lineHeight: '18px' }],
         caption10: ['10px', { lineHeight: '16px' }]
+      },
+      colors: {
+        active: '#0089EC',
+        red_500: '#F5553F'
       }
     }
   },
