@@ -17,6 +17,7 @@ export const StepTwoForm = () => {
         <label htmlFor='phone'>휴대폰 번호를 알려주세요</label>
         <input type='text' id='phone' />
       </form>
+      <Button>인증번호 요청</Button>
       <Button>다음</Button>
     </CardContent>
   );
