@@ -12,10 +12,10 @@ const HomePage = () => {
           <div className='h-[100px] w-[68px] bg-orange-500'>버킷 리스트</div>
           <CardContent flexDirection='col'>
             <Text>오늘 소비 날씨는</Text>
-            <Text sizes='title18' weight='bold'>
+            <Text sizes='18' weight='bold'>
               천둥번개가 쳐요!
             </Text>
-            <Text sizes='caption12' className='text-gray-500'>
+            <Text sizes='12' className='text-gray-500'>
               예산보다{' '}
               <Text weight='bold' className='text-orange-500'>
                 1,000,000원

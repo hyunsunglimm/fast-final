@@ -2,7 +2,7 @@ import { cn } from '@/utils/twMerge';
 import { forwardRef, HTMLAttributes } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
-const cardVariants = cva('bg-white shadow text-card-foreground border', {
+export const cardVariants = cva('bg-white shadow text-card-foreground border', {
   variants: {
     rounded: {
       none: 'rounded-none',
