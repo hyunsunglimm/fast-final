@@ -35,7 +35,7 @@ const cardContentVariants = cva('p-5 pt-0 flex', {
 
 type CardContentProps = VariantProps<typeof cardContentVariants> & HTMLAttributes<HTMLDivElement>;
 
-const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
+export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ className, flexDirection, justifyContent, alignItems, ...props }: CardContentProps, ref) => {
     return (
       <div
@@ -49,5 +49,3 @@ const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   }
 );
 CardContent.displayName = 'CardContent';
-
-export default CardContent;
