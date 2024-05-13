@@ -1,10 +1,10 @@
 import { ChangeEvent, useState, useEffect } from 'react';
-import { CardContent } from '@/components/ui/card';
+import { CardContent, CardFooter } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import CheckIcon from './_components/CheckIcon';
 import ArrowRightIcon from './_components/ArrowRightIcon';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
+import Button from '@/components/ui/Button';
 const policyList = [
   {
     id: 'service',
@@ -61,7 +61,7 @@ export const StepFiveForm = () => {
               checked={isAllChecked}
               onChange={handleSelectAll}
               type='checkbox'
-              className='hidden'
+              className='hidden '
             />
             <CheckIcon
               fill={isAllChecked ? '#51D868' : '#fff'}
@@ -75,6 +75,9 @@ export const StepFiveForm = () => {
           className='w-full rounded-2xl border border-black px-0 py-0 [&>*]:border-b [&>*]:border-black'
         >
           {policyList.map((item, index) => {
+            const isChecked = selectedOptionsArray[index] === true;
+            const fillClass = isChecked ? 'fill-[#51D868]' : 'fill-white';
+            const strokeClass = isChecked ? 'stroke-white' : 'stroke-[#b7b7b7]';
             return (
               <div
                 key={item.id}
@@ -88,21 +91,39 @@ export const StepFiveForm = () => {
                       className='hidden'
                       id={item.id}
                     />
-                    <CheckIcon
-                      fill={selectedOptionsArray[index] === true ? '#51D868' : '#fff'}
-                      stroke={selectedOptionsArray[index] === true ? '#fff' : '#b7b7b7'}
-                    />
+                    <CheckIcon className={`${fillClass} ${strokeClass}`} />
                     <Text sizes='18'>{item.title}</Text>
                   </CardContent>
                 </label>
-                <ArrowRightIcon width={8} height={12} />
+                <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} />
               </div>
             );
           })}
         </CardContent>
-        <button type='submit' className='h-20 bg-blue-500'>
-          submit
-        </button>
+        <CardContent
+          alignItems='center'
+          justifyContent='between'
+          className='w-full rounded-2xl border border-black p-5'
+        >
+          <label className='flex cursor-pointer items-center justify-between has-[:checked]:text-green-500 has-[:checked]:ring-indigo-200'>
+            <CardContent alignItems='center' className='gap-x-4 p-0'>
+              <input type='checkbox' className='peer/promotion hidden' id='promotion' />
+              <CheckIcon className='fill-white stroke-[#b7b7b7] peer-checked/promotion:fill-[#51D868] peer-checked/promotion:stroke-white' />
+              <Text sizes='18'>[선택] 프로모션 알림 수신 동의</Text>
+            </CardContent>
+          </label>
+          <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} />
+        </CardContent>
+        <CardFooter>
+          <Button className='h-20 text-white'>이전</Button>
+          <Button
+            disabled={!isAllChecked}
+            type='submit'
+            className='h-20 text-white disabled:bg-gray-300'
+          >
+            완료
+          </Button>
+        </CardFooter>
       </CardContent>
     </form>
   );
