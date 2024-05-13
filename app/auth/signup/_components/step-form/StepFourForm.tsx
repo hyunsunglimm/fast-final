@@ -1,4 +1,3 @@
-'use client';
 import Button from '@/components/ui/Button';
 import { CardContent } from '@/components/ui/card';
 import React, { useState } from 'react';
@@ -13,18 +12,27 @@ export type InputValueType = {
   gender: string;
 };
 
-export const StepFourForm = () => {
+type StepFourFormProps = {
+  nextStep: () => void;
+};
+
+export const StepFourForm = ({ nextStep }: StepFourFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { isValid },
     setValue,
     getValues
-  } = useForm<InputValueType>({ mode: 'onChange' });
+  } = useForm<InputValueType>({
+    defaultValues: {},
+    mode: 'onChange'
+  });
   const [visiblePostDaum, setVisiblePostDaum] = useState(false);
   const addressFieldValues = getValues('address');
 
-  const nextStepSubmit: SubmitHandler<InputValueType> = (data) => {};
+  const nextStepSubmit: SubmitHandler<InputValueType> = (data) => {
+    nextStep();
+  };
 
   return (
     <CardContent flexDirection='col' className='relative h-screen w-full'>
@@ -33,7 +41,7 @@ export const StepFourForm = () => {
       )}
       <form className='w-full' onSubmit={handleSubmit(nextStepSubmit)}>
         <label htmlFor='address'>
-          <Text sizes='title20'>주소를 입력해주세요.</Text>
+          <Text sizes='20'>주소를 입력해주세요.</Text>
         </label>
         <CardContent className='w-full'>
           <input
@@ -52,7 +60,7 @@ export const StepFourForm = () => {
         {Boolean(addressFieldValues) && (
           <>
             <label htmlFor='detailAddress'>
-              <Text sizes='title20'>상세 주소를 입력해주세요.</Text>
+              <Text sizes='20'>상세 주소를 입력해주세요.</Text>
             </label>
             <input
               {...register('detailAdress')}

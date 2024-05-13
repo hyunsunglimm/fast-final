@@ -5,18 +5,18 @@ const customTwMerge = extendTailwindMerge({
     classGroups: {
       // 이렇게 해야 저희가 설정한 색상과 텍스트 클래스가 병합되지 않습니다.
       'font-size': [
-        'text-data48',
-        'text-data40',
-        'text-data36',
-        'text-title32',
-        'text-title28',
-        'text-title24',
-        'text-title20',
-        'text-title18',
-        'text-body16',
-        'text-body14',
-        'text-caption12',
-        'text-caption10'
+        'text-48',
+        'text-40',
+        'text-36',
+        'text-32',
+        'text-28',
+        'text-24',
+        'text-20',
+        'text-18',
+        'text-16',
+        'text-14',
+        'text-12',
+        'text-10'
       ]
     }
   }

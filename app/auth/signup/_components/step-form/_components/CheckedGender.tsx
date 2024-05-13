@@ -13,7 +13,7 @@ const genderChoiceBtnClass =
 const CheckedGender = ({ register }: CheckedGenderProps) => {
   return (
     <>
-      <Text sizes='title20'>성별을 선택해주세요.</Text>
+      <Text sizes='20'>성별을 선택해주세요.</Text>
       <CardContent justifyContent='center' className='w-full gap-x-4'>
         <input
           {...register('gender', { required: true })}
