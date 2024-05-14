@@ -43,7 +43,7 @@ const DraggableCardContainer = () => {
   return (
     <>
       <CardContent justifyContent='between'>
-        <Text variant='h4' weight='bold' sizes='20'>
+        <Text variant='h4' weight='700' sizes='20'>
           한 눈에 보기
         </Text>
         <button onClick={() => setEditMode((prev) => !prev)}>

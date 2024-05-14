@@ -16,8 +16,10 @@ const TextBubble = ({ amounts, date, className, isChallenge }: TextBubbleProps) 
       alignItems='center'
       className={`${className} ${afterClass} bottom-bubble relative gap-x-[0.8rem] rounded-full bg-white px-[1rem] py-[0.8rem]`}
     >
-      <Text className={`${txtColor}`}>+{amounts.toLocaleString('kr')}원</Text>
-      <Text sizes='10' className='text-gray-500'>
+      <Text weight='500' className={`${txtColor}`}>
+        +{amounts.toLocaleString('kr')}원
+      </Text>
+      <Text weight='400' sizes='10' className='text-gray-500'>
         {date}
       </Text>
     </FlexBox>

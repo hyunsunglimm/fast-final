@@ -12,11 +12,13 @@ const MyAssetsGraphSection = () => {
       <Card>
         <CardContent flexDirection='col' className='gap-y-[1.6rem] p-[2.4rem]'>
           <FlexBox flexDirection='col'>
-            <Text sizes='16' className='text-gray-500'>
+            <Text weight='500' sizes='16' className='text-gray-500'>
               지난달 보다 자산이 증가했어요
             </Text>
             <FlexBox alignItems='center' className='gap-x-1'>
-              <Text sizes='16'>300,000원</Text>
+              <Text weight='500' sizes='16'>
+                300,000원
+              </Text>
               <ArrowUpFillIcon />
             </FlexBox>
           </FlexBox>

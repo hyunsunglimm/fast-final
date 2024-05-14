@@ -39,11 +39,11 @@ const BucketListCard = ({
         justifyContent='between'
         className='relative pl-[1.6rem] pr-0'
       >
-        <Text sizes='20' weight='bold'>
+        <Text sizes='20' weight='700'>
           {headerText}
         </Text>
         {subHeaderText && (
-          <Text sizes='20' weight='bold' className='absolute mt-10 block'>
+          <Text sizes='20' weight='700' className='absolute mt-10 block'>
             {subHeaderText}
           </Text>
         )}
@@ -80,8 +80,10 @@ const BucketListCard = ({
       <CardFooter className='flex-col px-[1.6rem]'>
         <FlexBox justifyContent='between' alignItems='end' className='mb-[0.6rem] w-full'>
           <p>
-            <Text sizes='18'>{currentAmount.toLocaleString('kr')}&nbsp;</Text>
-            <Text weight='regular'>/ {targetAmount.toLocaleString('kr')}원</Text>
+            <Text sizes='18' weight='700'>
+              {currentAmount.toLocaleString('kr')}&nbsp;
+            </Text>
+            <Text weight='500'>/ {targetAmount.toLocaleString('kr')}원</Text>
           </p>
           <Text>12일째</Text>
         </FlexBox>
