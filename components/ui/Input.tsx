@@ -47,14 +47,15 @@ type InputProps = {
   size?: BoxVariantSize;
   radius?: BoxVariantSize;
   borderType?: 'all' | 'all2' | 'bottom' | 'bottom2' | 'none';
+  fontSize?: 'sm' | 'md' | 'lg';
   action?: 'active' | 'error';
   className?: string;
 } & VariantProps<typeof inputVariants> &
   React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ size, radius, borderType, action, className, ...props }: InputProps, ref) => {
-    const inputClass = cn(inputVariants({ size, radius, borderType, action, className }));
+  ({ size, radius, borderType, fontSize, action, className, ...props }: InputProps, ref) => {
+    const inputClass = cn(inputVariants({ size, radius, borderType, fontSize, action, className }));
 
     return <input {...props} ref={ref} className={inputClass} />;
   }
