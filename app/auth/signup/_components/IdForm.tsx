@@ -18,15 +18,15 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting, isSubmitSuccessful }
+    formState: { errors, isSubmitting, isSubmitSuccessful, isValid }
   } = useForm<FormFields>();
 
   const idRegex = /^[a-zA-Z0-9]+$/;
 
   const idChecker: SubmitHandler<FormFields> = async (data) => {
     try {
-      setEnteredValues((prev) => ({ ...prev, id: data.id }));
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      setEnteredValues((prev) => ({ ...prev, id: data.id }));
       // throw new Error();
     } catch (error) {
       setError('id', {
@@ -44,7 +44,7 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
       </label>
       <div className='relative mb-[0.5rem]'>
         <Input
-          className='rounded-[1.5rem] text-18 placeholder:text-12'
+          className='text-18 placeholder:text-12 rounded-[1.5rem]'
           {...register('id', {
             required: '아이디를 입력해주세요.',
             minLength: {
@@ -74,7 +74,7 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
           {isSubmitting ? '중복확인 중...' : '중복확인'}
         </Button>
       </div>
-      {isSubmitSuccessful && (
+      {isSubmitSuccessful && isValid && (
         <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem]'>
           사용 가능한 아이디입니다.
         </Text>

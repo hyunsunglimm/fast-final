@@ -1,9 +1,12 @@
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Text from '@/components/ui/Text';
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { EnteredValues, SetEnteredValues } from './step-form';
+import VisibleIcon from '@/components/icons/VisibleIcon';
+import SuccessIcon from '@/components/icons/SuccessIcon';
+import InvisibleIcon from '@/components/icons/InvisibleIcon';
 
 type FormFields = {
   password: string;
@@ -23,7 +26,11 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
     formState: { errors, isSubmitting, isValid }
   } = useForm<FormFields>();
 
+  const [isView, setIsView] = useState(false);
+
   const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+
+  const isCheckedId = !!enteredValues.id;
 
   const nextStepSubmit: SubmitHandler<FormFields> = async () => {
     try {
@@ -43,28 +50,36 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
         <label htmlFor='password'>
           <Text sizes='20'>비밀번호를 입력해주세요</Text>
         </label>
-        <Input
-          className='rounded-[1.5rem] text-18 placeholder:text-12'
-          {...register('password', {
-            required: '비밀번호를 입력해주세요.',
-            minLength: {
-              value: 8,
-              message: '비밀번호는 8자 이상입니다.'
-            },
-            maxLength: {
-              value: 20,
-              message: '비밀번호는 21자 미만입니다.'
-            },
-            pattern: {
-              value: pwRegex,
-              message: '영문, 숫자, 특수문자를 모두 포함해야 합니다.'
-            }
-          })}
-          type='password'
-          id='password'
-          autoComplete='off'
-          placeholder='영문, 숫자, 특수문자를 포함하여 8자 이상'
-        />
+        <div className='relative'>
+          <Input
+            className='rounded-[1.5rem] text-18 placeholder:text-12'
+            {...register('password', {
+              required: '비밀번호를 입력해주세요.',
+              minLength: {
+                value: 8,
+                message: '비밀번호는 8자 이상입니다.'
+              },
+              maxLength: {
+                value: 20,
+                message: '비밀번호는 21자 미만입니다.'
+              },
+              pattern: {
+                value: pwRegex,
+                message: '영문, 숫자, 특수문자를 모두 포함해야 합니다.'
+              }
+            })}
+            type={isView ? 'text' : 'password'}
+            id='password'
+            autoComplete='off'
+            placeholder='영문, 숫자, 특수문자를 포함하여 8자 이상'
+          />
+          <div
+            className='absolute right-[2.1rem] top-[1.8rem]'
+            onClick={() => setIsView((prev) => !prev)}
+          >
+            {isView ? <VisibleIcon /> : <InvisibleIcon />}
+          </div>
+        </div>
         {errors.password && (
           <Text sizes='12' className='absolute bottom-[-2.3rem] left-[0.9rem] text-red-500'>
             {errors.password.message}
@@ -76,22 +91,25 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
         <label htmlFor='confirmPassword'>
           <Text sizes='20'>비밀번호를 한번 더 입력해주세요</Text>
         </label>
-        <Input
-          className='rounded-[1.5rem] text-18 placeholder:text-12'
-          {...register('reconfirmPassword', {
-            validate: (value, { password }) => {
-              if (value !== password) {
-                return '비밀번호가 일치하지 않습니다.';
+        <div className='relative'>
+          <Input
+            className='rounded-[1.5rem] text-18 placeholder:text-12'
+            {...register('reconfirmPassword', {
+              validate: (value, { password }) => {
+                if (value !== password) {
+                  return '비밀번호가 일치하지 않습니다.';
+                }
+                setEnteredValues((prev) => ({ ...prev, password }));
+                return true;
               }
-              setEnteredValues((prev) => ({ ...prev, password }));
-              return true;
-            }
-          })}
-          type='password'
-          id='confirmPassword'
-          autoComplete='off'
-          placeholder='비밀번호를 확인해주세요'
-        />
+            })}
+            type='password'
+            id='confirmPassword'
+            autoComplete='off'
+            placeholder='비밀번호를 확인해주세요'
+          />
+          <div className='absolute right-[2.1rem] top-[1.8rem]'>{isValid && <SuccessIcon />}</div>
+        </div>
         {errors.reconfirmPassword && (
           <Text sizes='12' className='absolute bottom-[-2.3rem] left-[0.9rem] text-red-500'>
             {errors.reconfirmPassword.message}
@@ -110,8 +128,8 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
         </Button>
         <Button
           size='signup_next'
-          styled={!isValid ? 'outline' : isSubmitting ? 'disabled' : 'fill'}
-          disabled={!isValid || isSubmitting}
+          styled={!isValid || !isCheckedId ? 'outline' : isSubmitting ? 'disabled' : 'fill'}
+          disabled={!isValid || isSubmitting || !isCheckedId}
           rounded='xl'
         >
           {isSubmitting ? '제출중...' : '다음'}
