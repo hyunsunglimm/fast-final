@@ -3,27 +3,29 @@ import Input from '@/components/ui/Input';
 import Text from '@/components/ui/Text';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { EnteredValues, SetEnteredValues } from './step-form';
 
 type FormFields = {
   id: string;
 };
 
-const IdForm = () => {
+type IdFormProps = {
+  setEnteredValues: (value: EnteredValues | SetEnteredValues) => void;
+};
+
+const IdForm = ({ setEnteredValues }: IdFormProps) => {
   const {
     register,
     handleSubmit,
     setError,
-    formState: {
-      errors: idErrors,
-      isSubmitting: idIsSubmitting,
-      isSubmitSuccessful: isIdSubmitSuccessful
-    }
+    formState: { errors, isSubmitting, isSubmitSuccessful }
   } = useForm<FormFields>();
 
   const idRegex = /^[a-zA-Z0-9]+$/;
 
   const idChecker: SubmitHandler<FormFields> = async (data) => {
     try {
+      setEnteredValues((prev) => ({ ...prev, id: data.id }));
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // throw new Error();
     } catch (error) {
@@ -34,15 +36,15 @@ const IdForm = () => {
   };
 
   return (
-    <form
-      className='mb-[3.7rem] flex w-full flex-col gap-[3.7rem]'
-      onSubmit={handleSubmit(idChecker)}
-    >
-      <div className='flex flex-col gap-[1.4rem]'>
-        <label htmlFor='id'>
-          <Text sizes='20'>아이디를 입력해주세요</Text>
-        </label>
+    <form className='relative mb-[3.7rem] flex w-full flex-col' onSubmit={handleSubmit(idChecker)}>
+      <label htmlFor='id' className='mb-[1.5rem]'>
+        <Text sizes='20' className='ml-[0.7rem]'>
+          아이디를 입력해주세요
+        </Text>
+      </label>
+      <div className='relative mb-[0.5rem]'>
         <Input
+          className='rounded-[1.5rem] text-18 placeholder:text-12'
           {...register('id', {
             required: '아이디를 입력해주세요.',
             minLength: {
@@ -62,12 +64,26 @@ const IdForm = () => {
           id='id'
           placeholder='6자 이상의 영문 혹은 영문과 숫자를 조합'
         />
-        {isIdSubmitSuccessful && <div>사용 가능한 아이디입니다.</div>}
-        {idErrors.id && <div className='text-red-500'>{idErrors.id.message}</div>}
+        <Button
+          size='sm'
+          styled={isSubmitting ? 'disabled' : 'fill'}
+          rounded='lg'
+          disabled={isSubmitting}
+          className='absolute right-[1.3rem] top-[1.2rem]'
+        >
+          {isSubmitting ? '중복확인 중...' : '중복확인'}
+        </Button>
       </div>
-      <Button active={idIsSubmitting ? 'no' : 'yes'} disabled={idIsSubmitting} size='sm'>
-        {idIsSubmitting ? '중복확인 중...' : '중복확인'}
-      </Button>
+      {isSubmitSuccessful && (
+        <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem]'>
+          사용 가능한 아이디입니다.
+        </Text>
+      )}
+      {errors.id && (
+        <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem] text-red-500'>
+          {errors.id.message}
+        </Text>
+      )}
     </form>
   );
 };
