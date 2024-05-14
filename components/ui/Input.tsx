@@ -24,7 +24,7 @@ const inputVariants = cva('placeholder-black-opacity-30 outline-none', {
     },
     fontSize: {
       sm: 'text-sm',
-      md: 'text-title20',
+      md: 'text-20',
       lg: 'text-lg'
     },
     action: {
