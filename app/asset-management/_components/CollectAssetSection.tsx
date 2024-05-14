@@ -20,7 +20,7 @@ const CollectAssetSection = () => {
             <Card key={item.title} className='aspect-square w-[16.2rem] p-[2.4rem]'>
               <CardContent className='h-full p-0' flexDirection='col' justifyContent='between'>
                 <FlexBox alignItems='center' className='mb-[2.4rem] gap-x-[0.4rem]'>
-                  <Text>{item.title}</Text>
+                  <Text weight='500'>{item.title}</Text>
                   <div
                     className={`${badgeClass} my-auto flex h-[2rem] w-[2rem] items-center justify-center rounded-full text-center text-white`}
                   >
@@ -29,7 +29,9 @@ const CollectAssetSection = () => {
                 </FlexBox>
                 <FlexBox flexDirection='col' className='gap-y-2'>
                   <Text className='text-gray-500'>모인 금액</Text>
-                  <Text sizes='16'>{item.amount.toLocaleString('kr')}원</Text>
+                  <Text weight='700' sizes='16'>
+                    {item.amount.toLocaleString('kr')}원
+                  </Text>
                 </FlexBox>
               </CardContent>
             </Card>

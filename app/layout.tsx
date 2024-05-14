@@ -16,7 +16,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang='ko'>
-      <body className='mx-auto overflow-hidden xs:w-[520px]'>
+      <body className='mx-auto overflow-hidden text-black xs:w-[520px]'>
         <AuthProvider>
           <QueryProviders>
             {/* XXX 
