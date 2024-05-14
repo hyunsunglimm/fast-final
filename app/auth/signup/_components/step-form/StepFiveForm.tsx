@@ -1,8 +1,7 @@
 import { ChangeEvent, useState, useEffect } from 'react';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
-import CheckIcon from '@/components/icons/CheckIcon';
-import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
+import { CheckIcon, ArrowRightIcon } from '@/components/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/ui/Button';
 
