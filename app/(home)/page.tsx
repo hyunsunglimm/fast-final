@@ -2,13 +2,14 @@ import ConsumeWeatherCard from './_components/ConsumeWeatherCard';
 import DraggableCardContainer from './_components/DraggableCardContainer';
 import BucketListCard from './_components/BucketListCard';
 import HomeBanner from './_components/HomeBanner';
+import HomeWidgetSection from './_components/HomeWidgetSection';
 import { BucketListHeader, BucketListFooter, BucketListContent } from './_components/bucket-list';
 const HomePage = () => {
   return (
     <>
       <HomeBanner />
       <BucketListCard isChallenge={false}>
-        <BucketListHeader badgeText='버킷리스트' headerText='유럽 여행가기' />
+        <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
         <BucketListContent
           altText='버킷리스트'
           imagePath='/images/home-bucket-rabbit.png'
@@ -26,6 +27,7 @@ const HomePage = () => {
         <BucketListFooter targetAmount={2000000} currentAmount={350000} />
       </BucketListCard>
       <ConsumeWeatherCard />
+      <HomeWidgetSection />
       {/* TODO
          내 계좌 바텀시트 */}
       {/* <div className='flex'>
