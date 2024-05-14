@@ -7,14 +7,14 @@ const BucketListCard = () => {
     <Card rounded='xl' className='aspect-square bg-sky-400 text-white'>
       <CardHeader>
         <div className='flex w-fit items-center rounded-xl bg-indigo-900 px-[8px] py-[6px]'>
-          <Text sizes='caption10'>버킷 리스트</Text>
+          <Text sizes='10'>버킷 리스트</Text>
         </div>
       </CardHeader>
       <CardContent flexDirection='col' alignItems='start' justifyContent='between' className='pr-0'>
-        <Text sizes='title20'>유럽 여행가기</Text>
+        <Text sizes='20'>유럽 여행가기</Text>
         <CardContent justifyContent='between' className='w-full px-0'>
           <div>버킷 리스트</div>
-          <div className='relative h-[230px] w-[202px] overflow-hidden '>
+          <div className='relative h-[23rem] w-[20.2rem] overflow-hidden'>
             <Image
               src='/images/home-bucket-rabbit.png'
               fill

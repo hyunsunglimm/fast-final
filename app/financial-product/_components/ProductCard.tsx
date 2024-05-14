@@ -1,5 +1,5 @@
 import Text from '@/components/ui/Text';
-import Card from '@/components/ui/card/Card';
+import { Card } from '@/components/ui/card/Card';
 import ProductIcon from './ProductIcon';
 
 type ProductInfoProps = {
