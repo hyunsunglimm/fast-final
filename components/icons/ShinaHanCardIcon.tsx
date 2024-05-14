@@ -1,5 +1,5 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
-const ShinaHanCardIcon = ({ ...props }: SvgComponentProps) => {
+export const ShinaHanCardIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -82,5 +82,3 @@ const ShinaHanCardIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default ShinaHanCardIcon;

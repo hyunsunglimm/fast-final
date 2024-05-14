@@ -1,6 +1,6 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
 
-const BusIcon = ({ ...props }: SvgComponentProps) => {
+export const BusIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -50,5 +50,3 @@ const BusIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default BusIcon;

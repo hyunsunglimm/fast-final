@@ -1,6 +1,6 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
 
-const SubsServiceIcon = ({ ...props }: SvgComponentProps) => {
+export const SubsServiceIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -36,5 +36,3 @@ const SubsServiceIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default SubsServiceIcon;

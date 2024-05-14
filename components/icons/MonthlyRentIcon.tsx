@@ -1,5 +1,5 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
-const MonthlyRentIcon = ({ ...props }: SvgComponentProps) => {
+export const MonthlyRentIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -47,5 +47,3 @@ const MonthlyRentIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default MonthlyRentIcon;

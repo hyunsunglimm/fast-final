@@ -1,6 +1,5 @@
-import React from 'react';
 import { SvgComponentProps } from '@/types/svgComponentProps';
-const KbCardIcon = ({ ...props }: SvgComponentProps) => {
+export const KbCardIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -86,5 +85,3 @@ const KbCardIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default KbCardIcon;

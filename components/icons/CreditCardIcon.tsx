@@ -1,5 +1,5 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
-const CreditCardIcon = ({ ...props }: SvgComponentProps) => {
+export const CreditCardIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -64,4 +64,3 @@ const CreditCardIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-export default CreditCardIcon;
