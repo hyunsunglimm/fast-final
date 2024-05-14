@@ -5,7 +5,7 @@ import Text from '@/components/ui/Text';
 
 const ItemList = [1, 2, 3, 4, 5];
 
-const NetWorth = () => {
+const NetWorthSection = () => {
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
@@ -33,23 +33,22 @@ const NetWorth = () => {
   const handleItemClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
-  const mouseCursorClass = isDragging ? 'cursor-grab' : 'cursor-default';
+
   return (
-    <div className=''>
-      <div className='flex flex-col '>
+    <>
+      <div className='flex flex-col'>
         <Text>순자산</Text>
         <Text>3,123,567원</Text>
       </div>
 
       <div
-        className={`${mouseCursorClass} relative flex w-full gap-[1.6rem] overflow-x-auto pb-[4rem] pt-[2rem]`}
+        className='hide-scrollbar relative flex gap-[1.6rem] overflow-x-auto pt-[2rem]'
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
         onMouseUp={handleDragEnd}
         onMouseLeave={handleDragEnd}
         ref={containerRef}
       >
-        <div className='w-[0.2rem] shrink-0'></div>
         {ItemList.map((item) => {
           return (
             <Card
@@ -66,7 +65,7 @@ const NetWorth = () => {
         })}
         <div className='w-[0.2rem] shrink-0'></div>
       </div>
-    </div>
+    </>
   );
 };
-export default NetWorth;
+export default NetWorthSection;

@@ -1,6 +1,6 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
 
-const CheckIcon = (props: SvgComponentProps) => {
+export const CheckIcon = (props: SvgComponentProps) => {
   return (
     <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' {...props}>
       <path
@@ -20,5 +20,3 @@ const CheckIcon = (props: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default CheckIcon;
