@@ -7,7 +7,7 @@
 html {
   font-size: 1.9231vw;
 }
-@media (min-width: 520px) {
+@media (min-width: 375px) {
   html {
     font-size: 10px;
   }
