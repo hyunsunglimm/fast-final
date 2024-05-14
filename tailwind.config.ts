@@ -28,6 +28,10 @@ const config: Config = {
         '14': ['1.4rem', { lineHeight: '2rem' }],
         '12': ['1.2rem', { lineHeight: '1.8rem' }],
         '10': ['1rem', { lineHeight: '1.6rem' }]
+      },
+      colors: {
+        active: '#0089EC',
+        red_500: '#F5553F'
       }
     }
   },
