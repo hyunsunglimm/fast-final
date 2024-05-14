@@ -81,7 +81,7 @@ const UpCommingCard = () => {
               alignItems='center'
               className='w-full'
             >
-              <FlexBox flexDirection='row' className='gap-x-5'>
+              <FlexBox flexDirection='row' alignItems='center' className='gap-x-5'>
                 {item.icon}
                 <FlexBox flexDirection='col'>
                   <Text sizes='16'>{item.cardName}</Text>
