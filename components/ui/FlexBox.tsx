@@ -36,12 +36,12 @@ export const flexBoxVariants = cva('flex', {
 type FlexBoxProps = VariantProps<typeof flexBoxVariants> & HTMLAttributes<HTMLDivElement>;
 
 const FlexBox = forwardRef<HTMLDivElement, FlexBoxProps>(
-  ({ className, justifyContent, flexDirection, alignItems, ...props }: FlexBoxProps, ref) => {
+  ({ className, justifyContent, flexDirection, alignItems, ...props }, ref) => {
     return (
       <div
         ref={ref}
         {...props}
-        className={cn({ className, justifyContent, flexDirection, alignItems })}
+        className={cn(flexBoxVariants({ className, justifyContent, flexDirection, alignItems }))}
       />
     );
   }
