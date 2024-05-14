@@ -2,7 +2,7 @@ import { cn } from '@/utils/twMerge';
 import { forwardRef, HTMLAttributes } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
-export const cardContentVariants = cva('p-5 pt-0 flex', {
+export const cardContentVariants = cva('flex', {
   variants: {
     flexDirection: {
       col: 'flex-col',
