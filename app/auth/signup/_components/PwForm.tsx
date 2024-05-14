@@ -30,7 +30,8 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
 
   const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 
-  const isCheckedId = !!enteredValues.id;
+  const isCheckedId =
+    !!enteredValues.checkedId && enteredValues.enteredId === enteredValues.checkedId;
 
   const nextStepSubmit: SubmitHandler<FormFields> = async () => {
     try {
@@ -52,7 +53,7 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
         </label>
         <div className='relative'>
           <Input
-            className='rounded-[1.5rem] text-18 placeholder:text-12'
+            className='text-18 placeholder:text-12 rounded-[1.5rem]'
             {...register('password', {
               required: '비밀번호를 입력해주세요.',
               minLength: {
@@ -93,7 +94,7 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
         </label>
         <div className='relative'>
           <Input
-            className='rounded-[1.5rem] text-18 placeholder:text-12'
+            className='text-18 placeholder:text-12 rounded-[1.5rem]'
             {...register('reconfirmPassword', {
               validate: (value, { password }) => {
                 if (value !== password) {

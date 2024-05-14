@@ -10,10 +10,11 @@ type FormFields = {
 };
 
 type IdFormProps = {
+  enteredValues: EnteredValues;
   setEnteredValues: (value: EnteredValues | SetEnteredValues) => void;
 };
 
-const IdForm = ({ setEnteredValues }: IdFormProps) => {
+const IdForm = ({ enteredValues, setEnteredValues }: IdFormProps) => {
   const {
     register,
     handleSubmit,
@@ -23,10 +24,13 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
 
   const idRegex = /^[a-zA-Z0-9]+$/;
 
+  const isIdRevalidation =
+    isSubmitSuccessful && enteredValues.enteredId !== enteredValues.checkedId;
+
   const idChecker: SubmitHandler<FormFields> = async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      setEnteredValues((prev) => ({ ...prev, id: data.id }));
+      setEnteredValues((prev) => ({ ...prev, checkedId: data.id }));
       // throw new Error();
     } catch (error) {
       setError('id', {
@@ -58,7 +62,8 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
             pattern: {
               value: idRegex,
               message: '영문 혹은 영문과 숫자 조합으로 작성해주세요.'
-            }
+            },
+            onChange: (e) => setEnteredValues((prev) => ({ ...prev, enteredId: e.target.value }))
           })}
           type='text'
           id='id'
@@ -74,7 +79,7 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
           {isSubmitting ? '중복확인 중...' : '중복확인'}
         </Button>
       </div>
-      {isSubmitSuccessful && isValid && (
+      {isSubmitSuccessful && !isIdRevalidation && (
         <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem]'>
           사용 가능한 아이디입니다.
         </Text>
@@ -82,6 +87,11 @@ const IdForm = ({ setEnteredValues }: IdFormProps) => {
       {errors.id && (
         <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem] text-red-500'>
           {errors.id.message}
+        </Text>
+      )}
+      {isIdRevalidation && isValid && (
+        <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem] text-red-500'>
+          중복확인을 다시 해주세요
         </Text>
       )}
     </form>

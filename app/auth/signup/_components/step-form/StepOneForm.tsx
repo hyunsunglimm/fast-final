@@ -6,12 +6,14 @@ import PwForm from '../PwForm';
 import { useState } from 'react';
 
 const INITAIL_ENTERED_VALUES = {
-  id: '',
+  enteredId: '',
+  checkedId: '',
   password: ''
 };
 
 export type EnteredValues = {
-  id: string;
+  enteredId: string;
+  checkedId: string;
   password: string;
 };
 
@@ -22,7 +24,7 @@ export const StepOneForm = () => {
 
   return (
     <CardContent flexDirection='col' className=''>
-      <IdForm setEnteredValues={setEnteredValues} />
+      <IdForm enteredValues={enteredValues} setEnteredValues={setEnteredValues} />
       <PwForm enteredValues={enteredValues} setEnteredValues={setEnteredValues} />
     </CardContent>
   );
