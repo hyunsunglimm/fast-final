@@ -1,10 +1,11 @@
 import { ChangeEvent, useState, useEffect } from 'react';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
-import CheckIcon from './_components/CheckIcon';
-import ArrowRightIcon from './_components/ArrowRightIcon';
+import CheckIcon from '@/components/icons/CheckIcon';
+import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/ui/Button';
+
 const policyList = [
   {
     id: 'service',
