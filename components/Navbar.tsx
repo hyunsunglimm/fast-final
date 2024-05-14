@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 const Navbar = () => {
   return (
-    <ul className='flex w-full justify-between gap-x-2 px-4 text-body16'>
+    <ul className='flex w-full justify-between gap-x-2 px-4 text-16'>
       <li>
         <Link href='/'>홈</Link>
       </li>

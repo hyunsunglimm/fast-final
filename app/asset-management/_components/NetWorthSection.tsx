@@ -5,7 +5,7 @@ import Text from '@/components/ui/Text';
 
 const ItemList = [1, 2, 3, 4, 5];
 
-const NetWorth = () => {
+const NetWorthSection = () => {
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
@@ -69,4 +69,4 @@ const NetWorth = () => {
     </div>
   );
 };
-export default NetWorth;
+export default NetWorthSection;
