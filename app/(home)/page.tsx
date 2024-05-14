@@ -2,28 +2,32 @@ import ConsumeWeatherCard from './_components/ConsumeWeatherCard';
 import DraggableCardContainer from './_components/DraggableCardContainer';
 import BucketListCard from './_components/BucketListCard';
 import HomeBanner from './_components/HomeBanner';
+import HomeWidgetSection from './_components/HomeWidgetSection';
+import { BucketListHeader, BucketListFooter, BucketListContent } from './_components/bucket-list';
 const HomePage = () => {
   return (
     <>
       <HomeBanner />
-      <BucketListCard
-        badgeText='버킷리스트'
-        headerText='유럽 여행가기'
-        imagePath='/images/home-bucket-rabbit.png'
-        targetAmount={2000000}
-        currentAmount={350000}
-        isChallenge={false}
-      />
-      <BucketListCard
-        badgeText='챌린지'
-        headerText='오늘의 나의 기분은?'
-        subHeaderText='감정 통장 챌린지'
-        imagePath='/images/home-bucket-rabbit.png'
-        targetAmount={2000000}
-        currentAmount={350000}
-        isChallenge={true}
-      />
+      <BucketListCard isChallenge={false}>
+        <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
+        <BucketListContent
+          altText='버킷리스트'
+          imagePath='/images/home-bucket-rabbit.png'
+          isChallenge={false}
+        />
+        <BucketListFooter targetAmount={2000000} currentAmount={350000} />
+      </BucketListCard>
+      <BucketListCard>
+        <BucketListHeader
+          badgeText='챌린지'
+          headerText='오늘의 나의 기분은?'
+          subHeaderText='감정 통장 챌린지'
+        />
+        <BucketListContent altText='챌린지' imagePath='/images/home-bucket-rabbit.png' />
+        <BucketListFooter targetAmount={2000000} currentAmount={350000} />
+      </BucketListCard>
       <ConsumeWeatherCard />
+      <HomeWidgetSection />
       {/* TODO
          내 계좌 바텀시트 */}
       {/* <div className='flex'>

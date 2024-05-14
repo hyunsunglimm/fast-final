@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-const ProgressBar = ({ progressPercent }: { progressPercent: number }) => {
+export const ProgressBar = ({ progressPercent }: { progressPercent: number }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -22,5 +22,3 @@ const ProgressBar = ({ progressPercent }: { progressPercent: number }) => {
     </div>
   );
 };
-
-export default ProgressBar;

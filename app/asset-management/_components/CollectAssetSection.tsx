@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionTitle from './SectionTitle';
+import SectionTitle from '@/components/SectionTitle';
 import { Card, CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
