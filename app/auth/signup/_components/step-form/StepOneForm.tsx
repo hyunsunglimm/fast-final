@@ -1,31 +1,52 @@
 'use client';
 
 import { CardContent } from '@/components/ui/card';
-import IdForm from '../IdForm';
-import PwForm from '../PwForm';
-import { useState } from 'react';
+import IdInput from '../IdInput';
+import PwInput from '../PwInput';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import Button from '@/components/ui/Button';
 
-const INITAIL_ENTERED_VALUES = {
-  enteredId: '',
-  checkedId: '',
-  password: ''
-};
+export type StepOneFormFieldsKey = 'id' | 'password' | 'reconfirmPw';
 
-export type EnteredValues = {
-  enteredId: string;
-  checkedId: string;
+export type StepOneFormFields = {
+  id: string;
   password: string;
+  reconfirmPw: string;
 };
-
-export type SetEnteredValues = (value: EnteredValues) => EnteredValues;
 
 export const StepOneForm = () => {
-  const [enteredValues, setEnteredValues] = useState<EnteredValues>(INITAIL_ENTERED_VALUES);
+  const methods = useForm<StepOneFormFields>();
+
+  const { setError, handleSubmit } = methods;
+
+  const nextStepSubmit: SubmitHandler<StepOneFormFields> = async (data) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(data);
+      // 데이터 세션 저장 -> 다음 스탭으로
+    } catch (error) {
+      setError('root', {
+        message: '서버 에러'
+      });
+    }
+  };
 
   return (
     <CardContent flexDirection='col' className=''>
-      <IdForm enteredValues={enteredValues} setEnteredValues={setEnteredValues} />
-      <PwForm enteredValues={enteredValues} setEnteredValues={setEnteredValues} />
+      <FormProvider {...methods}>
+        <form className='w-full' onSubmit={handleSubmit(nextStepSubmit)}>
+          <IdInput />
+          <PwInput />
+          <div className='flex justify-between'>
+            <Button styled='outline' type='button' size='signup_prev' rounded='xl'>
+              이전
+            </Button>
+            <Button size='signup_next' styled='outline' rounded='xl'>
+              다음
+            </Button>
+          </div>
+        </form>
+      </FormProvider>
     </CardContent>
   );
 };

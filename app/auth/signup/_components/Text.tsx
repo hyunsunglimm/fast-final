@@ -2,51 +2,17 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Text from '@/components/ui/Text';
 import React, { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { EnteredValues, SetEnteredValues } from './step-form';
 import VisibleIcon from '@/components/icons/VisibleIcon';
 import SuccessIcon from '@/components/icons/SuccessIcon';
 import InvisibleIcon from '@/components/icons/InvisibleIcon';
 
-type FormFields = {
-  password: string;
-  reconfirmPassword: string;
-};
-
-type PwFormProps = {
-  enteredValues: EnteredValues;
-  setEnteredValues: (value: EnteredValues | SetEnteredValues) => void;
-};
-
-const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting, isValid }
-  } = useForm<FormFields>();
-
+const PwInput = () => {
   const [isView, setIsView] = useState(false);
 
   const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 
-  const isCheckedId =
-    !!enteredValues.checkedId && enteredValues.enteredId === enteredValues.checkedId;
-
-  const nextStepSubmit: SubmitHandler<FormFields> = async () => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // enteredValues 데이터 세션 저장 -> 다음 스탭으로
-      // console.log(enteredValues);
-    } catch (error) {
-      setError('root', {
-        message: '서버 에러'
-      });
-    }
-  };
-
   return (
-    <form className='flex w-full flex-col gap-[3.7rem]' onSubmit={handleSubmit(nextStepSubmit)}>
+    <section className='flex w-full flex-col gap-[3.7rem]'>
       <div className='relative flex flex-col gap-[1.4rem]'>
         <label htmlFor='password'>
           <Text sizes='20'>비밀번호를 입력해주세요</Text>
@@ -100,7 +66,7 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
                 if (value !== password) {
                   return '비밀번호가 일치하지 않습니다.';
                 }
-                setEnteredValues((prev) => ({ ...prev, password }));
+                updateStepOneValues(password, 'password');
                 return true;
               }
             })}
@@ -136,8 +102,8 @@ const PwForm = ({ enteredValues, setEnteredValues }: PwFormProps) => {
           {isSubmitting ? '제출중...' : '다음'}
         </Button>
       </div>
-    </form>
+    </section>
   );
 };
 
-export default PwForm;
+export default PwInput;
