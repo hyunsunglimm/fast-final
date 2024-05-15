@@ -5,6 +5,7 @@ import IdInput from '../IdInput';
 import PwInput from '../PwInput';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/ui/Button';
+import ReconfirmPwInput from '../ReconfirmPwInput';
 
 export type StepOneFormFieldsKey = 'id' | 'password' | 'reconfirmPw';
 
@@ -37,6 +38,7 @@ export const StepOneForm = () => {
         <form className='w-full' onSubmit={handleSubmit(nextStepSubmit)}>
           <IdInput />
           <PwInput />
+          <ReconfirmPwInput />
           <div className='flex justify-between'>
             <Button styled='outline' type='button' size='signup_prev' rounded='xl'>
               이전

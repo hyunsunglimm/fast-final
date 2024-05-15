@@ -34,7 +34,7 @@ const IdInput = () => {
 
   return (
     <InputLayout
-      type='id'
+      fieldKey='id'
       title='아이디를 입력해주세요'
       placeholder='6자 이상의 영문 혹은 영문과 숫자를 조합'
       rule={rule}

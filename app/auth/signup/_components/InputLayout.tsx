@@ -4,25 +4,27 @@ import Text from '@/components/ui/Text';
 import { RegisterOptions, SubmitHandler, useFormContext } from 'react-hook-form';
 import { StepOneFormFields, StepOneFormFieldsKey } from './step-form';
 
-type FieldKeys = StepOneFormFieldsKey;
+type FieldKey = StepOneFormFieldsKey;
 
 type FormLayoutProps = {
-  type: FieldKeys;
+  fieldKey: FieldKey;
   title: string;
   placeholder: string;
-  rule: RegisterOptions<StepOneFormFields, FieldKeys>;
+  rule: RegisterOptions<StepOneFormFields, FieldKey>;
+  inputType?: string;
   isButton?: boolean;
-  isIcon?: boolean;
+  icon?: React.ReactNode;
   onClick?: SubmitHandler<StepOneFormFields>;
 };
 
 const InputLayout = ({
-  type,
+  fieldKey,
   title,
   placeholder,
   rule,
+  inputType = 'text',
   isButton = false,
-  isIcon = false,
+  icon = null,
   onClick = () => {}
 }: FormLayoutProps) => {
   const {
@@ -33,7 +35,7 @@ const InputLayout = ({
 
   return (
     <section className='relative mb-[3.7rem] flex flex-col'>
-      <label htmlFor={type} className='mb-[1.5rem]'>
+      <label htmlFor={fieldKey} className='mb-[1.5rem]'>
         <Text sizes='20' className='ml-[0.7rem]'>
           {title}
         </Text>
@@ -41,9 +43,9 @@ const InputLayout = ({
       <div className='relative mb-[0.5rem]'>
         <Input
           className='text-18 placeholder:text-12 w-full rounded-[1.5rem]'
-          {...register(type, rule)}
-          type={type === 'password' ? 'password' : 'text'}
-          id={type}
+          {...register(fieldKey, rule)}
+          type={inputType}
+          id={fieldKey}
           placeholder={placeholder}
         />
         {isButton && (
@@ -59,10 +61,11 @@ const InputLayout = ({
             중복확인
           </Button>
         )}
+        {icon}
       </div>
-      {errors[type] && (
+      {errors[fieldKey] && (
         <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem] text-red-500'>
-          {errors[type]?.message}
+          {errors[fieldKey]?.message}
         </Text>
       )}
     </section>
