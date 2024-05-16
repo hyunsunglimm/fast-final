@@ -2,28 +2,42 @@ import { cn } from '@/utils/twMerge';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-const buttonVariants = cva('', {
+const buttonVariants = cva('px-[1.6rem]', {
   variants: {
-    variant: {
-      default: 'bg-black text-white rounded-[0.8rem] px-[1.6rem] h-[4.8rem] text-[1.6rem]'
-    },
     size: {
-      default: 'w-full',
-      sm: ''
+      full: 'w-full h-[4.8rem] text-16',
+      sm: 'h-[3.2rem] text-12',
+      signup_prev: 'w-[9.3rem] h-[5.4rem] text-16',
+      signup_next: 'w-[21rem] h-[5.4rem] text-16'
+    },
+    styled: {
+      fill: 'bg-black text-white',
+      outline: 'bg-white border-[1px] border-black',
+      disabled: 'bg-gray-300 text-white'
+    },
+    rounded: {
+      md: 'rounded-[0.8rem]',
+      lg: 'rounded-[1.1rem]',
+      xl: 'rounded-[2.7rem]'
     }
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'default'
+    size: 'full',
+    styled: 'fill',
+    rounded: 'md'
   }
 });
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, size, variant, ...props }, ref) => {
+  ({ className, size, styled, rounded, ...props }, ref) => {
     return (
-      <button ref={ref} className={cn(buttonVariants({ variant, size, className }))} {...props} />
+      <button
+        ref={ref}
+        className={cn(buttonVariants({ styled, size, className, rounded }))}
+        {...props}
+      />
     );
   }
 );
