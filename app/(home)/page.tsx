@@ -1,30 +1,33 @@
-import Text from '@/components/ui/Text';
-import { Card, CardContent } from '@/components/ui/card';
+import ConsumeWeatherCard from './_components/ConsumeWeatherCard';
 import DraggableCardContainer from './_components/DraggableCardContainer';
 import BucketListCard from './_components/BucketListCard';
-
+import HomeBanner from './_components/HomeBanner';
+import HomeWidgetSection from './_components/HomeWidgetSection';
+import { BucketListHeader, BucketListFooter, BucketListContent } from './_components/bucket-list';
 const HomePage = () => {
   return (
-    <div>
-      <BucketListCard />
-      <Card>
-        <CardContent className='gap-x-4 px-5 py-6' alignItems='center'>
-          <div className='h-[100px] w-[68px] bg-orange-500'>버킷 리스트</div>
-          <CardContent flexDirection='col'>
-            <Text>오늘 소비 날씨는</Text>
-            <Text sizes='18' weight='bold'>
-              천둥번개가 쳐요!
-            </Text>
-            <Text sizes='12' className='text-gray-500'>
-              예산보다{' '}
-              <Text weight='bold' className='text-orange-500'>
-                1,000,000원
-              </Text>{' '}
-              더 썼어요.
-            </Text>
-          </CardContent>
-        </CardContent>
-      </Card>
+    <>
+      <HomeBanner />
+      <BucketListCard isChallenge={false}>
+        <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
+        <BucketListContent
+          altText='버킷리스트'
+          imagePath='/images/home-bucket-rabbit.png'
+          isChallenge={false}
+        />
+        <BucketListFooter targetAmount={2000000} currentAmount={350000} />
+      </BucketListCard>
+      <BucketListCard>
+        <BucketListHeader
+          badgeText='챌린지'
+          headerText='오늘의 나의 기분은?'
+          subHeaderText='감정 통장 챌린지'
+        />
+        <BucketListContent altText='챌린지' imagePath='/images/home-bucket-rabbit.png' />
+        <BucketListFooter targetAmount={2000000} currentAmount={350000} />
+      </BucketListCard>
+      <ConsumeWeatherCard />
+      <HomeWidgetSection />
       {/* TODO
          내 계좌 바텀시트 */}
       {/* <div className='flex'>
@@ -43,8 +46,8 @@ const HomePage = () => {
           </div>
         </div>
       </div> */}
-      <DraggableCardContainer />
-    </div>
+      {/* <DraggableCardContainer /> */}
+    </>
   );
 };
 export default HomePage;

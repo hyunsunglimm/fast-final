@@ -1,35 +1,13 @@
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
-import Text from '@/components/ui/Text';
-import Image from 'next/image';
+import { Card } from '@/components/ui/card';
 
-const BucketListCard = () => {
-  return (
-    <Card rounded='xl' className='aspect-square bg-sky-400 text-white'>
-      <CardHeader>
-        <div className='flex w-fit items-center rounded-xl bg-indigo-900 px-[8px] py-[6px]'>
-          <Text sizes='10'>버킷 리스트</Text>
-        </div>
-      </CardHeader>
-      <CardContent flexDirection='col' alignItems='start' justifyContent='between' className='pr-0'>
-        <Text sizes='20'>유럽 여행가기</Text>
-        <CardContent justifyContent='between' className='w-full px-0'>
-          <div>버킷 리스트</div>
-          <div className='relative h-[23rem] w-[20.2rem] overflow-hidden'>
-            <Image
-              src='/images/home-bucket-rabbit.png'
-              fill
-              alt='버킷리스트'
-              title='버킷리스트'
-              sizes='auto'
-              priority
-              className='object-cover'
-            />
-          </div>
-        </CardContent>
-      </CardContent>
-      <CardFooter>350,000 / 2,000,000원</CardFooter>
-    </Card>
-  );
+type BucketListCardProps = {
+  isChallenge?: boolean;
+  children?: React.ReactNode;
+};
+
+const BucketListCard = ({ isChallenge = true, children }: BucketListCardProps) => {
+  const bgColor = isChallenge ? 'bg-[#FF8B4A]' : 'bg-[#4AA8FF]';
+  return <Card className={`aspect-square ${bgColor} text-white`}>{children}</Card>;
 };
 
 export default BucketListCard;

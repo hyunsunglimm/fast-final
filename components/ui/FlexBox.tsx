@@ -2,7 +2,7 @@ import { cn } from '@/utils/twMerge';
 import { forwardRef, HTMLAttributes } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
-export const cardContentVariants = cva('flex', {
+export const flexBoxVariants = cva('flex', {
   variants: {
     flexDirection: {
       col: 'flex-col',
@@ -33,19 +33,18 @@ export const cardContentVariants = cva('flex', {
   }
 });
 
-type CardContentProps = VariantProps<typeof cardContentVariants> & HTMLAttributes<HTMLDivElement>;
+type FlexBoxProps = VariantProps<typeof flexBoxVariants> & HTMLAttributes<HTMLDivElement>;
 
-export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
-  ({ className, flexDirection, justifyContent, alignItems, ...props }: CardContentProps, ref) => {
+const FlexBox = forwardRef<HTMLDivElement, FlexBoxProps>(
+  ({ className, justifyContent, flexDirection, alignItems, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={cn(
-          cardContentVariants({ className, flexDirection, justifyContent, alignItems })
-        )}
         {...props}
+        className={cn(flexBoxVariants({ className, justifyContent, flexDirection, alignItems }))}
       />
     );
   }
 );
-CardContent.displayName = 'CardContent';
+FlexBox.displayName = 'FlexBox';
+export default FlexBox;

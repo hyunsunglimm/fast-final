@@ -5,10 +5,16 @@
   box-sizing: border-box;
 }
 html {
-  font-size: 1.9231vw;
+  font-size: 2.6667vw;
 }
-@media (min-width: 375px) {
+@media (min-width: 520px) {
   html {
-    font-size: 10px;
+    font-size: 14px;
   }
+}
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

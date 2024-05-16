@@ -1,9 +1,16 @@
-// 자산관리 페이지
-import NetWorth from './_components/NetWorth';
+import NetWorthSection from './_components/NetWorthSection';
+import MyCreditSection from './_components/MyCreditSection';
+import CollectAssetSection from './_components/CollectAssetSection';
+import UpcomingScheduleSection from './_components/UpcomingScheduleSection';
+import MyAssetsGraphSection from './_components/MyAssetsGraphSection';
 const AssetManagementPage = () => {
   return (
     <>
-      <NetWorth />
+      <NetWorthSection />
+      <MyCreditSection />
+      <CollectAssetSection />
+      <UpcomingScheduleSection />
+      <MyAssetsGraphSection />
     </>
   );
 };
