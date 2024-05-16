@@ -16,7 +16,7 @@ const RootLayout = ({
   children: React.ReactNode;
   params: string;
 }>) => {
-  console.log(params);
+  // console.log(params);
   return (
     <html lang='ko'>
       <body className='mx-auto overflow-hidden text-black xs:w-[520px]'>
