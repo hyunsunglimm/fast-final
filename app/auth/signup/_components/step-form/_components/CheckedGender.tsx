@@ -1,20 +1,22 @@
-import { CardContent } from '@/components/ui/card';
+import FlexBox from '@/components/ui/FlexBox';
 import { UseFormRegister } from 'react-hook-form';
 import { InputValueType } from '../StepFourForm';
 import Text from '@/components/ui/Text';
-
+import { buttonVariants } from '@/components/ui/Button';
 type CheckedGenderProps = {
   register: UseFormRegister<InputValueType>;
 };
 
 const genderChoiceBtnClass =
-  'w-40 cursor-pointer rounded-md border border-black py-5 text-center transition duration-200 hover:bg-gray-400';
+  'w-full h-[5.6rem] flex items-center justify-center cursor-pointer rounded-md border border-black text-center transition duration-200 hover:bg-gray-400';
 
 const CheckedGender = ({ register }: CheckedGenderProps) => {
   return (
     <>
-      <Text sizes='20'>성별을 선택해주세요.</Text>
-      <CardContent justifyContent='center' className='w-full gap-x-4'>
+      <Text sizes='16' weight='600' className='mb-4'>
+        성별을 선택해주세요.
+      </Text>
+      <FlexBox justifyContent='center' className='w-full gap-x-4'>
         <input
           {...register('gender', { required: true })}
           type='radio'
@@ -26,7 +28,9 @@ const CheckedGender = ({ register }: CheckedGenderProps) => {
           htmlFor='male'
           className={`${genderChoiceBtnClass} peer-checked/male:bg-black peer-checked/male:text-white`}
         >
-          남성
+          <Text sizes='14' weight='600'>
+            남성
+          </Text>
         </label>
         <input
           {...register('gender', { required: true })}
@@ -39,9 +43,11 @@ const CheckedGender = ({ register }: CheckedGenderProps) => {
           htmlFor='female'
           className={`${genderChoiceBtnClass} peer-checked/female:bg-black peer-checked/female:text-white`}
         >
-          여성
+          <Text sizes='14' weight='600'>
+            여성
+          </Text>
         </label>
-      </CardContent>
+      </FlexBox>
     </>
   );
 };

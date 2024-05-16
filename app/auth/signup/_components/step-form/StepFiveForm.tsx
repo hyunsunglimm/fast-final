@@ -1,5 +1,6 @@
 import { ChangeEvent, useState, useEffect } from 'react';
-import { CardContent, CardFooter } from '@/components/ui/card';
+import { CardFooter } from '@/components/ui/card';
+import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { CheckIcon, ArrowRightIcon } from '@/components/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -51,11 +52,11 @@ export const StepFiveForm = () => {
     // console.log('isSelect 2: ', data.selectOptions[2]);
   };
   return (
-    <form onSubmit={handleSubmit(handleOnSubmit)}>
-      <CardContent flexDirection='col' className='w-full'>
+    <>
+      <FlexBox flexDirection='col' className='w-full'>
         <Text sizes='20'>이용약관을 확인하고 동의해주세요</Text>
         <label className='has-[:checked]:text-green-500 has-[:checked]:ring-indigo-200'>
-          <CardContent alignItems='center' className='gap-x-4 p-0'>
+          <FlexBox alignItems='center' className='gap-x-4 p-0'>
             <input
               {...register('selectAll')}
               checked={isAllChecked}
@@ -68,9 +69,9 @@ export const StepFiveForm = () => {
               stroke={isAllChecked ? '#fff' : '#b7b7b7'}
             />
             <Text sizes='18'>필수 항목 모두 동의하기</Text>
-          </CardContent>
+          </FlexBox>
         </label>
-        <CardContent
+        <FlexBox
           flexDirection='col'
           className='w-full rounded-2xl border border-black px-0 py-0 [&>*]:border-b [&>*]:border-black'
         >
@@ -84,7 +85,7 @@ export const StepFiveForm = () => {
                 className='flex w-full items-center justify-between p-5 last:border-b-0'
               >
                 <label className='flex cursor-pointer items-center justify-between has-[:checked]:text-green-500 has-[:checked]:ring-indigo-200'>
-                  <CardContent alignItems='center' className='gap-x-4 p-0'>
+                  <FlexBox alignItems='center' className='gap-x-4 p-0'>
                     <input
                       {...register(`selectOptions.${index}`)}
                       type='checkbox'
@@ -93,38 +94,41 @@ export const StepFiveForm = () => {
                     />
                     <CheckIcon className={`${fillClass} ${strokeClass}`} />
                     <Text sizes='18'>{item.title}</Text>
-                  </CardContent>
+                  </FlexBox>
                 </label>
                 <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} />
               </div>
             );
           })}
-        </CardContent>
-        <CardContent
+        </FlexBox>
+        <FlexBox
           alignItems='center'
           justifyContent='between'
           className='w-full rounded-2xl border border-black p-5'
         >
           <label className='flex cursor-pointer items-center justify-between has-[:checked]:text-green-500 has-[:checked]:ring-indigo-200'>
-            <CardContent alignItems='center' className='gap-x-4 p-0'>
+            <FlexBox alignItems='center' className='gap-x-4 p-0'>
               <input type='checkbox' className='peer/promotion hidden' id='promotion' />
               <CheckIcon className='fill-white stroke-[#b7b7b7] peer-checked/promotion:fill-[#51D868] peer-checked/promotion:stroke-white' />
               <Text sizes='18'>[선택] 프로모션 알림 수신 동의</Text>
-            </CardContent>
+            </FlexBox>
           </label>
           <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} />
-        </CardContent>
-        <CardFooter>
-          <Button className='h-20 text-white'>이전</Button>
+        </FlexBox>
+
+        <FlexBox className='w-full gap-x-4'>
+          <Button type='button' className='disabled:cursor-not-allowed disabled:bg-gray-300'>
+            이전
+          </Button>
           <Button
+            type='button'
             disabled={!isAllChecked}
-            type='submit'
-            className='h-20 text-white disabled:bg-gray-300'
+            className='w-[21rem] shrink-0 disabled:cursor-not-allowed disabled:bg-gray-300'
           >
             완료
           </Button>
-        </CardFooter>
-      </CardContent>
-    </form>
+        </FlexBox>
+      </FlexBox>
+    </>
   );
 };

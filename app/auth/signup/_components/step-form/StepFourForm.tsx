@@ -1,11 +1,12 @@
 import Button from '@/components/ui/Button';
-import { CardContent } from '@/components/ui/card';
+import FlexBox from '@/components/ui/FlexBox';
 import React, { useState } from 'react';
 import DaumAddress from './_components/DaumAddress';
 import Text from '@/components/ui/Text';
 import CheckedGender from './_components/CheckedGender';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
+import Input from '@/components/ui/Input';
+import SearchIcon from '@/components/icons/SearchIcon';
 export type InputValueType = {
   address: string;
   detailAdress?: string;
@@ -35,52 +36,66 @@ export const StepFourForm = ({ nextStep }: StepFourFormProps) => {
   };
 
   return (
-    <CardContent flexDirection='col' className='relative h-screen w-full'>
+    <FlexBox flexDirection='col' className='relative h-screen w-full'>
       {visiblePostDaum && (
         <DaumAddress setValue={setValue} setVisiblePostDaum={setVisiblePostDaum} />
       )}
-      <form className='w-full' onSubmit={handleSubmit(nextStepSubmit)}>
-        <label htmlFor='address'>
-          <Text sizes='20'>주소를 입력해주세요.</Text>
-        </label>
-        <CardContent className='w-full'>
-          <input
+      <label htmlFor='address' className='mb-4'>
+        <Text sizes='16' weight='600'>
+          {addressFieldValues ? '상세 주소를 입력해주세요.' : '주소를 입력해주세요.'}
+        </Text>
+      </label>
+      <FlexBox
+        flexDirection='col'
+        alignItems='center'
+        className='mb-32 w-full rounded-sm border border-black bg-white'
+      >
+        <FlexBox className='w-full' alignItems='center'>
+          <Input
             {...register('address', { required: true })}
             placeholder='주소를 입력해주세요.'
             aria-label='주소를 입력해주세요.'
             type='text'
             id='address'
-            className='h-10 w-full flex-grow'
+            borderType='none'
+            className='h-[5.6rem] w-full flex-grow text-14 placeholder:text-14'
             defaultValue={addressFieldValues || ''}
           />
-          <Button type='button' onClick={() => setVisiblePostDaum((prev) => !prev)}>
-            주소 검색
-          </Button>
-        </CardContent>
+          <FlexBox className='w-[4rem]' alignItems='center' justifyContent='center'>
+            <SearchIcon
+              className='cursor-pointer'
+              onClick={() => setVisiblePostDaum((prev) => !prev)}
+            />
+          </FlexBox>
+        </FlexBox>
         {Boolean(addressFieldValues) && (
           <>
-            <label htmlFor='detailAddress'>
-              <Text sizes='20'>상세 주소를 입력해주세요.</Text>
-            </label>
-            <input
+            <div className='h-[1px] w-full bg-black' />
+            <Input
               {...register('detailAdress')}
               placeholder='상세주소를 입력해주세요.'
+              borderType='none'
               type='text'
               id='detailAdress'
-              className='h-10 w-full'
+              className='h-[5.6rem] w-full text-14 placeholder:text-14'
             />
           </>
         )}
+      </FlexBox>
 
-        <CheckedGender register={register} />
+      <CheckedGender register={register} />
+      <FlexBox className='w-full gap-x-4'>
+        <Button type='button' className='disabled:cursor-not-allowed disabled:bg-gray-300'>
+          이전
+        </Button>
         <Button
-          type='submit'
+          type='button'
           disabled={!isValid}
-          className='disabled:cursor-not-allowed disabled:bg-gray-300'
+          className='w-[21rem] shrink-0 disabled:cursor-not-allowed disabled:bg-gray-300'
         >
           다음
         </Button>
-      </form>
-    </CardContent>
+      </FlexBox>
+    </FlexBox>
   );
 };
