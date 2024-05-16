@@ -10,14 +10,16 @@ import { useIsMounted } from '@/hooks/useIsMounted';
 import { debounce } from '@/utils/debounce';
 
 type MotionCarouselProps = {
-  children: Array<React.ReactElement>;
+  children: Array<React.ReactNode>;
   showDots?: boolean;
+  moveGap?: number;
 } & HTMLAttributes<HTMLDivElement>;
 
 const DRAG_BUFFER = 30;
 
 const MotionCarousel = ({
   children,
+  moveGap,
   showDots = true,
   className,
   ...props
@@ -34,7 +36,7 @@ const MotionCarousel = ({
   const gapSize = ref.current
     ? (ref.current?.scrollWidth - containerBoxWidth) / (children.length - 1)
     : 0;
-  const moveTranslateX = childrenElementWidth + gapSize;
+  const moveTranslateX = childrenElementWidth + gapSize - (moveGap || 0);
 
   const handleResize = debounce(
     useCallback(() => {
@@ -102,7 +104,7 @@ export default MotionCarousel;
 type DotsProps = {
   index: number;
   setIndex: React.Dispatch<SetStateAction<number>>;
-  newChildrenArr: Array<React.ReactElement>;
+  newChildrenArr: Array<React.ReactNode>;
 };
 
 const Dots = ({ index, setIndex, newChildrenArr }: DotsProps) => {
@@ -112,7 +114,7 @@ const Dots = ({ index, setIndex, newChildrenArr }: DotsProps) => {
         const currentDotClass = idx === index ? 'w-[1.8rem] bg-black' : 'w-[0.8rem] bg-gray-300';
         return (
           <span
-            key={item.key + `${idx}`}
+            key={item + `${idx}`}
             className={`${currentDotClass} me-3 flex h-[0.8rem] cursor-pointer rounded-full transition-all duration-100 ease-in`}
             onClick={() => setIndex(idx)}
           ></span>
