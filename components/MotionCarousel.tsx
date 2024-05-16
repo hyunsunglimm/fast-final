@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+
 'use client';
 import { motion, useMotionValue } from 'framer-motion';
-import { HTMLAttributes, useRef, SetStateAction, useState, useEffect } from 'react';
+import { HTMLAttributes, useRef, SetStateAction, useState, useEffect, useCallback } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import { cn } from '@/utils/twMerge';
 import { useIsMounted } from '@/hooks/useIsMounted';
+import { debounce } from '@/utils/debounce';
+
 type MotionCarouselProps = {
   children: Array<React.ReactElement>;
   showDots?: boolean;
@@ -17,9 +22,8 @@ const MotionCarousel = ({
   className,
   ...props
 }: MotionCarouselProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-  const [dragging, setDragging] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [childrenElementWidth, setChildrenElementWidth] = useState(0);
   const [documentSize, setDocumentSize] = useState(0);
   const [index, setIndex] = useState(0);
@@ -32,19 +36,26 @@ const MotionCarousel = ({
     : 0;
   const moveTranslateX = childrenElementWidth + gapSize;
 
-  const handleResize = () => {
-    const documentWidth = document.documentElement.clientWidth;
-    setDocumentSize(documentWidth);
-  };
+  const handleResize = debounce(
+    useCallback(() => {
+      const documentWidth = document.documentElement.clientWidth;
+      setDocumentSize(documentWidth);
+    }, []),
+    300
+  );
 
   useEffect(() => {
     if (isMounted()) {
       window.addEventListener('resize', handleResize);
     }
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMounted, handleResize]);
+
+  useEffect(() => {
     if (ref.current) {
       setChildrenElementWidth(ref.current.children[0].clientWidth);
     }
-  }, [children.length, isMounted]);
+  }, [children.length, documentSize]);
 
   const onDragStart = () => {
     setDragging(true);
