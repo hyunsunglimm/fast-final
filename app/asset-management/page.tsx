@@ -7,10 +7,12 @@ const AssetManagementPage = () => {
   return (
     <>
       <NetWorthSection />
-      <MyCreditSection />
-      <CollectAssetSection />
-      <UpcomingScheduleSection />
-      <MyAssetsGraphSection />
+      <div className='px-20'>
+        <MyCreditSection />
+        <CollectAssetSection />
+        <UpcomingScheduleSection />
+        <MyAssetsGraphSection />
+      </div>
     </>
   );
 };
