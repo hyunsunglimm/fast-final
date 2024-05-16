@@ -1,73 +1,54 @@
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Text from '@/components/ui/Text';
-import { RegisterOptions, SubmitHandler, useFormContext } from 'react-hook-form';
-import { StepOneFormFields, StepOneFormFieldsKey } from './step-form';
 
-type FieldKey = StepOneFormFieldsKey;
+type ButtonInfo = { title: string; onClick: () => void };
 
 type FormLayoutProps = {
-  fieldKey: FieldKey;
+  fieldKey: string;
   title: string;
   placeholder: string;
-  rule: RegisterOptions<StepOneFormFields, FieldKey>;
   inputType?: string;
-  isButton?: boolean;
+  buttonInfo?: ButtonInfo | null;
   icon?: React.ReactNode;
-  onClick?: SubmitHandler<StepOneFormFields>;
 };
 
 const InputLayout = ({
   fieldKey,
   title,
   placeholder,
-  rule,
   inputType = 'text',
-  isButton = false,
-  icon = null,
-  onClick = () => {}
+  buttonInfo = null,
+  icon = null
 }: FormLayoutProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting }
-  } = useFormContext<StepOneFormFields>();
-
   return (
-    <section className='relative mb-[3.7rem] flex flex-col'>
-      <label htmlFor={fieldKey} className='mb-[1.5rem]'>
+    <section className='relative flex flex-col'>
+      <label htmlFor={fieldKey} className='mb-[1.4rem]'>
         <Text sizes='20' className='ml-[0.7rem]'>
           {title}
         </Text>
       </label>
-      <div className='relative mb-[0.5rem]'>
+      <div className='relative'>
         <Input
-          className='text-18 placeholder:text-12 w-full rounded-[1.5rem]'
-          {...register(fieldKey, rule)}
+          className='w-full rounded-[1.5rem] text-18 placeholder:text-12'
           type={inputType}
           id={fieldKey}
           placeholder={placeholder}
         />
-        {isButton && (
+        {buttonInfo && (
           <Button
             size='sm'
             styled='fill'
             rounded='lg'
-            disabled={isSubmitting}
             className='absolute right-[1.3rem] top-[1.2rem]'
-            onClick={handleSubmit(onClick)}
+            onClick={buttonInfo.onClick}
             type='button'
           >
-            중복확인
+            {buttonInfo.title}
           </Button>
         )}
         {icon}
       </div>
-      {errors[fieldKey] && (
-        <Text sizes='12' className='absolute bottom-[-1.8rem] left-[0.9rem] text-red-500'>
-          {errors[fieldKey]?.message}
-        </Text>
-      )}
     </section>
   );
 };

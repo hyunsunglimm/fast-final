@@ -6,7 +6,7 @@ const buttonVariants = cva('px-[1.6rem]', {
   variants: {
     size: {
       full: 'w-full h-[4.8rem] text-16',
-      sm: 'w-[6.7rem] h-[3.2rem] text-10',
+      sm: 'h-[3.2rem] text-12',
       signup_prev: 'w-[9.3rem] h-[5.4rem] text-16',
       signup_next: 'w-[21rem] h-[5.4rem] text-16'
     },
