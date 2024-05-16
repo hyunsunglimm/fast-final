@@ -3,7 +3,7 @@ import { motion, useMotionValue } from 'framer-motion';
 import { HTMLAttributes, useRef, SetStateAction, useState, useEffect } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import { cn } from '@/utils/twMerge';
-
+import { useIsMounted } from '@/hooks/useIsMounted';
 type MotionCarouselProps = {
   children: Array<React.ReactElement>;
   showDots?: boolean;
@@ -25,7 +25,7 @@ const MotionCarousel = ({
   const [index, setIndex] = useState(0);
   const dragX = useMotionValue(0);
   const newChildrenArr = [...children];
-
+  const isMounted = useIsMounted();
   const containerBoxWidth = ref.current ? childrenElementWidth * children.length : 0;
   const gapSize = ref.current
     ? (ref.current?.scrollWidth - containerBoxWidth) / (children.length - 1)
@@ -36,13 +36,15 @@ const MotionCarousel = ({
     const documentWidth = document.documentElement.clientWidth;
     setDocumentSize(documentWidth);
   };
-  window.addEventListener('resize', handleResize);
 
   useEffect(() => {
+    if (isMounted()) {
+      window.addEventListener('resize', handleResize);
+    }
     if (ref.current) {
       setChildrenElementWidth(ref.current.children[0].clientWidth);
     }
-  }, [children.length, documentSize]);
+  }, [children.length, isMounted]);
 
   const onDragStart = () => {
     setDragging(true);
