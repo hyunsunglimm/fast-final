@@ -7,3 +7,4 @@ export * from './KbCardIcon';
 export * from './MonthlyRentIcon';
 export * from './ShinaHanCardIcon';
 export * from './SubsServiceIcon';
+export * from './ArrowLeftIcon';
