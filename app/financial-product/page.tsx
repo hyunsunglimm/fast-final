@@ -3,6 +3,7 @@
 import Text from '@/components/ui/Text';
 import ProductCard from './_components/ProductCard';
 import RecommendationCard from './_components/RecommendationCard';
+import Button from '@/components/ui/Button';
 
 const recommendationArray = [
   {
@@ -50,7 +51,10 @@ const productArray = [
 const FinancialProductPage = () => {
   return (
     <div>
-      <Text sizes='title20' variant='h1'>
+      <Button size='xs' styled='fill'>
+        버튼
+      </Button>
+      <Text sizes='20' variant='h1'>
         맞춤탐색
       </Text>
       <div className='mb-16 mt-8 flex flex-col gap-8'>
@@ -63,7 +67,7 @@ const FinancialProductPage = () => {
           );
         })}
       </div>
-      <Text sizes='title20' variant='h1'>
+      <Text sizes='20' variant='h1'>
         금융상품
       </Text>
       <div className='mt-8 flex flex-col gap-[12px]'>

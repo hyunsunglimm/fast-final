@@ -37,10 +37,9 @@ const InputLayout = ({
         />
         {buttonInfo && (
           <Button
-            size='sm'
+            size='xs'
             styled='fill'
-            rounded='lg'
-            className='absolute right-[1.3rem] top-[1.2rem]'
+            className='absolute right-[1.3rem] top-1/2 translate-y-[-50%]'
             onClick={buttonInfo.onClick}
             type='button'
           >
