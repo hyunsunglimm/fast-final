@@ -19,7 +19,7 @@ const RootLayout = ({
   // console.log(params);
   return (
     <html lang='ko'>
-      <body className='xs:w-[520px] mx-auto overflow-hidden text-black'>
+      <body className='mx-auto overflow-hidden text-black xs:w-[520px]'>
         <AuthProvider>
           <QueryProviders>
             {/* XXX 
