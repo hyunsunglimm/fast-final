@@ -30,7 +30,7 @@ export const BucketListHeader = ({
           {headerText}
         </Text>
         {subHeaderText && (
-          <Text sizes='20' weight='700' className='absolute mt-10 block'>
+          <Text sizes='20' weight='700' className='absolute mt-24 block'>
             {subHeaderText}
           </Text>
         )}
