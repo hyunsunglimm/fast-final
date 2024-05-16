@@ -1,7 +1,8 @@
 'use client';
 import { motion, useMotionValue } from 'framer-motion';
-import { HTMLAttributes, useRef, SetStateAction, useState } from 'react';
+import { HTMLAttributes, useRef, SetStateAction, useState, useEffect } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
+import { cn } from '@/utils/twMerge';
 
 type MotionCarouselProps = {
   children: Array<React.ReactElement>;
@@ -10,15 +11,38 @@ type MotionCarouselProps = {
 
 const DRAG_BUFFER = 30;
 
-const MotionCarousel = ({ children, showDots = true, ...props }: MotionCarouselProps) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-
+const MotionCarousel = ({
+  children,
+  showDots = true,
+  className,
+  ...props
+}: MotionCarouselProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [dragging, setDragging] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [childrenElementWidth, setChildrenElementWidth] = useState(0);
+  const [documentSize, setDocumentSize] = useState(0);
   const [index, setIndex] = useState(0);
   const dragX = useMotionValue(0);
   const newChildrenArr = [...children];
-  const childrenWidth = ref.current ? ref.current?.children[0].children[0].clientWidth + 14 : 0;
+
+  const containerBoxWidth = ref.current ? childrenElementWidth * children.length : 0;
+  const gapSize = ref.current
+    ? (ref.current?.scrollWidth - containerBoxWidth) / (children.length - 1)
+    : 0;
+  const moveTranslateX = childrenElementWidth + gapSize;
+
+  const handleResize = () => {
+    const documentWidth = document.documentElement.clientWidth;
+    setDocumentSize(documentWidth);
+  };
+  window.addEventListener('resize', handleResize);
+
+  useEffect(() => {
+    if (ref.current) {
+      setChildrenElementWidth(ref.current.children[0].clientWidth);
+    }
+  }, [children.length, documentSize]);
 
   const onDragStart = () => {
     setDragging(true);
@@ -36,15 +60,16 @@ const MotionCarousel = ({ children, showDots = true, ...props }: MotionCarouselP
   };
 
   return (
-    <div className='relative overflow-hidden' {...props} ref={ref}>
+    <div className={cn('relative overflow-hidden', className)} {...props}>
       <motion.div
+        ref={ref}
         drag='x'
         dragConstraints={{
           left: 0,
           right: 0
         }}
         animate={{
-          translateX: `-${index * childrenWidth}px`
+          translateX: `-${index * moveTranslateX}px`
         }}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
