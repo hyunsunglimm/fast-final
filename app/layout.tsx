@@ -3,7 +3,6 @@ import './globals.css';
 import QueryProviders from '@/context/queryProvider';
 import AuthProvider from '@/context/authProvider';
 import Navbar from '@/components/Navbar';
-import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   // FIXME -> 추후 메타데이터 수정
@@ -17,7 +16,7 @@ const RootLayout = ({
   children: React.ReactNode;
   params: string;
 }>) => {
-  console.log(params);
+  // console.log(params);
   return (
     <html lang='ko'>
       <body className='mx-auto overflow-hidden text-black xs:w-[520px]'>
@@ -27,7 +26,6 @@ const RootLayout = ({
               바디 구분 위해 의도적으로 색상 넣어놨습니다.
              */}
             <main className='hide-scrollbar relative h-dvh overflow-y-scroll bg-gray-50'>
-              <Header></Header>
               {children}
               <Navbar />
             </main>
