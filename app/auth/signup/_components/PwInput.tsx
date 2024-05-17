@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InputLayout from './InputLayout';
 import VisibleIcon from '@/components/icons/signup/VisibleIcon';
-import InvisibleIcon from '@/components/icons/InvisibleIcon';
+import InvisibleIcon from '@/components/icons/signup/InvisibleIcon';
 
 const PwInput = () => {
   const [isView, setIsView] = useState(false);

@@ -3,13 +3,17 @@ import SignupNav from '../SignupNav';
 import PhoneInput from '../PhoneInput';
 import CodeInput from '../CodeInput';
 
-export const StepThreeForm = () => {
+type StepThreeFormProps = {
+  nextStep: () => void;
+};
+
+export const StepThreeForm = ({ nextStep }: StepThreeFormProps) => {
   return (
     <CardContent flexDirection='col'>
       <div className='flex w-full flex-col gap-[3.7rem]'>
         <PhoneInput />
         <CodeInput />
-        <SignupNav />
+        <SignupNav nextStep={nextStep} />
       </div>
     </CardContent>
   );
