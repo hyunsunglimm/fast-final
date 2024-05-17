@@ -3,9 +3,10 @@ import Text from '@/components/ui/Text';
 
 type WidgetItemProps = {
   title: string;
+  children: React.ReactNode;
 };
 
-const WidgetItem = ({ title }: WidgetItemProps) => {
+const WidgetItem = ({ title, children }: WidgetItemProps) => {
   return (
     <Card className='aspect-square p-[1.2rem]'>
       <CardHeader className='pt-[0.4rem]'>
@@ -13,7 +14,7 @@ const WidgetItem = ({ title }: WidgetItemProps) => {
           {title}
         </Text>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>{children}</CardContent>
     </Card>
   );
 };

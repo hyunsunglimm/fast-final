@@ -2,7 +2,7 @@ import { cn } from '@/utils/twMerge';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-const buttonVariants = cva('', {
+export const buttonVariants = cva('', {
   variants: {
     size: {
       xs: 'h-[3.2rem] rounded-xs px-16 text-12',

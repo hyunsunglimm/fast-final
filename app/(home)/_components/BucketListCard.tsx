@@ -6,7 +6,7 @@ type BucketListCardProps = {
 };
 
 const BucketListCard = ({ isChallenge = true, children }: BucketListCardProps) => {
-  const bgColor = isChallenge ? 'bg-[#FF8B4A]' : 'bg-[#4AA8FF]';
+  const bgColor = isChallenge ? 'bg-primary' : 'bg-active';
   return <Card className={`aspect-square ${bgColor} text-white`}>{children}</Card>;
 };
 

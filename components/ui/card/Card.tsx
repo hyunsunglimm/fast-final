@@ -8,13 +8,11 @@ export const cardVariants = cva('bg-white shadow-3xl text-card-foreground', {
       none: 'rounded-none',
       sm: 'rounded-sm',
       md: 'rounded-md',
-      lg: 'rounded-lg',
-      xl: 'rounded-2xl',
-      '2xl': 'rounded-[1.6rem]'
+      lg: 'rounded-lg'
     }
   },
   defaultVariants: {
-    rounded: '2xl'
+    rounded: 'md'
   }
 });
 
