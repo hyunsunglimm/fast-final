@@ -2,11 +2,11 @@ import Button from '@/components/ui/Button';
 
 const SignupNav = () => {
   return (
-    <div className='flex justify-between'>
-      <Button styled='outline' type='button' size='signup_prev' rounded='xl'>
+    <div className='flex justify-between gap-[1.5rem]'>
+      <Button styled='outline' type='button' size='lg' className='basis-1/4'>
         이전
       </Button>
-      <Button size='signup_next' styled='outline' rounded='xl'>
+      <Button size='lg' styled='outline' className='basis-3/4'>
         다음
       </Button>
     </div>

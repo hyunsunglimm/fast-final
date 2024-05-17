@@ -9,7 +9,7 @@ type TextBubbleProps = {
 };
 
 export const TextBubble = ({ amounts, date, className, isChallenge }: TextBubbleProps) => {
-  const txtColor = isChallenge ? 'text-[#FF8B4A]' : 'text-[#4AA8FF]';
+  const txtColor = isChallenge ? 'text-primary' : 'text-active';
   const afterClass =
     'after:absolute after:bottom-[-1rem] after:left-1/4 after:h-[1rem] after:w-[1rem] after:border-b-[0.5rem] after:border-l-[0.5rem] after:border-r-[0.5rem] after:border-t-[0.5rem] after:border-b-transparent after:border-l-transparent after:border-r-transparent after:border-t-white';
   return (

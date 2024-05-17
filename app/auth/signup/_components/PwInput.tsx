@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import InputLayout from './InputLayout';
-import VisibleIcon from '@/components/icons/VisibleIcon';
+import VisibleIcon from '@/components/icons/signup/VisibleIcon';
 import InvisibleIcon from '@/components/icons/InvisibleIcon';
 
 const PwInput = () => {

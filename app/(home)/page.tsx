@@ -1,36 +1,49 @@
-import ConsumeWeatherCard from './_components/ConsumeWeatherCard';
 import DraggableCardContainer from './_components/DraggableCardContainer';
 import BucketListCard from './_components/BucketListCard';
 import HomeBanner from './_components/HomeBanner';
 import HomeWidgetSection from './_components/HomeWidgetSection';
+import ConsumeWeatherSesction from './_components/ConsumeWeatherSesction';
 import { BucketListHeader, BucketListFooter, BucketListContent } from './_components/bucket-list';
+
 const HomePage = () => {
   return (
     <>
-      <HomeBanner />
-      <BucketListCard isChallenge={false}>
-        <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
-        <BucketListContent
-          altText='버킷리스트'
-          imagePath='/images/home-bucket-rabbit.png'
-          isChallenge={false}
-        />
-        <BucketListFooter targetAmount={2000000} currentAmount={350000} />
-      </BucketListCard>
-      <BucketListCard>
-        <BucketListHeader
-          badgeText='챌린지'
-          headerText='오늘의 나의 기분은?'
-          subHeaderText='감정 통장 챌린지'
-        />
-        <BucketListContent altText='챌린지' imagePath='/images/home-bucket-rabbit.png' />
-        <BucketListFooter targetAmount={2000000} currentAmount={350000} />
-      </BucketListCard>
-      <ConsumeWeatherCard />
-      <HomeWidgetSection />
-      {/* TODO
-         내 계좌 바텀시트 */}
-      {/* <div className='flex'>
+      <div className='px-20'>
+        <HomeBanner />
+        <BucketListCard isChallenge={false}>
+          <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
+          <BucketListContent
+            altText='버킷리스트'
+            imagePath='/images/home-bucket-rabbit.png'
+            isChallenge={false}
+          />
+          <BucketListFooter targetAmount={2000000} currentAmount={350000} />
+        </BucketListCard>
+        <BucketListCard>
+          <BucketListHeader
+            badgeText='챌린지'
+            headerText='오늘의 나의 기분은?'
+            subHeaderText='감정 통장 챌린지'
+          />
+          <BucketListContent altText='챌린지' imagePath='/images/home-bucket-rabbit.png' />
+          <BucketListFooter targetAmount={2000000} currentAmount={350000} />
+        </BucketListCard>
+      </div>
+      <ConsumeWeatherSesction />
+      <div className='px-20'>
+        <HomeWidgetSection />
+      </div>
+    </>
+  );
+};
+export default HomePage;
+
+{
+  /* TODO
+         내 계좌 바텀시트 */
+}
+{
+  /* <div className='flex'>
         <input type='checkbox' id='drawer-toggle' className='peer sr-only relative' checked />
         <label
           htmlFor='drawer-toggle'
@@ -45,9 +58,8 @@ const HomePage = () => {
             <p className='text-gray-500'>This is a drawer.</p>
           </div>
         </div>
-      </div> */}
-      {/* <DraggableCardContainer /> */}
-    </>
-  );
-};
-export default HomePage;
+      </div> */
+}
+{
+  /* <DraggableCardContainer /> */
+}

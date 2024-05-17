@@ -1,12 +1,12 @@
 import { Card, CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-
-const ConsumeWeatherCard = () => {
+import WeatherOne from '@/components/icons/weather/WeatherOne';
+const ConsumeWeatherCard = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <Card className='mt-[1.2rem]'>
+    <Card className='mt-[1.2rem] w-[32rem] shrink-0'>
       <CardContent className='gap-x-[1.6rem] px-[2rem] py-[2.4rem]' alignItems='center'>
-        <div className='h-[10rem] w-[6.8rem] bg-orange-500'>버킷 리스트</div>
+        <WeatherOne />
         <FlexBox flexDirection='col'>
           <Text>오늘 소비 날씨는</Text>
           <Text sizes='18' weight='500'>
