@@ -12,23 +12,39 @@ export const buttonVariants = cva('', {
     },
     styled: {
       fill: 'bg-primary text-white',
-      outline: 'bg-white border-[1px] border-gray-200',
-      fill_disabled: 'bg-gray-200 text-gray-400',
-      outline_disabled: 'bg-transparent border-[1px] border-gray-200 text-gray-400'
+      outline: 'bg-white border-[1px] border-gray-200'
+    },
+    disabled: {
+      true: 'cursor-not-allowed',
+      false: ''
     }
   },
   defaultVariants: {
+    disabled: false,
     size: 'lg',
     styled: 'fill'
-  }
+  },
+  compoundVariants: [
+    { styled: 'fill', disabled: true, className: 'bg-gray-200 text-gray-400' },
+    {
+      styled: 'outline',
+      disabled: true,
+      className: 'bg-transparent border-[1px] border-gray-200 text-gray-400'
+    }
+  ]
 });
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, size, styled, ...props }, ref) => {
+  ({ className, disabled, size, styled, ...props }, ref) => {
     return (
-      <button ref={ref} className={cn(buttonVariants({ styled, size, className }))} {...props} />
+      <button
+        disabled={disabled}
+        ref={ref}
+        className={cn(buttonVariants({ styled, size, disabled, className }))}
+        {...props}
+      />
     );
   }
 );
