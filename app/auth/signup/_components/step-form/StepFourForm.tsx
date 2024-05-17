@@ -92,6 +92,7 @@ export const StepFourForm = ({ nextStep }: StepFourFormProps) => {
           type='button'
           disabled={!isValid}
           className='w-[21rem] shrink-0 disabled:cursor-not-allowed disabled:bg-gray-300'
+          onClick={nextStep}
         >
           다음
         </Button>

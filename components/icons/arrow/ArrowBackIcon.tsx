@@ -1,6 +1,6 @@
 import { SvgComponentProps } from '@/types/svgComponentProps';
 
-const ArrowBackIcon = ({ ...props }: SvgComponentProps) => {
+export const ArrowBackIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
@@ -20,5 +20,3 @@ const ArrowBackIcon = ({ ...props }: SvgComponentProps) => {
     </svg>
   );
 };
-
-export default ArrowBackIcon;
