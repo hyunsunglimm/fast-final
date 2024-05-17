@@ -18,17 +18,17 @@ const RecommendationCard = ({
   recommendationInfo: { title, subTitle, description, linkTitle, href }
 }: RecommendationInfoProps) => {
   return (
-    <Card className='p-[2.4rem]'>
-      <Text variant='h2' sizes='caption12' className='mb-[0.9rem] text-[#0089EC]'>
+    <Card className='p-24'>
+      <Text variant='h2' sizes='12' weight='700' className='mb-[1rem] text-primary'>
         {title}
       </Text>
-      <Text variant='p' sizes='title20' className='mb-[0.4rem]'>
+      <Text variant='p' sizes='20' weight='600' className='mb-[0.4rem]'>
         {subTitle}
       </Text>
-      <Text variant='p' sizes='caption12' className='mb-[2.8rem] text-[#787878]'>
+      <Text variant='p' sizes='14' className='text-gray-700'>
         {description}
       </Text>
-      <div className='mb-[2.8rem] flex justify-center'>
+      <div className='my-[3.6rem] flex justify-center'>
         <Image
           src={`/images/${href}.png`}
           alt='search products'
@@ -39,7 +39,7 @@ const RecommendationCard = ({
         />
       </div>
       <Link href={`/financial-product/${href}`}>
-        <Button>{linkTitle}</Button>
+        <Button size='md'>{linkTitle}</Button>
       </Link>
     </Card>
   );

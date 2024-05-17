@@ -4,26 +4,31 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 export const buttonVariants = cva('', {
   variants: {
-    variant: {
-      default: 'bg-black text-white rounded-[0.8rem] px-[1.6rem] h-[4.8rem] text-[1.6rem]'
-    },
     size: {
-      default: 'w-full',
-      sm: ''
+      xs: 'h-[3.2rem] rounded-xs px-16 text-12',
+      sm: 'h-[4rem] rounded-xs px-16 text-14',
+      md: 'h-[4.8rem] w-full rounded-sm text-16 px-20',
+      lg: 'h-[5.6rem] w-full rounded-sm text-16 px-20'
+    },
+    styled: {
+      fill: 'bg-primary text-white',
+      outline: 'bg-white border-[1px] border-gray-200',
+      fill_disabled: 'bg-gray-200 text-gray-400',
+      outline_disabled: 'bg-transparent border-[1px] border-gray-200 text-gray-400'
     }
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'default'
+    size: 'lg',
+    styled: 'fill'
   }
 });
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, size, variant, ...props }, ref) => {
+  ({ className, size, styled, ...props }, ref) => {
     return (
-      <button ref={ref} className={cn(buttonVariants({ variant, size, className }))} {...props} />
+      <button ref={ref} className={cn(buttonVariants({ styled, size, className }))} {...props} />
     );
   }
 );

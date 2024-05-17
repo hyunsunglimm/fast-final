@@ -1,16 +1,16 @@
-import Text from '@/components/ui/Text';
 import { CardContent } from '@/components/ui/card';
-import Certification from '../Certification';
+import SignupNav from '../SignupNav';
+import PhoneInput from '../PhoneInput';
+import CodeInput from '../CodeInput';
 
 export const StepThreeForm = () => {
   return (
     <CardContent flexDirection='col'>
-      <Text sizes='title20' variant='p'>
-        문자로 받은
-        <br /> 인증번호 6자리를 입력해주세요
-      </Text>
-      <Text sizes='body16'>남은 시간 03:00</Text>
-      <Certification />
+      <div className='flex w-full flex-col gap-[3.7rem]'>
+        <PhoneInput />
+        <CodeInput />
+        <SignupNav />
+      </div>
     </CardContent>
   );
 };

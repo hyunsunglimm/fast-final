@@ -5,19 +5,19 @@ import ProductIcon from './ProductIcon';
 type ProductInfoProps = {
   productInfo: {
     title: string;
-    products: { title: string }[];
+    products: { title: string; icon: React.ReactNode }[];
   };
 };
 
 const ProductCard = ({ productInfo: { title, products } }: ProductInfoProps) => {
   return (
-    <Card className='px-[20px] py-[16px]'>
-      <Text variant='h2' sizes='body16'>
+    <Card className='p-24'>
+      <Text variant='h2' sizes='16' weight='500'>
         {title}
       </Text>
-      <div className='mt-[20px] grid grid-cols-3 px-[24px]'>
-        {products.map((product) => (
-          <ProductIcon key={product.title} title={product.title} />
+      <div className='mt-16 grid grid-cols-3'>
+        {products.map(({ title, icon }) => (
+          <ProductIcon key={title} title={title} icon={icon} />
         ))}
       </div>
     </Card>
