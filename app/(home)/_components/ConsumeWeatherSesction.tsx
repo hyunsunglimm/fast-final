@@ -4,7 +4,7 @@ import ConsumeWeatherCard from './consume-weather/ConsumeWeatherCard';
 
 const ConsumeWeatherSesction = () => {
   return (
-    <MotionCarousel className='pl-20' moveGap={14}>
+    <MotionCarousel className='pl-20'>
       <ConsumeWeatherCard></ConsumeWeatherCard>
       <ConsumeWeatherCard></ConsumeWeatherCard>
     </MotionCarousel>
