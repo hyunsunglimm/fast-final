@@ -1,10 +1,9 @@
 import FlexBox from '@/components/ui/FlexBox';
-import { UseFormRegister } from 'react-hook-form';
-import { InputValueType } from '../StepFourForm';
+import { UseFormRegister, FieldValues } from 'react-hook-form';
 import Text from '@/components/ui/Text';
-import { buttonVariants } from '@/components/ui/Button';
+
 type CheckedGenderProps = {
-  register: UseFormRegister<InputValueType>;
+  register: UseFormRegister<FieldValues>;
 };
 
 const genderChoiceBtnClass =

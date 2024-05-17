@@ -1,11 +1,13 @@
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Text from '@/components/ui/Text';
-
+import { UseFormRegister } from 'react-hook-form';
+import { RegisterInputValue } from './SignupForm';
 type ButtonInfo = { title: string; onClick: () => void };
 
 type FormLayoutProps = {
-  fieldKey: string;
+  register: UseFormRegister<RegisterInputValue>;
+  fieldKey: keyof RegisterInputValue;
   title: string;
   placeholder: string;
   inputType?: string;
@@ -14,6 +16,7 @@ type FormLayoutProps = {
 };
 
 const InputLayout = ({
+  register,
   fieldKey,
   title,
   placeholder,
@@ -21,6 +24,17 @@ const InputLayout = ({
   buttonInfo = null,
   icon = null
 }: FormLayoutProps) => {
+  const validateByFieldKey = (fieldKey: string, value: any) => {
+    switch (fieldKey) {
+      case 'memberId':
+        return value.length > 5;
+      case 'password':
+        return value.includes('@');
+      default:
+        return true;
+    }
+  };
+
   return (
     <section className='relative flex flex-col'>
       <label htmlFor={fieldKey} className='mb-[1.4rem]'>
@@ -30,6 +44,10 @@ const InputLayout = ({
       </label>
       <div className='relative'>
         <Input
+          {...register(fieldKey, {
+            required: true,
+            validate: (val) => validateByFieldKey(fieldKey, val)
+          })}
           className='w-full rounded-[1.5rem] text-16 placeholder:text-12'
           type={inputType}
           id={fieldKey}

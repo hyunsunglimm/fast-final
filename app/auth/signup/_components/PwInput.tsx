@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import InputLayout from './InputLayout';
 import VisibleIcon from '@/components/icons/signup/VisibleIcon';
 import InvisibleIcon from '@/components/icons/signup/InvisibleIcon';
+import { useFormContext } from 'react-hook-form';
+import { RegisterInputValue } from './SignupForm';
 
 const PwInput = () => {
   const [isView, setIsView] = useState(false);
-
+  const { register } = useFormContext<RegisterInputValue>();
   const icon = (
     <div
       className='absolute right-[2.1rem] top-[1.8rem]'
@@ -34,6 +36,7 @@ const PwInput = () => {
 
   return (
     <InputLayout
+      register={register}
       fieldKey='password'
       title='비밀번호를 입력해주세요'
       placeholder='영문, 숫자, 특수문자를 포함하여 8자 이상'
