@@ -1,9 +1,9 @@
 import Text from '@/components/ui/Text';
-import ConvenienceStoreIcon from '@/components/icons/ConvenienceStoreIcon';
 import SavingIcon from '@/components/icons/financial-product/SavingIcon';
-import ShoppingIcon from '@/components/icons/ShoppingIcon';
 import SixMonthSavingIcon from '@/components/icons/financial-product/SixMonthSavingIcon';
 import Link from 'next/link';
+import ConvenienceStoreIcon from '@/components/icons/financial-product/ConvenienceStoreIcon';
+import ShoppingIcon from '@/components/icons/financial-product/ShoppingIcon';
 
 const Themes = [
   {

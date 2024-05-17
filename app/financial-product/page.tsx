@@ -3,6 +3,17 @@
 import Text from '@/components/ui/Text';
 import ProductCard from './_components/ProductCard';
 import RecommendationCard from './_components/RecommendationCard';
+import FinancialTransactionIcon from '@/components/icons/financial-product/FinancialTransactionIcon';
+import DepositIcon from '@/components/icons/financial-product/DepositIcon';
+import SubscriptionIcon from '@/components/icons/financial-product/SubscriptionIcon';
+import CheckCardIcon from '@/components/icons/financial-product/CheckCardIcon';
+import CreditLoanIcon from '@/components/icons/financial-product/CreditLoanIcon';
+import EmergencyLoanIcon from '@/components/icons/financial-product/EmergencyLoanIcon';
+import LeaseLoanIcon from '@/components/icons/financial-product/LeaseLoanIcon';
+import FundIcon from '@/components/icons/financial-product/FundIcon';
+import StockInvestmentIcon from '@/components/icons/financial-product/StockInvestmentIcon';
+import ISAIcon from '@/components/icons/financial-product/ISAIcon';
+import CreditCardIcon from '@/components/icons/financial-product/CreditCardIcon';
 
 const recommendationArray = [
   {
@@ -31,25 +42,40 @@ const recommendationArray = [
 const productArray = [
   {
     title: '#차근차근 모아봐요',
-    products: [{ title: '입출금' }, { title: '예적금' }, { title: '청약' }]
+    products: [
+      { title: '입출금', icon: <FinancialTransactionIcon /> },
+      { title: '예적금', icon: <DepositIcon /> },
+      { title: '청약', icon: <SubscriptionIcon /> }
+    ]
   },
   {
     title: '#똑똑하게 소비해요',
-    products: [{ title: '체크카드' }, { title: '신용카드' }]
+    products: [
+      { title: '신용카드', icon: <CreditCardIcon /> },
+      { title: '체크카드', icon: <CheckCardIcon /> }
+    ]
   },
   {
     title: '#신중하게 빌려봐요',
-    products: [{ title: '신용대출' }, { title: '비상금대출' }, { title: '전세대출' }]
+    products: [
+      { title: '신용대출', icon: <CreditLoanIcon /> },
+      { title: '비상금대출', icon: <EmergencyLoanIcon /> },
+      { title: '전세대출', icon: <LeaseLoanIcon /> }
+    ]
   },
   {
     title: '#쑥쑥 불려봐요',
-    products: [{ title: '펀드' }, { title: '주식투자' }, { title: 'ISA' }]
+    products: [
+      { title: '펀드', icon: <FundIcon /> },
+      { title: '주식투자', icon: <StockInvestmentIcon /> },
+      { title: 'ISA', icon: <ISAIcon /> }
+    ]
   }
 ];
 
 const FinancialProductPage = () => {
   return (
-    <div>
+    <div className='px-20 py-40'>
       <Text sizes='20' variant='h1' weight='600'>
         맞춤탐색
       </Text>
@@ -65,7 +91,7 @@ const FinancialProductPage = () => {
       <Text sizes='20' variant='h1'>
         금융상품
       </Text>
-      <ul className='mt-8 flex flex-col gap-[12px]'>
+      <ul className='mt-8 flex flex-col gap-[1.2rem]'>
         {productArray.map((productInfo) => {
           return (
             <li key={productInfo.title}>
