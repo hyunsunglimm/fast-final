@@ -3,7 +3,6 @@
 import Text from '@/components/ui/Text';
 import ProductCard from './_components/ProductCard';
 import RecommendationCard from './_components/RecommendationCard';
-import Button from '@/components/ui/Button';
 
 const recommendationArray = [
   {
@@ -51,30 +50,30 @@ const productArray = [
 const FinancialProductPage = () => {
   return (
     <div>
-      <Button size='xs' styled='fill'>
-        버튼
-      </Button>
-      <Text sizes='20' variant='h1'>
+      <Text sizes='20' variant='h1' weight='600'>
         맞춤탐색
       </Text>
-      <div className='mb-16 mt-8 flex flex-col gap-8'>
+      <ul className='mb-16 mt-8 flex flex-col gap-8'>
         {recommendationArray.map((recommendationInfo) => {
           return (
-            <RecommendationCard
-              key={recommendationInfo.title}
-              recommendationInfo={recommendationInfo}
-            />
+            <li key={recommendationInfo.title}>
+              <RecommendationCard recommendationInfo={recommendationInfo} />
+            </li>
           );
         })}
-      </div>
+      </ul>
       <Text sizes='20' variant='h1'>
         금융상품
       </Text>
-      <div className='mt-8 flex flex-col gap-[12px]'>
-        {productArray.map((productInfo) => (
-          <ProductCard key={productInfo.title} productInfo={productInfo} />
-        ))}
-      </div>
+      <ul className='mt-8 flex flex-col gap-[12px]'>
+        {productArray.map((productInfo) => {
+          return (
+            <li key={productInfo.title}>
+              <ProductCard productInfo={productInfo} />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

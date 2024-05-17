@@ -11,8 +11,8 @@ type ProductInfoProps = {
 
 const ProductCard = ({ productInfo: { title, products } }: ProductInfoProps) => {
   return (
-    <Card className='px-[20px] py-[16px]'>
-      <Text variant='h2' sizes='body16'>
+    <Card className='p-24'>
+      <Text variant='h2' sizes='16' weight='500'>
         {title}
       </Text>
       <div className='mt-[20px] grid grid-cols-3 px-[24px]'>
