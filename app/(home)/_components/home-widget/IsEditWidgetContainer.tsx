@@ -1,33 +1,23 @@
 'use client';
 // import { IsBackHeader } from '@/components/Header';
-import { ArrowLeftIcon } from '@/components/icons';
-import FlexBox from '@/components/ui/FlexBox';
 import { motion } from 'framer-motion';
-import Text from '@/components/ui/Text';
 
 type IsEditWidgetContainerProps = {
   children: React.ReactNode;
-  setOpenEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  openEditMode: boolean;
 };
-const IsEditWidgetContainer = ({ children, setOpenEditMode }: IsEditWidgetContainerProps) => {
+const IsEditWidgetContainer = ({ children, openEditMode }: IsEditWidgetContainerProps) => {
   return (
     <motion.div
-      initial={{ x: '100%' }}
-      animate={{ x: '0' }}
+      initial='closed'
+      animate={openEditMode ? 'open' : 'closed'}
+      variants={{
+        open: { x: 0, display: 'block' },
+        closed: { x: '100%', display: 'none' }
+      }}
       transition={{ ease: 'easeInOut', duration: 0.25 }}
-      className='absolute inset-0 h-screen w-full bg-gray-50 px-[2rem]'
+      className='fixed inset-0 mx-auto h-screen overflow-scroll bg-gray-50 xs:w-[520px]'
     >
-      <FlexBox alignItems='center' justifyContent='between' className='h-[5.6rem]'>
-        <div className='w-[2.4rem] cursor-pointer' onClick={() => setOpenEditMode(false)}>
-          <ArrowLeftIcon />
-        </div>
-        <FlexBox justifyContent='center'>
-          <Text variant='h6' sizes='16'>
-            한 눈에 보기 편집
-          </Text>
-        </FlexBox>
-        <div className='w-[2.4rem]'></div>
-      </FlexBox>
       {children}
     </motion.div>
   );
