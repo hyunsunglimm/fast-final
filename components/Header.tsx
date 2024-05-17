@@ -26,9 +26,9 @@ const pathConfig: PathConfig = {
 
 const Header = () => {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
   const currentPageConfig = pathConfig[pathname];
-  console.log(currentPageConfig);
+  // console.log(currentPageConfig);
   // console.log(currentPageConfig);
   // const renderHeader = currentPageConfig.isBack ? (
   //   <IsBackHeader>{currentPageConfig.title}</IsBackHeader>

@@ -18,7 +18,7 @@ const ComparisonPage = () => {
               className={`cursor-pointer py-[1.2rem] text-center ${selectedMenu === title ? 'border-b-2 border-black text-black' : 'text-gray-300'}`}
               onClick={() => setSelectedMenu(title)}
             >
-              <Text sizes='body16'>{title}</Text>
+              <Text sizes='16'>{title}</Text>
             </li>
           );
         })}

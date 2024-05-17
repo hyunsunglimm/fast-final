@@ -16,7 +16,7 @@ const IsEditWidgetContainer = ({ children, openEditMode }: IsEditWidgetContainer
         closed: { x: '100%', display: 'none' }
       }}
       transition={{ ease: 'easeInOut', duration: 0.25 }}
-      className='fixed inset-0 mx-auto h-screen overflow-scroll bg-gray-50 xs:w-[520px]'
+      className='absolute inset-0 mx-auto h-screen overflow-scroll bg-gray-50 xs:w-[520px]'
     >
       {children}
     </motion.div>
