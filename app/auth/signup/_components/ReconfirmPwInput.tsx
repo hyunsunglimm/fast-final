@@ -1,5 +1,5 @@
 import InputLayout from './InputLayout';
-import SuccessIcon from '@/components/icons/SuccessIcon';
+import SuccessIcon from '@/components/icons/signup/SuccessIcon';
 
 const ReconfirmPwInput = () => {
   const icon = (
