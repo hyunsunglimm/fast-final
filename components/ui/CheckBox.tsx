@@ -85,7 +85,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         {childrenPosition === 'left' && <>{children}</>}
         <div className={`relative ${checkboxClass}`}>
-          {imageSrc && <Image src={imageSrc} alt='Checkbox' layout='fill' />}
+          {imageSrc && <Image src={imageSrc} alt='Checkbox' fill />}
         </div>
         {childrenPosition === 'right' && <>{children}</>}
       </label>
