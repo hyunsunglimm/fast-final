@@ -7,14 +7,18 @@ import PwInput from '../PwInput';
 import ReconfirmPwInput from '../ReconfirmPwInput';
 import SignupNav from '../SignupNav';
 
-export const StepOneForm = () => {
+type StepOneFormProps = {
+  nextStep: () => void;
+};
+
+export const StepOneForm = ({ nextStep }: StepOneFormProps) => {
   return (
     <CardContent flexDirection='col' className=''>
       <div className='flex w-full flex-col gap-[3.7rem]'>
         <IdInput />
         <PwInput />
         <ReconfirmPwInput />
-        <SignupNav />
+        <SignupNav nextStep={nextStep} />
       </div>
     </CardContent>
   );
