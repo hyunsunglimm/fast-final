@@ -24,13 +24,13 @@ const InputLayout = ({
   return (
     <section className='relative flex flex-col'>
       <label htmlFor={fieldKey} className='mb-[1.4rem]'>
-        <Text sizes='20' className='ml-[0.7rem]'>
+        <Text sizes='16' variant='h3' weight='600' className='ml-[0.7rem]'>
           {title}
         </Text>
       </label>
       <div className='relative'>
         <Input
-          className='w-full rounded-[1.5rem] text-18 placeholder:text-12'
+          className='w-full rounded-[1.5rem] text-16 placeholder:text-12'
           type={inputType}
           id={fieldKey}
           placeholder={placeholder}

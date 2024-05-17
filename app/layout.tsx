@@ -23,7 +23,7 @@ const RootLayout = ({
               바디 구분 위해 의도적으로 색상 넣어놨습니다.
              hide-scrollbar
              */}
-            <main className='hide-scrollbar relative h-dvh overflow-y-scroll bg-gray-50 pb-[13.2rem]'>
+            <main className={'hide-scrollbar relative h-dvh overflow-y-scroll bg-gray-50'}>
               {children}
               <Navbar />
             </main>
