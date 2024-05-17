@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import WeatherOne from '@/components/icons/weather/WeatherOne';
+import { WeatherOne } from '@/components/icons';
 const ConsumeWeatherCard = ({ children }: { children?: React.ReactNode }) => {
   return (
     <Card className='mt-[1.2rem] w-[32rem] shrink-0'>
