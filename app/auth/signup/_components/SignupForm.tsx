@@ -7,6 +7,7 @@ import { useForm, FormProvider, FieldValues } from 'react-hook-form';
 export type RegisterInputValue = {
   memberId: string;
   password: string;
+  reconfirmPw: string;
   name: string;
   email: string;
   phoneNumber: string;
@@ -15,6 +16,7 @@ export type RegisterInputValue = {
     detail: string;
   };
   gender: string;
+  code: string;
 };
 
 const SignupForm = () => {

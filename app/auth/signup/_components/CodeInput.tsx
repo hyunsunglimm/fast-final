@@ -1,7 +1,8 @@
 import InputLayout from './InputLayout';
 import { useFormContext } from 'react-hook-form';
+import { RegisterInputValue } from './SignupForm';
 const CodeInput = () => {
-  const { register } = useFormContext();
+  const { register } = useFormContext<RegisterInputValue>();
   const buttonInfo = {
     title: '인증번호 재요청',
     onClick: () => console.log('인증번호 재요청')
