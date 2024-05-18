@@ -15,7 +15,7 @@ type MotionCarouselProps = {
   moveGap?: number;
 } & HTMLAttributes<HTMLDivElement>;
 
-const DRAG_BUFFER = 30;
+const DRAG_BUFFER = 10;
 
 const MotionCarousel = ({
   children,

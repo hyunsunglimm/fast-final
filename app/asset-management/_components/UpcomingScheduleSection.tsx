@@ -96,7 +96,7 @@ const UpCommingCard = () => {
                 </FlexBox>
               </FlexBox>
               <Text sizes='16' weight='500'>
-                {item.amount.toLocaleString('kr')} 원
+                {item.amount.toLocaleString('ko')} 원
               </Text>
             </FlexBox>
           );

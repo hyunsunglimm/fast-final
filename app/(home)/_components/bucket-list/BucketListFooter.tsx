@@ -15,9 +15,9 @@ export const BucketListFooter = ({ currentAmount, targetAmount }: BucketListFoot
       <FlexBox justifyContent='between' alignItems='end' className='mb-[0.6rem] w-full'>
         <p>
           <Text sizes='18' weight='700'>
-            {currentAmount.toLocaleString('kr')}&nbsp;
+            {currentAmount.toLocaleString('ko')}&nbsp;
           </Text>
-          <Text weight='500'>/ {targetAmount.toLocaleString('kr')}원</Text>
+          <Text weight='500'>/ {targetAmount.toLocaleString('ko')}원</Text>
         </p>
         <Text>12일째</Text>
       </FlexBox>
