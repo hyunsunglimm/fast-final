@@ -1,4 +1,3 @@
-import DraggableCardContainer from './_components/DraggableCardContainer';
 import BucketListCard from './_components/BucketListCard';
 import HomeBanner from './_components/HomeBanner';
 import HomeWidgetSection from './_components/HomeWidgetSection';

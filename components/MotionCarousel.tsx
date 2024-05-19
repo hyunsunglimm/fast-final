@@ -15,7 +15,7 @@ type MotionCarouselProps = {
   moveGap?: number;
 } & HTMLAttributes<HTMLDivElement>;
 
-const DRAG_BUFFER = 30;
+const DRAG_BUFFER = 10;
 
 const MotionCarousel = ({
   children,
@@ -33,9 +33,10 @@ const MotionCarousel = ({
   const newChildrenArr = [...children];
   const isMounted = useIsMounted();
   const containerBoxWidth = ref.current ? childrenElementWidth * children.length : 0;
-  const gapSize = ref.current
-    ? (ref.current?.scrollWidth - containerBoxWidth) / (children.length - 1)
-    : 0;
+  const gapSize =
+    ref.current && children.length > 1
+      ? (ref.current?.scrollWidth - containerBoxWidth) / (children.length - 1)
+      : 0;
   const moveTranslateX = childrenElementWidth + gapSize - (moveGap || 0);
 
   const handleResize = debounce(

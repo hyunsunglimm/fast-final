@@ -1,7 +1,10 @@
+import { useFormContext } from 'react-hook-form';
 import InputLayout from './InputLayout';
 import SuccessIcon from '@/components/icons/signup/SuccessIcon';
+import { RegisterInputValue } from './SignupForm';
 
 const ReconfirmPwInput = () => {
+  const { register } = useFormContext<RegisterInputValue>();
   const icon = (
     <div className='absolute right-[2.1rem] top-[1.8rem]'>
       <SuccessIcon />
@@ -19,6 +22,7 @@ const ReconfirmPwInput = () => {
 
   return (
     <InputLayout
+      register={register}
       fieldKey='reconfirmPw'
       title='비밀번호를 한번 더 입력해주세요'
       placeholder='비밀번호를 확인해주세요'
