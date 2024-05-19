@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button';
 
 const FixedBottom = () => {
   return (
-    <FlexBox className='shadow-top-shadow fixed bottom-0 w-full border-t border-gray-50 bg-white px-[2rem] pb-[3.2rem] pt-[2.4rem] xs:w-[520px]'>
+    <FlexBox className='fixed bottom-0 w-full border-t border-gray-50 bg-white px-[2rem] pb-[3.2rem] pt-[2.4rem] shadow-top-shadow xs:w-[520px]'>
       <Button size='md'>완료</Button>
     </FlexBox>
   );

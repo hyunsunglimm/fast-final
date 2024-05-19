@@ -5,10 +5,9 @@ export const ArrowBackIcon = ({ ...props }: SvgComponentProps) => {
     <svg
       {...props}
       xmlns='http://www.w3.org/2000/svg'
-      width='25'
-      height='24'
       viewBox='0 0 25 24'
       fill='none'
+      className='h-[2.4rem] w-[2.5rem]'
     >
       <path
         d='M20.4984 12L4.49841 12M4.49841 12L10.4984 18M4.49841 12L10.4984 6'
@@ -26,8 +25,7 @@ export const ArrowLeftIcon = ({ ...props }: SvgComponentProps) => {
     <svg
       {...props}
       xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
+      className='h-[2.4rem] w-[2.5rem]'
       viewBox='0 0 24 24'
       fill='none'
     >
@@ -55,8 +53,7 @@ export const ArrowUpFillIcon = ({ ...props }: SvgComponentProps) => {
     <svg
       {...props}
       xmlns='http://www.w3.org/2000/svg'
-      width='16'
-      height='16'
+      className='h-[1.6rem] w-[1.6rem]'
       viewBox='0 0 16 16'
       fill='none'
     >
