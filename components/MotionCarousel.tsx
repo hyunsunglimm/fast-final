@@ -8,10 +8,12 @@ import FlexBox from '@/components/ui/FlexBox';
 import { cn } from '@/utils/twMerge';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { debounce } from '@/utils/debounce';
+import Text from './ui/Text';
 
 type MotionCarouselProps = {
   children: Array<React.ReactNode>;
   showDots?: boolean;
+  showNumber?: boolean;
   moveGap?: number;
 } & HTMLAttributes<HTMLDivElement>;
 
@@ -21,6 +23,7 @@ const MotionCarousel = ({
   children,
   moveGap,
   showDots = true,
+  showNumber = false,
   className,
   ...props
 }: MotionCarouselProps) => {
@@ -97,6 +100,9 @@ const MotionCarousel = ({
         {children}
       </motion.div>
       {showDots && <Dots index={index} setIndex={setIndex} newChildrenArr={newChildrenArr} />}
+      {showNumber && (
+        <NumberIndicator index={index} setIndex={setIndex} newChildrenArr={newChildrenArr} />
+      )}
     </div>
   );
 };
@@ -121,6 +127,20 @@ const Dots = ({ index, setIndex, newChildrenArr }: DotsProps) => {
           ></span>
         );
       })}
+    </FlexBox>
+  );
+};
+
+const NumberIndicator = ({ index, setIndex, newChildrenArr }: DotsProps) => {
+  return (
+    <FlexBox
+      alignItems='center'
+      justifyContent='center'
+      className='absolute bottom-12 right-6 z-10 rounded-full bg-black/50 px-[0.6rem] py-[0.2rem]'
+    >
+      <Text sizes='10' weight='400' className='text-white'>
+        {index + 1} / {newChildrenArr.length}
+      </Text>
     </FlexBox>
   );
 };
