@@ -1,13 +1,12 @@
 import React from 'react';
 
-export const WeatherZero = () => {
+export const WeatherOne = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='68'
-      height='100'
       viewBox='0 0 68 100'
       fill='none'
+      className='h-[10rem] w-[6.8rem]'
     >
       <path
         d='M36 0H32C14.33 0 0 14.33 0 32V88C0 94.63 5.37 100 12 100H56C62.63 100 68 94.63 68 88V32C68 14.33 53.67 0 36 0Z'
@@ -90,14 +89,15 @@ export const WeatherZero = () => {
   );
 };
 
-export const WeatherOne = () => {
+export const WeatherTwo = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='68'
-      height='100'
+      // width='68'
+      // height='100'
       viewBox='0 0 68 100'
       fill='none'
+      className='h-[10rem] w-[6.8rem]'
     >
       <path
         d='M36 0H32C14.33 0 0 14.33 0 32V88C0 94.63 5.37 100 12 100H56C62.63 100 68 94.63 68 88V32C68 14.33 53.67 0 36 0Z'
@@ -144,14 +144,15 @@ export const WeatherOne = () => {
   );
 };
 
-export const WeatherTwo = () => {
+export const WeatherThree = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='68'
-      height='100'
+      // width='68'
+      // height='100'
       viewBox='0 0 68 100'
       fill='none'
+      className='h-[10rem] w-[6.8rem]'
     >
       <path
         d='M36 0.000976562H32C14.33 0.000976562 0 14.331 0 32.001V88.001C0 94.631 5.37 100.001 12 100.001H56C62.63 100.001 68 94.631 68 88.001V32.001C68 14.331 53.67 0.000976562 36 0.000976562Z'
@@ -217,12 +218,11 @@ export const WeatherTwo = () => {
   );
 };
 
-export const WeatherThree = () => {
+export const WeatherFour = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='68'
-      height='100'
+      className='h-[10rem] w-[6.8rem]'
       viewBox='0 0 68 100'
       fill='none'
     >
@@ -283,12 +283,11 @@ export const WeatherThree = () => {
   );
 };
 
-export const WeatherFour = () => {
+export const WeatherFive = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='68'
-      height='100'
+      className='h-[10rem] w-[6.8rem]'
       viewBox='0 0 68 100'
       fill='none'
     >
