@@ -2,15 +2,20 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import MenuBarThreeIcon from '@/components/icons/MenuBarThreeIcon';
 import MinusIcon from '@/components/icons/MinusIcon';
 import Text from '@/components/ui/Text';
+import { MouseEvent } from 'react';
 
 type IsEditWidgetItemProps = {
   title: string;
+  id: string;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
-const IsEditWidgetItem = ({ title }: IsEditWidgetItemProps) => {
+const IsEditWidgetItem = ({ title, id, onClick }: IsEditWidgetItemProps) => {
   return (
     <Card className='relative aspect-square border border-gray-100 p-[1.2rem]'>
       <div className='absolute -left-[1rem] -top-[1rem] cursor-pointer'>
-        <MinusIcon />
+        <button id={id} onClick={onClick}>
+          <MinusIcon />
+        </button>
       </div>
       <CardHeader className='w-full items-end pt-[0.4rem]'>
         <MenuBarThreeIcon />
