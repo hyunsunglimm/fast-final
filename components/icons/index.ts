@@ -10,3 +10,5 @@ export * from './bottom-nav/BottomNavIcon';
 export * from './weather/WeatherIcon';
 export * from './ProfileIcon';
 export * from './NotiIcon';
+export * from './widget/Budget';
+export * from './widget/Netflix';
