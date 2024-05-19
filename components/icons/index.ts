@@ -8,3 +8,5 @@ export * from './ShinaHanCardIcon';
 export * from './SubsServiceIcon';
 export * from './bottom-nav/BottomNavIcon';
 export * from './weather/WeatherIcon';
+export * from './ProfileIcon';
+export * from './NotiIcon';
