@@ -12,3 +12,6 @@ export * from './ProfileIcon';
 export * from './NotiIcon';
 export * from './widget/Budget';
 export * from './widget/Netflix';
+export * from './banner/CardEventIcon';
+export * from './banner/SavingEventIcon';
+export * from './banner/TodayBenefitIcon';
