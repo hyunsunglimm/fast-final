@@ -16,14 +16,17 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang='ko'>
-      <body className='mx-auto overflow-hidden text-black xs:w-[520px]'>
+      {/* <body className='mx-auto overflow-hidden text-black xs:w-[520px]'> */}
+      <body className='mx-auto bg-gray-200 text-black xs:w-[520px]'>
         <AuthProvider>
           <QueryProviders>
             {/* XXX 
               바디 구분 위해 의도적으로 색상 넣어놨습니다.
              hide-scrollbar
              */}
-            <main className={'hide-scrollbar relative h-dvh overflow-y-scroll bg-gray-50'}>
+            {/* <main className={'  relative overflow-y-scroll bg-gray-50'}> */}
+            {/* <main className={'hide-scrollbar relative h-dvh overflow-y-scroll bg-gray-50'}> */}
+            <main className='hide-scrollbar h-dvh overflow-y-scroll bg-gray-50'>
               {children}
               <Navbar />
             </main>
