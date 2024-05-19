@@ -30,7 +30,7 @@ const RecommendationCard = ({
       </Text>
       <div className='my-[3.6rem] flex justify-center'>
         <Image
-          src={`/images/${href}.png`}
+          src={`/images/${href}.svg`}
           alt='search products'
           width={1000}
           height={0}
