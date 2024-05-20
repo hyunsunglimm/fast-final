@@ -4,7 +4,6 @@ import DropdownIcon from '@/components/icons/DropdownIcon';
 import FlexBox from '@/components/ui/FlexBox';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
-import { useState } from 'react';
 import SpotlightCardItem from './SpotlightCardItem';
 import Button from '@/components/ui/Button';
 
@@ -47,8 +46,6 @@ const spotlightCards = [
 ];
 
 const SpotlightCards = () => {
-  const [selectedTab, setSelectedTab] = useState('신용카드');
-
   return (
     <div>
       <FlexBox alignItems='center'>
@@ -65,12 +62,7 @@ const SpotlightCards = () => {
         </Text>
       </FlexBox>
       <div className='mb-24 mt-16'>
-        <Tab
-          array={['신용카드', '체크카드']}
-          type='box'
-          selectedTab={selectedTab}
-          setSelectedTab={setSelectedTab}
-        />
+        <Tab array={['신용카드', '체크카드']} type='box' />
       </div>
       <ul className='mb-24 flex flex-col gap-[1.2rem]'>
         {spotlightCards.map((card, index) => {

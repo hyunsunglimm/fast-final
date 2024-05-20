@@ -8,7 +8,7 @@ const recommendationArray = [
     subTitle: '하나하나 살펴보기 힘들죠?',
     description: '원하는 혜택을 쉽게 비교해보세요',
     linkTitle: '상품비교 바로가기',
-    href: 'comparison'
+    href: 'comparison?tab=카드'
   },
   {
     title: '테마별 추천',
