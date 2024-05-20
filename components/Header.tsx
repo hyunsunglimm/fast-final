@@ -1,58 +1,54 @@
-'use client';
 import FlexBox from './ui/FlexBox';
-import { usePathname } from 'next/navigation';
-import { ArrowLeftIcon } from './icons';
+import { ArrowBackIcon, ProfileIcon, NotiIcon } from './icons';
+import Text from './ui/Text';
 import Link from 'next/link';
-type HeaderProps = {
-  children?: React.ReactNode;
-  href?: string;
-};
-type PathConfig = {
-  [key: string]: {
-    title: string;
-    isBack: boolean;
-  };
-};
-const pathConfig: PathConfig = {
-  '/': {
-    title: 'Home',
-    isBack: false
-  },
-  '/edit-widget': {
-    title: '한 눈에 보기 편집',
-    isBack: true
-  }
+
+type DefaultHeaderProps = {
+  isHome?: boolean;
+  title?: string;
 };
 
-const Header = () => {
-  const pathname = usePathname();
-  // console.log(pathname);
-  const currentPageConfig = pathConfig[pathname];
-  // console.log(currentPageConfig);
-  // console.log(currentPageConfig);
-  // const renderHeader = currentPageConfig.isBack ? (
-  //   <IsBackHeader>{currentPageConfig.title}</IsBackHeader>
-  // ) : (
-  //   <DefaultHeader>{currentPageConfig.title}</DefaultHeader>
-  // );
-
+export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => {
   return (
-    <FlexBox alignItems='center' className='h-[5.6rem] px-40'>
-      Home
+    <FlexBox justifyContent='between' alignItems='center' className='h-[5.6rem] px-20'>
+      {isHome ? (
+        'logo'
+      ) : (
+        <Text sizes='20' weight='800'>
+          {title}
+        </Text>
+      )}
+      <FlexBox className='gap-x-[1.2rem]'>
+        <NotiIcon />
+        <ProfileIcon />
+      </FlexBox>
     </FlexBox>
   );
 };
 
-export default Header;
+type HeaderProps = {
+  title?: string;
+  href: string;
+};
 
-export const IsBackHeader = ({ children, href }: HeaderProps) => {
+export const IsBackHeader = ({ title, href }: HeaderProps) => {
   return (
-    <>
-      <Link href={`${href}`}>
-        <ArrowLeftIcon />
-      </Link>
-      {children}
-    </>
+    <FlexBox
+      alignItems='center'
+      justifyContent='between'
+      className='mb-[2rem] h-[5.6rem] px-[2rem]'
+    >
+      <div className='w-[2.4rem] cursor-pointer'>
+        <Link href={href}>
+          <ArrowBackIcon />
+        </Link>
+      </div>
+      <FlexBox justifyContent='center'>
+        <Text variant='h6' sizes='16' weight='700'>
+          {title}
+        </Text>
+      </FlexBox>
+      <div className='w-[2.4rem]' aria-hidden></div>
+    </FlexBox>
   );
 };
-const DefaultHeader = ({ children }: HeaderProps) => <>{children}</>;
