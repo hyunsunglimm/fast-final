@@ -47,7 +47,14 @@ const HomeWidgetSection = async () => {
         <Text sizes='18' weight='600' variant='h2'>
           한 눈에 보기
         </Text>
-        <Link href='/edit-widget' className={buttonVariants({ size: 'xs' })}>
+        <Link
+          aria-label='위젯 편집으로 이동'
+          href='/edit-widget'
+          className={buttonVariants({
+            size: 'xs',
+            className: 'focus:outline-none focus:ring focus:ring-active focus:ring-offset-1'
+          })}
+        >
           편집
         </Link>
       </FlexBox>

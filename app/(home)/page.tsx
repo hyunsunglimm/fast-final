@@ -7,7 +7,7 @@ import { BucketListHeader, BucketListFooter, BucketListContent } from './_compon
 const HomePage = () => {
   return (
     <>
-      <div className='px-20'>
+      <section className='px-20'>
         <HomeBanner />
         <BucketListCard isChallenge={false}>
           <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
@@ -27,11 +27,11 @@ const HomePage = () => {
           <BucketListContent altText='챌린지' imagePath='/images/home-bucket-rabbit.png' />
           <BucketListFooter targetAmount={2000000} currentAmount={350000} />
         </BucketListCard>
-      </div>
+      </section>
       <ConsumeWeatherSesction />
-      <div className='px-20'>
+      <section className='px-20'>
         <HomeWidgetSection />
-      </div>
+      </section>
     </>
   );
 };
