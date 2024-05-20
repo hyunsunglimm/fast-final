@@ -4,37 +4,38 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { MouseEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { WeatherOne, WeatherTwo, WeatherThree, WeatherFour, WeatherFive } from '@/components/icons';
+import Image from 'next/image';
+
 type ConsumeWeatherCardProps = {
   weatherId: number;
 };
 
 type WeatherConfigType = {
   [key: number]: {
-    icon: React.JSX.Element;
+    imagePath: string;
     text: string;
   };
 };
 
 const weatherConfig: WeatherConfigType = {
   1: {
-    icon: <WeatherOne />,
+    imagePath: '/images/weather/weather-1.svg',
     text: '무지출이 떴어요!'
   },
   2: {
-    icon: <WeatherTwo />,
+    imagePath: '/images/weather/weather-2.svg',
     text: '지출 구름이 꼈어요!'
   },
   3: {
-    icon: <WeatherThree />,
+    imagePath: '/images/weather/weather-3.svg',
     text: '지출 하늘이 맑아요!'
   },
   4: {
-    icon: <WeatherFour />,
+    imagePath: '/images/weather/weather-4.svg',
     text: '지출 비가 내려요!'
   },
   5: {
-    icon: <WeatherFive />,
+    imagePath: '/images/weather/weather-5.svg',
     text: '지출 번개가 쳐요!'
   }
 };
@@ -62,7 +63,10 @@ const ConsumeWeatherCard = ({ weatherId }: ConsumeWeatherCardProps) => {
       className='mt-[1.2rem] w-[32rem] shrink-0'
     >
       <CardContent className='gap-x-[1.6rem] px-[2rem] py-[2.4rem]' alignItems='center'>
-        {weather.icon}
+        <FlexBox className='relative h-[10rem] w-[6.8rem]'>
+          <Image src={weather.imagePath} alt={`${weather.text} 아이콘`} fill sizes='auto' />
+        </FlexBox>
+        {/* {weather.icon} */}
         <FlexBox flexDirection='col'>
           <Text>오늘 소비 날씨는</Text>
           <Text sizes='18' weight='500'>
