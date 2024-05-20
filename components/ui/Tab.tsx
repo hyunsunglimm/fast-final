@@ -11,7 +11,7 @@ type TabProps = {
 const Tab = ({ array, type, selectedTab, setSelectedTab }: TabProps) => {
   return (
     <FlexBox
-      className={`${type === 'box' ? 'gap-[1.2rem]' : '-mb-px w-full border-b border-gray-200 px-[2rem]'}`}
+      className={`${type === 'box' ? 'gap-[0.8rem]' : '-mb-px w-full border-b border-gray-200 px-[2rem]'}`}
     >
       {array.map((label) => {
         return (

@@ -6,6 +6,7 @@ import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
 import { useState } from 'react';
 import SpotlightCardItem from './SpotlightCardItem';
+import Button from '@/components/ui/Button';
 
 const spotlightCards = [
   {
@@ -71,7 +72,7 @@ const SpotlightCards = () => {
           setSelectedTab={setSelectedTab}
         />
       </div>
-      <ul className='flex flex-col gap-[1.2rem]'>
+      <ul className='mb-24 flex flex-col gap-[1.2rem]'>
         {spotlightCards.map((card, index) => {
           return (
             <li key={card.title}>
@@ -80,6 +81,9 @@ const SpotlightCards = () => {
           );
         })}
       </ul>
+      <Button size='md' styled='outline'>
+        더보기
+      </Button>
     </div>
   );
 };

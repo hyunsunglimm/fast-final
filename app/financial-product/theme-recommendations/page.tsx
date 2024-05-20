@@ -38,11 +38,11 @@ const Themes = [
 
 const ThemeRecommendationsPage = () => {
   return (
-    <section>
-      <Text variant='h1' sizes='24' weight='600'>
+    <section className='px-[2rem]'>
+      <Text variant='h1' sizes='24' weight='600' className='mb-40'>
         상황에 맞는 상품을 <br /> 선택해 보세요!
       </Text>
-      <ul className='flex flex-col gap-4'>
+      <ul className='flex flex-col gap-[1.6rem]'>
         {Themes.map((theme) => {
           return (
             <li key={theme.title}>

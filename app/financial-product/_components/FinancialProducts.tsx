@@ -1,4 +1,3 @@
-import { CreditCardIcon } from '@/components/icons';
 import CheckCardIcon from '@/components/icons/financial-product/CheckCardIcon';
 import CreditLoanIcon from '@/components/icons/financial-product/CreditLoanIcon';
 import DepositIcon from '@/components/icons/financial-product/DepositIcon';
@@ -11,6 +10,7 @@ import StockInvestmentIcon from '@/components/icons/financial-product/StockInves
 import SubscriptionIcon from '@/components/icons/financial-product/SubscriptionIcon';
 import Text from '@/components/ui/Text';
 import ProductCard from './ProductCard';
+import CreditCardIcon from '@/components/icons/financial-product/CreditCardIcon';
 
 const productArray = [
   {

@@ -1,5 +1,12 @@
+'use client';
+
+import NextIcon from '@/components/icons/NextIcon';
+import FlexBox from '@/components/ui/FlexBox';
+import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
+import { useState } from 'react';
 import SavingCard from '../../_components/SavingCard';
+import Button from '@/components/ui/Button';
 
 const savings = [
   {
@@ -36,16 +43,28 @@ const savings = [
   }
 ];
 
-const page = () => {
+const PerfectFinancialProducts = () => {
+  const [selectedTab, setSelectedTab] = useState('예적금');
   return (
-    <section className='px-[2rem]'>
-      <Text variant='h1' sizes='24' weight='600'>
-        올 겨울에 6개월 적금 들고 <br /> 내년 여름 여행가자
-      </Text>
-      <Text variant='h2' sizes='16' className='mb-28 mt-[0.8rem] text-gray-700'>
-        단기 적금으로 여행 경비를 모으고 싶다면!
-      </Text>
-      <ul className='flex flex-col gap-[1.2rem]'>
+    <div className='px-20 py-40'>
+      <FlexBox justifyContent='between' alignItems='center'>
+        <Text variant='h2' sizes='20' weight='600'>
+          꼭 맞는 금융상품
+        </Text>
+        <FlexBox alignItems='center'>
+          <Text sizes='12'>전체보기</Text>
+          <NextIcon />
+        </FlexBox>
+      </FlexBox>
+      <div className='mb-16 mt-20'>
+        <Tab
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+          type='box'
+          array={['예적금', '카드', '대출', '청약']}
+        />
+      </div>
+      <ul className='mb-24 flex flex-col gap-[1.2rem]'>
         {savings.map((saving) => {
           return (
             <li key={saving.title}>
@@ -54,8 +73,11 @@ const page = () => {
           );
         })}
       </ul>
-    </section>
+      <Button size='md' styled='outline'>
+        더보기
+      </Button>
+    </div>
   );
 };
 
-export default page;
+export default PerfectFinancialProducts;
