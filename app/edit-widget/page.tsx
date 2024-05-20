@@ -99,12 +99,18 @@ const EditWidgetPage = () => {
                 <button
                   id={item.id}
                   onClick={handleInsertWidgetItem}
-                  aria-label='항목 추가'
+                  aria-label={`${item.title} 항목 추가`}
                   disabled={showWidget.length >= 6}
                   className='group relative flex aspect-square w-[2.8rem] items-center justify-center rounded-full bg-primary disabled:cursor-not-allowed disabled:bg-gray-200'
                 >
-                  <span className='absolute h-[0.3rem] w-[1.6rem] rounded-lg bg-white group-disabled:bg-gray-400'></span>
-                  <span className='absolute h-[0.3rem] w-[1.6rem] rotate-90 rounded-lg bg-white group-disabled:bg-gray-400'></span>
+                  <span
+                    aria-hidden
+                    className='absolute h-[0.3rem] w-[1.6rem] rounded-lg bg-white group-disabled:bg-gray-400'
+                  ></span>
+                  <span
+                    aria-hidden
+                    className='absolute h-[0.3rem] w-[1.6rem] rotate-90 rounded-lg bg-white group-disabled:bg-gray-400'
+                  ></span>
                 </button>
               </FlexBox>
             );
