@@ -1,6 +1,6 @@
 import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
-import { ProfileIcon, NotiIcon } from '../icons';
 import Text from '../ui/Text';
+import Image from 'next/image';
 
 type DefaultHeaderProps = {
   isHome?: boolean;
@@ -24,8 +24,12 @@ export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => 
         </Text>
       )}
       <FlexBox className='gap-x-[1.2rem]'>
-        <NotiIcon />
-        <ProfileIcon />
+        <div className='relative h-[2.4rem] w-[2.4rem]'>
+          <Image src='/images/header/header-alarm.svg' alt='알람 아이콘' fill sizes='auto' />
+        </div>
+        <div className='relative h-[2.4rem] w-[2.4rem]'>
+          <Image src='/images/header/header-profile.svg' alt='프로필 아이콘' fill sizes='auto' />
+        </div>
       </FlexBox>
     </header>
   );

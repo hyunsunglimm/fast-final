@@ -16,14 +16,14 @@ const MyCreditSection = () => {
           <FlexBox flexDirection='col' className='my-auto h-full'>
             <Text sizes='18' weight='700'>
               880
-              <Text sizes='14' weight='500'>
+              <Text sizes='14' weight='500' className='text-gray-500'>
                 점
               </Text>
             </Text>
             <Text sizes='12' className='text-gray-500'>
               상위 27%
             </Text>
-            <Text sizes='10' className='text-gray-500'>
+            <Text sizes='12' className='text-gray-500'>
               50점 (03.08 대비)
             </Text>
           </FlexBox>

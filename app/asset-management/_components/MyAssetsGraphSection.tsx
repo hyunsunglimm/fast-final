@@ -3,7 +3,7 @@ import SectionTitle from '@/components/SectionTitle';
 import { Card, CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
-import { ArrowUpFillIcon } from '@/components/icons';
+import Image from 'next/image';
 import MotionCarousel from '@/components/MotionCarousel';
 const MyAssetsGraphSection = () => {
   return (
@@ -31,7 +31,14 @@ const CardList = () => {
             <Text weight='500' sizes='16'>
               300,000원
             </Text>
-            <ArrowUpFillIcon />
+            <div className='relative h-[1.6rem] w-[1.6rem]'>
+              <Image
+                src='/images/arrow/bxs-up-arrow.svg'
+                alt='자산 증가 아이콘'
+                fill
+                sizes='auto'
+              />
+            </div>
           </FlexBox>
         </FlexBox>
         <div className='h-[11.4rem] w-full bg-orange-500 px-[0.8rem]'>graph</div>
