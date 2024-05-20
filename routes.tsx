@@ -5,7 +5,7 @@ export const publicRoutes: string[] = [
   '/',
   '/asset-management/:path*',
   '/budget-calendar/:path*',
-  '/financial-product/:path*'
+  '/financial-product/:path*' //  /financial-product/a  /financial-product/a/b
 ];
 
 /**

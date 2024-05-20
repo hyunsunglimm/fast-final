@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultHeader } from '@/components/Header';
+import { DefaultHeader } from '@/components/header';
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='pb-[13.2rem]'>

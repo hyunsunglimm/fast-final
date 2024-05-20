@@ -1,8 +1,9 @@
 'use client';
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { match } from 'path-to-regexp';
 import { publicRoutes } from '@/routes';
+import Text from './ui/Text';
 import {
   HomeIcon,
   AssetManagementIcon,
@@ -25,14 +26,17 @@ const Navbar = () => {
   return (
     <>
       {isMatchPath(pathname) ? (
-        <nav className='fixed bottom-0 h-[7.2rem] w-full rounded-t-md border-t border-gray-100 bg-white px-20 text-10 xs:w-[520px]'>
+        <nav className='fixed bottom-0 h-[7.2rem] w-full rounded-t-md border-t border-gray-100 bg-white px-20 xs:w-[520px]'>
           <ul className='mt-10 flex items-center justify-between'>
             {NAV_DATA.map((nav) => {
               const isActive =
+
                 nav.path === '/'
                   ? pathname === nav.path
                   : pathname.startsWith(nav.path.split('?')[0]);
               const activeClass = isActive ? 'text-primary' : 'text-gray-500';
+        const textClass = isActive ? 'text-primary' : 'text-gray-500';
+
 
               return (
                 <li key={nav.title}>
@@ -42,7 +46,9 @@ const Navbar = () => {
                     className={`${activeClass} flex aspect-square w-[4.8rem] cursor-pointer flex-col items-center justify-center gap-y-[0.4rem] rounded-full active:bg-slate-100 active:opacity-80`}
                   >
                     {nav.icon}
-                    {nav.title}
+                    <Text sizes='10' className={`${textClass}`}>
+                      {nav.title}
+                    </Text>
                   </Link>
                 </li>
               );
