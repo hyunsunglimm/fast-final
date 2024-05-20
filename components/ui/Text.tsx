@@ -5,28 +5,32 @@ import { cn } from '@/utils/twMerge';
 const textVariants = cva('', {
   variants: {
     sizes: {
-      data48: 'text-data48',
-      data40: 'text-data40',
-      data36: 'text-data36',
-      title32: 'text-title32',
-      title28: 'text-title28',
-      title24: 'text-title24',
-      title20: 'text-title20',
-      title18: 'text-title18',
-      body16: 'text-body16',
-      body14: 'text-body14',
-      caption12: 'text-caption12',
-      caption10: 'text-caption10'
+      '48': 'text-48',
+      '40': 'text-40',
+      '36': 'text-36',
+      '32': 'text-32',
+      '28': 'text-28',
+      '24': 'text-24',
+      '20': 'text-20',
+      '18': 'text-18',
+      '16': 'text-16',
+      '14': 'text-14',
+      '12': 'text-12',
+      '10': 'text-10'
     },
     weight: {
-      bold: 'font-bold',
-      medium: 'font-medium',
-      regular: 'font-normal'
+      '300': 'font-300',
+      '400': 'font-400',
+      '500': 'font-500',
+      '600': 'font-600',
+      '700': 'font-700',
+      '800': 'font-800',
+      '900': 'font-900'
     }
   },
   defaultVariants: {
-    sizes: 'body14',
-    weight: 'regular'
+    sizes: '14',
+    weight: '400'
   }
 });
 
