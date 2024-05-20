@@ -1,32 +1,18 @@
-import BucketListCard from './_components/BucketListCard';
 import HomeBanner from './_components/HomeBanner';
 import HomeWidgetSection from './_components/HomeWidgetSection';
 import ConsumeWeatherSesction from './_components/ConsumeWeatherSesction';
-import { BucketListHeader, BucketListFooter, BucketListContent } from './_components/bucket-list';
-
+import BucketListCard from './_components/BucketListCard';
+import ChallengeCard from './_components/ChallengeCard';
+import MotionCarousel from '@/components/MotionCarousel';
 const HomePage = () => {
   return (
     <>
       <section className='px-20'>
         <HomeBanner />
-        <BucketListCard isChallenge={false}>
-          <BucketListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
-          <BucketListContent
-            altText='버킷리스트'
-            imagePath='/images/home-bucket-rabbit.png'
-            isChallenge={false}
-          />
-          <BucketListFooter targetAmount={2000000} currentAmount={350000} />
-        </BucketListCard>
-        <BucketListCard>
-          <BucketListHeader
-            badgeText='챌린지'
-            headerText='오늘의 나의 기분은?'
-            subHeaderText='감정 통장 챌린지'
-          />
-          <BucketListContent altText='챌린지' imagePath='/images/home-bucket-rabbit.png' />
-          <BucketListFooter targetAmount={2000000} currentAmount={350000} />
-        </BucketListCard>
+        <MotionCarousel>
+          <BucketListCard />
+          <ChallengeCard />
+        </MotionCarousel>
       </section>
       <ConsumeWeatherSesction />
       <section className='px-20'>

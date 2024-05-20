@@ -1,19 +1,19 @@
 import { CardHeader } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
-type BucketListHeaderProps = {
+type ListHeaderProps = {
   badgeText: string;
   headerText: string;
   subHeaderText?: string;
   isChallenge?: boolean;
 };
 
-export const BucketListHeader = ({
+export const ListHeader = ({
   badgeText,
   headerText,
   subHeaderText,
   isChallenge = true
-}: BucketListHeaderProps) => {
+}: ListHeaderProps) => {
   return (
     <CardHeader className='p-[1.6rem] pb-0'>
       <FlexBox justifyContent='between' className='mb-[1.2rem]'>

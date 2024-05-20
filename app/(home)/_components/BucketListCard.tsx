@@ -1,13 +1,18 @@
-import { Card } from '@/components/ui/card';
+import React from 'react';
+import { ListCard, ListHeader, ListFooter, ListContent } from './bucket-challenge';
 
-type BucketListCardProps = {
-  isChallenge?: boolean;
-  children?: React.ReactNode;
-};
-
-const BucketListCard = ({ isChallenge = true, children }: BucketListCardProps) => {
-  const bgColor = isChallenge ? 'bg-primary' : 'bg-active';
-  return <Card className={`aspect-square ${bgColor} text-white`}>{children}</Card>;
+const BucketListCard = () => {
+  return (
+    <ListCard isChallenge={false}>
+      <ListHeader isChallenge={false} badgeText='버킷리스트' headerText='유럽 여행가기' />
+      <ListContent
+        altText='버킷리스트'
+        imagePath='/images/home-bucket-rabbit.png'
+        isChallenge={false}
+      />
+      <ListFooter targetAmount={2000000} currentAmount={350000} />
+    </ListCard>
+  );
 };
 
 export default BucketListCard;

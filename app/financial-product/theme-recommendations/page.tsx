@@ -4,7 +4,7 @@ import SixMonthSavingIcon from '@/components/icons/financial-product/SixMonthSav
 import Link from 'next/link';
 import ConvenienceStoreIcon from '@/components/icons/financial-product/ConvenienceStoreIcon';
 import ShoppingIcon from '@/components/icons/financial-product/ShoppingIcon';
-import { IsBackHeader } from '@/components/Header';
+import { IsBackHeader } from '@/components/header';
 
 const Themes = [
   {
@@ -40,7 +40,7 @@ const Themes = [
 const ThemeRecommendationsPage = () => {
   return (
     <>
-      <IsBackHeader href='/financial-product' />
+      <IsBackHeader />
       <section className='px-20 pb-[13.2rem]'>
         <Text variant='h1' sizes='24' weight='600' className='mb-40'>
           상황에 맞는 상품을 <br /> 선택해 보세요!

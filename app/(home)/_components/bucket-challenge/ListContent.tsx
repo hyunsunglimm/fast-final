@@ -3,17 +3,13 @@ import { TextBubble } from './TextBubble';
 import FlexBox from '@/components/ui/FlexBox';
 import Image from 'next/image';
 
-type BucketListContentProps = {
+type ListContentProps = {
   altText: string;
   imagePath: string;
   isChallenge?: boolean;
 };
 
-export const BucketListContent = ({
-  altText,
-  imagePath,
-  isChallenge = true
-}: BucketListContentProps) => {
+export const ListContent = ({ altText, imagePath, isChallenge = true }: ListContentProps) => {
   return (
     <CardContent
       flexDirection='col'

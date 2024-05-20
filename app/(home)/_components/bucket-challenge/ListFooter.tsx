@@ -3,12 +3,12 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { ProgressBar } from '@/components/ProgressBar';
 
-type BucketListFooterProps = {
+type ListFooterProps = {
   targetAmount: number;
   currentAmount: number;
 };
 
-export const BucketListFooter = ({ currentAmount, targetAmount }: BucketListFooterProps) => {
+export const ListFooter = ({ currentAmount, targetAmount }: ListFooterProps) => {
   const progressPercent = (currentAmount / targetAmount) * 100;
   return (
     <CardFooter className='flex-col px-[1.6rem] pb-[2.2rem]'>
