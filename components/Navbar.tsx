@@ -33,14 +33,11 @@ const Navbar = () => {
               const activeClass = isActive ? 'text-primary' : 'text-gray-500';
 
               return (
-                <li
-                  key={nav.title}
-                  className='flex aspect-square w-[4.8rem] cursor-pointer items-center justify-center rounded-full active:bg-slate-100 active:opacity-80'
-                >
+                <li key={nav.title}>
                   <Link
                     aria-label={`${nav.title}로 이동`}
                     href={nav.path}
-                    className={`${activeClass} flex flex-col items-center justify-center gap-y-[0.4rem] `}
+                    className={`${activeClass} flex aspect-square w-[4.8rem] cursor-pointer flex-col items-center justify-center gap-y-[0.4rem] rounded-full active:bg-slate-100 active:opacity-80`}
                   >
                     {nav.icon}
                     {nav.title}
