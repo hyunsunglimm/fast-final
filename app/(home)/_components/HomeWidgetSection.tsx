@@ -52,7 +52,7 @@ const HomeWidgetSection = async () => {
           href='/edit-widget'
           className={buttonVariants({
             size: 'xs',
-            className: 'focus:outline-none focus:ring focus:ring-active focus:ring-offset-1'
+            className: 'focus:outline-none focus:ring focus:ring-primary/50 focus:ring-offset-1'
           })}
         >
           편집

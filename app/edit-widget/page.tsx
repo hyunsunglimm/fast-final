@@ -1,6 +1,6 @@
 'use client';
 import FlexBox from '@/components/ui/FlexBox';
-import { IsBackHeader } from '@/components/Header';
+import { IsBackHeader } from '@/components/header';
 import Text from '@/components/ui/Text';
 import TopContents from './_components/TopContents';
 import React, { MouseEvent, useEffect, useState } from 'react';
@@ -57,7 +57,7 @@ const EditWidgetPage = () => {
 
   return (
     <>
-      <IsBackHeader title='한 눈에 보기 편집' href='/' />
+      <IsBackHeader title='한 눈에 보기 편집' />
       <TopContents />
       <div className='grid grid-cols-2 gap-x-[2rem] gap-y-[1.9rem] px-[2rem]'>
         {/* ShowWidget 렌더링 */}

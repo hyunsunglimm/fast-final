@@ -59,7 +59,7 @@ const ConsumeWeatherCard = ({ weatherId }: ConsumeWeatherCardProps) => {
       tabIndex={0}
       onMouseDown={mouseDownCoords}
       onMouseUp={goToBudget}
-      className='mt-[1.2rem] w-[32rem] shrink-0 focus:outline-none focus:ring focus:ring-active focus:ring-offset-2'
+      className='mt-[1.2rem] w-[32rem] shrink-0'
     >
       <CardContent className='gap-x-[1.6rem] px-[2rem] py-[2.4rem]' alignItems='center'>
         {weather.icon}
