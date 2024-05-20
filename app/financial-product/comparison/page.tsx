@@ -1,28 +1,30 @@
 'use client';
 
-import Text from '@/components/ui/Text';
+import Tab from '@/components/ui/Tab';
 import { useState } from 'react';
 
-const menus = [{ title: '예적금' }, { title: '대출' }, { title: '카드' }, { title: '보험' }];
-
 const ComparisonPage = () => {
-  const [selectedMenu, setSelectedMenu] = useState('카드');
+  const [selectedTab, setSelectedTab] = useState('카드');
+  const [selectedSubTab, setSelectedSubTab] = useState('신용카드');
 
   return (
     <section>
-      <ul className='grid grid-cols-4 border-b-2 border-gray-300'>
-        {menus.map(({ title }) => {
-          return (
-            <li
-              key={title}
-              className={`cursor-pointer py-[1.2rem] text-center ${selectedMenu === title ? 'border-b-2 border-black text-black' : 'text-gray-300'}`}
-              onClick={() => setSelectedMenu(title)}
-            >
-              <Text sizes='16'>{title}</Text>
-            </li>
-          );
-        })}
-      </ul>
+      <div className='bg-white'>
+        <Tab
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+          type='underline'
+          array={['예적금', '대출', '카드', '보험']}
+        />
+        <div className='px-20 py-16'>
+          <Tab
+            selectedTab={selectedSubTab}
+            setSelectedTab={setSelectedSubTab}
+            type='box'
+            array={['신용카드', '체크카드']}
+          />
+        </div>
+      </div>
     </section>
   );
 };

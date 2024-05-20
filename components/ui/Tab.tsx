@@ -20,7 +20,7 @@ const Tab = ({ array, type, selectedTab, setSelectedTab }: TabProps) => {
             className={getStyle(type, label === selectedTab)}
             onClick={() => setSelectedTab(label)}
           >
-            <Text weight='500'>{label}</Text>
+            <Text weight={type === 'box' ? '500' : '700'}>{label}</Text>
           </div>
         );
       })}
