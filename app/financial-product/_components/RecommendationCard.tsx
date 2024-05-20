@@ -17,6 +17,8 @@ type RecommendationInfoProps = {
 const RecommendationCard = ({
   recommendationInfo: { title, subTitle, description, linkTitle, href }
 }: RecommendationInfoProps) => {
+  const imageUrl = href.split('?')[0];
+
   return (
     <Card className='w-full shrink-0 p-24'>
       <Text variant='h2' sizes='12' weight='700' className='mb-[1rem] text-primary'>
@@ -30,7 +32,7 @@ const RecommendationCard = ({
       </Text>
       <div className='my-[3.6rem] flex justify-center'>
         <Image
-          src={`/images/${href}.svg`}
+          src={`/images/${imageUrl}.svg`}
           alt='search products'
           width={1000}
           height={0}
