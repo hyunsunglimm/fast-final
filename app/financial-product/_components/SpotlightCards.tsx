@@ -62,7 +62,7 @@ const SpotlightCards = () => {
         </Text>
       </FlexBox>
       <div className='mb-24 mt-16'>
-        <Tab array={['신용카드', '체크카드']} type='box' />
+        <Tab array={['신용카드', '체크카드']} type='box' tabKey='tab' />
       </div>
       <ul className='mb-24 flex flex-col gap-[1.2rem]'>
         {spotlightCards.map((card, index) => {
