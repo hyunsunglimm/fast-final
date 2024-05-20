@@ -65,7 +65,7 @@ const benefits = [
 
 const SpendingHabitsCards = () => {
   return (
-    <div className='bg-white pt-40'>
+    <div className='bg-white pb-[6rem] pt-40'>
       <Text variant='h2' sizes='20' weight='600' className='mb-[2.6rem] text-center'>
         소비습관에 맞는 카드
       </Text>

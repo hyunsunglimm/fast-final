@@ -30,13 +30,11 @@ const Navbar = () => {
           <ul className='mt-10 flex items-center justify-between'>
             {NAV_DATA.map((nav) => {
               const isActive =
-
                 nav.path === '/'
                   ? pathname === nav.path
                   : pathname.startsWith(nav.path.split('?')[0]);
               const activeClass = isActive ? 'text-primary' : 'text-gray-500';
-        const textClass = isActive ? 'text-primary' : 'text-gray-500';
-
+              const textClass = isActive ? 'text-primary' : 'text-gray-500';
 
               return (
                 <li key={nav.title}>

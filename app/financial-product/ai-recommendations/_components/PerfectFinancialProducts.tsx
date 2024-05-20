@@ -4,7 +4,6 @@ import NextIcon from '@/components/icons/NextIcon';
 import FlexBox from '@/components/ui/FlexBox';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
-import { useState } from 'react';
 import SavingCard from '../../_components/SavingCard';
 import Button from '@/components/ui/Button';
 
@@ -44,7 +43,6 @@ const savings = [
 ];
 
 const PerfectFinancialProducts = () => {
-  const [selectedTab, setSelectedTab] = useState('예적금');
   return (
     <div className='px-20 py-40'>
       <FlexBox justifyContent='between' alignItems='center'>
@@ -57,12 +55,7 @@ const PerfectFinancialProducts = () => {
         </FlexBox>
       </FlexBox>
       <div className='mb-16 mt-20'>
-        <Tab
-          selectedTab={selectedTab}
-          setSelectedTab={setSelectedTab}
-          type='box'
-          array={['예적금', '카드', '대출', '청약']}
-        />
+        <Tab type='box' array={['예적금', '카드', '대출', '청약']} tabKey='tab' />
       </div>
       <ul className='mb-24 flex flex-col gap-[1.2rem]'>
         {savings.map((saving) => {
