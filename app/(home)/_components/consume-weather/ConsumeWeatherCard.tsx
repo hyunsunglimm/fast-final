@@ -54,9 +54,12 @@ const ConsumeWeatherCard = ({ weatherId }: ConsumeWeatherCardProps) => {
   };
   return (
     <Card
+      role='button'
+      aria-label='가계부로 이동'
+      tabIndex={0}
       onMouseDown={mouseDownCoords}
       onMouseUp={goToBudget}
-      className='mt-[1.2rem] w-[32rem] shrink-0'
+      className='mt-[1.2rem] w-[32rem] shrink-0 focus:outline-none focus:ring focus:ring-active focus:ring-offset-2'
     >
       <CardContent className='gap-x-[1.6rem] px-[2rem] py-[2.4rem]' alignItems='center'>
         {weather.icon}

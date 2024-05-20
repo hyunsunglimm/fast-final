@@ -5,12 +5,11 @@ export const BusIcon = ({ ...props }: SvgComponentProps) => {
     <svg
       {...props}
       xmlns='http://www.w3.org/2000/svg'
-      width='30'
-      height='30'
+      className='h-[3rem] w-[3rem]'
       viewBox='0 0 30 30'
       fill='none'
     >
-      <rect width='30' height='30' fill='white' />
+      <rect className='h-[3rem] w-[3rem]' fill='white' />
       <path
         d='M22.3101 26.9897H20.7501C20.1601 26.9897 19.6801 26.5008 19.6801 25.8998V21.9066H23.3901V25.8998C23.3901 26.5008 22.9101 26.9897 22.3201 26.9897H22.3101Z'
         fill='#D7E4FF'
