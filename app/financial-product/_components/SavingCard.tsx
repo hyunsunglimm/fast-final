@@ -21,7 +21,7 @@ const SavingCard = ({ saving }: SavingCardProps) => {
   return (
     <Card className='flex flex-col gap-[1.6rem] p-24'>
       <div className='flex items-center justify-between'>
-        <div className='flex gap-[0.4rem]'>
+        <div className='flex items-center gap-[0.4rem]'>
           <div className='h-[1.6rem] w-[1.6rem] rounded-full bg-primary' />
           <Text sizes='12' className='text-gray-600'>
             {bank}
