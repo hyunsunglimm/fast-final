@@ -1,7 +1,7 @@
 import { CardFooter } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { ProgressBar } from './ProgressBar';
+import { ProgressBar } from '@/components/ProgressBar';
 
 type BucketListFooterProps = {
   targetAmount: number;
@@ -15,13 +15,15 @@ export const BucketListFooter = ({ currentAmount, targetAmount }: BucketListFoot
       <FlexBox justifyContent='between' alignItems='end' className='mb-[0.6rem] w-full'>
         <p>
           <Text sizes='18' weight='700'>
-            {currentAmount.toLocaleString('kr')}&nbsp;
+            {currentAmount.toLocaleString('ko')}&nbsp;
           </Text>
-          <Text weight='500'>/ {targetAmount.toLocaleString('kr')}원</Text>
+          <Text weight='500'>/ {targetAmount.toLocaleString('ko')}원</Text>
         </p>
         <Text>12일째</Text>
       </FlexBox>
-      <ProgressBar progressPercent={progressPercent} />
+      <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>
+        <ProgressBar barColor='white' progressPercent={progressPercent} />
+      </div>
     </CardFooter>
   );
 };

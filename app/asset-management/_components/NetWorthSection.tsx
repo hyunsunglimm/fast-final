@@ -1,67 +1,53 @@
 'use client';
-import React, { useState, useRef, MouseEvent } from 'react';
+import React, { useEffect, useState, useRef, MouseEvent } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import { motion } from 'framer-motion';
+import { useWindowResize } from '@/hooks/useWindowResize';
 const ItemList = [1, 2, 3, 4, 5];
 
 const NetWorthSection = () => {
-  // const [scrollLeft, setScrollLeft] = useState<number>(0);
-  // const [isDragging, setIsDragging] = useState<boolean>(false);
-  // const [startX, setStartX] = useState<number>(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [constraints, setConstraints] = useState({ left: 0, right: 0 });
+  const { documentSize } = useWindowResize();
 
-  // const handleDragStart = (e: MouseEvent<HTMLDivElement>) => {
-  //   e.preventDefault();
-  //   if (!containerRef.current) return;
-  //   setIsDragging(true);
-  //   setStartX(e.pageX - containerRef.current.offsetLeft);
-  //   setScrollLeft(containerRef.current.scrollLeft);
-  // };
+  useEffect(() => {
+    if (containerRef.current) {
+      setConstraints({
+        left: -(containerRef.current.scrollWidth - containerRef.current.clientWidth),
+        right: 0
+      });
+    }
+  }, [documentSize]);
 
-  // const handleDragMove = (e: MouseEvent<HTMLDivElement>) => {
-  //   if (!isDragging || !containerRef.current) return;
-  //   const x = e.pageX - containerRef.current.offsetLeft;
-  //   const walk = x - startX;
-
-  //   containerRef.current.scrollLeft = scrollLeft - walk;
-  // };
-
-  // const handleDragEnd = () => {
-  //   setIsDragging(false);
-  // };
   const handleItemClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
   return (
     <>
-      <div className='flex flex-col'>
-        <Text>순자산</Text>
-        <Text>3,123,567원</Text>
+      <div className='mb-24 ml-20 mt-20 flex flex-col'>
+        <Text sizes='16' weight='600'>
+          순자산
+        </Text>
+        <Text sizes='24' weight='700'>
+          3,123,567원
+        </Text>
       </div>
 
-      <div
-        className='hide-scrollbar relative overflow-hidden'
-        // onMouseDown={handleDragStart}
-        // onMouseMove={handleDragMove}
-        // onMouseUp={handleDragEnd}
-        // onMouseLeave={handleDragEnd}
-        ref={containerRef}
-      >
+      <div className='relative overflow-hidden'>
         <motion.div
+          ref={containerRef}
           drag='x'
-          dragConstraints={{
-            left: 0,
-            right: 0
-          }}
-          className='flex cursor-grab items-center gap-x-4 active:cursor-grabbing'
+          dragConstraints={constraints}
+          className='mb-4 flex cursor-grab scroll-pr-8 items-center gap-x-[1.6rem]'
         >
+          <div className='h-[2rem] w-[0.4rem] shrink-0' aria-hidden></div>
           {ItemList.map((item) => {
             return (
               <Card
                 key={item}
-                className='aspect-square w-[24rem] shrink-0 cursor-pointer first:pl-8 last:pr-8'
+                className={'aspect-square w-[24rem] shrink-0 cursor-pointer'}
                 onClick={handleItemClick}
               >
                 <CardHeader>
@@ -71,7 +57,7 @@ const NetWorthSection = () => {
               </Card>
             );
           })}
-          <div className='w-[0.2rem] shrink-0'></div>
+          <div className='h-[2rem] w-[0.4rem] shrink-0' aria-hidden></div>
         </motion.div>
       </div>
     </>

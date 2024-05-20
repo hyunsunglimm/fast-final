@@ -30,7 +30,7 @@ const CollectAssetSection = () => {
                 <FlexBox flexDirection='col' className='gap-y-2'>
                   <Text className='text-gray-500'>모인 금액</Text>
                   <Text weight='700' sizes='16'>
-                    {item.amount.toLocaleString('kr')}원
+                    {item.amount.toLocaleString('ko')}원
                   </Text>
                 </FlexBox>
               </CardContent>

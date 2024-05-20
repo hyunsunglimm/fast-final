@@ -1,11 +1,10 @@
 import { ChangeEvent, useState, useEffect } from 'react';
-import { CardFooter } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { CheckIcon, ArrowRightIcon } from '@/components/icons';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import Button from '@/components/ui/Button';
-
+import { useRouter } from 'next/navigation';
 const policyList = [
   {
     id: 'service',
@@ -25,10 +24,12 @@ type CheckboxType = {
   selectOptions: boolean[];
 };
 export const StepFiveForm = () => {
+  const router = useRouter();
   const [isAllChecked, setIsAllChecked] = useState(false);
-  const { register, handleSubmit, watch, setValue } = useForm<CheckboxType>();
+  const { register, watch, setValue } = useFormContext();
   const selectedOptionsArray = policyList.map((_, index) => watch(`selectOptions.${index}`));
   const isSelectedOption = selectedOptionsArray.every((select) => select === true);
+
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
       policyList.forEach((_, index) => {
@@ -45,12 +46,6 @@ export const StepFiveForm = () => {
     setIsAllChecked(isSelectedOption);
   }, [isSelectedOption]);
 
-  const handleOnSubmit: SubmitHandler<CheckboxType> = (data) => {
-    // console.log('selectOptions: ', data.selectOptions);
-    // console.log('isSelect 0: ', data.selectOptions[0]);
-    // console.log('isSelect 1: ', data.selectOptions[1]);
-    // console.log('isSelect 2: ', data.selectOptions[2]);
-  };
   return (
     <>
       <FlexBox flexDirection='col' className='w-full'>
@@ -62,7 +57,7 @@ export const StepFiveForm = () => {
               checked={isAllChecked}
               onChange={handleSelectAll}
               type='checkbox'
-              className='hidden '
+              className='hidden'
             />
             <CheckIcon
               fill={isAllChecked ? '#51D868' : '#fff'}
@@ -117,11 +112,15 @@ export const StepFiveForm = () => {
         </FlexBox>
 
         <FlexBox className='w-full gap-x-4'>
-          <Button type='button' className='disabled:cursor-not-allowed disabled:bg-gray-300'>
+          <Button
+            type='button'
+            className='disabled:cursor-not-allowed disabled:bg-gray-300'
+            onClick={() => router.back()}
+          >
             이전
           </Button>
           <Button
-            type='button'
+            type='submit'
             disabled={!isAllChecked}
             className='w-[21rem] shrink-0 disabled:cursor-not-allowed disabled:bg-gray-300'
           >

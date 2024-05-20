@@ -3,8 +3,7 @@ export const CreditCardIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
       {...props}
-      width='66'
-      height='57'
+      className='h-[5.7rem] w-[6.6rem]'
       viewBox='0 0 66 57'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
@@ -58,7 +57,7 @@ export const CreditCardIcon = ({ ...props }: SvgComponentProps) => {
       </g>
       <defs>
         <clipPath id='clip0_1311_10020'>
-          <rect width='66' height='57' fill='white' />
+          <rect className='h-[5.7rem] w-[6.6rem]' fill='white' />
         </clipPath>
       </defs>
     </svg>

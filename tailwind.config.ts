@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       boxShadow: {
         sm: '0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 1px 0px rgba(0, 0, 0, 0.06)',
-        '3xl': '0px 4px 10px 0px rgba(0, 0, 0, 0.06)'
+        '3xl': '0px 4px 10px 0px rgba(0, 0, 0, 0.06)',
+        'top-shadow': '0px 4px 16px 0px rgba(75, 81, 88, 0.08)'
       },
       screens: {
         xs: '520px'
