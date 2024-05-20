@@ -5,7 +5,6 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
-import { MonthlyRentIcon, BusIcon, SubsServiceIcon } from '@/components/icons';
 
 const UpcomingScheduleSection = () => {
   return (
@@ -110,9 +109,9 @@ const UpCommingCard = () => {
   );
 };
 const fiexedExpensesData = [
-  { title: '월세', date: '내일', icon: <MonthlyRentIcon /> },
-  { title: '교통비', date: '2일뒤', icon: <BusIcon /> },
-  { title: '구독서비스', date: '4일뒤', icon: <SubsServiceIcon /> }
+  { title: '월세', date: '내일', imgPath: '/images/asset/home-rental.svg' },
+  { title: '교통비', date: '2일뒤', imgPath: '/images/asset/bus.svg' },
+  { title: '구독서비스', date: '4일뒤', imgPath: '/images/asset/ott.svg' }
 ];
 const FixedExpenses = () => {
   return (
@@ -126,13 +125,10 @@ const FixedExpenses = () => {
             className='mb-[2rem] w-full last:mb-0'
           >
             <FlexBox className='gap-x-[0.5rem]' alignItems='center'>
-              <FlexBox
-                alignItems='center'
-                justifyContent='center'
-                className='mx-auto my-auto h-[3rem] w-[3rem]'
-              >
-                {item.icon}
-              </FlexBox>
+              <div className='relative h-[3rem] w-[3rem]'>
+                <Image src={item.imgPath} alt={`${item.title} 아이콘`} fill sizes='auto' />
+                {/* {item.icon} */}
+              </div>
               <Text weight='700' sizes='16'>
                 {item.title}
               </Text>

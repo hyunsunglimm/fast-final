@@ -15,21 +15,22 @@ const CollectAssetSection = () => {
       <SectionTitle>자산 모으기</SectionTitle>
       <FlexBox justifyContent='between'>
         {AssetData.map((item) => {
-          const badgeClass = item.id === 'bucket' ? 'bg-[#5486FF]' : 'bg-[#F5553F]';
           return (
             <Card key={item.title} className='aspect-square w-[16.2rem] p-[2.4rem]'>
               <CardContent className='h-full p-0' flexDirection='col' justifyContent='between'>
                 <FlexBox alignItems='center' className='mb-[2.4rem] gap-x-[0.4rem]'>
-                  <Text weight='500'>{item.title}</Text>
-                  <div
-                    className={`${badgeClass} my-auto flex h-[2rem] w-[2rem] items-center justify-center rounded-full text-center text-white`}
-                  >
-                    <Text sizes='14'> {item.listCount}</Text>
-                  </div>
+                  <Text sizes='16' weight='500'>
+                    {item.title}
+                  </Text>
+                  {item.id === 'challenge' && (
+                    <div className='my-auto flex h-[2rem] w-[2rem] items-center justify-center rounded-full bg-warning text-center text-white'>
+                      <Text sizes='14'> {item.listCount}</Text>
+                    </div>
+                  )}
                 </FlexBox>
                 <FlexBox flexDirection='col' className='gap-y-2'>
                   <Text className='text-gray-500'>모인 금액</Text>
-                  <Text weight='700' sizes='16'>
+                  <Text weight='700' sizes='18'>
                     {item.amount.toLocaleString('ko')}원
                   </Text>
                 </FlexBox>
