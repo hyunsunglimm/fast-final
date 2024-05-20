@@ -47,7 +47,7 @@ const getStyle = (type: 'box' | 'underline', isSelcted: boolean) => {
   if (type === 'underline') {
     className += ' w-full text-center px-[1rem] py-[1.2rem] -mb-px';
     if (isSelcted) {
-      className += ' border-b-2 border-black';
+      className += ' h-[4.4rem] border-b-2 border-black';
     } else {
       className += ' text-gray-400';
     }
