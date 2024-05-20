@@ -6,8 +6,7 @@ import { motion, useMotionValue } from 'framer-motion';
 import { HTMLAttributes, useRef, SetStateAction, useState, useEffect, useCallback } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import { cn } from '@/utils/twMerge';
-import { useIsMounted } from '@/hooks/useIsMounted';
-import { debounce } from '@/utils/debounce';
+import { useWindowResize } from '@/hooks/useWindowResize';
 import Text from './ui/Text';
 
 type MotionCarouselProps = {
@@ -30,32 +29,16 @@ const MotionCarousel = ({
   const ref = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState(false);
   const [childrenElementWidth, setChildrenElementWidth] = useState(0);
-  const [documentSize, setDocumentSize] = useState(0);
   const [index, setIndex] = useState(0);
   const dragX = useMotionValue(0);
+  const { documentSize } = useWindowResize();
   const newChildrenArr = [...children];
-  const isMounted = useIsMounted();
   const containerBoxWidth = ref.current ? childrenElementWidth * children.length : 0;
   const gapSize =
     ref.current && children.length > 1
       ? (ref.current?.scrollWidth - containerBoxWidth) / (children.length - 1)
       : 0;
   const moveTranslateX = childrenElementWidth + gapSize - (moveGap || 0);
-
-  const handleResize = debounce(
-    useCallback(() => {
-      const documentWidth = document.documentElement.clientWidth;
-      setDocumentSize(documentWidth);
-    }, []),
-    300
-  );
-
-  useEffect(() => {
-    if (isMounted()) {
-      window.addEventListener('resize', handleResize);
-    }
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isMounted, handleResize]);
 
   useEffect(() => {
     if (ref.current) {
@@ -66,11 +49,10 @@ const MotionCarousel = ({
   const onDragStart = () => {
     setDragging(true);
   };
+
   const onDragEnd = () => {
     setDragging(false);
-
     const x = dragX.get();
-
     if (x <= -DRAG_BUFFER && index < children.length - 1) {
       setIndex((prev) => prev + 1);
     } else if (x >= DRAG_BUFFER && index > 0) {
@@ -79,7 +61,7 @@ const MotionCarousel = ({
   };
 
   return (
-    <div className={cn('relative overflow-hidden', className)} {...props}>
+    <section className={cn('relative overflow-hidden', className)} {...props}>
       <motion.div
         ref={ref}
         drag='x'
@@ -103,7 +85,7 @@ const MotionCarousel = ({
       {showNumber && (
         <NumberIndicator index={index} setIndex={setIndex} newChildrenArr={newChildrenArr} />
       )}
-    </div>
+    </section>
   );
 };
 export default MotionCarousel;
@@ -116,7 +98,7 @@ type DotsProps = {
 
 const Dots = ({ index, setIndex, newChildrenArr }: DotsProps) => {
   return (
-    <FlexBox alignItems='center' justifyContent='center' className='my-[1.6rem] w-full'>
+    <FlexBox alignItems='center' justifyContent='center' className='mt-[1.6rem] w-full'>
       {newChildrenArr.map((item, idx) => {
         const currentDotClass = idx === index ? 'w-[1.8rem] bg-black' : 'w-[0.8rem] bg-gray-300';
         return (
