@@ -27,7 +27,7 @@ const Tab = ({ array, type, tabKey }: TabProps) => {
 
   return (
     <FlexBox
-      className={`${type === 'box' ? 'gap-[0.8rem]' : '-mb-px w-full border-b border-gray-200 px-[2rem]'}`}
+      className={`${type === 'box' ? 'gap-[0.8rem]' : 'w-full border-b border-gray-200 px-[2rem]'}`}
     >
       {array.map((label) => {
         return (
@@ -46,7 +46,7 @@ const Tab = ({ array, type, tabKey }: TabProps) => {
 };
 
 const getStyle = (type: 'box' | 'underline', isSelcted: boolean) => {
-  let className = 'inline-block';
+  let className = '';
 
   if (type === 'box') {
     className += ' rounded-[4.3rem] px-[1.4rem] py-[0.7rem]';
