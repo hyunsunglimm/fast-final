@@ -4,8 +4,7 @@ export const MonthlyRentIcon = ({ ...props }: SvgComponentProps) => {
     <svg
       {...props}
       xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
+      className='h-[2.4rem] w-[2.4rem]'
       viewBox='0 0 24 24'
       fill='none'
     >
@@ -41,7 +40,7 @@ export const MonthlyRentIcon = ({ ...props }: SvgComponentProps) => {
       </g>
       <defs>
         <clipPath id='clip0_1311_9968'>
-          <rect width='24' height='23.21' fill='white' />
+          <rect className='h-[2.321rem] w-[2.4rem]' fill='white' />
         </clipPath>
       </defs>
     </svg>

@@ -1,6 +1,11 @@
 export const AssetManagementIcon = () => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' width='21' height='22' viewBox='0 0 21 22' fill='none'>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='h-[2.2rem] w-[2.1rem]'
+      viewBox='0 0 21 22'
+      fill='none'
+    >
       <path
         d='M10.75 17.8691L8.96504 15.7616C8.17754 14.8316 8.23004 13.4516 9.09254 12.5891C10.0075 11.6741 11.4925 11.6741 12.4075 12.5891C13.27 13.4516 13.3225 14.8316 12.535 15.7616L10.75 17.8691Z'
         stroke='currentColor'
@@ -28,7 +33,12 @@ export const AssetManagementIcon = () => {
 
 export const BudgetCalendarIcon = () => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' width='21' height='21' viewBox='0 0 21 21' fill='none'>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='h-[2.1rem] w-[2.1rem]'
+      viewBox='0 0 21 21'
+      fill='none'
+    >
       <path
         d='M19.8619 12.433V18.5C19.8619 19.3284 19.1903 20 18.3619 20H2.63794C1.80951 20 1.13794 19.3284 1.13794 18.5V11.7725C1.13794 10.9441 1.80951 10.2725 2.63794 10.2725H18.3619C19.1903 10.2725 19.8619 9.60094 19.8619 8.77251V7.32369C19.8619 6.82172 19.3769 6.46319 18.8808 6.53962C15.8723 7.00309 14.1007 5.23145 14.1007 5.23145C14.1007 5.23145 13.0204 6.67175 10.4999 6.67175C7.97938 6.67175 6.89915 5.23145 6.89915 5.23145C6.89915 5.23145 5.67086 7.07389 2.07995 6.50945C1.59831 6.43374 1.13794 6.78897 1.13794 7.27653V8.11205'
         stroke='currentColor'
@@ -56,7 +66,12 @@ export const BudgetCalendarIcon = () => {
 
 export const FinancialProductIcon = () => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' width='23' height='20' viewBox='0 0 23 20' fill='none'>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='h-[2rem] w-[2.3rem]'
+      viewBox='0 0 23 20'
+      fill='none'
+    >
       <g clipPath='url(#clip0_1651_17724)'>
         <path
           d='M6.75014 5.6725L5.34764 4.0225C4.73264 3.295 4.77014 2.215 5.45264 1.54C6.17264 0.82 7.32764 0.82 8.04764 1.54C8.72264 2.215 8.76764 3.295 8.15264 4.0225L6.75014 5.6725Z'
@@ -103,7 +118,7 @@ export const FinancialProductIcon = () => {
       </g>
       <defs>
         <clipPath id='clip0_1651_17724'>
-          <rect width='22.5' height='19.6725' fill='white' transform='translate(0 0.25)' />
+          <rect className='h-[1.96725rem] w-[2.25rem]' fill='white' transform='translate(0 0.25)' />
         </clipPath>
       </defs>
     </svg>
@@ -112,7 +127,12 @@ export const FinancialProductIcon = () => {
 
 export const HomeIcon = () => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' width='22' height='21' viewBox='0 0 22 21' fill='none'>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='h-[2.1rem] w-[2.2rem]'
+      viewBox='0 0 22 21'
+      fill='none'
+    >
       <path
         d='M11 16.9448L9.21504 14.8373C8.42754 13.9073 8.48004 12.5273 9.34254 11.6648C10.2575 10.7498 11.7425 10.7498 12.6575 11.6648C13.52 12.5273 13.5725 13.9073 12.785 14.8373L11 16.9448Z'
         stroke='currentColor'
@@ -140,7 +160,12 @@ export const HomeIcon = () => {
 
 export const NavAllIcon = () => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='h-[2rem] w-[2rem]'
+      viewBox='0 0 20 20'
+      fill='none'
+    >
       <path
         d='M5.15364 6.54051L3.50595 4.59513C2.77903 3.73666 2.82749 2.46282 3.62364 1.66666C4.46826 0.822049 5.83903 0.822049 6.68364 1.66666C7.4798 2.46282 7.52826 3.73666 6.80133 4.59513L5.15364 6.54051Z'
         stroke='currentColor'
