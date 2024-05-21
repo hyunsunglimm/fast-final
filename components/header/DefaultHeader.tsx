@@ -17,7 +17,7 @@ export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => 
       })}
     >
       {isHome ? (
-        <div className='relative h-[1.96rem] w-[8.442rem]'>
+        <div className='relative h-[1.96rem] w-[8.442rem]' aria-label='PORKO 로고 이미지'>
           <Image src='/images/porko-logo.svg' fill alt='PORKO 로고 이미지' sizes='auto' />
         </div>
       ) : (
