@@ -18,7 +18,13 @@ export const IsBackHeader = ({ title }: HeaderProps) => {
       })}
     >
       <div className='relative h-[2.4rem] w-[2.4rem]' role='button' onClick={() => router.back()}>
-        <Image src='/images/arrow/arrow-prev.svg' alt='뒤로가기' aria-hidden fill sizes='auto' />
+        <Image
+          src='/images/icons/arrow/arrow-prev.svg'
+          alt='뒤로가기'
+          aria-hidden
+          fill
+          sizes='auto'
+        />
       </div>
 
       <FlexBox justifyContent='center'>

@@ -4,13 +4,14 @@ import { usePathname } from 'next/navigation';
 import { match } from 'path-to-regexp';
 import { publicRoutes } from '@/routes';
 import Text from './ui/Text';
+
 import {
   AssetManagementIcon,
   BudgetCalendarIcon,
   FinancialProductIcon,
   HomeIcon,
   NavAllIcon
-} from './icons/bottom-nav/BottomNavIcon';
+} from './BottomNavIcon';
 
 export const NAV_DATA = [
   { title: '홈', path: '/', icon: <HomeIcon /> },

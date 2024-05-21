@@ -106,14 +106,14 @@ const BudgetCalendarPage = () => {
             validation={errorMessage ? 'error' : 'success'}
             value={input}
             trailingText='원'
-            // icon={[
-            //   input ? <DeleteIcon key='item' onClick={() => setInput('')} /> : null,
-            //   isView ? (
-            //     <VisibleIcon onClick={() => setIsView((prev) => !prev)} />
-            //   ) : (
-            //     <InvisibleIcon onClick={() => setIsView((prev) => !prev)} />
-            //   )
-            // ]}
+            icon={[
+              input ? <DeleteIcon key='item' onClick={() => setInput('')} /> : null,
+              isView ? (
+                <VisibleIcon onClick={() => setIsView((prev) => !prev)} />
+              ) : (
+                <InvisibleIcon onClick={() => setIsView((prev) => !prev)} />
+              )
+            ]}
           />
         </div>
         {/* <button type='button' onClick={() => setIsView((prev) => !prev)}>

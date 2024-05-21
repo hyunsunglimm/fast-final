@@ -5,6 +5,8 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Image from 'next/image';
 import MotionCarousel from '@/components/MotionCarousel';
+import Icon from '@/components/Icon';
+
 const MyAssetsGraphSection = () => {
   return (
     <>
@@ -31,14 +33,11 @@ const CardList = () => {
             <Text weight='700' sizes='18'>
               300,000원
             </Text>
-            <div className='relative h-[1.6rem] w-[1.6rem]'>
-              <Image
-                src='/images/arrow/bxs-up-arrow.svg'
-                alt='자산 증가 아이콘'
-                fill
-                sizes='auto'
-              />
-            </div>
+            <Icon
+              src='/icons/system-icon/arrow/bxs-up-arrow.svg'
+              alt='자산 증가 화살표'
+              size='16'
+            />
           </FlexBox>
         </FlexBox>
         <div className='h-[11.4rem] w-full bg-orange-500 px-[0.8rem]'>graph</div>
@@ -71,7 +70,7 @@ const CardListTop = () => {
           </div>
           <div className='absolute -bottom-8 right-[2.4rem] h-[19.7rem] w-[10rem]'>
             <Image
-              src='/images/asset/male.svg'
+              src='/images/asset-page/male.svg'
               alt='남성 이미지'
               fill
               sizes='auto'
