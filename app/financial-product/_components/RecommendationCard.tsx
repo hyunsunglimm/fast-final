@@ -37,7 +37,7 @@ const RecommendationCard = ({
           width={1000}
           height={0}
           priority
-          className='w-[17rem]'
+          className='pointer-events-none w-[17rem]'
         />
       </div>
       <Link href={`/financial-product/${href}`}>
