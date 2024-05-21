@@ -5,7 +5,7 @@ import { cn } from '@/utils/twMerge';
 type IconProps = {
   src: string;
   alt: string;
-  size: '16' | '20' | '24' | '28' | '32' | '36' | '40' | '48';
+  size: '16' | '20' | '24' | '28' | '32' | '36' | '40' | '48' | '52' | '56';
   imgClass?: string;
 } & HtmlHTMLAttributes<HTMLDivElement>;
 
@@ -25,7 +25,9 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       '32': 'w-[3.2rem] h-[3.2rem]',
       '36': 'w-[3.6rem] h-[3.6rem]',
       '40': 'w-[4rem] h-[4rem]',
-      '48': 'w-[4.8rem] h-[4.8rem]'
+      '48': 'w-[4.8rem] h-[4.8rem]',
+      '52': 'w-[5.2rem] h-[5.2rem]',
+      '56': 'w-[5.6rem] h-[5.6rem]'
     };
 
     return (
