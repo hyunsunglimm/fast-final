@@ -3,6 +3,7 @@ import CustomNavigation from './_components/CustomNavigation';
 import FinancialProducts from './_components/FinancialProducts';
 import SpotlightCards from './_components/SpotlightCards';
 import FinancialProductBanner from './_components/FinancialProductBanner';
+import { DefaultHeader } from '@/components/header';
 
 const FinancialProductPage = () => {
   return (

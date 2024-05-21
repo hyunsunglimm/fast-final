@@ -41,7 +41,7 @@ const ThemeRecommendationsPage = () => {
   return (
     <>
       <IsBackHeader />
-      <section className='px-20 pb-[13.2rem]'>
+      <section className='px-20 pb-[6rem]'>
         <Text variant='h1' sizes='24' weight='600' className='mb-40'>
           상황에 맞는 상품을 <br /> 선택해 보세요!
         </Text>
