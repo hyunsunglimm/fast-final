@@ -59,6 +59,8 @@ const config: Config = {
         lg: '2.4rem'
       },
       colors: {
+        bucket: '#53B7FF',
+        challenge: '#32C889',
         primary: '#FF7822',
         dim: '#ADADAD',
         active: '#5A7EFF',

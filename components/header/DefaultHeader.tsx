@@ -17,7 +17,9 @@ export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => 
       })}
     >
       {isHome ? (
-        'logo'
+        <div className='relative h-[1.96rem] w-[8.442rem]'>
+          <Image src='/images/logo.svg' fill alt='PORKO 로고 이미지' sizes='auto' />
+        </div>
       ) : (
         <Text variant='h2' sizes='20' weight='800'>
           {title}
