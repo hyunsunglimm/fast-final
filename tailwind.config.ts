@@ -31,6 +31,8 @@ const config: Config = {
         '48': ['4.8rem', { lineHeight: '7.2rem' }]
       },
       padding: {
+        '4': '0.4rem',
+        '8': '0.8rem',
         '10': '1rem',
         '12': '1.2rem',
         '16': '1.6rem',
@@ -42,6 +44,8 @@ const config: Config = {
         '40': '4rem'
       },
       margin: {
+        '4': '0.4rem',
+        '8': '0.8rem',
         '10': '1rem',
         '12': '1.2rem',
         '16': '1.6rem',
@@ -73,7 +77,8 @@ const config: Config = {
         'gray-500': '#8E939A',
         'gray-600': '#747A81',
         'gray-700': '#4B5158',
-        black: '#23282E'
+        black: '#23282E',
+        banner: '#FFEDE1'
       },
       fontWeight: {
         '300': '300',
