@@ -44,7 +44,7 @@ if (filteredData.length === 0) {
 
 const ConsumeWeatherSesction = () => {
   return (
-    <MotionCarousel className='pl-20'>
+    <MotionCarousel className='pl-20' showDots={false}>
       {filteredData.map((item) => {
         return <ConsumeWeatherCard key={item.date} weatherId={item.weatherId}></ConsumeWeatherCard>;
       })}

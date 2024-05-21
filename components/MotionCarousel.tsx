@@ -61,7 +61,7 @@ const MotionCarousel = ({
   };
 
   return (
-    <section className={cn('relative overflow-hidden', className)} {...props}>
+    <div className={cn('relative overflow-hidden', className)} {...props}>
       <motion.div
         ref={ref}
         drag='x'
@@ -85,7 +85,7 @@ const MotionCarousel = ({
       {showNumber && (
         <NumberIndicator index={index} setIndex={setIndex} newChildrenArr={newChildrenArr} />
       )}
-    </section>
+    </div>
   );
 };
 export default MotionCarousel;
