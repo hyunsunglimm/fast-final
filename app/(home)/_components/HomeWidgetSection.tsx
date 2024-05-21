@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import { getWidgetItem } from '@/actions/serverAction';
 import Image from 'next/image';
-
+import { UniqueIdentifier } from '@dnd-kit/core';
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -18,11 +18,11 @@ import {
 } from './widget-item';
 export type DataType = {
   showWidget: {
-    id: string;
+    id: UniqueIdentifier;
     title: string;
   }[];
   hideWidget: {
-    id: string;
+    id: UniqueIdentifier;
     title: string;
   }[];
 }[];
@@ -30,7 +30,7 @@ const HomeWidgetSection = async () => {
   // const res = await fetch('http://localhost:3000/api/widget');
   const data: DataType = await getWidgetItem();
 
-  const widgetMap: { [key: string]: React.ComponentType } = {
+  const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
     a: WidgetBudget,
     b: WidgetCardPerformance,
     c: WidgetCurrentMonth,
@@ -53,7 +53,8 @@ const HomeWidgetSection = async () => {
           href='/edit-widget'
           className={buttonVariants({
             size: 'xs',
-            className: 'focus:outline-none focus:ring focus:ring-primary/50 focus:ring-offset-1'
+            styled: 'outline',
+            className: 'focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
           })}
         >
           편집

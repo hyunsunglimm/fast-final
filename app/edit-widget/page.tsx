@@ -10,10 +10,23 @@ import { DataType } from '../(home)/_components/HomeWidgetSection';
 import { useQuery } from '@tanstack/react-query';
 import { Card } from '@/components/ui/card';
 
+import {
+  closestCorners,
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  PointerSensor,
+  TouchSensor,
+  UniqueIdentifier,
+  useSensor,
+  useSensors
+} from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 const EditWidgetPage = () => {
   const [showWidget, setShowWidget] = useState<DataType[0]['showWidget']>([]);
   const [hideWidget, setHideWidget] = useState<DataType[0]['hideWidget']>([]);
-
+  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const { data, isLoading } = useQuery<DataType>({
     queryKey: ['fetchWidget'],
     queryFn: () => getWidgetItem()
@@ -27,11 +40,12 @@ const EditWidgetPage = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
+  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
+  const findItemTitle = (id: UniqueIdentifier | undefined) => {
+    const item = showWidget.find((item) => item.id === id);
+    if (!item) return '';
+    return item.title;
+  };
   const handleDeleteWidgetItem = (e: MouseEvent<HTMLButtonElement>) => {
     const currentClickItem = e.currentTarget.id;
     setShowWidget((prevShowWidget) =>
@@ -55,22 +69,56 @@ const EditWidgetPage = () => {
     }
   };
 
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    const { id } = active;
+    setActiveId(id);
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+    if (active.id !== over.id) {
+      setShowWidget((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
   return (
     <>
       <IsBackHeader title='한 눈에 보기 편집' />
       <TopContents />
       <div className='grid grid-cols-2 gap-20 px-20'>
         {/* ShowWidget 렌더링 */}
-        {showWidget.map((item) => {
-          return (
-            <IsEditWidgetItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              onClick={handleDeleteWidgetItem}
-            ></IsEditWidgetItem>
-          );
-        })}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={showWidget}>
+            {showWidget.map((item) => {
+              return (
+                <IsEditWidgetItem
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  onClick={handleDeleteWidgetItem}
+                ></IsEditWidgetItem>
+              );
+            })}
+          </SortableContext>
+          <DragOverlay adjustScale={false}>
+            {activeId && <IsEditWidgetItem id={activeId} title={findItemTitle(activeId)} />}
+          </DragOverlay>
+        </DndContext>
+
         {/* ShowWidget가 6미만인 경우 빈 카드 렌더링 */}
         {showWidget.length < 6 && (
           <Card className='relative flex aspect-square items-center justify-center border border-dashed border-gray-500 p-12 shadow-none'>
@@ -97,7 +145,7 @@ const EditWidgetPage = () => {
                   {item.title}
                 </Text>
                 <button
-                  id={item.id}
+                  id={String(item.id)}
                   onClick={handleInsertWidgetItem}
                   aria-label={`${item.title} 항목 추가`}
                   disabled={showWidget.length >= 6}
