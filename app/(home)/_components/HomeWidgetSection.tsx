@@ -73,7 +73,7 @@ const HomeWidgetSection = async () => {
         </FlexBox>
         <div className='absolute right-[2.4rem] top-[0.5rem] h-[18rem] w-[13rem]'>
           <Image
-            src='/images/home/home_ai.svg'
+            src='/images/ai-banner-porko.svg'
             alt='AI 맞춤 추천 이미지'
             fill
             sizes='auto'

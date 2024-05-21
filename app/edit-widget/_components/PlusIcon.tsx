@@ -1,4 +1,4 @@
-import FlexBox from '../ui/FlexBox';
+import FlexBox from '@/components/ui/FlexBox';
 
 const PlusIcon = () => {
   return (

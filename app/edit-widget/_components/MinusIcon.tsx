@@ -1,4 +1,4 @@
-import FlexBox from '../ui/FlexBox';
+import FlexBox from '@/components/ui/FlexBox';
 
 const MinusIcon = () => {
   return (
@@ -8,7 +8,7 @@ const MinusIcon = () => {
       justifyContent='center'
       className='relative aspect-square w-[2.8rem] rounded-full bg-primary'
     >
-      <span aria-hidden className='h-[0.3rem] w-[1.6rem] rounded-lg bg-white'></span>{' '}
+      <span aria-hidden className='h-[0.3rem] w-[1.6rem] rounded-lg bg-white'></span>
     </FlexBox>
   );
 };

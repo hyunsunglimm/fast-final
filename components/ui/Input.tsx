@@ -11,11 +11,14 @@ const inputVariants = cva(
   {
     variants: {
       validation: {
+        default: 'focus:border-active focus:text-active',
         success: 'focus:border-active focus:text-active',
         error: 'focus:border-warning focus:text-warning'
       }
     },
-    defaultVariants: {},
+    defaultVariants: {
+      validation: 'default'
+    },
     compoundVariants: []
   }
 );
@@ -51,11 +54,29 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {placeholder}
         </label>
+
         {trailingText && (
           <FlexBox className='absolute right-3 h-full pt-3' alignItems='center'>
             <Text sizes='14' className=' text-gray-600'>
               {trailingText}
             </Text>
+          </FlexBox>
+        )}
+        {Icon && (
+          <FlexBox className='flex items-center gap-x-4 pe-3'>
+            {Array.isArray(Icon) ? (
+              Icon.map((item, idx) => {
+                return (
+                  <button key={idx} type='button' className='flex items-center justify-center'>
+                    {item}
+                  </button>
+                );
+              })
+            ) : (
+              <button type='button' className='flex items-center justify-center'>
+                {Icon}
+              </button>
+            )}
           </FlexBox>
         )}
       </div>
@@ -65,21 +86,3 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input';
 export default Input;
-
-// {Icon && (
-//   <FlexBox className='flex items-center gap-x-4 pe-3'>
-//     {Array.isArray(Icon) ? (
-//       Icon.map((item, idx) => {
-//         return (
-//           <button key={idx} type='button' className='flex items-center justify-center'>
-//             {item}
-//           </button>
-//         );
-//       })
-//     ) : (
-//       <button type='button' className='flex items-center justify-center'>
-//         {Icon}
-//       </button>
-//     )}
-//   </FlexBox>
-// )}

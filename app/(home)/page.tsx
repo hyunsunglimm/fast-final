@@ -4,6 +4,7 @@ import ConsumeWeatherSesction from './_components/ConsumeWeatherSesction';
 import BucketListCard from './_components/BucketListCard';
 import ChallengeCard from './_components/ChallengeCard';
 import MotionCarousel from '@/components/MotionCarousel';
+
 const HomePage = () => {
   return (
     <>
