@@ -59,7 +59,7 @@ const EditWidgetPage = () => {
     <>
       <IsBackHeader title='한 눈에 보기 편집' />
       <TopContents />
-      <div className='grid grid-cols-2 gap-x-[2rem] gap-y-[1.9rem] px-[2rem]'>
+      <div className='grid grid-cols-2 gap-20 px-20'>
         {/* ShowWidget 렌더링 */}
         {showWidget.map((item) => {
           return (
@@ -73,7 +73,7 @@ const EditWidgetPage = () => {
         })}
         {/* ShowWidget가 6미만인 경우 빈 카드 렌더링 */}
         {showWidget.length < 6 && (
-          <Card className='relative flex aspect-square items-center justify-center border border-dashed border-gray-500 p-[1.2rem] shadow-none'>
+          <Card className='relative flex aspect-square items-center justify-center border border-dashed border-gray-500 p-12 shadow-none'>
             <Text className='text-center text-gray-500' sizes='18' weight='500'>
               위젯을 <br />
               추가해보세요!
@@ -89,7 +89,7 @@ const EditWidgetPage = () => {
           </Text>
         </div>
         {/* HideWidget 렌더링 */}
-        <FlexBox flexDirection='col' className='gap-y-[3.2rem] '>
+        <FlexBox flexDirection='col' className='gap-y-[3.2rem]'>
           {hideWidget.map((item) => {
             return (
               <FlexBox key={item.id} justifyContent='between' className='w-full'>

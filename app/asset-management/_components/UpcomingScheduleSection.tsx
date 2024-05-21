@@ -75,7 +75,7 @@ const UpCommingCard = () => {
           카드별 5월 카드값
         </Text>
       </CardHeader>
-      <CardContent flexDirection='col' className='w-full gap-y-[2.5rem] p-0'>
+      <CardContent flexDirection='col' className='w-full gap-y-24 p-0'>
         {upcommingData.map((item) => {
           return (
             <FlexBox
@@ -103,7 +103,7 @@ const UpCommingCard = () => {
           );
         })}
       </CardContent>
-      <CardFooter className='flex items-center justify-center pb-0 pt-[2.5rem]'>
+      <CardFooter className='flex items-center justify-center pb-0 pt-24'>
         <Button size='sm'>더 알아보기</Button>
       </CardFooter>
     </Card>

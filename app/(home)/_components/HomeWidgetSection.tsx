@@ -60,7 +60,7 @@ const HomeWidgetSection = async () => {
         </Link>
       </FlexBox>
       <Card className='relative mb-[1.9rem] flex h-[17rem] justify-between overflow-hidden bg-[#886AFF] p-24'>
-        <FlexBox flexDirection='col' className='gap-y-[1rem] text-white'>
+        <FlexBox flexDirection='col' className='gap-y-10 text-white'>
           <div className='rounded-full bg-black/20 px-[0.8rem] py-[0.5rem]'>
             <Text sizes='12' weight='700'>
               AI맞춤 추천
@@ -81,7 +81,7 @@ const HomeWidgetSection = async () => {
           />
         </div>
       </Card>
-      <div className='grid grid-cols-2 gap-x-[2rem] gap-y-[1.9rem]'>
+      <div className='grid grid-cols-2 gap-x-20 gap-y-20'>
         {data[0].showWidget.map((item) => {
           const WidgetCOmponent = widgetMap[item.id];
           return WidgetCOmponent ? <WidgetCOmponent key={item.id} /> : null;
