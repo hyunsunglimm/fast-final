@@ -64,7 +64,13 @@ const ConsumeWeatherCard = ({ weatherId }: ConsumeWeatherCardProps) => {
     >
       <CardContent className='gap-x-[1.6rem] px-[2rem] py-[2.4rem]' alignItems='center'>
         <FlexBox className='relative h-[10rem] w-[6.8rem]'>
-          <Image src={weather.imagePath} alt={`${weather.text} 아이콘`} fill sizes='auto' />
+          <Image
+            src={weather.imagePath}
+            alt={`${weather.text} 아이콘`}
+            fill
+            sizes='auto'
+            className='pointer-events-none'
+          />
         </FlexBox>
         {/* {weather.icon} */}
         <FlexBox flexDirection='col'>

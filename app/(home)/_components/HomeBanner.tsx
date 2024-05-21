@@ -47,7 +47,13 @@ const Banner = ({ headText, content, icon }: BannerProps) => {
           <Text weight='700' dangerouslySetInnerHTML={{ __html: content }}></Text>
         </FlexBox>
         <div className='relative h-[9.4rem] w-[12rem]'>
-          <Image src={icon} alt={`${headText} 아이콘`} fill sizes='auto' />
+          <Image
+            src={icon}
+            alt={`${headText} 아이콘`}
+            fill
+            sizes='auto'
+            className='pointer-events-none'
+          />
         </div>
       </FlexBox>
     </Card>

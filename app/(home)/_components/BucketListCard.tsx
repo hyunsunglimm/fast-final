@@ -15,6 +15,7 @@ const BucketListCard = () => {
             title='버킷리스트 이미지'
             sizes='auto'
             priority
+            className='pointer-events-none'
           />
         </div>
       </ListContent>
