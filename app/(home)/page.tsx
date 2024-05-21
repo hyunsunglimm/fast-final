@@ -9,6 +9,8 @@ const HomePage = () => {
     <>
       <section className='px-20'>
         <HomeBanner />
+      </section>
+      <section className='mb-24 px-20'>
         <MotionCarousel>
           <BucketListCard />
           <ChallengeCard />

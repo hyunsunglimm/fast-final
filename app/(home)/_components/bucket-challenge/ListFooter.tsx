@@ -11,8 +11,8 @@ type ListFooterProps = {
 export const ListFooter = ({ currentAmount, targetAmount }: ListFooterProps) => {
   const progressPercent = (currentAmount / targetAmount) * 100;
   return (
-    <CardFooter className='flex-col px-[1.6rem] pb-[2.2rem]'>
-      <FlexBox justifyContent='between' alignItems='end' className='mb-[0.6rem] w-full'>
+    <CardFooter className='flex-col px-24 pb-24'>
+      <FlexBox justifyContent='between' alignItems='end' className='mb-[1rem] w-full'>
         <p>
           <Text sizes='18' weight='700'>
             {currentAmount.toLocaleString('ko')}&nbsp;
