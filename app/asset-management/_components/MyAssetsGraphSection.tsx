@@ -75,7 +75,7 @@ const CardListTop = () => {
               alt='남성 이미지'
               fill
               sizes='auto'
-              className='object-top'
+              className='pointer-events-none object-top'
             />
           </div>
         </FlexBox>

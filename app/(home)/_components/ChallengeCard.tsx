@@ -19,6 +19,7 @@ const ChallengeCard = () => {
             title='챌린지 이미지'
             sizes='auto'
             priority
+            className='pointer-events-none'
           />
         </FlexBox>
       </ListContent>
