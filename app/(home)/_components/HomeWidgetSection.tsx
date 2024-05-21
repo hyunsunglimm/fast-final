@@ -16,16 +16,8 @@ import {
   WidgetMyChallenge,
   WidgetUpcomingExpenses
 } from './widget-item';
-export type DataType = {
-  showWidget: {
-    id: UniqueIdentifier;
-    title: string;
-  }[];
-  hideWidget: {
-    id: UniqueIdentifier;
-    title: string;
-  }[];
-}[];
+import { DataType } from '@/types/widget-type/widgetType';
+
 const HomeWidgetSection = async () => {
   // const res = await fetch('http://localhost:3000/api/widget');
   const data: DataType = await getWidgetItem();

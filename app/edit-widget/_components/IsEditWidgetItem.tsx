@@ -49,14 +49,14 @@ const IsEditWidgetItem = ({ title, id, onClick }: IsEditWidgetItemProps) => {
       </button>
 
       <CardHeader className='w-full items-end pt-[0.4rem]'>
-        <Icon
-          {...listeners}
-          src='/icons/asset-page/three-bar.svg'
-          size='16'
-          alt='드래그 아이콘'
-          className='cursor-grab active:cursor-grabbing'
-          style={{ touchAction: 'none' }}
-        />
+        <button {...listeners} className='cursor-grab touch-none active:cursor-grabbing'>
+          <Icon
+            src='/icons/asset-page/three-bar.svg'
+            size='16'
+            alt='드래그 아이콘'
+            className='pointer-events-none'
+          />
+        </button>
       </CardHeader>
       <CardContent alignItems='center' justifyContent='center' className='pt-[4.6rem]'>
         <Text sizes='16' className='text-gray-500'>
