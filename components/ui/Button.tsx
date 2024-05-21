@@ -12,6 +12,7 @@ export const buttonVariants = cva('flex items-center justify-center', {
     },
     styled: {
       fill: 'bg-primary text-white',
+      fill_black: 'bg-black text-white',
       outline: 'bg-white border-[1px] border-gray-200'
     },
     disabled: {
