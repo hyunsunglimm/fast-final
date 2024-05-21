@@ -1,4 +1,4 @@
-import { DefaultHeader } from '@/components/Header';
+import { DefaultHeader } from '@/components/header';
 import CustomNavigation from './_components/CustomNavigation';
 import FinancialProducts from './_components/FinancialProducts';
 import SpotlightCards from './_components/SpotlightCards';
