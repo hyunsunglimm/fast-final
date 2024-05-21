@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import MenuBarThreeIcon from '@/components/icons/MenuBarThreeIcon';
-import MinusIcon from '@/components/icons/MinusIcon';
+import MenuBarThreeIcon from './MenuBarThreeIcon';
+import MinusIcon from './MinusIcon';
 import Text from '@/components/ui/Text';
 import { MouseEvent } from 'react';
 

@@ -5,6 +5,7 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
+import Icon from '@/components/Icon';
 
 const UpcomingScheduleSection = () => {
   return (
@@ -19,7 +20,7 @@ const UpcomingScheduleSection = () => {
             </Text>
             <Text className='text-gray-500'>5.07 기준</Text>
           </FlexBox>
-          <Text weight='700' sizes='18' className='mb-[2rem]'>
+          <Text weight='700' sizes='20' className='mb-[2rem]'>
             300,000원
           </Text>
         </CardHeader>
@@ -35,12 +36,12 @@ const UpcomingScheduleSection = () => {
         <CardContent justifyContent='between' alignItems='center' className='w-full p-0'>
           <FlexBox flexDirection='col'>
             <Text>이번달 카드값이에요</Text>
-            <Text sizes='18' weight='700'>
+            <Text sizes='20' weight='700'>
               150,000원
             </Text>
           </FlexBox>
           <div className='relative h-[5.7rem] w-[6.6rem]'>
-            <Image src='/images/asset/asset-card.svg' alt='카드 이미지' fill sizes='auto' />
+            <Image src='/images/asset-page/asset-card.svg' alt='카드 이미지' fill sizes='auto' />
           </div>
         </CardContent>
       </Card>
@@ -56,13 +57,13 @@ const upcommingData = [
     cardName: 'KB국민카드',
     cardType: '체크',
     amount: 135000,
-    imgPath: '/images/asset/kb-card.svg'
+    imgPath: '/images/asset-page/kb-card.svg'
   },
   {
     cardName: '신한카드',
     cardType: '체크',
     amount: 15000,
-    imgPath: '/images/asset/shinhan-card.svg'
+    imgPath: '/images/asset-page/shinhan-card.svg'
   }
 ];
 
@@ -109,9 +110,9 @@ const UpCommingCard = () => {
   );
 };
 const fiexedExpensesData = [
-  { title: '월세', date: '내일', imgPath: '/images/asset/home-rental.svg' },
-  { title: '교통비', date: '2일뒤', imgPath: '/images/asset/bus.svg' },
-  { title: '구독서비스', date: '4일뒤', imgPath: '/images/asset/ott.svg' }
+  { title: '월세', date: '내일', imgPath: '/icons/product/상품비교=편의점.svg' },
+  { title: '교통비', date: '2일뒤', imgPath: '/icons/product/상품비교=대중교통.svg' },
+  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/product/상품비교=구독.svg' }
 ];
 const FixedExpenses = () => {
   return (
@@ -125,10 +126,7 @@ const FixedExpenses = () => {
             className='mb-[2rem] w-full last:mb-0'
           >
             <FlexBox className='gap-x-[0.5rem]' alignItems='center'>
-              <div className='relative h-[3rem] w-[3rem]'>
-                <Image src={item.imgPath} alt={`${item.title} 아이콘`} fill sizes='auto' />
-                {/* {item.icon} */}
-              </div>
+              <Icon src={item.imgPath} alt={`${item.title} 아이콘`} size='32' />
               <Text weight='700' sizes='16'>
                 {item.title}
               </Text>
