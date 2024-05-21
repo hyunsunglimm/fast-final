@@ -4,19 +4,20 @@ import { usePathname } from 'next/navigation';
 import { match } from 'path-to-regexp';
 import { publicRoutes } from '@/routes';
 import Text from './ui/Text';
+
 import {
   HomeIcon,
   AssetManagementIcon,
   BudgetCalendarIcon,
   FinancialProductIcon,
   NavAllIcon
-} from './icons';
+} from './BottomNavIcon';
 
 export const NAV_DATA = [
   { title: '홈', path: '/', icon: <HomeIcon /> },
   { title: '자산', path: '/asset-management', icon: <AssetManagementIcon /> },
   { title: '가계부', path: '/budget-calendar', icon: <BudgetCalendarIcon /> },
-  { title: '상품 탐색', path: '/financial-product', icon: <FinancialProductIcon /> },
+  { title: '상품 탐색', path: '/financial-product?tab=신용카드', icon: <FinancialProductIcon /> },
   { title: '전체', path: '#', icon: <NavAllIcon /> }
 ];
 
@@ -30,9 +31,12 @@ const Navbar = () => {
           <ul className='mt-10 flex items-center justify-between'>
             {NAV_DATA.map((nav) => {
               const isActive =
-                nav.path === '/' ? pathname === nav.path : pathname.startsWith(nav.path);
-              const activeClass = isActive ? 'text-primary' : 'text-gray-400';
+                nav.path === '/'
+                  ? pathname === nav.path
+                  : pathname.startsWith(nav.path.split('?')[0]);
+              const activeClass = isActive ? 'text-primary' : 'text-gray-500';
               const textClass = isActive ? 'text-primary' : 'text-gray-500';
+
               return (
                 <li key={nav.title}>
                   <Link

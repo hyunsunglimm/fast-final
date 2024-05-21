@@ -1,8 +1,9 @@
 import React from 'react';
-
-const VisibleIcon = () => {
+import { SvgComponentProps } from '@/types/svgComponentProps';
+const VisibleIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
+      {...props}
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 24 24'

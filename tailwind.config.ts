@@ -16,6 +16,20 @@ const config: Config = {
       screens: {
         xs: '520px'
       },
+      gap: {
+        2: '0.2rem',
+        4: '0.4rem',
+        6: '0.6rem',
+        8: '0.8rem',
+        10: '1rem',
+        12: '1.2rem',
+        14: '1.4rem',
+        16: '1.6rem',
+        18: '1.8rem',
+        20: '2rem',
+        22: '2.2rem',
+        24: '2.4rem'
+      },
       fontSize: {
         '10': ['1rem', { lineHeight: '1.6rem' }],
         '12': ['1.2rem', { lineHeight: '1.8rem' }],
@@ -63,6 +77,8 @@ const config: Config = {
         lg: '2.4rem'
       },
       colors: {
+        bucket: '#53B7FF',
+        challenge: '#32C889',
         primary: '#FF7822',
         dim: '#ADADAD',
         active: '#5A7EFF',

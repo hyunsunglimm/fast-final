@@ -1,8 +1,8 @@
 'use client';
 import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
-import { ArrowBackIcon } from '../icons';
 import Text from '../ui/Text';
 import { useRouter } from 'next/navigation';
+import Icon from '../Icon';
 
 type HeaderProps = {
   title?: string;
@@ -18,7 +18,13 @@ export const IsBackHeader = ({ title }: HeaderProps) => {
         className: 'mb-[2rem] h-[5.6rem] px-[2rem]'
       })}
     >
-      <ArrowBackIcon role='button' onClick={() => router.back()} />
+      <Icon
+        size='24'
+        role='button'
+        alt='뒤로가기'
+        src='/icons/system-icon/arrow/arrow-prev.svg'
+        onClick={() => router.back()}
+      />
 
       <FlexBox justifyContent='center'>
         <Text variant='h6' sizes='16' weight='700'>

@@ -1,8 +1,9 @@
 import React from 'react';
-
-const InvisibleIcon = () => {
+import { SvgComponentProps } from '@/types/svgComponentProps';
+const InvisibleIcon = ({ ...props }: SvgComponentProps) => {
   return (
     <svg
+      {...props}
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 24 24'

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, useEffect } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { CheckIcon, ArrowRightIcon } from '@/components/icons';
+// import { CheckIcon, ArrowRightIcon } from '@/components/icons';
 import { useFormContext } from 'react-hook-form';
 import Button from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
@@ -59,10 +59,10 @@ export const StepFiveForm = () => {
               type='checkbox'
               className='hidden'
             />
-            <CheckIcon
+            {/* <CheckIcon
               fill={isAllChecked ? '#51D868' : '#fff'}
               stroke={isAllChecked ? '#fff' : '#b7b7b7'}
-            />
+            /> */}
             <Text sizes='18'>필수 항목 모두 동의하기</Text>
           </FlexBox>
         </label>
@@ -87,11 +87,11 @@ export const StepFiveForm = () => {
                       className='hidden'
                       id={item.id}
                     />
-                    <CheckIcon className={`${fillClass} ${strokeClass}`} />
+                    {/* <CheckIcon className={`${fillClass} ${strokeClass}`} /> */}
                     <Text sizes='18'>{item.title}</Text>
                   </FlexBox>
                 </label>
-                <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} />
+                {/* <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} /> */}
               </div>
             );
           })}
@@ -104,11 +104,11 @@ export const StepFiveForm = () => {
           <label className='flex cursor-pointer items-center justify-between has-[:checked]:text-green-500 has-[:checked]:ring-indigo-200'>
             <FlexBox alignItems='center' className='gap-x-4 p-0'>
               <input type='checkbox' className='peer/promotion hidden' id='promotion' />
-              <CheckIcon className='fill-white stroke-[#b7b7b7] peer-checked/promotion:fill-[#51D868] peer-checked/promotion:stroke-white' />
+              {/* <CheckIcon className='fill-white stroke-[#b7b7b7] peer-checked/promotion:fill-[#51D868] peer-checked/promotion:stroke-white' /> */}
               <Text sizes='18'>[선택] 프로모션 알림 수신 동의</Text>
             </FlexBox>
           </label>
-          <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} />
+          {/* <ArrowRightIcon className='fill-none stroke-black' width={8} height={12} /> */}
         </FlexBox>
 
         <FlexBox className='w-full gap-x-4'>

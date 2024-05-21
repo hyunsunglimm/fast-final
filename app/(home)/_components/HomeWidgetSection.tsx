@@ -5,6 +5,7 @@ import Text from '@/components/ui/Text';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import { getWidgetItem } from '@/actions/serverAction';
+import Image from 'next/image';
 
 import {
   WidgetBudget,
@@ -58,7 +59,28 @@ const HomeWidgetSection = async () => {
           편집
         </Link>
       </FlexBox>
-      <Card className='mb-[1.9rem] h-[17rem]'>맞춤 상품 추천</Card>
+      <Card className='relative mb-[1.9rem] flex h-[17rem] justify-between overflow-hidden bg-[#886AFF] p-24'>
+        <FlexBox flexDirection='col' className='gap-y-[1rem] text-white'>
+          <div className='rounded-full bg-black/20 px-[0.8rem] py-[0.5rem]'>
+            <Text sizes='12' weight='700'>
+              AI맞춤 추천
+            </Text>
+          </div>
+          <Text sizes='20' weight='700'>
+            꼭 맞는 상품 <br />
+            여기 있어요!
+          </Text>
+        </FlexBox>
+        <div className='absolute right-[2.4rem] top-[0.5rem] h-[18rem] w-[13rem]'>
+          <Image
+            src='/images/ai-banner-porko.svg'
+            alt='AI 맞춤 추천 이미지'
+            fill
+            sizes='auto'
+            className='object-top'
+          />
+        </div>
+      </Card>
       <div className='grid grid-cols-2 gap-x-[2rem] gap-y-[1.9rem]'>
         {data[0].showWidget.map((item) => {
           const WidgetCOmponent = widgetMap[item.id];
