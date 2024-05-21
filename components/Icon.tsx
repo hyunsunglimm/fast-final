@@ -29,12 +29,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
     };
 
     return (
-      <div
-        className={cn(`${sizeClass[size]} relative`, className)}
-        {...props}
-        ref={ref}
-        aria-hidden
-      >
+      <div className={cn(`${sizeClass[size]} relative`, className)} {...props} ref={ref}>
         <Image src={src} alt={alt} fill sizes='auto' className={imgClass} />
       </div>
     );
