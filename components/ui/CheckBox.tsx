@@ -20,8 +20,7 @@ const checkboxVariants = cva('', {
 type CheckboxProps = {
   childrenPosition?: 'left' | 'right';
   onImage?: string;
-  offImage?: string | 'none';
-  greenImage?: string;
+  offImage?: string;
 } & VariantProps<typeof checkboxVariants> &
   InputHTMLAttributes<HTMLInputElement>;
 
@@ -35,20 +34,13 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       childrenPosition = 'right',
       onImage = '/icons/system-icon/checkbox/round-checkbox-on.svg',
       offImage = '/icons/system-icon/checkbox/round-checkbox-off.svg',
-      greenImage = '/icons/system-icon/checkbox/round-checkbox-green.svg',
       ...props
     },
     ref
   ) => {
     const containerClass = cn('flex items-center justify-center', className);
     const { checked } = props;
-    const imageSrc = checked
-      ? onImage === 'greenImage'
-        ? greenImage
-        : onImage
-      : offImage === 'none'
-        ? undefined
-        : offImage;
+    const imageSrc = checked ? onImage : offImage;
 
     return (
       <label className={containerClass} htmlFor={id}>
