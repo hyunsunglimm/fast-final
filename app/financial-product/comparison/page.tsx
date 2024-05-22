@@ -1,21 +1,23 @@
 'use client';
 
+import Icon from '@/components/Icon';
 import { IsBackHeader } from '@/components/header';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
+import { benefitCategoryIconPath } from '@/utils/benefitCategoryIconPath';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const cardCompanies = [
-  { title: '신한', fileName: 'shinhan-logo-icon' },
-  { title: '현대', fileName: 'hyundai-logo-icon' },
-  { title: '비씨', fileName: 'bc-logo-icon' }
+  { title: '신한', iconPath: '/icons/logos/card/card-shinhan.svg' },
+  { title: '현대', iconPath: '/icons/logos/card/card-hyundai.svg' },
+  { title: '비씨', iconPath: '/icons/logos/card/card-bc.svg' }
 ];
 
-const filterings = ['대중교통', '편의점'];
+const filterings = ['대중교통', '카페'];
 
 const comparisonCards = [
   {
@@ -23,20 +25,20 @@ const comparisonCards = [
     title: '신한카드 Mr.Life',
     description: '공과금부터 쇼핑까지 생활혜택!',
     fileName: 'shinhan-mrlife',
-    benefits: ['식비', '편의점', '포인트']
+    benefits: ['식비', '카페', '포인트']
   },
   {
     id: 2,
     title: '카카오뱅크 신한카드 Time',
     description: 'Time For us to Shine',
     fileName: 'kakao-shinhan-time',
-    benefits: ['대중교통', '택시', '편의점']
+    benefits: ['대중교통', '택시', '카페']
   },
   {
     id: 3,
     title: '카카오페이 신한 라이언',
     description: '귀여운 라이언 대박 예감',
-    fileName: 'kakao-shinhan-ryan',
+    fileName: 'kakao-shinhan-lion',
     benefits: ['포인트', '카페', '대중교통']
   },
   {
@@ -50,7 +52,7 @@ const comparisonCards = [
     id: 5,
     title: '밸런스 카드',
     description: '혜택과 실적의 밸런스',
-    fileName: 'bc-clear',
+    fileName: 'balance',
     benefits: ['대중교통', '배달', '카페']
   }
 ];
@@ -87,7 +89,7 @@ const ComparisonPage = () => {
           <div className='flex items-center border-b border-gray-100 px-20 py-16'>
             <div className='relative flex gap-[0.6rem] rounded-xs border border-gray-200 px-[1rem] py-[0.7rem]'>
               <Image
-                src='/images/icons/filter-icon.svg'
+                src='/icons/financial-product/filter-icon.svg'
                 alt='filter icon'
                 width={16}
                 height={16}
@@ -106,16 +108,10 @@ const ComparisonPage = () => {
             </div>
             <div className='mx-16 h-[2.6rem] w-[0.1rem] border border-gray-200' />
             <ul className='flex gap-[1.6rem]'>
-              {cardCompanies.map(({ title, fileName }) => {
+              {cardCompanies.map(({ title, iconPath }) => {
                 return (
                   <li key={title}>
-                    <Image
-                      src={`/images/icons/${fileName}.png`}
-                      alt={title}
-                      width={32}
-                      height={32}
-                      className='w-[3.2rem]'
-                    />
+                    <Icon src={iconPath} alt={title} size='32' />
                   </li>
                 );
               })}
@@ -125,7 +121,7 @@ const ComparisonPage = () => {
           <div className='flex items-center px-20 py-16'>
             <div className='relative flex gap-[0.6rem] rounded-xs border border-gray-200 px-[1rem] py-[0.7rem]'>
               <Image
-                src='/images/icons/filter-icon.svg'
+                src='/icons/financial-product/filter-icon.svg'
                 alt='filter icon'
                 width={16}
                 height={16}
@@ -154,7 +150,7 @@ const ComparisonPage = () => {
                       {filter}
                     </Text>
                     <Image
-                      src='/images/icons/close-icon.svg'
+                      src='/icons/financial-product/close-icon.svg'
                       alt='close icon'
                       width={16}
                       height={16}
@@ -183,9 +179,9 @@ const ComparisonPage = () => {
                   >
                     <FlexBox>
                       <Image
-                        src={`/images/${card.fileName}.png`}
-                        alt=''
-                        width={44}
+                        src={`/images/financial-product/${card.fileName}.png`}
+                        alt={card.title}
+                        width={100}
                         height={70}
                         className='mr-16 w-[4.4rem]'
                       />
@@ -197,7 +193,12 @@ const ComparisonPage = () => {
                         <ul className='flex gap-[0.8rem]'>
                           {card.benefits.map((benefit) => {
                             return (
-                              <li key={benefit}>
+                              <li key={benefit} className='flex items-center gap-[0.2rem]'>
+                                <Icon
+                                  src={benefitCategoryIconPath[benefit]}
+                                  alt={`${benefit} icon`}
+                                  size='12'
+                                />
                                 <Text sizes='12' className='text-gray-600'>
                                   {benefit}
                                 </Text>
@@ -209,7 +210,7 @@ const ComparisonPage = () => {
                     </FlexBox>
                     {isSelected && (
                       <Image
-                        src='/images/checkbox-on.svg'
+                        src='/icons/system-icon/checkbox/checkbox-on.svg'
                         alt='check icon'
                         width={24}
                         height={24}

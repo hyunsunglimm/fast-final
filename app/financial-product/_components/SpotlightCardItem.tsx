@@ -36,10 +36,10 @@ const SpotlightCardItem = ({
         </Text>
       </FlexBox>
       <Image
-        src={`/images/${image}.png`}
+        src={`/images/financial-product/${image}.png`}
         alt={title}
-        width={1000}
-        height={0}
+        width={100}
+        height={82}
         className='mr-[1.6rem] w-[5.2rem]'
       />
       <FlexBox flexDirection='col'>

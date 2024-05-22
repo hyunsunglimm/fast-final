@@ -12,21 +12,21 @@ const spotlightCards = [
     title: '카카오뱅크 신한카드 Time',
     annualBenefits: 100602,
     annualFee: '연회비 1만원',
-    image: 'kakao-sinhan-time',
+    image: 'kakao-shinhan-time',
     isEvent: false
   },
   {
     title: '신한카드 Mr.Life',
     annualBenefits: 91162,
     annualFee: '연회비 1만 5천원',
-    image: 'sinhan-mrlife',
+    image: 'shinhan-mrlife',
     isEvent: false
   },
   {
     title: '카카오페이 신한 라이언',
     annualBenefits: 80000,
     annualFee: '연회비 이벤트',
-    image: 'kakao-sinhan-ryan',
+    image: 'kakao-shinhan-lion',
     isEvent: true
   },
   {
@@ -40,7 +40,7 @@ const spotlightCards = [
     title: 'BC 바로 클리어',
     annualBenefits: 56428,
     annualFee: '연회비 이벤트',
-    image: 'bc-clear',
+    image: 'balance',
     isEvent: true
   }
 ];

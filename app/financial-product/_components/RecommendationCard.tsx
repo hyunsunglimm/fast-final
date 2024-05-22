@@ -32,12 +32,12 @@ const RecommendationCard = ({
       </Text>
       <div className='my-[3.6rem] flex justify-center'>
         <Image
-          src={`/images/${imageUrl}.svg`}
+          src={`/images/financial-product/${imageUrl}.png`}
           alt='search products'
-          width={1000}
-          height={0}
+          width={300}
+          height={142}
           priority
-          className='pointer-events-none w-[17rem]'
+          className='pointer-events-none h-[14.2rem] w-auto'
         />
       </div>
       <Link href={`/financial-product/${href}`}>
