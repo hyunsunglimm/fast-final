@@ -66,7 +66,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 
     return (
       <div
-        className={cn(${sizeClass[size]} relative overflow-hidden, className)}
+        className={cn(`${sizeClass[size]} overflow-hidden, className relative`)}
         {...divProps}
         ref={ref}
       >
