@@ -19,23 +19,23 @@ type WeatherConfigType = {
 
 const weatherConfig: WeatherConfigType = {
   1: {
-    imagePath: '/images/weather/weather-1.svg',
+    imagePath: '/images/home/weather/weather-1.svg',
     text: '무지출이 떴어요!'
   },
   2: {
-    imagePath: '/images/weather/weather-2.svg',
+    imagePath: '/images/home/weather/weather-2.svg',
     text: '지출 구름이 꼈어요!'
   },
   3: {
-    imagePath: '/images/weather/weather-3.svg',
+    imagePath: '/images/home/weather/weather-3.svg',
     text: '지출 하늘이 맑아요!'
   },
   4: {
-    imagePath: '/images/weather/weather-4.svg',
+    imagePath: '/images/home/weather/weather-4.svg',
     text: '지출 비가 내려요!'
   },
   5: {
-    imagePath: '/images/weather/weather-5.svg',
+    imagePath: '/images/home/weather/weather-5.svg',
     text: '지출 번개가 쳐요!'
   }
 };
