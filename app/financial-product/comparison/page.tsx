@@ -8,11 +8,11 @@ import { useSearchParams } from 'next/navigation';
 
 const ComparisonPage = () => {
   const searchParams = useSearchParams();
-  const selectedCards = searchParams.getAll('select');
+  const selectedCards = searchParams.getAll('card');
 
   return (
     <>
-      <IsBackHeader title='상품비교' />
+      <IsBackHeader title='상품비교' href='./' />
       <section className='relative pb-[13.2rem]'>
         <FilteringSection />
         <ComparisonSection />
