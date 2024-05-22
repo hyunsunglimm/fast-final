@@ -7,47 +7,46 @@ type CheckedGenderProps = {
 };
 
 const genderChoiceBtnClass =
-  'w-full h-[5.6rem] flex items-center justify-center cursor-pointer rounded-md border border-black text-center transition duration-200 hover:bg-gray-400';
+  'flex h-[4.8rem] w-full cursor-pointer items-center justify-center rounded-sm bg-gray-200 text-center text-gray-400 transition duration-200 hover:bg-gray-400';
 
-const CheckedGender = ({ register }: CheckedGenderProps) => {
+const CheckedGender = () => {
   return (
-    <>
-      <Text sizes='16' weight='600' className='mb-4'>
+    <div className='w-full'>
+      <Text sizes='18' weight='700' className='mt-24'>
         성별을 선택해주세요.
       </Text>
-      <FlexBox justifyContent='center' className='w-full gap-x-4'>
+
+      <FlexBox justifyContent='center' className='mt-16 w-full gap-x-4'>
         <input
-          {...register('gender', { required: true })}
+          // {...register('gender', { required: true })}
           type='radio'
           className='peer/male hidden'
           id='male'
+          name='gender'
           value='male'
         />
         <label
           htmlFor='male'
-          className={`${genderChoiceBtnClass} peer-checked/male:bg-black peer-checked/male:text-white`}
+          className={`${genderChoiceBtnClass} peer-checked/male:bg-primary peer-checked/male:text-white`}
         >
-          <Text sizes='14' weight='600'>
-            남성
-          </Text>
+          <Text sizes='16'>남성</Text>
         </label>
         <input
-          {...register('gender', { required: true })}
+          // {...register('gender', { required: true })}
           type='radio'
           id='female'
+          name='gender'
           value='female'
           className='peer/female hidden'
         />
         <label
           htmlFor='female'
-          className={`${genderChoiceBtnClass} peer-checked/female:bg-black peer-checked/female:text-white`}
+          className={`${genderChoiceBtnClass} peer-checked/female:bg-primary peer-checked/female:text-white`}
         >
-          <Text sizes='14' weight='600'>
-            여성
-          </Text>
+          <Text sizes='16'>여성</Text>
         </label>
       </FlexBox>
-    </>
+    </div>
   );
 };
 
