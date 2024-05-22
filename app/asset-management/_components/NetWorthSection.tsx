@@ -40,7 +40,7 @@ const NetWorthSection = () => {
           ref={containerRef}
           drag='x'
           dragConstraints={constraints}
-          className='mb-4 flex cursor-grab scroll-pr-8 items-center gap-x-[1.6rem]'
+          className='mb-4 flex cursor-grab scroll-pr-8 items-center gap-x-16'
         >
           <div className='h-[2rem] w-[0.4rem] shrink-0' aria-hidden></div>
           {ItemList.map((item) => {

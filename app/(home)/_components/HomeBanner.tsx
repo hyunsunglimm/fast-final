@@ -42,10 +42,14 @@ const Banner = ({ headText, content, icon }: BannerProps) => {
     <Card className='relative my-[2rem] w-full shrink-0 '>
       <FlexBox alignItems='center' justifyContent='between'>
         <FlexBox flexDirection='col' className='px-24 py-16'>
-          <Text sizes='12' className='text-gray-600'>
+          <Text weight='500' sizes='12' className='mb-[0.4rem] text-gray-600'>
             {headText}
           </Text>
-          <Text weight='700' dangerouslySetInnerHTML={{ __html: content }}></Text>
+          <Text
+            weight='700'
+            className='tracking-tight'
+            dangerouslySetInnerHTML={{ __html: content }}
+          ></Text>
         </FlexBox>
 
         <Image
