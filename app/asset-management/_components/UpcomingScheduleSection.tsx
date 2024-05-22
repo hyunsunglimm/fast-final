@@ -12,7 +12,7 @@ const UpcomingScheduleSection = () => {
     <>
       <SectionTitle>다가오고 있는 일정</SectionTitle>
       {/*  */}
-      <Card className='px-[2.4rem] py-[2.2rem]'>
+      <Card className='px-24 py-[2.2rem]'>
         <CardHeader>
           <FlexBox justifyContent='between' className='w-full'>
             <Text weight='500' className='text-gray-700'>
@@ -20,14 +20,14 @@ const UpcomingScheduleSection = () => {
             </Text>
             <Text className='text-gray-500'>5.07 기준</Text>
           </FlexBox>
-          <Text weight='700' sizes='20' className='mb-[2rem]'>
+          <Text weight='700' sizes='20' className='mb-20'>
             300,000원
           </Text>
         </CardHeader>
         <CardContent className='p-0' flexDirection='col'>
           <FixedExpenses />
         </CardContent>
-        <CardFooter className='flex w-full items-center justify-center p-0 pt-[2.0rem]'>
+        <CardFooter className='flex w-full items-center justify-center p-0 pt-20'>
           <Button size='sm'>내 고정 지출 알아보기</Button>
         </CardFooter>
       </Card>
@@ -110,9 +110,9 @@ const UpCommingCard = () => {
   );
 };
 const fiexedExpensesData = [
-  { title: '월세', date: '내일', imgPath: '/icons/product/상품비교=편의점.svg' },
-  { title: '교통비', date: '2일뒤', imgPath: '/icons/product/상품비교=대중교통.svg' },
-  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/product/상품비교=구독.svg' }
+  { title: '월세', date: '내일', imgPath: '/icons/product/product-cvs.svg' },
+  { title: '교통비', date: '2일뒤', imgPath: '/icons/product/product-traffic.svg' },
+  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/product/product-subscribe.svg' }
 ];
 const FixedExpenses = () => {
   return (
