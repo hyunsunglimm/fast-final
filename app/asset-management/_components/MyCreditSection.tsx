@@ -11,7 +11,7 @@ const MyCreditSection = () => {
         <CardContent
           flexDirection='row'
           justifyContent='center'
-          className='gap-x-10 px-[2.4rm] py-[1.1rem]'
+          className='gap-x-16 px-24 py-[1.1rem]'
         >
           <FlexBox flexDirection='col' className='my-auto h-full'>
             <Text sizes='18' weight='700'>

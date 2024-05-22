@@ -3,7 +3,7 @@
 
 'use client';
 import { motion, useMotionValue } from 'framer-motion';
-import { HTMLAttributes, useRef, SetStateAction, useState, useEffect, useCallback } from 'react';
+import { HTMLAttributes, useRef, SetStateAction, useState, useEffect, TouchEvent } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import { cn } from '@/utils/twMerge';
 import { useWindowResize } from '@/hooks/useWindowResize';
@@ -31,6 +31,7 @@ const MotionCarousel = ({
   const [childrenElementWidth, setChildrenElementWidth] = useState(0);
   const [index, setIndex] = useState(0);
   const dragX = useMotionValue(0);
+
   const { documentSize } = useWindowResize();
   const newChildrenArr = [...children];
   const containerBoxWidth = ref.current ? childrenElementWidth * children.length : 0;
@@ -46,12 +47,25 @@ const MotionCarousel = ({
     }
   }, [children.length, documentSize]);
 
+  useEffect(() => {
+    const unsubX = dragX.on('change', (latest) => {
+      if (Math.abs(latest) >= 100) {
+        setDragging(true);
+      }
+    });
+
+    return () => {
+      unsubX();
+    };
+  }, [dragX]);
+
   const onDragStart = () => {
     setDragging(true);
   };
 
   const onDragEnd = () => {
     setDragging(false);
+
     const x = dragX.get();
     if (x <= -DRAG_BUFFER && index < children.length - 1) {
       setIndex((prev) => prev + 1);
@@ -59,9 +73,9 @@ const MotionCarousel = ({
       setIndex((prev) => prev - 1);
     }
   };
-
+  const touchClass = dragging ? 'touch-pan-x' : 'touch-auto';
   return (
-    <div className={cn('relative overflow-hidden', className)} {...props}>
+    <div className={cn('relative overflow-hidden', touchClass, className)} {...props}>
       <motion.div
         ref={ref}
         drag='x'

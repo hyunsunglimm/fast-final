@@ -60,9 +60,9 @@ const ConsumeWeatherCard = ({ weatherId }: ConsumeWeatherCardProps) => {
       tabIndex={0}
       onMouseDown={mouseDownCoords}
       onMouseUp={goToBudget}
-      className='mt-[1.2rem] w-[32rem] shrink-0'
+      className='mt-12 w-[32rem] shrink-0'
     >
-      <CardContent className='gap-x-[1.6rem] px-[2rem] py-[2.4rem]' alignItems='center'>
+      <CardContent className='gap-x-16 px-20 py-24' alignItems='center'>
         <FlexBox className='relative h-[10rem] w-[6.8rem]'>
           <Image
             src={weather.imagePath}
