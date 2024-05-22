@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import { getWidgetItem } from '@/actions/serverAction';
 import Image from 'next/image';
-
+import { UniqueIdentifier } from '@dnd-kit/core';
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -16,21 +16,13 @@ import {
   WidgetMyChallenge,
   WidgetUpcomingExpenses
 } from './widget-item';
-export type DataType = {
-  showWidget: {
-    id: string;
-    title: string;
-  }[];
-  hideWidget: {
-    id: string;
-    title: string;
-  }[];
-}[];
+import { DataType } from '@/types/widget-type/widgetType';
+
 const HomeWidgetSection = async () => {
   // const res = await fetch('http://localhost:3000/api/widget');
   const data: DataType = await getWidgetItem();
 
-  const widgetMap: { [key: string]: React.ComponentType } = {
+  const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
     a: WidgetBudget,
     b: WidgetCardPerformance,
     c: WidgetCurrentMonth,
@@ -53,14 +45,15 @@ const HomeWidgetSection = async () => {
           href='/edit-widget'
           className={buttonVariants({
             size: 'xs',
-            className: 'focus:outline-none focus:ring focus:ring-primary/50 focus:ring-offset-1'
+            styled: 'outline',
+            className: 'focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
           })}
         >
           편집
         </Link>
       </FlexBox>
       <Card className='relative mb-[1.9rem] flex h-[17rem] justify-between overflow-hidden bg-[#886AFF] p-24'>
-        <FlexBox flexDirection='col' className='gap-y-[1rem] text-white'>
+        <FlexBox flexDirection='col' className='gap-y-10 text-white'>
           <div className='rounded-full bg-black/20 px-[0.8rem] py-[0.5rem]'>
             <Text sizes='12' weight='700'>
               AI맞춤 추천
@@ -81,7 +74,7 @@ const HomeWidgetSection = async () => {
           />
         </div>
       </Card>
-      <div className='grid grid-cols-2 gap-x-[2rem] gap-y-[1.9rem]'>
+      <div className='grid grid-cols-2 gap-x-20 gap-y-20'>
         {data[0].showWidget.map((item) => {
           const WidgetCOmponent = widgetMap[item.id];
           return WidgetCOmponent ? <WidgetCOmponent key={item.id} /> : null;

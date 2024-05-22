@@ -15,7 +15,7 @@ export const ListContent = ({ textColor, children }: ListContentProps) => {
       justifyContent='between'
       className='relative mb-24 px-24'
     >
-      <FlexBox flexDirection='col' className='shrink-0 gap-y-[1.6rem]'>
+      <FlexBox flexDirection='col' className='shrink-0 gap-y-16'>
         <TextBubble textColor={textColor} amounts={15000} date='5월2일' />
         <TextBubble textColor={textColor} amounts={15000} date='5월2일' />
       </FlexBox>
