@@ -5,7 +5,7 @@ import ProductIcon from './ProductIcon';
 type ProductInfoProps = {
   productInfo: {
     title: string;
-    products: { title: string; icon: React.ReactNode }[];
+    products: { title: string; iconPath: string }[];
   };
 };
 
@@ -16,8 +16,8 @@ const ProductCard = ({ productInfo: { title, products } }: ProductInfoProps) => 
         {title}
       </Text>
       <div className='mt-16 grid grid-cols-3'>
-        {products.map(({ title, icon }) => (
-          <ProductIcon key={title} title={title} icon={icon} />
+        {products.map(({ title, iconPath }) => (
+          <ProductIcon key={title} title={title} iconPath={iconPath} />
         ))}
       </div>
     </Card>

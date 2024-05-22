@@ -28,8 +28,8 @@ const recommendationArray = [
 
 const CustomNavigation = () => {
   return (
-    <div className='mb-[2.4rem]'>
-      <Text sizes='20' variant='h1' weight='700'>
+    <div className='mb-40'>
+      <Text sizes='20' variant='h1' weight='700' className='mb-20'>
         맞춤탐색
       </Text>
       <MotionCarousel>
