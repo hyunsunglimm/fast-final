@@ -11,7 +11,7 @@ type DragOverWidgetProps = {
 const DragOverWidget = ({ activeId, title }: DragOverWidgetProps) => {
   return (
     <DragOverlay adjustScale={false}>
-      {activeId && <IsEditWidgetItem id={activeId} title={title} />}
+      {activeId && <IsEditWidgetItem id={activeId} title={title} dragOverlay />}
     </DragOverlay>
   );
 };
