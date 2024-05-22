@@ -58,6 +58,12 @@ html {
     font-size: 14px;
   }
 }
+input {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+}
 .hide-scrollbar {
   scrollbar-width: none;
 }
