@@ -36,8 +36,6 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       quality,
       priority,
       loading,
-      placeholder,
-      blurDataURL,
       unoptimized,
       overrideSrc,
       onLoad,
@@ -51,8 +49,6 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       quality,
       priority,
       loading,
-      placeholder,
-      blurDataURL,
       unoptimized,
       overrideSrc,
       onLoad,
@@ -62,14 +58,14 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 
     return (
       <div
-        className={cn(`${sizeClass[size]} relative overflow-hidden`, className)}
+        className={cn(`${sizeClass[size]} relative overflow-hidden rounded-full`, className)}
         {...divProps}
         ref={ref}
       >
         <Image
-          // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAL0lEQVR42u3NQQ0AAAgEIK9/B3vYzhQ+3KAAma5TEQgEAoFAIBAIBAKBQCAQfAoWm4pAgU0zEmgAAAAASUVORK5CYII='
-          // placeholder='blur'
           fill
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAAAL0lEQVR42u3NMQEAAAgDIJfcNPY0g4cfFCDT9S4SiUQikUgkEolEIpFIJBKJ5GYBnpg5OxOuJSoAAAAASUVORK5CYII='
+          placeholder='blur'
           sizes='auto'
           className={imgClass}
           {...imageProps}
