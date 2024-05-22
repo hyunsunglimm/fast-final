@@ -1,11 +1,11 @@
 'use client';
 
-import DropdownIcon from '@/components/icons/DropdownIcon';
 import FlexBox from '@/components/ui/FlexBox';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
 import SpotlightCardItem from './SpotlightCardItem';
 import Button from '@/components/ui/Button';
+import Icon from '@/components/Icon';
 
 const spotlightCards = [
   {
@@ -56,7 +56,7 @@ const SpotlightCards = () => {
         >
           20대
         </Text>
-        <DropdownIcon />
+        <Icon src='/icons/system-icon/arrow/arrow-down.svg' alt='drop down' size='16' />
         <Text sizes='20' variant='h1' weight='700' className='ml-[1.4rem]'>
           주목받는 카드
         </Text>

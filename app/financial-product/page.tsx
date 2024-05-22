@@ -12,7 +12,7 @@ const FinancialProductPage = () => {
         <FinancialProductBanner />
         <CustomNavigation />
         <FinancialProducts />
-        {/* <SpotlightCards /> */}
+        <SpotlightCards />
       </section>
     </>
   );
