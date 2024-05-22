@@ -1,92 +1,54 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, InputHTMLAttributes } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
-import Image from 'next/image';
 import { cn } from '@/utils/twMerge';
+import Icon from '../Icon';
 
 const checkboxVariants = cva('', {
   variants: {
-    size: {
-      default: 'w-[2rem] h-[2rem]',
-      md: 'w-[4rem] h-[4rem]'
+    sizes: {
+      '12': '12',
+      '16': '16',
+      '20': '20',
+      '24': '24'
     }
   },
   defaultVariants: {
-    size: 'default'
-  }
-});
-
-const containerVariants = cva('', {
-  variants: {
-    fontSize: {
-      sm: 'text-sm',
-      md: 'text-16'
-    }
-  },
-  defaultVariants: {
-    fontSize: 'md'
+    sizes: '16'
   }
 });
 
 type CheckboxProps = {
-  id: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  children?: React.ReactNode;
-  className?: string;
-  CantainerClass?: string;
-  size?: 'default' | 'sm' | 'md' | 'lg';
-  fontSize?: 'sm' | 'md';
   childrenPosition?: 'left' | 'right';
-  onImage?: 'onImage' | 'greenImage';
-  offImage?: string | 'none';
-  greenImage?: string;
-} & VariantProps<typeof checkboxVariants>;
+  onImage?: string;
+  offImage?: string;
+} & VariantProps<typeof checkboxVariants> &
+  InputHTMLAttributes<HTMLInputElement>;
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
-      id,
-      checked,
-      onChange,
       children,
       className,
-      size,
-      fontSize,
+      sizes,
+      id,
       childrenPosition = 'right',
-      onImage = '/images/checkbox-on.svg',
-      offImage = '/images/checkbox-off.svg',
-      greenImage = '/images/checkbox-green.svg'
+      onImage = '/icons/system-icon/checkbox/round-checkbox-on.svg',
+      offImage = '/icons/system-icon/checkbox/round-checkbox-off.svg',
+      ...props
     },
     ref
   ) => {
-    const handleChange = () => {
-      onChange(!checked);
-    };
-
-    const checkboxClass = cn(checkboxVariants({ size }));
-    const containerClass = cn(containerVariants({ fontSize }));
-    const imageSrc = checked
-      ? onImage === 'greenImage'
-        ? greenImage
-        : onImage
-      : offImage === 'none'
-        ? undefined
-        : offImage;
+    const containerClass = cn('flex items-center justify-center', className);
+    const { checked } = props;
+    const imageSrc = checked ? onImage : offImage;
 
     return (
-      <label className={`${className} flex items-center ${containerClass}`} htmlFor={id}>
-        <input
-          id={id}
-          type='checkbox'
-          checked={checked}
-          onChange={handleChange}
-          ref={ref}
-          className='hidden'
-        />
+      <label className={containerClass} htmlFor={id}>
+        <input {...props} type='checkbox' ref={ref} className='hidden' id={id} />
         {childrenPosition === 'left' && <>{children}</>}
-        <div className={`relative ${checkboxClass}`}>
-          {imageSrc && <Image src={imageSrc} alt='Checkbox' fill />}
-        </div>
+        {imageSrc && (
+          <Icon src={imageSrc} alt='Checkbox' size={sizes || '16'} placeholder='empty' />
+        )}
         {childrenPosition === 'right' && <>{children}</>}
       </label>
     );

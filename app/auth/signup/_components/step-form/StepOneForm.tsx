@@ -1,23 +1,23 @@
 import { CardContent } from '@/components/ui/card';
-import IdInput from '../IdInput';
-import PwInput from '../PwInput';
+import Input from '@/components/ui/Input';
+import FlexBox from '@/components/ui/FlexBox';
+import Text from '@/components/ui/Text';
 
-import ReconfirmPwInput from '../ReconfirmPwInput';
-import SignupNav from '../SignupNav';
-
-type StepOneFormProps = {
-  nextStep: () => void;
-};
-
-export const StepOneForm = ({ nextStep }: StepOneFormProps) => {
+export const StepOneForm = () => {
   return (
-    <CardContent flexDirection='col' className=''>
-      <div className='flex w-full flex-col gap-[3.7rem]'>
-        <IdInput />
-        <PwInput />
-        <ReconfirmPwInput />
-        <SignupNav nextStep={nextStep} />
-      </div>
+    <CardContent flexDirection='col' className='mt-32 space-y-12'>
+      <FlexBox className='w-full gap-8' flexDirection='col'>
+        <Input placeholder='이메일을 입력해주세요' id='email' />
+        <Text sizes='12'>메시지</Text>
+      </FlexBox>
+      <FlexBox className='w-full gap-8' flexDirection='col'>
+        <Input placeholder='비밀번호를 입력해주세요' id='password' />
+        <Text sizes='12'>메시지</Text>
+      </FlexBox>
+      <FlexBox className='w-full gap-8' flexDirection='col'>
+        <Input placeholder='비밀번호 재확인' id='confirmPassword' />
+        <Text sizes='12'>메시지</Text>
+      </FlexBox>
     </CardContent>
   );
 };
