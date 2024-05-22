@@ -13,11 +13,25 @@ import type { SetShowWidgetType } from '@/types/widget-type/widgetType';
 
 const useDrag = (setShowWidget: SetShowWidgetType) => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
+  const [isDragging, setIsDragging] = useState(false);
+  const pointerSensor = useSensor(PointerSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5
+    }
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5
+    }
+  });
+  const sensors = useSensors(pointerSensor, touchSensor);
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     const { id } = active;
     setActiveId(id);
+    setIsDragging(true);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -31,8 +45,9 @@ const useDrag = (setShowWidget: SetShowWidgetType) => {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
+    setIsDragging(false);
   };
 
-  return { activeId, sensors, handleDragStart, handleDragEnd };
+  return { activeId, sensors, handleDragStart, handleDragEnd, isDragging };
 };
 export default useDrag;

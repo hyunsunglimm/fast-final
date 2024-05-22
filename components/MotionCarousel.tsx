@@ -49,7 +49,7 @@ const MotionCarousel = ({
 
   useEffect(() => {
     const unsubX = dragX.on('change', (latest) => {
-      if (Math.abs(latest) >= DRAG_BUFFER) {
+      if (Math.abs(latest) >= 100) {
         setDragging(true);
       }
     });
