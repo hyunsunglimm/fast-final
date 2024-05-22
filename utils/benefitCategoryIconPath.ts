@@ -5,5 +5,6 @@ export const benefitCategoryIconPath: { [key: string]: string } = {
   포인트: '/icons/system-icon/system/card-point.svg',
   온라인: '/icons/system-icon/system/card-online.svg',
   스트리밍: '/icons/system-icon/system/card-streaming.svg',
-  배달: '/icons/system-icon/system/card-delivery.svg'
+  배달: '/icons/system-icon/system/card-delivery.svg',
+  택시: '/icons/system-icon/system/card-taxi.svg'
 };
