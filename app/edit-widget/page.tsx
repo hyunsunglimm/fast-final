@@ -51,7 +51,7 @@ const EditWidgetPage = () => {
 
   return (
     <>
-      <IsBackHeader title='한 눈에 보기 편집' />
+      <IsBackHeader href='/' title='한 눈에 보기 편집' />
       <TopContents />
       <div className='grid grid-cols-2 gap-20 px-20'>
         {/* ShowWidget 렌더링 */}
