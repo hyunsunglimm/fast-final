@@ -48,9 +48,3 @@ const SignupForm = () => {
   );
 };
 export default SignupForm;
-
-// {(step === '1' || step === undefined) && <StepOneForm />}
-// {step === '2' && <StepTwoForm />}
-/* {step === '3' && <StepFourForm />} */
-// {step === '4' && <StepFourForm />}
-// {step === '5' && <StepFiveForm />}

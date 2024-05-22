@@ -38,6 +38,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       alt,
       loader,
       quality,
+      placeholder = 'blur',
       priority,
       loading,
       unoptimized,
@@ -51,6 +52,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       alt,
       loader,
       quality,
+      placeholder,
       priority,
       loading,
       unoptimized,
@@ -69,7 +71,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
         <Image
           fill
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAAAL0lEQVR42u3NMQEAAAgDIJfcNPY0g4cfFCDT9S4SiUQikUgkEolEIpFIJBKJ5GYBnpg5OxOuJSoAAAAASUVORK5CYII='
-          placeholder='blur'
+          placeholder={placeholder}
           sizes='auto'
           className={imgClass}
           {...imageProps}

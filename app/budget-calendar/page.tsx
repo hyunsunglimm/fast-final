@@ -4,10 +4,8 @@ import Input from '@/components/ui/Input';
 import Checkbox from '@/components/ui/CheckBox';
 import Switch from '@/components/ui/Switch';
 import { useForm } from 'react-hook-form';
-import VisibleIcon from '@/components/icons/signup/VisibleIcon';
-import InvisibleIcon from '@/components/icons/signup/InvisibleIcon';
 import FlexBox from '@/components/ui/FlexBox';
-import DeleteIcon from '@/components/icons/DeleteIcon';
+
 const BudgetCalendarPage = () => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
@@ -73,11 +71,6 @@ const BudgetCalendarPage = () => {
               id='memberId'
               placeholder='아이디를 입력해주세요'
               validation={errors.memberId ? 'error' : 'success'}
-              icon={
-                watch('memberId') ? (
-                  <DeleteIcon key='item' onClick={() => setValue('memberId', '')} />
-                ) : null
-              }
             />
             {errors.memberId && <p>{errors.memberId?.message}</p>}
           </div>
@@ -106,14 +99,6 @@ const BudgetCalendarPage = () => {
             validation={errorMessage ? 'error' : 'success'}
             value={input}
             trailingText='원'
-            icon={[
-              input ? <DeleteIcon key='item' onClick={() => setInput('')} /> : null,
-              isView ? (
-                <VisibleIcon onClick={() => setIsView((prev) => !prev)} />
-              ) : (
-                <InvisibleIcon onClick={() => setIsView((prev) => !prev)} />
-              )
-            ]}
           />
         </div>
         {/* <button type='button' onClick={() => setIsView((prev) => !prev)}>
