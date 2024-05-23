@@ -296,6 +296,18 @@ const BudgetCalendarPage = () => {
           </div>
           {/* 라인 */}
           <div className='h-[1.6rem] bg-gray-50'></div>
+          {/* 쓰고 후회한 돈 */}
+          <div className='px-20 py-32 text-14'>
+            <h2 className='mb-16 text-18 font-600'>쓰고 후회한 돈</h2>
+            <div className='text-center'>
+              <div className='mb-40 h-[15.9rem] w-[16rem] text-[16rem]'></div>
+              <div className='mb-16'>
+                <h4 className='mb-4 text-18 font-700'>최신형 맥북</h4>
+                <p>만큼 아낄 수 있었어요</p>
+              </div>
+              <p className='text-12 text-gray-500'>총 1,000,000원</p>
+            </div>
+          </div>
         </>
       )}
     </div>
