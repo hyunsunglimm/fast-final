@@ -2,28 +2,81 @@ import BottomSheet from '@/components/BottomSheet';
 import Icon from '@/components/Icon';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
-import Image from 'next/image';
 import { useState } from 'react';
+import SelectCardCompany, { cardCompanies } from './SelectCardCompany';
+import SelectFiltering from './SelectFiltering';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import FlexBox from '@/components/ui/FlexBox';
 
-const cardCompanies = [
-  { title: '신한', iconPath: '/icons/logos/card/card-shinhan.svg' },
-  { title: '현대', iconPath: '/icons/logos/card/card-hyundai.svg' },
-  { title: '비씨', iconPath: '/icons/logos/card/card-bc.svg' },
-  { title: '신한a', iconPath: '/icons/logos/card/card-shinhan.svg' },
-  { title: '현대a', iconPath: '/icons/logos/card/card-hyundai.svg' },
-  { title: '비씨a', iconPath: '/icons/logos/card/card-bc.svg' },
-  { title: '신한s', iconPath: '/icons/logos/card/card-shinhan.svg' },
-  { title: '현대s', iconPath: '/icons/logos/card/card-hyundai.svg' },
-  { title: '비씨s', iconPath: '/icons/logos/card/card-bc.svg' }
-];
-
-const filterings = ['대중교통', '카페', '쇼핑', '편의점', '마트', '문화', '통신비', '주유'];
+export type CardCompany = { title: string; iconPath: string };
 
 const FilteringSection = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const [option, setOption] = useState('');
+
+  const params = new URLSearchParams(searchParams.toString());
+
+  const initialCardCompanies = searchParams.getAll('card-company').map((title) => {
+    return {
+      title,
+      iconPath: cardCompanies.find((cardCompany) => cardCompany.title === title)!.iconPath
+    };
+  });
+
+  const initialFilterings = searchParams.getAll('filtering');
+
+  const [selectedCardCompanies, setSelectedCardCompanies] =
+    useState<CardCompany[]>(initialCardCompanies);
+  const [selectedFilterings, setSelectedFilterings] = useState<string[]>(initialFilterings);
 
   const cardCompanyIsOpen = option === 'card company';
   const filteringIsOpen = option === 'filtering';
+
+  const onClose = () => {
+    setOption('');
+  };
+
+  const onSelectCardCompany = (selectedCardCompany: CardCompany) => {
+    const existingIndex = selectedCardCompanies.findIndex(
+      (item) => item.title === selectedCardCompany.title
+    );
+
+    if (existingIndex > -1) {
+      const newArray = selectedCardCompanies.filter((_, index) => index !== existingIndex);
+      setSelectedCardCompanies(newArray);
+    } else {
+      setSelectedCardCompanies((prev) => [...prev, selectedCardCompany]);
+    }
+  };
+
+  const onClickCardCompany = () => {
+    params.delete('card-company');
+    selectedCardCompanies.forEach((item) => {
+      params.append('card-company', item.title);
+    });
+    router.push(pathname + '?' + params.toString(), { scroll: false });
+    onClose();
+  };
+
+  const onSelectFiltering = (title: string) => {
+    if (selectedFilterings.includes(title)) {
+      const newArray = selectedFilterings.filter((filter) => filter !== title);
+      setSelectedFilterings(newArray);
+    } else {
+      setSelectedFilterings((prev) => [...prev, title]);
+    }
+  };
+
+  const onClickFiltering = () => {
+    params.delete('filtering');
+    selectedFilterings.forEach((filtering) => {
+      params.append('filtering', filtering);
+    });
+    router.push(pathname + '?' + params.toString(), { scroll: false });
+    onClose();
+  };
 
   return (
     <>
@@ -39,20 +92,26 @@ const FilteringSection = () => {
             onClick={() => setOption('card company')}
           >
             <Icon src='/icons/financial-product/filter-icon.svg' alt='filter icon' size='16' />
-            <Text sizes='12' weight='700' className='text-primary'>
+            <Text
+              sizes='12'
+              weight='700'
+              className={`${selectedCardCompanies.length > 0 ? 'text-primary' : 'text-gray-500'}`}
+            >
               카드사
             </Text>
-            <Text
-              sizes='10'
-              weight='500'
-              className='absolute right-[-0.6rem] top-[-0.5rem] flex h-[1.6rem] w-[1.6rem] items-center justify-center rounded-full bg-primary text-white'
-            >
-              3
-            </Text>
+            {selectedCardCompanies.length > 0 && (
+              <Text
+                sizes='10'
+                weight='500'
+                className='absolute right-[-0.6rem] top-[-0.5rem] flex h-[1.6rem] w-[1.6rem] items-center justify-center rounded-full bg-primary text-white'
+              >
+                {selectedCardCompanies.length}
+              </Text>
+            )}
           </div>
           <div className='mx-16 h-[2.6rem] w-[0.1rem] border border-gray-200' />
           <ul className='hide-scrollbar flex gap-[1.6rem] overflow-x-scroll'>
-            {cardCompanies.map(({ title, iconPath }) => {
+            {selectedCardCompanies.map(({ title, iconPath }) => {
               return (
                 <li key={title}>
                   <Icon src={iconPath} alt={title} size='32' />
@@ -68,20 +127,26 @@ const FilteringSection = () => {
             onClick={() => setOption('filtering')}
           >
             <Icon src='/icons/financial-product/filter-icon.svg' alt='filter icon' size='16' />
-            <Text sizes='12' weight='700' className='text-primary'>
+            <Text
+              sizes='12'
+              weight='700'
+              className={`${selectedFilterings.length > 0 ? 'text-primary' : 'text-gray-500'}`}
+            >
               필터링
             </Text>
-            <Text
-              sizes='10'
-              weight='500'
-              className='absolute right-[-0.6rem] top-[-0.5rem] flex h-[1.6rem] w-[1.6rem] items-center justify-center rounded-full bg-primary text-white'
-            >
-              2
-            </Text>
+            {selectedFilterings.length > 0 && (
+              <Text
+                sizes='10'
+                weight='500'
+                className='absolute right-[-0.6rem] top-[-0.5rem] flex h-[1.6rem] w-[1.6rem] items-center justify-center rounded-full bg-primary text-white'
+              >
+                {selectedFilterings.length}
+              </Text>
+            )}
           </div>
           <div className='mx-16 h-[2.6rem] w-[0.1rem] border border-gray-200' />
           <ul className='hide-scrollbar flex gap-[0.8rem] overflow-x-scroll'>
-            {filterings.map((filter) => {
+            {selectedFilterings.map((filter) => {
               return (
                 <li
                   key={filter}
@@ -90,36 +155,55 @@ const FilteringSection = () => {
                   <Text sizes='12' weight='600'>
                     {filter}
                   </Text>
-                  <Image
+                  <Icon
                     src='/icons/financial-product/close-icon.svg'
                     alt='close icon'
-                    width={16}
-                    height={16}
-                    className='w-[1.6rem]'
+                    size='16'
+                    onClick={() => {
+                      params.delete('filtering', filter);
+                      router.push(pathname + '?' + params.toString());
+                      setSelectedFilterings((prev) => prev.filter((title) => title !== filter));
+                    }}
                   />
                 </li>
               );
             })}
           </ul>
         </div>
+        <FlexBox className='gap-4 px-20 pb-16 pt-[0.4rem]'>
+          <Icon src='/icons/system-icon/info.svg' alt='info icon' size='16' />
+          <Text sizes='12' className='text-gray-500'>
+            필터를 적용하면 상품비교 정확도가 올라가요!
+          </Text>
+        </FlexBox>
       </div>
       <BottomSheet
         title='카드사'
         buttonLabel='적용하기'
         isOpen={cardCompanyIsOpen}
-        onClose={() => setOption('')}
-        buttonOptions={{ size: 'md', styled: 'fill_black' }}
+        onClose={onClose}
+        onClick={onClickCardCompany}
+        buttonOptions={{
+          size: 'md',
+          styled: 'fill_black',
+          disabled: selectedCardCompanies.length === 0
+        }}
       >
-        <div>카드사</div>
+        <SelectCardCompany items={selectedCardCompanies} onSelect={onSelectCardCompany} />
       </BottomSheet>
       <BottomSheet
         title='필터링'
         buttonLabel='적용하기'
         isOpen={filteringIsOpen}
-        onClose={() => setOption('')}
-        buttonOptions={{ size: 'md', styled: 'fill_black' }}
+        onClose={onClose}
+        onClick={onClickFiltering}
+        buttonOptions={{
+          size: 'md',
+          styled: 'fill_black',
+          disabled: selectedFilterings.length === 0
+        }}
       >
-        <div>필터링</div>
+        <SelectFiltering items={selectedFilterings} onSelect={onSelectFiltering} />
       </BottomSheet>
     </>
   );
