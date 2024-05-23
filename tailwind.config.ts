@@ -46,6 +46,7 @@ const config: Config = {
       },
       padding: {
         '4': '0.4rem',
+        '6': '0.6rem',
         '8': '0.8rem',
         '10': '1rem',
         '12': '1.2rem',
@@ -59,6 +60,7 @@ const config: Config = {
       },
       margin: {
         '4': '0.4rem',
+        '6': '0.6rem',
         '8': '0.8rem',
         '10': '1rem',
         '12': '1.2rem',
