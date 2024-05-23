@@ -80,7 +80,7 @@ const SelectCategoryPage = () => {
                   <Text>{title}</Text>
                   {isSelected && (
                     <Icon
-                      src='/icons/system-icon/checkbox/checkbox-on.svg'
+                      src='/icons/system-icon/checkbox/round-checkbox-on.svg'
                       alt='check icon'
                       size='20'
                       className='absolute right-[0.8rem] top-[0.8rem]'
