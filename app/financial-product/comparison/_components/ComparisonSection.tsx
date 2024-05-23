@@ -123,7 +123,7 @@ const ComparisonSection = () => {
                 </FlexBox>
                 {isSelected && (
                   <Icon
-                    src='/icons/system-icon/checkbox/checkbox-on.svg'
+                    src='/icons/system-icon/checkbox/round-checkbox-on.svg'
                     alt='check icon'
                     size='24'
                     className='absolute right-[2.4rem] top-1/2 w-[2.4rem] translate-y-[-50%]'
