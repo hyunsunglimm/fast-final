@@ -1,23 +1,26 @@
-'use client';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import React from 'react';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
-import { useRouter } from 'next/navigation';
-const SignupHeader = ({ currentStep }: { currentStep?: string }) => {
-  const router = useRouter();
+
+type SignupHeaderProps = {
+  currentStep?: string;
+  onClick?: () => void;
+};
+
+const SignupHeader = ({ currentStep, onClick }: SignupHeaderProps) => {
   return (
     <header
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: 'mb-40 h-[5.6rem] px-20'
+        className: 'mb-40 h-[5.6rem]'
       })}
     >
       {currentStep !== '1' ? (
         <Icon
           role='button'
-          onClick={() => router.back()}
+          onClick={onClick}
           size='24'
           alt='뒤로가기'
           src='/icons/system-icon/arrow/arrow-prev.svg'
