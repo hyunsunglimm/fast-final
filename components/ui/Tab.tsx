@@ -8,9 +8,10 @@ type TabProps = {
   array: string[];
   type: 'box' | 'underline';
   tabKey: string;
+  onTabChange?: (newViewMode: string) => void;
 };
 
-const Tab = ({ array, type, tabKey }: TabProps) => {
+const Tab = ({ array, type, tabKey, onTabChange }: TabProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const selectedTab = searchParams.get(tabKey);
@@ -36,6 +37,12 @@ const Tab = ({ array, type, tabKey }: TabProps) => {
             href={pathname + '?' + createQueryString(tabKey, label)}
             key={label}
             className={getStyle(type, label === selectedTab)}
+            onClick={(event) => {
+              if (onTabChange) {
+                event.preventDefault();
+                onTabChange(label);
+              }
+            }}
           >
             <Text weight={type === 'box' ? '500' : '700'}>{label}</Text>
           </Link>
