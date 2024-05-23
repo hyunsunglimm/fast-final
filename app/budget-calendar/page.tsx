@@ -1,11 +1,30 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { DefaultHeader } from '@/components/header';
 import Tab from '@/components/ui/Tab';
 import FlexBox from '@/components/ui/FlexBox';
+import Button from '@/components/ui/Button';
+import { motion } from 'framer-motion';
+import { useWindowResize } from '@/hooks/useWindowResize';
+import Icon from '@/components/Icon';
+
+// 공유한 멤버 더미 데이터
+const items = [
+  { profile: '/icons/profile/profile.svg', name: '나' },
+  { profile: '/icons/profile/profile.svg', name: 'John' },
+  { profile: '/icons/profile/profile.svg', name: 'Jane' },
+  { profile: '/icons/profile/profile.svg', name: 'Alice' },
+  { profile: '/icons/profile/profile.svg', name: 'Bob' },
+  { profile: '/icons/profile/profile.svg', name: 'Eve' },
+  { profile: '/icons/profile/profile.svg', name: 'Mike' },
+  { profile: '/icons/profile/profile.svg', name: 'Anna' },
+  { profile: '/icons/profile/profile.svg', name: 'Tom' },
+  { profile: '/icons/profile/profile.svg', name: 'Lisa' },
+  { profile: '/icons/profile/profile.svg', name: 'David' }
+];
 
 const BudgetCalendarPage = () => {
   const router = useRouter();
@@ -45,6 +64,26 @@ const BudgetCalendarPage = () => {
     }
 
     router.replace(`/budget-calendar?${newParams.toString()}`);
+  };
+
+  // 함께봐요
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [selectedProfile, setSelectedProfile] = useState('나');
+  const { documentSize } = useWindowResize();
+
+  // 공유한 멤버 스크롤 될 수 있는 width 영역
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+      setContentWidth(containerRef.current.scrollWidth);
+    }
+  }, [documentSize, viewMode]);
+
+  // 공유한 멤버 select
+  const handleProfileClick = (name: string) => {
+    setSelectedProfile(name);
   };
 
   return (
@@ -157,6 +196,53 @@ const BudgetCalendarPage = () => {
                   </div>
                 </li>
               </ul>
+            </div>
+          </div>
+        </>
+      )}
+      {viewMode === '함께봐요' && (
+        <>
+          {/* 공유한 멤버 */}
+          <div className='py-40'>
+            <FlexBox alignItems='center' justifyContent='between' className='mb-16 px-20'>
+              <FlexBox alignItems='center' justifyContent='between'>
+                <h2 className='mr-8 text-18 font-600'>공유한 멤버</h2>
+                <p className='text-14 font-500 text-gray-700'>9명</p>
+              </FlexBox>
+              <Button size='xs' styled='outline' className='px-12'>
+                멤버 편집
+              </Button>
+            </FlexBox>
+            <div className='w-full overflow-hidden px-20' ref={containerRef}>
+              <motion.ul
+                className='flex gap-16 text-center'
+                drag='x'
+                dragConstraints={{ left: -(contentWidth - containerWidth), right: 0 }}
+                style={{ cursor: 'grab' }}
+              >
+                {items.map((item, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className='relative p-4'
+                      onClick={() => handleProfileClick(item.name)}
+                    >
+                      {selectedProfile === item.name && (
+                        <div className='absolute z-[2] h-[4rem] w-[4rem] rounded-full border-[0.3rem] border-primary'></div>
+                      )}
+                      <Icon
+                        src={item.profile}
+                        alt={item.name}
+                        size='40'
+                        className={'pointer-events-none mb-8'}
+                      />
+                      <p className={`${selectedProfile === item.name ? 'text-primary' : ''}`}>
+                        {item.name}
+                      </p>
+                    </li>
+                  );
+                })}
+              </motion.ul>
             </div>
           </div>
         </>
