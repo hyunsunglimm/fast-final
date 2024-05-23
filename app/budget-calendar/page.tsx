@@ -245,6 +245,11 @@ const BudgetCalendarPage = () => {
               </motion.ul>
             </div>
           </div>
+          {/* 공유 가계부 캘린더 */}
+          <div className='px-20 pb-24'>
+            <h2 className='mb-16 text-18 font-600'>{selectedProfile}님의 공유 가계부</h2>
+            <div className='h-[30rem]'>캘린더 넣을 예정</div>
+          </div>
         </>
       )}
     </div>
