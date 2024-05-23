@@ -8,16 +8,20 @@ import { useSearchParams } from 'next/navigation';
 
 const ComparisonPage = () => {
   const searchParams = useSearchParams();
-  const selectedCards = searchParams.getAll('select');
+  const selectedCards = searchParams.getAll('card');
 
   return (
     <>
-      <IsBackHeader title='상품비교' />
+      <div className='bg-white'>
+        <IsBackHeader title='상품비교' href='./' />
+      </div>
       <section className='relative pb-[13.2rem]'>
         <FilteringSection />
         <ComparisonSection />
       </section>
-      {selectedCards.length >= 2 && <BottomButton />}
+      {selectedCards.length >= 2 && (
+        <BottomButton title='비교하기' path='/financial-product/comparison/select-category' />
+      )}
     </>
   );
 };

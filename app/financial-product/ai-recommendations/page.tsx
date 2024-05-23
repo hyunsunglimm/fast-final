@@ -6,7 +6,7 @@ import AiBanner from './_components/AiBanner';
 const AiRecommendationsPage = () => {
   return (
     <>
-      <IsBackHeader title='AI 맞춤' />
+      <IsBackHeader title='AI 맞춤' href='./' />
       <section>
         <AiBanner />
         <PerfectFinancialProducts />

@@ -45,6 +45,8 @@ const comparisonCards = [
   }
 ];
 
+const QUERY_KEY = 'card';
+
 const ComparisonSection = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -52,20 +54,20 @@ const ComparisonSection = () => {
 
   const params = useMemo(() => new URLSearchParams(searchParams.toString()), [searchParams]);
 
-  const selectedCards = searchParams.getAll('select');
+  const selectedCards = searchParams.getAll(QUERY_KEY);
 
   useEffect(() => {
     if (selectedCards.length > 2) {
-      params.delete('select', selectedCards[0]);
+      params.delete(QUERY_KEY, selectedCards[0]);
       router.push(pathname + '?' + params.toString(), { scroll: false });
     }
   }, [selectedCards, pathname, router, params]);
 
   const onSelect = (cardId: string) => {
     if (selectedCards.includes(cardId)) {
-      params.delete('select', cardId);
+      params.delete(QUERY_KEY, cardId);
     } else {
-      params.append('select', cardId);
+      params.append(QUERY_KEY, cardId);
     }
 
     router.push(pathname + '?' + params.toString(), {
@@ -120,11 +122,10 @@ const ComparisonSection = () => {
                   </FlexBox>
                 </FlexBox>
                 {isSelected && (
-                  <Image
+                  <Icon
                     src='/icons/system-icon/checkbox/checkbox-on.svg'
                     alt='check icon'
-                    width={24}
-                    height={24}
+                    size='24'
                     className='absolute right-[2.4rem] top-1/2 w-[2.4rem] translate-y-[-50%]'
                   />
                 )}

@@ -44,7 +44,7 @@ const savings = [
 const page = () => {
   return (
     <>
-      <IsBackHeader />
+      <IsBackHeader href='./' />
       <section className='px-[2rem] pb-[6rem]'>
         <Text variant='h1' sizes='24' weight='600'>
           올 겨울에 6개월 적금 들고 <br /> 내년 여름 여행가자
