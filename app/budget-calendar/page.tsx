@@ -109,7 +109,7 @@ const BudgetCalendarPage = () => {
         </button>
       </form>
       {/* <Input placeholder='Enter text...' /> */}
-      <Checkbox id='1' checked={isChecked1} onChange={handleCheckboxChange1} onImage='greenImage'>
+      {/* <Checkbox id='1' checked={isChecked1} onChange={handleCheckboxChange1} onImage='greenImage'>
         <p>체크박스 레이블</p>
       </Checkbox>
       <Checkbox
@@ -121,7 +121,7 @@ const BudgetCalendarPage = () => {
         offImage='none'
       >
         체크박스 레이블
-      </Checkbox>
+      </Checkbox> */}
       <Switch id='switch' checked={isChecked3} onChange={handleToggle3} />
     </div>
   );
