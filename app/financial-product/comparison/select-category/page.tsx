@@ -31,9 +31,6 @@ const SelectCategoryPage = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const tab1 = searchParams.get('tab1');
-  const tab2 = searchParams.get('tab2');
-  const selectedCards = searchParams.getAll('card');
   const selectedCategories = searchParams.getAll(QUERY_KEY);
 
   const params = useMemo(() => new URLSearchParams(searchParams.toString()), [searchParams]);
@@ -59,9 +56,7 @@ const SelectCategoryPage = () => {
 
   return (
     <>
-      <IsBackHeader
-        href={`/financial-product/comparison?tab1=${tab1}&tab2=${tab2}&card=${selectedCards[0]}&card=${selectedCards[1]}`}
-      />
+      <IsBackHeader href={`./?${searchParams.toString()}`} />
       <section className='px-20 pb-[13.2rem]'>
         <FlexBox flexDirection='col' className='gap-8'>
           <Text sizes='24' weight='500'>
@@ -97,7 +92,12 @@ const SelectCategoryPage = () => {
           })}
         </ul>
       </section>
-      {selectedCategories.length >= 2 && <BottomButton />}
+      {selectedCategories.length >= 2 && (
+        <BottomButton
+          title='결과보기'
+          path='/financial-product/comparison/select-category/result'
+        />
+      )}
     </>
   );
 };
