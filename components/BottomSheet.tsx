@@ -11,6 +11,7 @@ type BottomSheetProps = {
   isOpen: boolean;
   buttonOptions: VariantProps<typeof buttonVariants>;
   onClose: () => void;
+  onClick: () => void;
   children: React.ReactNode;
 };
 
@@ -20,6 +21,7 @@ const BottomSheet = ({
   isOpen,
   buttonOptions: { size, styled, disabled },
   onClose,
+  onClick,
   children
 }: BottomSheetProps) => {
   return (
@@ -57,7 +59,13 @@ const BottomSheet = ({
               />
             </FlexBox>
             <div className='hide-scrollbar overflow-y-scroll'>{children}</div>
-            <Button size={size} styled={styled} disabled={disabled as boolean} className='shrink-0'>
+            <Button
+              onClick={onClick}
+              size={size}
+              styled={styled}
+              disabled={disabled as boolean}
+              className='shrink-0'
+            >
               {buttonLabel}
             </Button>
           </motion.div>
