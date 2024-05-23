@@ -14,6 +14,23 @@ const BudgetCalendarPage = () => {
   // const displayMode =
   //   searchParams.get('displayMode') || (viewMode === '혼자봐요' ? '캘린더 보기' : '');
 
+  // viewMode와 displayMode가 설정되지 않았을 경우 (기본값 설정: 혼자봐요, 캘린더 보기)
+  useEffect(() => {
+    if (
+      !searchParams.get('viewMode') ||
+      (viewMode === '혼자봐요' && !searchParams.get('displayMode'))
+    ) {
+      const newParams = new URLSearchParams(searchParams.toString());
+      if (!searchParams.get('viewMode')) {
+        newParams.set('viewMode', '혼자봐요');
+      }
+      if (viewMode === '혼자봐요' && !searchParams.get('displayMode')) {
+        newParams.set('displayMode', '캘린더 보기');
+      }
+      router.replace(`/budget-calendar?${newParams.toString()}`);
+    }
+  }, [searchParams, router, viewMode]);
+
   // 함께봐요에서 displayMode 삭제
   const handleViewModeChange = (newViewMode: string) => {
     const newParams = new URLSearchParams(searchParams.toString());
