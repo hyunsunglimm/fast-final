@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -44,6 +45,7 @@ const StepThreePage = () => {
   }, [visiblePostDaum]);
   return (
     <>
+      {/* 다음 주소 창 */}
       {visiblePostDaum && (
         <DaumAddress setVisiblePostDaum={setVisiblePostDaum} setValue={setValue} />
       )}
@@ -58,6 +60,7 @@ const StepThreePage = () => {
         </Text>
       </FlexBox>
       <CardContent flexDirection='col' className='mt-32 w-full space-y-12'>
+        {/* 주소 검색하기 */}
         <FormField
           control={control}
           name='address.roadName'
@@ -79,7 +82,7 @@ const StepThreePage = () => {
                       size='20'
                       src='/icons/system-icon/search-2.svg'
                       alt='검색 돋보기 아이콘'
-                      className='absolute bottom-0 right-0 top-2 my-auto cursor-pointer'
+                      className='absolute bottom-0 right-0 top-0 my-auto cursor-pointer'
                       placeholder='empty'
                       onClick={() => setVisiblePostDaum(true)}
                     />
@@ -90,27 +93,31 @@ const StepThreePage = () => {
             );
           }}
         />
+        {/* 상세 주소 */}
+        {watch('address.roadName') && (
+          <FormField
+            control={control}
+            name='address.detail'
+            render={({ field }) => {
+              return (
+                <FormItem className='w-full'>
+                  <FormControl>
+                    <Input
+                      placeholder='상세주소를 입력해주세요'
+                      id='address.detail'
+                      inputMode='text'
+                      {...field}
+                      validation={errors.address?.detail ? 'error' : 'success'}
+                    />
+                  </FormControl>
+                  <FormMessage className='text-12 font-400 text-warning' />
+                </FormItem>
+              );
+            }}
+          />
+        )}
 
-        <FormField
-          control={control}
-          name='address.detail'
-          render={({ field }) => {
-            return (
-              <FormItem className='w-full'>
-                <FormControl>
-                  <Input
-                    placeholder='상세주소를 입력해주세요'
-                    id='address.detail'
-                    inputMode='text'
-                    {...field}
-                    validation={errors.address?.detail ? 'error' : 'success'}
-                  />
-                </FormControl>
-                <FormMessage className='text-12 font-400 text-warning' />
-              </FormItem>
-            );
-          }}
-        />
+        {/* 성별 선택 */}
         <CheckedGender register={register} errors={errors} />
       </CardContent>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
