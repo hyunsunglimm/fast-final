@@ -19,7 +19,7 @@ import {
 import { DataType } from '@/types/widget-type/widgetType';
 
 const HomeWidgetSection = async () => {
-  // const res = await fetch('http://localhost:3000/api/widget');
+  // const res = await fetch('https://fast-final-client-kohl.vercel.app//api/widget');
   const data: DataType = await getWidgetItem();
 
   const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
