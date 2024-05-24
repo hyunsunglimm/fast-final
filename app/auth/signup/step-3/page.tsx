@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { SignupInputsValues } from '../_components/signupSchema';
 import { useRouter } from 'next/navigation';
@@ -19,6 +19,8 @@ const StepThreePage = () => {
   const router = useRouter();
   const {
     watch,
+    register,
+    clearErrors,
     setValue,
     control,
     trigger,
@@ -29,11 +31,17 @@ const StepThreePage = () => {
     const isEmailValid = await trigger('address.roadName', { shouldFocus: true });
     const isPasswordValid = await trigger('address.detail', { shouldFocus: true });
     const isGenderChecked = await trigger('gender', { shouldFocus: true });
+
     if (isEmailValid && isPasswordValid && isGenderChecked) {
-      router.push('/auth/signup/step-3');
+      router.push('/auth/signup/step-4');
     }
   };
 
+  useEffect(() => {
+    if (watch('address.roadName')) {
+      clearErrors('address.roadName');
+    }
+  }, [visiblePostDaum]);
   return (
     <>
       {visiblePostDaum && (
@@ -63,12 +71,15 @@ const StepThreePage = () => {
                       id='address.roadName'
                       inputMode='text'
                       {...field}
-                      validation={errors.address?.detail ? 'error' : 'success'}
+                      validation={
+                        errors.address?.roadName && !watch('address.roadName') ? 'error' : 'success'
+                      }
                     />
                     <Icon
-                      src='/icons/system-icon/search.svg'
+                      size='20'
+                      src='/icons/system-icon/search-2.svg'
                       alt='검색 돋보기 아이콘'
-                      className='absolute bottom-0 right-0 top-0 my-auto cursor-pointer'
+                      className='absolute bottom-0 right-0 top-2 my-auto cursor-pointer'
                       placeholder='empty'
                       onClick={() => setVisiblePostDaum(true)}
                     />
@@ -100,7 +111,7 @@ const StepThreePage = () => {
             );
           }}
         />
-        <CheckedGender />
+        <CheckedGender register={register} errors={errors} />
       </CardContent>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
         <Button type='button' className='w-full' onClick={onClickNext}>
