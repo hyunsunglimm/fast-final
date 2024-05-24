@@ -41,7 +41,7 @@ const Banner = ({ headText, content, icon }: BannerProps) => {
   return (
     <Card className='relative my-[2rem] w-full shrink-0 '>
       <FlexBox alignItems='center' justifyContent='between'>
-        <FlexBox flexDirection='col' className='px-24 py-16'>
+        <FlexBox flexDirection='col' className='px-24 py-16 pr-0'>
           <Text weight='500' sizes='12' className='mb-[0.4rem] text-gray-600'>
             {headText}
           </Text>
