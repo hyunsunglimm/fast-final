@@ -1,5 +1,5 @@
 import Icon from '@/components/Icon';
-import MotionCarousel from '@/components/MotionCarousel';
+import MultiCarousel from '@/components/MultiCarousel';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
@@ -79,12 +79,12 @@ const SpendingHabitsCards = () => {
           가 높았어요!
         </Text>
       </div>
-      <MotionCarousel className='mb-16 px-[6.05rem]'>
-        <div className='mx-auto h-[16rem] w-[25.4rem] shrink-0 rounded-xs bg-[#FF7674]' />
-        <div className='mx-auto h-[16rem] w-[25.4rem] shrink-0 rounded-xs bg-[#87CFDE]' />
-        <div className='mx-auto h-[16rem] w-[25.4rem] shrink-0 rounded-xs bg-[#959498]' />
-      </MotionCarousel>
-      <FlexBox flexDirection='col' alignItems='center' className='px-20'>
+      <MultiCarousel>
+        <div className='mx-auto h-[16rem] w-[25.4rem] rounded-xs bg-[#FF7674]' />
+        <div className='mx-auto h-[16rem] w-[25.4rem] rounded-xs bg-[#87CFDE]' />
+        <div className='mx-auto h-[16rem] w-[25.4rem] rounded-xs bg-[#959498]' />
+      </MultiCarousel>
+      <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
         <Text sizes='12' className='mb-[0.2rem]'>
           하나은행
         </Text>
