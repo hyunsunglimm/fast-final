@@ -10,10 +10,25 @@ const config: Config = {
     extend: {
       boxShadow: {
         sm: '0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 1px 0px rgba(0, 0, 0, 0.06)',
-        '3xl': '0px 4px 10px 0px rgba(0, 0, 0, 0.06)'
+        '3xl': '0px 4px 10px 0px rgba(0, 0, 0, 0.06)',
+        'top-shadow': '0px 4px 16px 0px rgba(75, 81, 88, 0.08)'
       },
       screens: {
         xs: '520px'
+      },
+      gap: {
+        2: '0.2rem',
+        4: '0.4rem',
+        6: '0.6rem',
+        8: '0.8rem',
+        10: '1rem',
+        12: '1.2rem',
+        14: '1.4rem',
+        16: '1.6rem',
+        18: '1.8rem',
+        20: '2rem',
+        22: '2.2rem',
+        24: '2.4rem'
       },
       fontSize: {
         '10': ['1rem', { lineHeight: '1.6rem' }],
@@ -30,6 +45,9 @@ const config: Config = {
         '48': ['4.8rem', { lineHeight: '7.2rem' }]
       },
       padding: {
+        '4': '0.4rem',
+        '6': '0.6rem',
+        '8': '0.8rem',
         '10': '1rem',
         '12': '1.2rem',
         '16': '1.6rem',
@@ -41,6 +59,9 @@ const config: Config = {
         '40': '4rem'
       },
       margin: {
+        '4': '0.4rem',
+        '6': '0.6rem',
+        '8': '0.8rem',
         '10': '1rem',
         '12': '1.2rem',
         '16': '1.6rem',
@@ -58,6 +79,8 @@ const config: Config = {
         lg: '2.4rem'
       },
       colors: {
+        bucket: '#53B7FF',
+        challenge: '#32C889',
         primary: '#FF7822',
         dim: '#ADADAD',
         active: '#5A7EFF',
@@ -72,7 +95,8 @@ const config: Config = {
         'gray-500': '#8E939A',
         'gray-600': '#747A81',
         'gray-700': '#4B5158',
-        black: '#23282E'
+        black: '#23282E',
+        banner: '#FFEDE1'
       },
       fontWeight: {
         '300': '300',
@@ -82,6 +106,20 @@ const config: Config = {
         '700': '700',
         '800': '800',
         '900': '900'
+      },
+      animation: {
+        pop: 'pop 200ms cubic-bezier(0.18, 0.67, 0.6, 1.22) 0s 1 normal forwards'
+      },
+      keyframes: {
+        pop: {
+          '0%': {
+            scale: '100%'
+          },
+          '100%': {
+            scale: '105%',
+            'box-shadow': '0px 0px 16px 9px rgba(0, 0, 0, 0.06)'
+          }
+        }
       }
     }
   },

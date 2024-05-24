@@ -1,5 +1,4 @@
-import HeartIcon from '@/components/icons/financial-product/HeartIcon';
-import SpeakerIcon from '@/components/icons/financial-product/SpeakerIcon';
+import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import React from 'react';
@@ -10,24 +9,25 @@ type SavingCardProps = {
     title: string;
     description: string;
     rate: string;
+    iconPath: string;
     startAmount: string;
     endAmount: number;
   };
 };
 
 const SavingCard = ({ saving }: SavingCardProps) => {
-  const { bank, title, description, rate, startAmount, endAmount } = saving;
+  const { bank, title, description, rate, iconPath, startAmount, endAmount } = saving;
 
   return (
     <Card className='flex flex-col gap-[1.6rem] p-24'>
       <div className='flex items-center justify-between'>
-        <div className='flex gap-[0.4rem]'>
-          <div className='h-[1.6rem] w-[1.6rem] rounded-full bg-primary' />
+        <div className='flex items-center gap-[0.4rem]'>
+          <Icon src={iconPath} alt={`${bank} logo`} size='16' />
           <Text sizes='12' className='text-gray-600'>
             {bank}
           </Text>
         </div>
-        <HeartIcon />
+        <Icon src='/icons/system-icon/heart-stroke.svg' alt='heart icon' size='20' />
       </div>
 
       <div className='flex justify-between'>
@@ -54,7 +54,7 @@ const SavingCard = ({ saving }: SavingCardProps) => {
       </div>
 
       <div className='flex items-center gap-[0.8rem] rounded-xs bg-[#FAF7F6] px-12 py-[0.8rem]'>
-        <SpeakerIcon />
+        <Icon src='/icons/financial-product/speaker.svg' alt='speaker icon' size='20' />
         <Text>
           {startAmount}으로 시작하면{' '}
           <Text className='text-primary'>{endAmount.toLocaleString()}원!</Text>
