@@ -7,7 +7,7 @@ import FinancialProductBanner from './_components/FinancialProductBanner';
 const FinancialProductPage = () => {
   return (
     <>
-      <DefaultHeader title='금융상품' />
+      <DefaultHeader title='상품탐색' />
       <section className='px-20 pb-[13.2rem]'>
         <FinancialProductBanner />
         <CustomNavigation />
