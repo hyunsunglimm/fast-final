@@ -1,15 +1,18 @@
 import FlexBox from '@/components/ui/FlexBox';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import Text from '@/components/ui/Text';
+import { SignupInputsValues } from './signupSchema';
+import { FormMessage } from '@/components/ui/form';
 
 type CheckedGenderProps = {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<SignupInputsValues>;
+  errors: FieldErrors<SignupInputsValues>;
 };
 
 const genderChoiceBtnClass =
   'flex h-[4.8rem] w-full cursor-pointer items-center justify-center rounded-sm bg-gray-200 text-center text-gray-400 transition duration-200 hover:bg-gray-400';
 
-const CheckedGender = () => {
+const CheckedGender = ({ register, errors }: CheckedGenderProps) => {
   return (
     <div className='w-full'>
       <Text sizes='18' weight='700' className='mt-24'>
@@ -18,7 +21,7 @@ const CheckedGender = () => {
 
       <FlexBox justifyContent='center' className='mt-16 w-full gap-x-4'>
         <input
-          // {...register('gender', { required: true })}
+          {...register('gender', { required: true })}
           type='radio'
           className='peer/male hidden'
           id='male'
@@ -32,7 +35,7 @@ const CheckedGender = () => {
           <Text sizes='16'>남성</Text>
         </label>
         <input
-          // {...register('gender', { required: true })}
+          {...register('gender', { required: true })}
           type='radio'
           id='female'
           name='gender'
@@ -46,6 +49,11 @@ const CheckedGender = () => {
           <Text sizes='16'>여성</Text>
         </label>
       </FlexBox>
+      {errors.gender && (
+        <FormMessage className='mt-[0.5rem] text-12 font-400 text-warning'>
+          {errors.gender.message}
+        </FormMessage>
+      )}
     </div>
   );
 };

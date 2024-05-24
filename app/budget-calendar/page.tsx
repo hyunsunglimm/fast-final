@@ -1,128 +1,63 @@
 'use client';
-import React, { ChangeEvent, useState } from 'react';
-import Input from '@/components/ui/Input';
-import Checkbox from '@/components/ui/CheckBox';
-import Switch from '@/components/ui/Switch';
-import { useForm } from 'react-hook-form';
-import FlexBox from '@/components/ui/FlexBox';
+
+import React, { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { DefaultHeader } from '@/components/header';
+import Tab from '@/components/ui/Tab';
+import LookAloneContainer from './_components/look-alone/LookAloneContainer';
+import LookTogetherContainer from './_components/look-together/LookTogetherContainer';
 
 const BudgetCalendarPage = () => {
-  const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [isChecked3, setIsChecked3] = useState(false);
-  const [input, setInput] = useState('');
-  const [isView, setIsView] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
-  const [deleteText, setDeleteText] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const viewMode = searchParams.get('viewMode') || '혼자봐요';
+  // const displayMode =
+  //   searchParams.get('displayMode') || (viewMode === '혼자봐요' ? '캘린더 보기' : '');
 
-  const {
-    watch,
-    getValues,
-    handleSubmit,
-    register,
-    setValue,
-    formState: { errors }
-  } = useForm({ defaultValues: { memberId: '', name: '' }, mode: 'onChange' });
+  // viewMode와 displayMode가 설정되지 않았을 경우 (기본값 설정: 혼자봐요, 캘린더 보기)
+  useEffect(() => {
+    if (
+      !searchParams.get('viewMode') ||
+      (viewMode === '혼자봐요' && !searchParams.get('displayMode'))
+    ) {
+      const newParams = new URLSearchParams(searchParams.toString());
+      if (!searchParams.get('viewMode')) {
+        newParams.set('viewMode', '혼자봐요');
+      }
+      if (viewMode === '혼자봐요' && !searchParams.get('displayMode')) {
+        newParams.set('displayMode', '캘린더 보기');
+      }
+      router.replace(`/budget-calendar?${newParams.toString()}`);
+    }
+  }, [searchParams, router, viewMode]);
 
-  // console.log();
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    setInput(newValue);
+  // 함께봐요에서 displayMode 삭제
+  const handleViewModeChange = (newViewMode: string) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('viewMode', newViewMode);
 
-    // Validate input length
-    const isValidLength = newValue.length >= 4 && newValue.length <= 8;
+    if (newViewMode === '혼자봐요') {
+      if (!newParams.get('displayMode')) {
+        newParams.set('displayMode', '캘린더 보기');
+      }
+    } else {
+      newParams.delete('displayMode');
+    }
 
-    setErrorMessage(!isValidLength);
+    router.replace(`/budget-calendar?${newParams.toString()}`);
   };
-  const handleCheckboxChange1 = (checked: boolean) => {
-    setIsChecked1(checked);
-  };
 
-  const handleCheckboxChange2 = (checked: boolean) => {
-    setIsChecked2(checked);
-  };
-
-  const handleToggle3 = () => {
-    setIsChecked3(!isChecked3);
-  };
-
-  const onSubmit = (data: any) => {
-    // console.log(data);
-  };
-  // console.log('errors.memberId', errors.memberId);
   return (
-    <div>
-      <p>가계부</p>
-      <form className='px-20' onSubmit={handleSubmit(onSubmit)}>
-        <div className='space-y-20'>
-          <div>
-            <Input
-              {...register('memberId', {
-                required: '아이디는 필수 입력값입니다.',
-                maxLength: {
-                  value: 8,
-                  message: '아이디는 4~8자리 글자 사이로 입력해주세요'
-                },
-                minLength: {
-                  value: 4,
-                  message: '아이디는 4~8자리 글자 사이로 입력해주세요'
-                }
-              })}
-              id='memberId'
-              placeholder='아이디를 입력해주세요'
-              validation={errors.memberId ? 'error' : 'success'}
-            />
-            {errors.memberId && <p>{errors.memberId?.message}</p>}
-          </div>
-          <Input
-            {...register('name', {
-              required: '이름은 필수 입력값입니다.',
-              maxLength: {
-                value: 8,
-                message: '이름는 4~8자리 글자 사이로 입력해주세요'
-              },
-              minLength: {
-                value: 4,
-                message: '이름는 4~8자리 글자 사이로 입력해주세요'
-              }
-            })}
-            id='name'
-            placeholder='아이디를 입력해주세요'
-            validation={errors.name ? 'error' : 'success'}
-            trailingText='원'
-          />
-          <Input
-            onChange={handleInput}
-            type={isView ? 'text' : 'password'}
-            id='password'
-            placeholder='패스를 입력해주세요'
-            validation={errorMessage ? 'error' : 'success'}
-            value={input}
-            trailingText='원'
-          />
-        </div>
-        {/* <button type='button' onClick={() => setIsView((prev) => !prev)}>
-          {isView ? <VisibleIcon /> : <InvisibleIcon />}
-        </button> */}
-        <button className='h-10 w-10 bg-white' type='submit'>
-          dd
-        </button>
-      </form>
-      {/* <Input placeholder='Enter text...' /> */}
-      <Checkbox id='1' checked={isChecked1} onChange={handleCheckboxChange1} onImage='greenImage'>
-        <p>체크박스 레이블</p>
-      </Checkbox>
-      <Checkbox
-        id='2'
-        checked={isChecked2}
-        onChange={handleCheckboxChange2}
-        size='md'
-        childrenPosition='left'
-        offImage='none'
-      >
-        체크박스 레이블
-      </Checkbox>
-      <Switch id='switch' checked={isChecked3} onChange={handleToggle3} />
+    <div className='min-h-full bg-white pb-[13.2rem]'>
+      <DefaultHeader title='가계부' />
+      <Tab
+        array={['혼자봐요', '함께봐요']}
+        type='underline'
+        tabKey='viewMode'
+        onTabChange={handleViewModeChange}
+      />
+      {viewMode === '혼자봐요' && <LookAloneContainer />}
+      {viewMode === '함께봐요' && <LookTogetherContainer viewMode={viewMode} />}
     </div>
   );
 };

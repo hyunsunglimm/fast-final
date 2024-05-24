@@ -1,15 +1,16 @@
 import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
-import { UseFormSetValue, FieldValues } from 'react-hook-form';
+import { UseFormSetValue } from 'react-hook-form';
+import { SignupInputsValues } from './signupSchema';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 
 type DaumAddressProps = {
   setVisiblePostDaum: React.Dispatch<React.SetStateAction<boolean>>;
-  // setValue: UseFormSetValue<FieldValues>;
+  setValue: UseFormSetValue<SignupInputsValues>;
 };
 
-const DaumAddress = ({ setVisiblePostDaum }: DaumAddressProps) => {
+const DaumAddress = ({ setVisiblePostDaum, setValue }: DaumAddressProps) => {
   const handleClosePostDaum = () => {
     setVisiblePostDaum(false);
   };
@@ -27,7 +28,7 @@ const DaumAddress = ({ setVisiblePostDaum }: DaumAddressProps) => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-    // setValue('address.roadName', fullAddress);
+    setValue('address.roadName', fullAddress);
     setVisiblePostDaum(false);
   };
   return (
