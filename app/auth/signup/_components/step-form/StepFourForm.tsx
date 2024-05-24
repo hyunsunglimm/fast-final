@@ -4,7 +4,8 @@ import Text from '@/components/ui/Text';
 import Icon from '@/components/Icon';
 import { useFormContext } from 'react-hook-form';
 import Checkbox from '@/components/ui/CheckBox';
-import { useRouter } from 'next/navigation';
+import Button from '@/components/ui/Button';
+
 const policyList = [
   {
     id: 'service',
@@ -24,7 +25,6 @@ type CheckboxType = {
   selectOptions: boolean[];
 };
 export const StepFourForm = () => {
-  const router = useRouter();
   const [isAllChecked, setIsAllChecked] = useState(false);
   const { register, watch, setValue } = useFormContext();
   const selectedOptionsArray = policyList.map((_, index) => watch(`selectOptions.${index}`));
@@ -47,53 +47,55 @@ export const StepFourForm = () => {
   }, [isSelectedOption]);
 
   return (
-    <FlexBox flexDirection='col' className='mt-32 w-full'>
-      <Checkbox
-        checked={isAllChecked}
-        onChange={handleSelectAll}
-        sizes='16'
-        className='w-full justify-start gap-8 rounded-xs border border-gray-300 p-16 has-[:checked]:border-primary/10 has-[:checked]:bg-primary/20'
-      >
-        <Text sizes='16' weight='500' className='mt-[0.2rem]'>
-          필수 항목 모두 동의
-        </Text>
-      </Checkbox>
+    <>
+      <FlexBox flexDirection='col' className='mt-32 w-full'>
+        <Checkbox
+          checked={isAllChecked}
+          onChange={handleSelectAll}
+          sizes='16'
+          className='w-full justify-start gap-8 rounded-xs border border-gray-300 p-16 has-[:checked]:border-primary/10 has-[:checked]:bg-primary/20'
+        >
+          <Text sizes='16' weight='500' className='mt-[0.2rem]'>
+            필수 항목 모두 동의
+          </Text>
+        </Checkbox>
 
-      <FlexBox flexDirection='col' className='mb-24 mt-10 w-full space-y-6 px-24'>
-        {policyList.map((item) => {
-          return (
-            <Checkbox
-              key={item.id}
-              checked={isAllChecked}
-              onChange={handleSelectAll}
-              sizes='20'
-              className='w-full justify-start gap-8 '
-              onImage='/icons/system-icon/checkbox/checkbox-on.svg'
-              offImage='/icons/system-icon/checkbox/checkbox-off.svg'
-            >
-              <Text sizes='12' weight='500' className='text-gray-700'>
-                {item.title}
-              </Text>
-              <Icon
-                src='/icons/system-icon/arrow/arrow-right.svg'
-                alt={`${item.title} 보러가기 화살표`}
-                size='12'
-                placeholder='empty'
-              />
-            </Checkbox>
-          );
-        })}
+        <FlexBox flexDirection='col' className='mb-24 mt-10 w-full space-y-6 px-24'>
+          {policyList.map((item) => {
+            return (
+              <Checkbox
+                key={item.id}
+                checked={isAllChecked}
+                onChange={handleSelectAll}
+                sizes='20'
+                className='w-full justify-start gap-8 '
+                onImage='/icons/system-icon/checkbox/checkbox-on.svg'
+                offImage='/icons/system-icon/checkbox/checkbox-off.svg'
+              >
+                <Text sizes='12' weight='500' className='text-gray-700'>
+                  {item.title}
+                </Text>
+                <Icon
+                  src='/icons/system-icon/arrow/arrow-right.svg'
+                  alt={`${item.title} 보러가기 화살표`}
+                  size='12'
+                  placeholder='empty'
+                />
+              </Checkbox>
+            );
+          })}
+        </FlexBox>
+        <Checkbox
+          checked={isAllChecked}
+          onChange={handleSelectAll}
+          sizes='16'
+          className='w-full justify-start gap-8 rounded-xs border border-gray-300 p-16 has-[:checked]:border-primary/10 has-[:checked]:bg-primary/20'
+        >
+          <Text sizes='16' weight='500' className='mt-[0.2rem]'>
+            [선택] 프로모션 알림 수신 동의
+          </Text>
+        </Checkbox>
       </FlexBox>
-      <Checkbox
-        checked={isAllChecked}
-        onChange={handleSelectAll}
-        sizes='16'
-        className='w-full justify-start gap-8 rounded-xs border border-gray-300 p-16 has-[:checked]:border-primary/10 has-[:checked]:bg-primary/20'
-      >
-        <Text sizes='16' weight='500' className='mt-[0.2rem]'>
-          [선택] 프로모션 알림 수신 동의
-        </Text>
-      </Checkbox>
-    </FlexBox>
+    </>
   );
 };

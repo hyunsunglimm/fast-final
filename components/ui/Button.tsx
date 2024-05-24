@@ -2,7 +2,7 @@ import { cn } from '@/utils/twMerge';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-export const buttonVariants = cva('flex items-center justify-center', {
+export const buttonVariants = cva('flex items-center justify-center active:opacity-90', {
   variants: {
     size: {
       xs: 'h-[3.2rem] rounded-xs px-16 text-12',

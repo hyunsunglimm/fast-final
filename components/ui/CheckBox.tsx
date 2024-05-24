@@ -46,9 +46,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <label className={containerClass} htmlFor={id}>
         <input {...props} type='checkbox' ref={ref} className='hidden' id={id} />
         {childrenPosition === 'left' && <>{children}</>}
-        {imageSrc && (
-          <Icon src={imageSrc} alt='Checkbox' size={sizes || '16'} placeholder='empty' />
-        )}
+        <Icon src={imageSrc} alt='Checkbox' size={sizes || '16'} placeholder='empty' />
         {childrenPosition === 'right' && <>{children}</>}
       </label>
     );
