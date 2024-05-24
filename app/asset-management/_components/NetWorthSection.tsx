@@ -37,7 +37,6 @@ const NetWorthSection = () => {
         right: 0
       });
     }
-    console.log('totalWidth', totalWidth);
   }, [documentSize]);
 
   const handleItemClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -55,7 +54,7 @@ const NetWorthSection = () => {
   return (
     <>
       <div className='mb-24 ml-20 mt-20 flex flex-col'>
-        <Text sizes='16' weight='600'>
+        <Text sizes='16' weight='600' className='text-gray-600'>
           순자산
         </Text>
         <Text sizes='24' weight='700'>

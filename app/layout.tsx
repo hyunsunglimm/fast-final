@@ -19,7 +19,9 @@ const RootLayout = ({
   return (
     <html lang='ko'>
       {/* <body className='mx-auto overflow-hidden text-black xs:w-[520px]'> */}
-      <body className={`${suit.className} mx-auto bg-gray-200 text-black xs:w-[520px]`}>
+      <body
+        className={`${suit.className} mx-auto bg-gray-200 tracking-tight text-black xs:w-[520px]`}
+      >
         <AuthProvider>
           <QueryProviders>
             {/* XXX 
