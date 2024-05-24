@@ -29,10 +29,21 @@ export const requestFetch = async <T>(
     throw new Error(error.message);
     //
   } catch (error) {
-    if (error instanceof Error) {
-      throw error;
-    } else {
-      throw new Error('An unknown error occurred');
-    }
+    throw { message: getErrorMessage(error) };
   }
+};
+
+const getErrorMessage = (error: unknown): string => {
+  let message: string = '';
+
+  if (error instanceof Error) {
+    message = error.message;
+  } else if (error && typeof error === 'object' && 'message' in error) {
+    message = String(error.message);
+  } else if (typeof error === 'string') {
+    message = error;
+  } else {
+    message = 'Something went wrong';
+  }
+  return message;
 };

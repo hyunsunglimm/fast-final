@@ -3,6 +3,7 @@ import * as z from 'zod';
 export const signupSchema = z
   .object({
     email: z.string().email({ message: '이메일을 입력해주세요' }),
+    checkEmail: z.boolean(),
     password: z
       .string()
       .min(8, { message: '비밀번호는 8자 이상이어야 합니다.' })
@@ -30,6 +31,7 @@ export type SignupInputsValues = z.infer<typeof signupSchema>;
 
 export const defaultValues: SignupInputsValues = {
   email: '',
+  checkEmail: true,
   password: '',
   confirmPassword: '',
   name: '',

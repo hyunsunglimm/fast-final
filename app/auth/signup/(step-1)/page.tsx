@@ -1,25 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import { useFormContext, useWatch } from 'react-hook-form';
-import { SignupInputsValues } from '../_components/signupSchema';
-import { useRouter } from 'next/navigation';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { useState, useEffect, useCallback } from 'react';
 import Input from '@/components/ui/Input';
-import { CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import SignupHeader from '../_components/SignupHeader';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import { useState, useEffect, useCallback } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import Spinner from '@/components/Spinner';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { SignupInputsValues } from '../_components/signupSchema';
+import { useRouter } from 'next/navigation';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { CardContent } from '@/components/ui/card';
+import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
 
 const StepOnePage = () => {
   const router = useRouter();
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [emailMessage, setEmailMessage] = useState('');
-  const [isEmailCheck, setIsEmailCheck] = useState(false);
   const {
+    setValue,
     getValues,
     control,
     trigger,
@@ -27,6 +27,8 @@ const StepOnePage = () => {
     setError,
     clearErrors
   } = useFormContext<SignupInputsValues>();
+
+  // console.log('getvalues', getValues('checkEmail'));
   type Tdata = {
     userId: string;
     message: string;
@@ -36,7 +38,7 @@ const StepOnePage = () => {
     onSuccess: (data) => {
       if (data) {
         setEmailMessage(data.message);
-        setIsEmailCheck(true);
+        setValue('checkEmail', true);
       }
     },
     onError: (err) => {
@@ -55,18 +57,29 @@ const StepOnePage = () => {
 
   const validateEmail = useCallback(async () => {
     const isValidEmail = await trigger('email');
+    // console.log('isValidEmail', isValidEmail);
+    // console.log('getvalues', getValues('checkEmail'));
     if (!isValidEmail) {
       setError('email', {
         type: 'manual',
         message: errors.email?.message || ''
       });
     } else {
+      // isValidEmail에 true 면 checkEmail은 false가 되어야 한다.
+      // 페이지가 갔다 오면 isValidEmail이 true라 checkEmail이 다시 false가 된다.
       clearErrors('email');
+      setValue('checkEmail', false);
+      // setValue('checkEmail', false);
+      // if (getValues('checkEmail')) {
+      //   console.log('else in getvalue true');
+      //   return;
+      // }
+      // console.log('else out getvalue true');
     }
-    setIsButtonDisabled(!isValidEmail);
+    // setIsButtonDisabled(!isValidEmail);
     setEmailMessage('');
-  }, [trigger, setError, clearErrors, errors.email]);
-
+  }, [trigger, setError, clearErrors, errors.email, setValue]);
+  // console.log('emailMessage', emailMessage);
   useEffect(() => {
     validateEmail();
   }, [email]);
@@ -77,7 +90,7 @@ const StepOnePage = () => {
     const isConfirmPasswordValid = await trigger('confirmPassword', { shouldFocus: true });
 
     if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
-      if (!isEmailCheck) {
+      if (!getValues('checkEmail')) {
         setError('email', {
           type: 'manual',
           message: '이메일 중복 확인을 해주세요.'
@@ -103,6 +116,7 @@ const StepOnePage = () => {
         </Text>
       </FlexBox>
       <CardContent flexDirection='col' className='mt-32 w-full space-y-12'>
+        {/* 이메일 */}
         <FormField
           control={control}
           name='email'
@@ -119,11 +133,12 @@ const StepOnePage = () => {
                       validation={errors.email ? 'error' : 'success'}
                     />
                     <Button
+                      name='checkEmail'
                       type='button'
                       size='xs'
                       className='w-[9.5rem] px-12'
                       onClick={() => mutate(getValues('email'))}
-                      disabled={isButtonDisabled || isPending}
+                      disabled={getValues('checkEmail') || isPending}
                     >
                       {isPending ? <Spinner /> : '중복 확인'}
                     </Button>
@@ -142,7 +157,7 @@ const StepOnePage = () => {
             );
           }}
         />
-
+        {/* 패스워드 */}
         <FormField
           control={control}
           name='password'
@@ -166,7 +181,7 @@ const StepOnePage = () => {
             );
           }}
         />
-
+        {/* 패스워드 검증 */}
         <FormField
           control={control}
           name='confirmPassword'
