@@ -10,7 +10,7 @@ const TopContents = () => {
       </Text>
       <Card className='mb-[1.9rem] flex h-[17rem] items-center justify-center bg-[#E1E6EC]'>
         <Text sizes='18' className='text-gray-400'>
-          맞춤 상품 추천
+          오늘 소비 날씨
         </Text>
       </Card>
     </div>
