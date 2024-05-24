@@ -1,5 +1,6 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
-const BASE_URL = process.env.NEXT_BASE_URL || 'http://localhost:3000';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const createOptions = (token?: string) => {
   const headers: HeadersInit = {
@@ -15,14 +16,14 @@ const createOptions = (token?: string) => {
 };
 
 export const requestFetch = async <T>(
-  url: string,
+  endPoint: string,
   config?: RequestInit,
   token?: string
 ): Promise<T> => {
   const options = createOptions(token);
 
   try {
-    const res = await fetch(BASE_URL + url, { ...config, ...options });
+    const res = await fetch(BASE_URL + endPoint, { ...config, ...options });
 
     if (res.ok) {
       return (await res.json()) as T;
