@@ -1,7 +1,6 @@
 import React from 'react';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => (
-  <main className='h-screen bg-white px-20'>{children}</main>
+  <section className='relative h-full bg-white'>{children}</section>
 );
-
 export default AuthLayout;

@@ -6,7 +6,7 @@ type ListCardProps = {
 };
 
 export const ListCard = ({ bgColor, children }: ListCardProps) => {
-  const bgColorClass = bgColor === 'bucket' ? 'bg-bucket' : 'bg-challenge';
+  const bgColorClass = bgColor === 'bucket' ? 'bg-active' : 'bg-challenge';
   return (
     <Card className={`aspect-square ${bgColorClass} w-full shrink-0 text-white`}>{children}</Card>
   );

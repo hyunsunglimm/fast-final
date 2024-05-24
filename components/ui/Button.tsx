@@ -27,6 +27,7 @@ export const buttonVariants = cva('flex items-center justify-center', {
   },
   compoundVariants: [
     { styled: 'fill', disabled: true, className: 'bg-gray-200 text-gray-400' },
+    { styled: 'fill_black', disabled: true, className: 'bg-gray-200 text-gray-400' },
     {
       styled: 'outline',
       disabled: true,

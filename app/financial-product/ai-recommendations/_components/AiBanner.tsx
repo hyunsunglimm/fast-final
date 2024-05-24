@@ -1,4 +1,4 @@
-import NextIcon from '@/components/icons/NextIcon';
+import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Image from 'next/image';
@@ -16,13 +16,13 @@ const AiBanner = () => {
         </Text>
         <div className='flex items-center text-white'>
           <Text sizes='12'>다시 받으러가기</Text>
-          <NextIcon />
+          <Icon src='/icons/system-icon/arrow/arrow-right-white.svg' alt='next icon' size='16' />
         </div>
         <Image
-          src='/images/ai-banner-porko.svg'
+          src='/images/financial-product/ai-banner-porko.png'
           alt='ai 배너 이미지'
-          width={1000}
-          height={0}
+          width={300}
+          height={133}
           className='absolute bottom-0 right-[3.5rem] w-[9.5rem]'
         />
       </FlexBox>

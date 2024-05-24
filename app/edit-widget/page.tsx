@@ -31,14 +31,14 @@ const EditWidgetPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const { activeId, sensors, handleDragStart, handleDragEnd, isDragging } = useDrag(setShowWidget);
+  const { activeId, sensors, handleDragStart, handleDragEnd } = useDrag(setShowWidget);
   const { handleDeleteWidgetItem, handleInsertWidgetItem } = useInsertAndDelete(
     setShowWidget,
     setHideWidget,
     showWidget,
     hideWidget
   );
-  // console.log(isDragging);
+
   const findItemTitle = (id: UniqueIdentifier | undefined) => {
     const item = showWidget.find((item) => item.id === id);
     if (!item) return '';
@@ -51,7 +51,7 @@ const EditWidgetPage = () => {
 
   return (
     <>
-      <IsBackHeader title='한 눈에 보기 편집' />
+      <IsBackHeader href='/' title='한 눈에 보기 편집' />
       <TopContents />
       <div className='grid grid-cols-2 gap-20 px-20'>
         {/* ShowWidget 렌더링 */}
@@ -69,7 +69,6 @@ const EditWidgetPage = () => {
                   id={item.id}
                   title={item.title}
                   onClick={handleDeleteWidgetItem}
-                  isDragging={isDragging}
                 />
               );
             })}

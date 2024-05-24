@@ -1,9 +1,5 @@
+import Icon from '@/components/Icon';
 import MotionCarousel from '@/components/MotionCarousel';
-import CircularGraphIcon from '@/components/icons/CircularGraphIcon';
-import CoffeeIcon from '@/components/icons/CoffeeIcon';
-import CoinIcon from '@/components/icons/CoinIcon';
-import PerformanceIcon from '@/components/icons/PerformanceIcon';
-import PublicTransportIcon from '@/components/icons/PublicTransportIcon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
@@ -11,7 +7,7 @@ import { Card } from '@/components/ui/card';
 const benefits = [
   {
     title: '대중교통',
-    icon: <PublicTransportIcon />,
+    iconPath: '/icons/system-icon/system/card-bus.svg',
     content: (
       <Text>
         대중교통{' '}
@@ -24,7 +20,7 @@ const benefits = [
   },
   {
     title: '카카오페이',
-    icon: <CoinIcon />,
+    iconPath: '/icons/system-icon/system/card-pay.svg',
     content: (
       <Text>
         카카오페이{' '}
@@ -37,7 +33,7 @@ const benefits = [
   },
   {
     title: '스타벅스',
-    icon: <CoffeeIcon />,
+    iconPath: '/icons/system-icon/system/card-cafe.svg',
     content: (
       <Text>
         스타벅스{' '}
@@ -50,7 +46,7 @@ const benefits = [
   },
   {
     title: '전월실적',
-    icon: <PerformanceIcon />,
+    iconPath: '/icons/system-icon/system/card-performance.svg',
     content: (
       <Text>
         전월실적{' '}
@@ -70,7 +66,11 @@ const SpendingHabitsCards = () => {
         소비습관에 맞는 카드
       </Text>
       <div className='mx-auto mb-16 flex w-[25.4rem] items-center rounded-[10rem] border border-primary bg-[#FAF7F5] px-12 py-[0.8rem]'>
-        <CircularGraphIcon />
+        <Icon
+          src='/icons/financial-product/circular-graph.svg'
+          alt='circular graph icon'
+          size='16'
+        />
         <Text className='ml-[0.4rem]'>
           최근 소비내역중{' '}
           <Text weight='700' className='text-primary'>
@@ -92,11 +92,11 @@ const SpendingHabitsCards = () => {
           카카오페이 CHECK
         </Text>
         <ul className='flex w-full flex-col gap-[0.6rem]'>
-          {benefits.map(({ title, icon, content }) => {
+          {benefits.map(({ title, iconPath, content }) => {
             return (
               <li key={title}>
                 <Card className='flex w-full items-center gap-[1.2rem] border border-gray-100 px-24 py-16'>
-                  {icon}
+                  <Icon src={iconPath} alt={title} size='20' />
                   {content}
                 </Card>
               </li>

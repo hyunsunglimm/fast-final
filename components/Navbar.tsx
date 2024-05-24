@@ -6,10 +6,10 @@ import { publicRoutes } from '@/routes';
 import Text from './ui/Text';
 
 import {
-  HomeIcon,
   AssetManagementIcon,
   BudgetCalendarIcon,
   FinancialProductIcon,
+  HomeIcon,
   NavAllIcon
 } from './BottomNavIcon';
 

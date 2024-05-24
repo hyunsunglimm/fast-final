@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect } from 'react';
+import { MouseEvent } from 'react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import { UniqueIdentifier } from '@dnd-kit/core';
@@ -11,16 +11,15 @@ type IsEditWidgetItemProps = {
   title: string;
   id: UniqueIdentifier;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  isDragging?: boolean;
+  dragOverlay?: boolean;
 };
-const IsEditWidgetItem = ({ title, id, onClick, isDragging }: IsEditWidgetItemProps) => {
+const IsEditWidgetItem = ({ title, id, onClick, dragOverlay }: IsEditWidgetItemProps) => {
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
-    active,
     isDragging: useDragging
   } = useSortable({
     id: id,
@@ -28,21 +27,19 @@ const IsEditWidgetItem = ({ title, id, onClick, isDragging }: IsEditWidgetItemPr
       type: 'item'
     }
   });
-  // useEffect(() => {
-  //   console.log(active);
-  // }, [isDragging]);
+
+  const classa = dragOverlay ? 'animate-pop ' : useDragging && 'opacity-50 bg-gray-200';
   return (
     <Card
       className={cn(
-        'no-user-select relative aspect-square cursor-default border border-gray-100 p-[1.2rem] ',
-        useDragging && 'opacity-30'
+        'no-user-select relative aspect-square cursor-default border border-gray-100 p-[1.2rem]',
+        classa
       )}
       ref={setNodeRef}
       {...attributes}
       style={{
         transition,
-        transform: CSS.Translate.toString(transform),
-        scale: isDragging && active?.id === id ? 1.16 : 1
+        transform: CSS.Translate.toString(transform)
       }}
       id={String(id)}
     >
@@ -58,6 +55,7 @@ const IsEditWidgetItem = ({ title, id, onClick, isDragging }: IsEditWidgetItemPr
             alt='위젯 삭제 아이콘'
             size='28'
             className='pointer-events-none'
+            placeholder='empty'
           />
         </button>
         <button {...listeners} className='cursor-grab touch-none active:cursor-grabbing'>
@@ -65,7 +63,8 @@ const IsEditWidgetItem = ({ title, id, onClick, isDragging }: IsEditWidgetItemPr
             src='/icons/asset-page/three-bar.svg'
             size='16'
             alt='드래그 아이콘'
-            className='pointer-events-none'
+            className='pointer-events-none rounded-none'
+            placeholder='empty'
           />
         </button>
       </CardHeader>

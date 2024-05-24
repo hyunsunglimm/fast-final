@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import InputLayout from './InputLayout';
-import VisibleIcon from '@/components/icons/signup/VisibleIcon';
-import InvisibleIcon from '@/components/icons/signup/InvisibleIcon';
 import { useFormContext } from 'react-hook-form';
 import { RegisterInputValue } from './SignupForm';
+import Icon from '@/components/Icon';
 
 const PwInput = () => {
   const [isView, setIsView] = useState(false);
@@ -13,7 +12,11 @@ const PwInput = () => {
       className='absolute right-[2.1rem] top-[1.8rem]'
       onClick={() => setIsView((prev) => !prev)}
     >
-      {isView ? <VisibleIcon /> : <InvisibleIcon />}
+      {isView ? (
+        <Icon src='/icons/signup/eye.svg' alt='eye icon' size='24' />
+      ) : (
+        <Icon src='/icons/signup/eye-slash.svg' alt='eye icon' size='24' />
+      )}
     </div>
   );
 

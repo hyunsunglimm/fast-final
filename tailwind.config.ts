@@ -106,6 +106,20 @@ const config: Config = {
         '700': '700',
         '800': '800',
         '900': '900'
+      },
+      animation: {
+        pop: 'pop 200ms cubic-bezier(0.18, 0.67, 0.6, 1.22) 0s 1 normal forwards'
+      },
+      keyframes: {
+        pop: {
+          '0%': {
+            scale: '100%'
+          },
+          '100%': {
+            scale: '105%',
+            'box-shadow': '0px 0px 16px 9px rgba(0, 0, 0, 0.06)'
+          }
+        }
       }
     }
   },
