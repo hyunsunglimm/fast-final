@@ -11,7 +11,7 @@ const isBudgetData = (data: BudgetDataType): data is Exclude<BudgetDataType, { m
 export const WidgetBudget = async () => {
   const currentMonth = (new Date().getMonth() + 1).toLocaleString('ko-KR');
 
-  const res = await fetch(`http://localhost:3000/api/widget/budget?month=${currentMonth}`);
+  const res = await fetch(`${process.env.NEXT_BASE_URL}/api/widget/budget?month=${currentMonth}`);
   const data = await res.json();
 
   return (
