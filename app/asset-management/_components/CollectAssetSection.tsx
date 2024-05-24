@@ -23,9 +23,15 @@ const CollectAssetSection = () => {
                     {item.title}
                   </Text>
                   {item.id === 'challenge' && (
-                    <div className='my-auto flex h-[2rem] w-[2rem] items-center justify-center rounded-full bg-warning text-center text-white'>
-                      <Text sizes='14'> {item.listCount}</Text>
-                    </div>
+                    <FlexBox
+                      alignItems='center'
+                      justifyContent='center'
+                      className='my-auto mb-[0.3rem] h-[2rem] w-[2rem] rounded-full bg-warning text-center text-white'
+                    >
+                      <Text sizes='14' className='leading-[0]'>
+                        {item.listCount}
+                      </Text>
+                    </FlexBox>
                   )}
                 </FlexBox>
                 <FlexBox flexDirection='col' className='gap-y-2'>
