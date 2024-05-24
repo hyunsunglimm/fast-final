@@ -28,11 +28,15 @@ const StepOnePage = () => {
     clearErrors
   } = useFormContext<SignupInputsValues>();
 
-  // console.log('getvalues', getValues('checkEmail'));
   type Tdata = {
     userId: string;
     message: string;
   };
+
+  // useEffect(() => {
+  //   console.log('dddd', checkEmailDuplicate(getValues('email')));
+  // }, []);
+
   const { mutate, isPending } = useMutation<Tdata, Error, string>({
     mutationFn: (id) => checkEmailDuplicate(id),
     onSuccess: (data) => {
