@@ -25,11 +25,6 @@ export const suit = localFont({
       path: '../public/font/SUIT-ExtraBold.woff2',
       weight: '800',
       style: 'normal'
-    },
-    {
-      path: '../public/font/SUIT-Heavy.woff2',
-      weight: '900',
-      style: 'normal'
     }
   ]
 });
