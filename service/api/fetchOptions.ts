@@ -1,4 +1,5 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
+const BASE_URL = process.env.NEXT_BASE_URL || 'http://localhost:3000';
 
 const createOptions = (token?: string) => {
   const headers: HeadersInit = {
@@ -21,7 +22,8 @@ export const requestFetch = async <T>(
   const options = createOptions(token);
 
   try {
-    const res = await fetch(url, { ...config, ...options });
+    const res = await fetch(BASE_URL + url, { ...config, ...options });
+
     if (res.ok) {
       return (await res.json()) as T;
     }
