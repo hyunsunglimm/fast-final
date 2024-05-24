@@ -3,46 +3,14 @@ import './globals.css';
 import QueryProviders from '@/context/queryProvider';
 import AuthProvider from '@/context/authProvider';
 import Navbar from '@/components/Navbar';
-import localFont from 'next/font/local';
+import { suit } from './font';
+
 export const metadata: Metadata = {
   // FIXME -> 추후 메타데이터 수정
   title: 'PORKO',
   description: 'MZ특화 금융앱 PORKO !!!'
 };
-const suit = localFont({
-  src: [
-    {
-      path: '../public/font/SUIT-Regular.woff2',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: '../public/font/SUIT-Medium.woff2',
-      weight: '500',
-      style: 'normal'
-    },
-    {
-      path: '../public/font/SUIT-SemiBold.woff2',
-      weight: '600',
-      style: 'normal'
-    },
-    {
-      path: '../public/font/SUIT-Bold.woff2',
-      weight: '700',
-      style: 'normal'
-    },
-    {
-      path: '../public/font/SUIT-ExtraBold.woff2',
-      weight: '800',
-      style: 'normal'
-    },
-    {
-      path: '../public/font/SUIT-Heavy.woff2',
-      weight: '900',
-      style: 'normal'
-    }
-  ]
-});
+
 const RootLayout = ({
   children
 }: Readonly<{
