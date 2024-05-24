@@ -13,7 +13,7 @@ const MyCreditSection = () => {
           justifyContent='center'
           className='gap-x-16 px-24 py-[1.1rem]'
         >
-          <FlexBox flexDirection='col' className='my-auto h-full'>
+          <FlexBox flexDirection='col' className='my-auto h-full shrink-0'>
             <Text sizes='18' weight='700'>
               880
               <Text sizes='14' weight='500' className='text-gray-500'>
@@ -27,7 +27,7 @@ const MyCreditSection = () => {
               50점 (03.08 대비)
             </Text>
           </FlexBox>
-          <FlexBox className='h-[9.4rem] w-[18.9rem] bg-orange-500'></FlexBox>
+          <FlexBox className='h-[9.2rem] w-[18.5rem] bg-orange-500'></FlexBox>
         </CardContent>
       </Card>
     </div>
