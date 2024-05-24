@@ -2,7 +2,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import React from 'react';
 import Text from '@/components/ui/Text';
 import Link from 'next/link';
-import { buttonVariants } from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import { getWidgetItem } from '@/actions/serverAction';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import ConsumeWeatherCard from './ConsumeWeatherCard';
@@ -40,17 +40,16 @@ const HomeWidgetSection = async () => {
         <Text sizes='18' weight='600' variant='h2'>
           한 눈에 보기
         </Text>
-        <Link
-          aria-label='위젯 편집으로 이동'
-          href='/edit-widget'
-          className={buttonVariants({
-            size: 'xs',
-            styled: 'outline',
-            className: 'focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
-          })}
+        <Button
+          asChild
+          styled='outline'
+          size='xs'
+          className='focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
         >
-          편집
-        </Link>
+          <Link aria-label='위젯 편집으로 이동' href='/edit-widget'>
+            편집
+          </Link>
+        </Button>
       </FlexBox>
 
       {/* 소비날씨 */}

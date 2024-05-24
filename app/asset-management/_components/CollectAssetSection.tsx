@@ -28,7 +28,7 @@ const CollectAssetSection = () => {
                       justifyContent='center'
                       className='my-auto mb-[0.3rem] h-[2rem] w-[2rem] rounded-full bg-warning text-center text-white'
                     >
-                      <Text sizes='14' className='leading-[0]'>
+                      <Text sizes='14' className='mt-[0.2rem]'>
                         {item.listCount}
                       </Text>
                     </FlexBox>
