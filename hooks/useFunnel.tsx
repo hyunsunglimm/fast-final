@@ -16,7 +16,7 @@ type SetStepOptions = {
 
 /**
  * @param stepQueryKey 쿼리 파라미터의 'Key'을 결정
- * @param initialStep 쿼리 파라미터의 'Default Value'를 결정
+ * @param initialStep 쿼리 파라미터의 'Default Step'를 결정
  * @returns Funnel, ShowStep, setStep
  */
 export const useFunnel = <Steps extends NoEmptyArray<string>>(
@@ -28,6 +28,7 @@ export const useFunnel = <Steps extends NoEmptyArray<string>>(
   const pathname = usePathname();
   const currentStep = params.get(stepQueryKey) ?? initialStep;
 
+  // console.log('funnel currentStep', currentStep);
   /**
    * @param targetStep:steps[]중 보여져야 할 요소,
    * @returns children || null
@@ -62,5 +63,5 @@ export const useFunnel = <Steps extends NoEmptyArray<string>>(
     return <>{TargetStepComp}</>;
   };
 
-  return { FunnelCompnent, ShowStepComponent, setStep } as const;
+  return { FunnelCompnent, ShowStepComponent, setStep, currentStep } as const;
 };

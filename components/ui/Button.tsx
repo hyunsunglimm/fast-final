@@ -1,8 +1,8 @@
 import { cn } from '@/utils/twMerge';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
-
-export const buttonVariants = cva('', {
+import { Slot } from '@radix-ui/react-slot';
+export const buttonVariants = cva('flex items-center justify-center active:opacity-90', {
   variants: {
     size: {
       xs: 'h-[3.2rem] rounded-xs px-16 text-12',
@@ -12,6 +12,7 @@ export const buttonVariants = cva('', {
     },
     styled: {
       fill: 'bg-primary text-white',
+      fill_black: 'bg-black text-white',
       outline: 'bg-white border-[1px] border-gray-200'
     },
     disabled: {
@@ -26,6 +27,7 @@ export const buttonVariants = cva('', {
   },
   compoundVariants: [
     { styled: 'fill', disabled: true, className: 'bg-gray-200 text-gray-400' },
+    { styled: 'fill_black', disabled: true, className: 'bg-gray-200 text-gray-400' },
     {
       styled: 'outline',
       disabled: true,
@@ -34,12 +36,14 @@ export const buttonVariants = cva('', {
   ]
 });
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
+type ButtonProps = { asChild?: boolean } & ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, disabled, size, styled, ...props }, ref) => {
+  ({ className, disabled, size, styled, asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
     return (
-      <button
+      <Comp
         disabled={disabled}
         ref={ref}
         className={cn(buttonVariants({ styled, size, disabled, className }))}

@@ -1,29 +1,28 @@
 'use client';
 
-import Text from '@/components/ui/Text';
-import { useState } from 'react';
-
-const menus = [{ title: '예적금' }, { title: '대출' }, { title: '카드' }, { title: '보험' }];
+import { IsBackHeader } from '@/components/header';
+import FilteringSection from './_components/FilteringSection';
+import ComparisonSection from './_components/ComparisonSection';
+import BottomButton from './_components/BottomButton';
+import { useSearchParams } from 'next/navigation';
 
 const ComparisonPage = () => {
-  const [selectedMenu, setSelectedMenu] = useState('카드');
+  const searchParams = useSearchParams();
+  const selectedCards = searchParams.getAll('card');
 
   return (
-    <section>
-      <ul className='grid grid-cols-4 border-b-2 border-gray-300'>
-        {menus.map(({ title }) => {
-          return (
-            <li
-              key={title}
-              className={`cursor-pointer py-[1.2rem] text-center ${selectedMenu === title ? 'border-b-2 border-black text-black' : 'text-gray-300'}`}
-              onClick={() => setSelectedMenu(title)}
-            >
-              <Text sizes='16'>{title}</Text>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <>
+      <div className='bg-white'>
+        <IsBackHeader title='상품비교' href='./' />
+      </div>
+      <section className='relative pb-[13.2rem]'>
+        <FilteringSection />
+        <ComparisonSection />
+      </section>
+      {selectedCards.length >= 2 && (
+        <BottomButton title='비교하기' path='/financial-product/comparison/select-category' />
+      )}
+    </>
   );
 };
 
