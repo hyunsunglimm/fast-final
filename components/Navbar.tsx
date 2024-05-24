@@ -17,7 +17,7 @@ export const NAV_DATA = [
   { title: '홈', path: '/', icon: <HomeIcon /> },
   { title: '자산', path: '/asset-management', icon: <AssetManagementIcon /> },
   { title: '가계부', path: '/budget-calendar', icon: <BudgetCalendarIcon /> },
-  { title: '상품 탐색', path: '/financial-product?tab=신용카드', icon: <FinancialProductIcon /> },
+  { title: '금융상품', path: '/financial-product?tab=신용카드', icon: <FinancialProductIcon /> },
   { title: '전체', path: '#', icon: <NavAllIcon /> }
 ];
 
