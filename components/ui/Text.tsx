@@ -19,13 +19,11 @@ const textVariants = cva('', {
       '10': 'text-10'
     },
     weight: {
-      '300': 'font-300',
       '400': 'font-400',
       '500': 'font-500',
       '600': 'font-600',
       '700': 'font-700',
-      '800': 'font-800',
-      '900': 'font-900'
+      '800': 'font-800'
     }
   },
   defaultVariants: {
