@@ -16,6 +16,7 @@ import TextButton from '@/components/ui/TextButton';
 import Link from 'next/link';
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [autoLoginCheck, setAutoLoginCheck] = useState(false);
 
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
@@ -23,6 +24,7 @@ const LoginForm = () => {
   });
 
   const {
+    getValues,
     setValue,
     handleSubmit,
     formState: { errors },
@@ -59,7 +61,10 @@ const LoginForm = () => {
                             {...field}
                             validation={errors.email ? 'error' : 'success'}
                           />
-                          <ClearInputValueIcon show={true} onClick={() => setValue('email', '')} />
+                          <ClearInputValueIcon
+                            show={Boolean(getValues('email'))}
+                            onClick={() => setValue('email', '')}
+                          />
                         </div>
                       </FlexBox>
                     </FormControl>
@@ -91,7 +96,7 @@ const LoginForm = () => {
 
                         <ClearInputValueIcon
                           rightMargin
-                          show={true}
+                          show={Boolean(getValues('password'))}
                           onClick={() => setValue('password', '')}
                         />
                         <EyeIcon show={showPassword} setState={setShowPassword} />
@@ -104,8 +109,13 @@ const LoginForm = () => {
             />
           </FlexBox>
           <FlexBox className='mt-24 gap-8 self-start' alignItems='center'>
-            <Checkbox />
-            <Text className='text-gray-700'>자동 로그인</Text>
+            <Checkbox
+              onChange={() => setAutoLoginCheck((prev) => !prev)}
+              checked={autoLoginCheck}
+              className='cursor-pointer items-center gap-8'
+            >
+              <Text className='mt-[0.1rem] text-gray-700'>자동 로그인</Text>
+            </Checkbox>
           </FlexBox>
           <Footer />
         </CardContent>
