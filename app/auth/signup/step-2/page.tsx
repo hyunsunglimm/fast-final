@@ -1,18 +1,18 @@
 'use client';
 import { useFormContext } from 'react-hook-form';
-import { SignupInputsValues } from '../_components/signupSchema';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import Input from '@/components/ui/Input';
 import { CardContent } from '@/components/ui/card';
-import FlexBox from '@/components/ui/FlexBox';
-import SignupHeader from '../_components/SignupHeader';
-import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
+import { SignupInputsValues } from '../_components/signupSchema';
+import SignupHeader from '../_components/SignupHeader';
+import ClearInputValueIcon from '../_components/ClearInputValueIcon';
 
 const StepTwoPage = () => {
   const router = useRouter();
   const {
+    getValues,
     control,
     trigger,
     formState: { errors }
@@ -28,31 +28,26 @@ const StepTwoPage = () => {
 
   return (
     <>
-      <SignupHeader onClick={() => router.push('/auth/signup')} />
-      <FlexBox className='space-y-2' flexDirection='col'>
-        <Text variant='h2' sizes='20' weight='700'>
-          회원가입을 위해
-          <br /> 정보를 입력해주세요
-        </Text>
-        <Text className='text-gray-500' sizes='18' weight='500'>
-          <span className='text-primary'>2</span> / 3
-        </Text>
-      </FlexBox>
-      <CardContent flexDirection='col' className='mt-32 w-full space-y-12'>
+      <SignupHeader title='회원가입' pushPath='/auth/signup' currentStep='2' />
+
+      <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         <FormField
           control={control}
           name='name'
           render={({ field }) => {
             return (
-              <FormItem className='w-full'>
+              <FormItem className='relative w-full'>
                 <FormControl>
-                  <Input
-                    placeholder='이름을 알려주세요'
-                    id='name'
-                    inputMode='text'
-                    {...field}
-                    validation={errors.name ? 'error' : 'success'}
-                  />
+                  <>
+                    <Input
+                      placeholder='이름을 알려주세요'
+                      id='name'
+                      inputMode='text'
+                      {...field}
+                      validation={errors.name ? 'error' : 'success'}
+                    />
+                    <ClearInputValueIcon show={Boolean(getValues('name'))} formName='name' />
+                  </>
                 </FormControl>
                 <FormMessage className='text-12 font-400 text-warning' />
               </FormItem>
@@ -65,16 +60,22 @@ const StepTwoPage = () => {
           name='phoneNumber'
           render={({ field }) => {
             return (
-              <FormItem className='w-full'>
+              <FormItem className='relative w-full'>
                 <FormControl>
-                  <Input
-                    placeholder='휴대폰 번호를 알려주세요'
-                    id='phoneNumber'
-                    inputMode='numeric'
-                    type='text'
-                    {...field}
-                    validation={errors.phoneNumber ? 'error' : 'success'}
-                  />
+                  <>
+                    <Input
+                      placeholder='휴대폰 번호를 알려주세요'
+                      id='phoneNumber'
+                      inputMode='numeric'
+                      type='text'
+                      {...field}
+                      validation={errors.phoneNumber ? 'error' : 'success'}
+                    />
+                    <ClearInputValueIcon
+                      show={Boolean(getValues('phoneNumber'))}
+                      formName='phoneNumber'
+                    />
+                  </>
                 </FormControl>
                 <FormMessage className='text-12 font-400 text-warning' />
               </FormItem>

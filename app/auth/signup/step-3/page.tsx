@@ -5,18 +5,18 @@ import { useFormContext } from 'react-hook-form';
 import { SignupInputsValues } from '../_components/signupSchema';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import SignupHeader from '../_components/SignupHeader';
 import CheckedGender from '../_components/CheckedGender';
 import DaumAddress from '../_components/DaumAddress';
 import Icon from '@/components/Icon';
 import Input from '@/components/ui/Input';
 import { CardContent } from '@/components/ui/card';
-import FlexBox from '@/components/ui/FlexBox';
-import SignupHeader from '../_components/SignupHeader';
-import Text from '@/components/ui/Text';
+import ClearInputValueIcon from '../_components/ClearInputValueIcon';
 import Button from '@/components/ui/Button';
 
 const StepThreePage = () => {
   const [visiblePostDaum, setVisiblePostDaum] = useState(false);
+
   const router = useRouter();
   const {
     watch,
@@ -25,15 +25,16 @@ const StepThreePage = () => {
     setValue,
     control,
     trigger,
+    getValues,
     formState: { errors }
   } = useFormContext<SignupInputsValues>();
 
   const onClickNext = async () => {
-    const isEmailValid = await trigger('address.roadName', { shouldFocus: true });
-    const isPasswordValid = await trigger('address.detail', { shouldFocus: true });
-    const isGenderChecked = await trigger('gender', { shouldFocus: true });
+    const isRoadNameAdress = await trigger('address.roadName', { shouldFocus: true });
+    const isDetailAdress = await trigger('address.detail', { shouldFocus: true });
+    const isGenderChecked = await trigger('gender');
 
-    if (isEmailValid && isPasswordValid && isGenderChecked) {
+    if (isRoadNameAdress && isDetailAdress && isGenderChecked) {
       router.push('/auth/signup/step-4');
     }
   };
@@ -43,23 +44,18 @@ const StepThreePage = () => {
       clearErrors('address.roadName');
     }
   }, [visiblePostDaum]);
+
   return (
     <>
       {/* 다음 주소 창 */}
       {visiblePostDaum && (
         <DaumAddress setVisiblePostDaum={setVisiblePostDaum} setValue={setValue} />
       )}
-      <SignupHeader onClick={() => router.push('/auth/signup/step-2')} />
-      <FlexBox className='space-y-2' flexDirection='col'>
-        <Text variant='h2' sizes='20' weight='700'>
-          회원가입을 위해
-          <br /> 정보를 입력해주세요
-        </Text>
-        <Text className='text-gray-500' sizes='18' weight='500'>
-          <span className='text-primary'>3</span> / 3
-        </Text>
-      </FlexBox>
-      <CardContent flexDirection='col' className='mt-32 w-full space-y-12'>
+
+      {/* 헤더 */}
+      <SignupHeader title='회원가입' pushPath='/auth/signup/step-2' currentStep='3' />
+
+      <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         {/* 주소 검색하기 */}
         <FormField
           control={control}
@@ -70,6 +66,7 @@ const StepThreePage = () => {
                 <FormControl>
                   <>
                     <Input
+                      className='pr-[6rem]'
                       placeholder='주소 검색하기'
                       id='address.roadName'
                       inputMode='text'
@@ -77,6 +74,11 @@ const StepThreePage = () => {
                       validation={
                         errors.address?.roadName && !watch('address.roadName') ? 'error' : 'success'
                       }
+                    />
+                    <ClearInputValueIcon
+                      rightMargin
+                      show={Boolean(getValues('address.roadName'))}
+                      formName='address.roadName'
                     />
                     <Icon
                       size='20'
@@ -100,15 +102,21 @@ const StepThreePage = () => {
             name='address.detail'
             render={({ field }) => {
               return (
-                <FormItem className='w-full'>
+                <FormItem className='relative w-full'>
                   <FormControl>
-                    <Input
-                      placeholder='상세주소를 입력해주세요'
-                      id='address.detail'
-                      inputMode='text'
-                      {...field}
-                      validation={errors.address?.detail ? 'error' : 'success'}
-                    />
+                    <>
+                      <Input
+                        placeholder='상세주소를 입력해주세요'
+                        id='address.detail'
+                        inputMode='text'
+                        {...field}
+                        validation={errors.address?.detail ? 'error' : 'success'}
+                      />
+                      <ClearInputValueIcon
+                        show={Boolean(getValues('address.detail'))}
+                        formName='address.detail'
+                      />
+                    </>
                   </FormControl>
                   <FormMessage className='text-12 font-400 text-warning' />
                 </FormItem>
