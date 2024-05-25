@@ -24,6 +24,7 @@ const AiBanner = () => {
           width={300}
           height={133}
           className='absolute bottom-0 right-[3.5rem] w-[9.5rem]'
+          priority
         />
       </FlexBox>
     </div>
