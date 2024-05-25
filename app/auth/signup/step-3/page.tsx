@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { SignupInputsValues } from '../_components/signupSchema';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import SignupHeader from '../_components/SignupHeader';
+import AuthHeader from '../../_components/AuthHeader';
 import CheckedGender from '../_components/CheckedGender';
 import DaumAddress from '../_components/DaumAddress';
 import Icon from '@/components/Icon';
@@ -53,7 +53,7 @@ const StepThreePage = () => {
       )}
 
       {/* 헤더 */}
-      <SignupHeader title='회원가입' pushPath='/auth/signup/step-2' currentStep='3' />
+      <AuthHeader title='회원가입' pushPath='/auth/signup/step-2' currentStep='3' />
 
       <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         {/* 주소 검색하기 */}

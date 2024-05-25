@@ -6,7 +6,7 @@ import Input from '@/components/ui/Input';
 import { CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/Button';
 import { SignupInputsValues } from '../_components/signupSchema';
-import SignupHeader from '../_components/SignupHeader';
+import AuthHeader from '../../_components/AuthHeader';
 import ClearInputValueIcon from '../_components/ClearInputValueIcon';
 
 const StepTwoPage = () => {
@@ -28,7 +28,7 @@ const StepTwoPage = () => {
 
   return (
     <>
-      <SignupHeader title='회원가입' pushPath='/auth/signup' currentStep='2' />
+      <AuthHeader title='회원가입' pushPath='/auth/signup' currentStep='2' />
 
       <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         <FormField
