@@ -1,10 +1,15 @@
 import { SignupInputsValues } from './signupSchema';
 import Icon from '@/components/Icon';
 import { useFormContext } from 'react-hook-form';
+
+type Address = 'address';
+type AddressKeys = 'roadName' | 'detail';
+type AddressPath = `${Address}.${AddressKeys}`;
+
 type ClearInputValueIconProps = {
   rightMargin?: boolean;
   show: boolean;
-  formName: keyof SignupInputsValues;
+  formName: Partial<keyof Omit<SignupInputsValues, 'address'>> | AddressPath;
 };
 
 const ClearInputValueIcon = ({ rightMargin = false, show, formName }: ClearInputValueIconProps) => {
