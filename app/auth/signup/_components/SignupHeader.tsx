@@ -1,14 +1,17 @@
+'use client';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import React from 'react';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
-
+import { useRouter } from 'next/navigation';
 type SignupHeaderProps = {
   currentStep?: string;
-  onClick?: () => void;
+  pushPath?: string;
+  title: string;
 };
 
-const SignupHeader = ({ currentStep, onClick }: SignupHeaderProps) => {
+const SignupHeader = ({ currentStep, pushPath, title }: SignupHeaderProps) => {
+  const router = useRouter();
   return (
     <header
       className={flexBoxVariants({
@@ -20,7 +23,7 @@ const SignupHeader = ({ currentStep, onClick }: SignupHeaderProps) => {
       {currentStep !== '1' ? (
         <Icon
           role='button'
-          onClick={onClick}
+          onClick={() => router.push(pushPath || '')}
           size='24'
           alt='뒤로가기'
           src='/icons/system-icon/arrow/arrow-prev.svg'
@@ -32,12 +35,11 @@ const SignupHeader = ({ currentStep, onClick }: SignupHeaderProps) => {
 
       <FlexBox justifyContent='center'>
         <Text variant='h6' sizes='16' weight='500'>
-          회원가입
+          {title}
         </Text>
       </FlexBox>
       <div className='w-[2.4rem]' aria-hidden></div>
     </header>
   );
 };
-
 export default SignupHeader;
