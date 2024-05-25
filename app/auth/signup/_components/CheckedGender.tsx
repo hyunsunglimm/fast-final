@@ -1,7 +1,7 @@
 import FlexBox from '@/components/ui/FlexBox';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import Text from '@/components/ui/Text';
-import { SignupInputsValues } from './signupSchema';
+import { SignupInputsValues } from '../../schema/signupSchema';
 import { FormMessage } from '@/components/ui/form';
 
 type CheckedGenderProps = {

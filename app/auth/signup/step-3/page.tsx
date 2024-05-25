@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { SignupInputsValues } from '../_components/signupSchema';
-import { useRouter } from 'next/navigation';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import AuthHeader from '../../_components/AuthHeader';
 import CheckedGender from '../_components/CheckedGender';
 import DaumAddress from '../_components/DaumAddress';
 import Icon from '@/components/Icon';
 import Input from '@/components/ui/Input';
-import { CardContent } from '@/components/ui/card';
 import ClearInputValueIcon from '../_components/ClearInputValueIcon';
 import Button from '@/components/ui/Button';
+import { useFormContext } from 'react-hook-form';
+import { SignupInputsValues } from '../../schema/signupSchema';
+import { useRouter } from 'next/navigation';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { CardContent } from '@/components/ui/card';
 
 const StepThreePage = () => {
   const [visiblePostDaum, setVisiblePostDaum] = useState(false);

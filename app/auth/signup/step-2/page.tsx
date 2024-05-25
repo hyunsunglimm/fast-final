@@ -1,13 +1,13 @@
 'use client';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import AuthHeader from '../../_components/AuthHeader';
+import ClearInputValueIcon from '../_components/ClearInputValueIcon';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import Input from '@/components/ui/Input';
 import { CardContent } from '@/components/ui/card';
-import Button from '@/components/ui/Button';
-import { SignupInputsValues } from '../_components/signupSchema';
-import AuthHeader from '../../_components/AuthHeader';
-import ClearInputValueIcon from '../_components/ClearInputValueIcon';
+import { SignupInputsValues } from '../../schema/signupSchema';
 
 const StepTwoPage = () => {
   const router = useRouter();

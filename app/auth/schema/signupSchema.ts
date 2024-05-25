@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const SignupSchema = z
+export const signupSchema = z
   .object({
     email: z.string().email({ message: '이메일을 입력해주세요' }),
     checkEmail: z.boolean(),
@@ -27,7 +27,7 @@ export const SignupSchema = z
     path: ['confirmPassword']
   });
 
-export type SignupInputsValues = z.infer<typeof SignupSchema>;
+export type SignupInputsValues = z.infer<typeof signupSchema>;
 
 export const defaultValues: SignupInputsValues = {
   email: '',

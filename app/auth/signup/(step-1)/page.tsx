@@ -5,16 +5,16 @@ import Input from '@/components/ui/Input';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/Spinner';
+import Icon from '@/components/Icon';
+import AuthHeader from '../../_components/AuthHeader';
+import ClearInputValueIcon from '../_components/ClearInputValueIcon';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
 import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
-import Icon from '@/components/Icon';
-import { SignupInputsValues } from '../_components/signupSchema';
-import SignupHeader from '../_components/SignupHeader';
-import ClearInputValueIcon from '../_components/ClearInputValueIcon';
+import { SignupInputsValues } from '../../schema/signupSchema';
 
 const StepOnePage = () => {
   const router = useRouter();
@@ -108,7 +108,7 @@ const StepOnePage = () => {
 
   return (
     <>
-      <SignupHeader currentStep='1' title='회원가입' />
+      <AuthHeader currentStep='1' title='회원가입' />
 
       <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         {/* 이메일 */}

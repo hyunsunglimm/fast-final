@@ -1,4 +1,4 @@
-import { SignupInputsValues } from './signupSchema';
+import { SignupInputsValues } from '../../schema/signupSchema';
 import Icon from '@/components/Icon';
 import { useFormContext } from 'react-hook-form';
 

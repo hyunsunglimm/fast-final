@@ -2,12 +2,12 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SignupInputsValues, defaultValues, SignupSchema } from './signupSchema';
+import { SignupInputsValues, defaultValues, signupSchema } from '../../schema/signupSchema';
 import { Form } from '@/components/ui/form';
 
 const SignUpFormProvider = ({ children }: { children: React.ReactNode }) => {
   const form = useForm<SignupInputsValues>({
-    resolver: zodResolver(SignupSchema),
+    resolver: zodResolver(signupSchema),
     defaultValues,
     mode: 'all'
   });
