@@ -6,7 +6,7 @@ import CheckedGender from '../_components/CheckedGender';
 import DaumAddress from '../_components/DaumAddress';
 import Icon from '@/components/Icon';
 import Input from '@/components/ui/Input';
-import ClearInputValueIcon from '../_components/ClearInputValueIcon';
+import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import Button from '@/components/ui/Button';
 import { useFormContext } from 'react-hook-form';
 import { SignupInputsValues } from '../../schema/signupSchema';
@@ -78,7 +78,7 @@ const StepThreePage = () => {
                     <ClearInputValueIcon
                       rightMargin
                       show={Boolean(getValues('address.roadName'))}
-                      formName='address.roadName'
+                      onClick={() => setValue('address.roadName', '')}
                     />
                     <Icon
                       size='20'
@@ -114,7 +114,7 @@ const StepThreePage = () => {
                       />
                       <ClearInputValueIcon
                         show={Boolean(getValues('address.detail'))}
-                        formName='address.detail'
+                        onClick={() => setValue('address.detail', '')}
                       />
                     </>
                   </FormControl>

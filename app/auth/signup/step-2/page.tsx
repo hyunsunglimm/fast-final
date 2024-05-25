@@ -2,7 +2,7 @@
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import AuthHeader from '../../_components/AuthHeader';
-import ClearInputValueIcon from '../_components/ClearInputValueIcon';
+import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
@@ -15,7 +15,8 @@ const StepTwoPage = () => {
     getValues,
     control,
     trigger,
-    formState: { errors }
+    formState: { errors },
+    setValue
   } = useFormContext<SignupInputsValues>();
 
   const onClickNext = async () => {
@@ -46,7 +47,10 @@ const StepTwoPage = () => {
                       {...field}
                       validation={errors.name ? 'error' : 'success'}
                     />
-                    <ClearInputValueIcon show={Boolean(getValues('name'))} formName='name' />
+                    <ClearInputValueIcon
+                      show={Boolean(getValues('name'))}
+                      onClick={() => setValue('name', '')}
+                    />
                   </>
                 </FormControl>
                 <FormMessage className='text-12 font-400 text-warning' />
@@ -73,7 +77,7 @@ const StepTwoPage = () => {
                     />
                     <ClearInputValueIcon
                       show={Boolean(getValues('phoneNumber'))}
-                      formName='phoneNumber'
+                      onClick={() => setValue('phoneNumber', '')}
                     />
                   </>
                 </FormControl>
