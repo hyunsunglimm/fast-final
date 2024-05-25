@@ -5,7 +5,7 @@ import Text from '@/components/ui/Text';
 import Icon from '@/components/Icon';
 import Checkbox from '@/components/ui/CheckBox';
 import Button from '@/components/ui/Button';
-import SignupHeader from '../_components/SignupHeader';
+import AuthHeader from '../../_components/AuthHeader';
 
 const policyList = [
   {
@@ -56,7 +56,7 @@ const StepFourPage = () => {
 
   return (
     <>
-      <SignupHeader title='이용약관' pushPath='/auth/signup/step-3' currentStep='4' />
+      <AuthHeader title='이용약관' pushPath='/auth/signup/step-3' currentStep='4' />
       <FlexBox flexDirection='col' className='mt-32 w-full'>
         <Checkbox
           checked={allChecked}

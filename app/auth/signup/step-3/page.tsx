@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { SignupInputsValues } from '../_components/signupSchema';
-import { useRouter } from 'next/navigation';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import SignupHeader from '../_components/SignupHeader';
+import AuthHeader from '../../_components/AuthHeader';
 import CheckedGender from '../_components/CheckedGender';
 import DaumAddress from '../_components/DaumAddress';
 import Icon from '@/components/Icon';
 import Input from '@/components/ui/Input';
-import { CardContent } from '@/components/ui/card';
-import ClearInputValueIcon from '../_components/ClearInputValueIcon';
+import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import Button from '@/components/ui/Button';
+import { useFormContext } from 'react-hook-form';
+import { SignupInputsValues } from '../../schema/signupSchema';
+import { useRouter } from 'next/navigation';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { CardContent } from '@/components/ui/card';
 
 const StepThreePage = () => {
   const [visiblePostDaum, setVisiblePostDaum] = useState(false);
@@ -53,7 +53,7 @@ const StepThreePage = () => {
       )}
 
       {/* 헤더 */}
-      <SignupHeader title='회원가입' pushPath='/auth/signup/step-2' currentStep='3' />
+      <AuthHeader title='회원가입' pushPath='/auth/signup/step-2' currentStep='3' />
 
       <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         {/* 주소 검색하기 */}
@@ -78,7 +78,7 @@ const StepThreePage = () => {
                     <ClearInputValueIcon
                       rightMargin
                       show={Boolean(getValues('address.roadName'))}
-                      formName='address.roadName'
+                      onClick={() => setValue('address.roadName', '')}
                     />
                     <Icon
                       size='20'
@@ -114,7 +114,7 @@ const StepThreePage = () => {
                       />
                       <ClearInputValueIcon
                         show={Boolean(getValues('address.detail'))}
-                        formName='address.detail'
+                        onClick={() => setValue('address.detail', '')}
                       />
                     </>
                   </FormControl>

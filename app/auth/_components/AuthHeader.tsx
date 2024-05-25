@@ -7,13 +7,14 @@ import { useRouter } from 'next/navigation';
 
 type CurrentStep = '1' | '2' | '3' | '4';
 
-type SignupHeaderProps = {
+type AuthHeaderProps = {
+  isSignup?: boolean;
   currentStep: CurrentStep;
   pushPath?: string;
   title: string;
 };
 
-const SignupHeader = ({ currentStep, pushPath, title }: SignupHeaderProps) => {
+const AuthHeader = ({ isSignup = true, currentStep, pushPath, title }: AuthHeaderProps) => {
   const router = useRouter();
   return (
     <>
@@ -25,7 +26,7 @@ const SignupHeader = ({ currentStep, pushPath, title }: SignupHeaderProps) => {
           className: 'mb-40 h-[5.6rem]'
         })}
       >
-        {currentStep !== '1' ? (
+        {currentStep !== '1' && isSignup ? (
           <Icon
             role='button'
             onClick={() => router.push(pushPath || '')}
@@ -45,18 +46,20 @@ const SignupHeader = ({ currentStep, pushPath, title }: SignupHeaderProps) => {
         <div className='w-[2.4rem]' aria-hidden></div>
       </header>
 
-      {/* 타이틀 문구 */}
-      <FlexBox className='space-y-2' flexDirection='col'>
-        {currentStep !== '4' ? (
-          <StepOneTwoThreeTitle currentStep={currentStep} />
-        ) : (
-          <StepFourTitle />
-        )}
-      </FlexBox>
+      {/* 회원가입 타이틀 문구 */}
+      {isSignup && (
+        <FlexBox className='space-y-2' flexDirection='col'>
+          {currentStep !== '4' ? (
+            <StepOneTwoThreeTitle currentStep={currentStep} />
+          ) : (
+            <StepFourTitle />
+          )}
+        </FlexBox>
+      )}
     </>
   );
 };
-export default SignupHeader;
+export default AuthHeader;
 
 const StepOneTwoThreeTitle = ({ currentStep }: { currentStep: CurrentStep }) => {
   return (

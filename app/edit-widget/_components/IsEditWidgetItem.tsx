@@ -32,7 +32,7 @@ const IsEditWidgetItem = ({ title, id, onClick, dragOverlay }: IsEditWidgetItemP
   return (
     <Card
       className={cn(
-        'no-user-select relative flex aspect-square cursor-default flex-col items-center justify-between border border-gray-100 ',
+        'no-user-select relative flex aspect-square cursor-default flex-col items-center justify-between border border-gray-100 will-change-transform ',
         classa
       )}
       ref={setNodeRef}

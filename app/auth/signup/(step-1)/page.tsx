@@ -5,16 +5,16 @@ import Input from '@/components/ui/Input';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/Spinner';
+import EyeIcon from '../../_components/EyeIcon';
+import AuthHeader from '../../_components/AuthHeader';
+import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
 import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
-import Icon from '@/components/Icon';
-import { SignupInputsValues } from '../_components/signupSchema';
-import SignupHeader from '../_components/SignupHeader';
-import ClearInputValueIcon from '../_components/ClearInputValueIcon';
+import { SignupInputsValues } from '../../schema/signupSchema';
 
 const StepOnePage = () => {
   const router = useRouter();
@@ -108,7 +108,7 @@ const StepOnePage = () => {
 
   return (
     <>
-      <SignupHeader currentStep='1' title='회원가입' />
+      <AuthHeader currentStep='1' title='회원가입' />
 
       <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         {/* 이메일 */}
@@ -128,7 +128,10 @@ const StepOnePage = () => {
                         {...field}
                         validation={errors.email ? 'error' : 'success'}
                       />
-                      <ClearInputValueIcon show={Boolean(email)} formName='email' />
+                      <ClearInputValueIcon
+                        show={Boolean(email)}
+                        onClick={() => setValue('email', '')}
+                      />
                     </div>
                     <Button
                       name='checkEmail'
@@ -178,7 +181,7 @@ const StepOnePage = () => {
                     <ClearInputValueIcon
                       rightMargin
                       show={Boolean(getValues('password'))}
-                      formName='password'
+                      onClick={() => setValue('password', '')}
                     />
                     <EyeIcon show={showPassword} setState={setShowPassword} />
                   </>
@@ -209,7 +212,7 @@ const StepOnePage = () => {
                     <ClearInputValueIcon
                       rightMargin
                       show={Boolean(getValues('confirmPassword'))}
-                      formName='confirmPassword'
+                      onClick={() => setValue('confirmPassword', '')}
                     />
                     <EyeIcon show={showConfirmPassword} setState={setShowConfirmPassword} />
                   </>
@@ -231,34 +234,3 @@ const StepOnePage = () => {
 };
 
 export default StepOnePage;
-
-type EyeIconProps = {
-  show: boolean;
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const EyeIcon = ({ show, setState }: EyeIconProps) => {
-  return (
-    <>
-      {show ? (
-        <Icon
-          src='/icons/signup/eye.svg'
-          alt='눈 아이콘'
-          size='20'
-          className='absolute bottom-0 right-0 top-0 my-auto cursor-pointer'
-          onClick={() => setState(false)}
-          placeholder='empty'
-        />
-      ) : (
-        <Icon
-          src='/icons/signup/eye-hide.svg'
-          alt='숨긴 눈 아이콘'
-          size='20'
-          className='absolute bottom-0 right-0 top-0 my-auto cursor-pointer'
-          onClick={() => setState(true)}
-          placeholder='empty'
-        />
-      )}
-    </>
-  );
-};
