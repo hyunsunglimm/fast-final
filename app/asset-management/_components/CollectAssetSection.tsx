@@ -26,11 +26,9 @@ const CollectAssetSection = () => {
                     <FlexBox
                       alignItems='center'
                       justifyContent='center'
-                      className='my-auto mb-[0.3rem] h-[2rem] w-[2rem] rounded-full bg-warning text-center text-white'
+                      className='my-auto mb-[0.3rem] h-[2rem] w-[2rem] rounded-full bg-primary text-center text-white'
                     >
-                      <Text sizes='14' className='mt-[0.2rem]'>
-                        {item.listCount}
-                      </Text>
+                      <Text sizes='14'>{item.listCount}</Text>
                     </FlexBox>
                   )}
                 </FlexBox>

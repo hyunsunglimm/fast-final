@@ -1,57 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 100;
-  src: url('../public/font/SUIT-Thin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 200;
-  src: url('../public/font/SUIT-ExtraLight.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 300;
-  src: url('../public/font/SUIT-Light.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 400;
-  src: url('../public/font/SUIT-Regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 500;
-  src: url('../public/font/SUIT-Medium.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 600;
-  src: url('../public/font/SUIT-SemiBold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 700;
-  src: url('../public/font/SUIT-Bold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 800;
-  src: url('../public/font/SUIT-ExtraBold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 900;
-  src: url('../public/font/SUIT-Heavy.woff2') format('woff2');
-}
+
 * {
   box-sizing: border-box;
 }
 html {
   font-size: 2.6667vw;
-  font-family: 'SUIT-Regular', sans-serif;
+}
+body {
+  -webkit-font-smoothing: antialiased; /* For macOS */
+  -moz-osx-font-smoothing: grayscale; /* For macOS */
+  -webkit-text-size-adjust: none;
 }
 @media (min-width: 520px) {
   html {

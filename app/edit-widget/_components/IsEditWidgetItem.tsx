@@ -32,7 +32,7 @@ const IsEditWidgetItem = ({ title, id, onClick, dragOverlay }: IsEditWidgetItemP
   return (
     <Card
       className={cn(
-        'no-user-select relative aspect-square cursor-default border border-gray-100 p-[1.2rem]',
+        'no-user-select relative flex aspect-square cursor-default flex-col items-center justify-between border border-gray-100 ',
         classa
       )}
       ref={setNodeRef}
@@ -43,7 +43,7 @@ const IsEditWidgetItem = ({ title, id, onClick, dragOverlay }: IsEditWidgetItemP
       }}
       id={String(id)}
     >
-      <CardHeader className='w-full items-end pt-[0.4rem]'>
+      <CardHeader className='relative h-[2.6rem] w-full items-end'>
         <button
           id={String(id)}
           onClick={onClick}
@@ -58,7 +58,11 @@ const IsEditWidgetItem = ({ title, id, onClick, dragOverlay }: IsEditWidgetItemP
             placeholder='empty'
           />
         </button>
-        <button {...listeners} className='cursor-grab touch-none active:cursor-grabbing'>
+
+        <button
+          {...listeners}
+          className='absolute cursor-grab touch-none p-10 pr-20 pt-12 active:cursor-grabbing'
+        >
           <Icon
             src='/icons/asset-page/three-bar.svg'
             size='16'
@@ -68,8 +72,8 @@ const IsEditWidgetItem = ({ title, id, onClick, dragOverlay }: IsEditWidgetItemP
           />
         </button>
       </CardHeader>
-      <CardContent alignItems='center' justifyContent='center' className='pt-[4.6rem]'>
-        <Text sizes='16' className='text-gray-500'>
+      <CardContent alignItems='center' justifyContent='center' className='flex-1'>
+        <Text sizes='16' className='pb-10 text-gray-500'>
           {title}
         </Text>
       </CardContent>

@@ -12,7 +12,9 @@ export const ListHeader = ({ badgeText, headerText, subHeaderText }: ListHeaderP
     <CardHeader className='p-[1.6rem] pb-0'>
       <FlexBox justifyContent='between' className='mb-[1.2rem]'>
         <div className=' w-fit rounded-full bg-black/20 px-[0.8rem] py-[0.5rem]'>
-          <Text sizes='10'>{badgeText}</Text>
+          <Text sizes='12' weight='700'>
+            {badgeText}
+          </Text>
         </div>
         <div>. . .</div>
       </FlexBox>

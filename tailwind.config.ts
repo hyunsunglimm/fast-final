@@ -99,13 +99,11 @@ const config: Config = {
         banner: '#FFEDE1'
       },
       fontWeight: {
-        '300': '300',
         '400': '400',
         '500': '500',
         '600': '600',
         '700': '700',
-        '800': '800',
-        '900': '900'
+        '800': '800'
       },
       animation: {
         pop: 'pop 200ms cubic-bezier(0.18, 0.67, 0.6, 1.22) 0s 1 normal forwards'
