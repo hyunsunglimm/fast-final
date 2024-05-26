@@ -1,8 +1,9 @@
+import dynamic from 'next/dynamic';
 import HomeBanner from './_components/HomeBanner';
 import HomeWidgetSection from './_components/HomeWidgetSection';
-import BucketListCard from './_components/BucketListCard';
-import ChallengeCard from './_components/ChallengeCard';
 import MotionCarousel from '@/components/MotionCarousel';
+import BucketListCard from './_components/BucketListCard';
+const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), { ssr: false });
 
 const HomePage = () => {
   return (

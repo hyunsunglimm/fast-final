@@ -18,12 +18,7 @@ const MyWallteBottomSheet = () => {
 
   useEffect(() => {
     MyWalletDataFetch();
-    // return () => MyWalletDataFetch();
   }, []);
-
-  useEffect(() => {
-    console.log(MyWalletData);
-  }, [MyWalletData]);
 
   const top3Data = MyWalletData.slice(0, 3);
   const othersData = MyWalletData.slice(3);
