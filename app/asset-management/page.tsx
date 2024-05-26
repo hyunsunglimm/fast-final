@@ -6,7 +6,7 @@ import MyAssetsGraphSection from './_components/MyAssetsGraphSection';
 const AssetManagementPage = () => {
   return (
     <>
-      <section>
+      <section className='pt-20'>
         <NetWorthSection />
       </section>
       <section className='px-20'>

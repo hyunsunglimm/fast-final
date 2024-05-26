@@ -54,14 +54,14 @@ const NetWorthSection = () => {
 
   return (
     <>
-      <div className='mb-24 ml-20 mt-20 flex flex-col'>
+      <FlexBox flexDirection='col' className='mb-24 ml-20'>
         <Text sizes='16' weight='600' className='text-gray-600'>
           순자산
         </Text>
         <Text sizes='24' weight='700'>
           3,123,567원
         </Text>
-      </div>
+      </FlexBox>
 
       <div className={`${touchClass} relative w-full overflow-hidden`} ref={containerRef}>
         <motion.div
