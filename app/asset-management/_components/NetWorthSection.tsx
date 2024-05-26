@@ -7,6 +7,7 @@ import { useWindowResize } from '@/hooks/useWindowResize';
 import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
 import { useTotalWidth } from '@/hooks/useTotalWidth';
+import Icon from '@/components/Icon';
 const ItemList = [
   {
     badgeText: '4개 보유',
@@ -134,9 +135,12 @@ const AddContents = () => {
         alignItems='center'
         className='bottom-0 top-0 my-auto space-y-6'
       >
-        <FlexBox className='pointer-events-none relative h-[4rem] w-[4rem]'>
-          <Image src='/icons/asset-page/ico_plus.svg' alt='통장 이미지' fill sizes='auto' />
-        </FlexBox>
+        <Icon
+          src='/icons/asset-page/ico_plus.svg'
+          alt='자산 추가 이미지'
+          size='40'
+          className='pointer-events-none cursor-pointer'
+        />
         <Text sizes='20' weight='400' className='text-gray-500'>
           자산 추가
         </Text>

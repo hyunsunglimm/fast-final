@@ -48,7 +48,7 @@ const DragContainer = () => {
 
   return (
     <>
-      <div className='grid grid-cols-2 gap-20 px-20'>
+      <section className='grid grid-cols-2 gap-20 px-20'>
         {/* ShowWidget 렌더링 */}
         <DndContext
           modifiers={[restrictToParentElement]}
@@ -81,9 +81,9 @@ const DragContainer = () => {
             </Text>
           </Card>
         )}
-      </div>
+      </section>
       <div aria-hidden className='my-[2rem] h-[1.1rem] bg-gray-50'></div>
-      <div className='bg-white px-[2rem] pb-[16.8rem]'>
+      <section className='bg-white px-[2rem] pb-[16.8rem]'>
         <div className='mb-[2.4rem]'>
           <Text sizes='20' weight='700'>
             숨긴 항목
@@ -117,7 +117,7 @@ const DragContainer = () => {
             );
           })}
         </FlexBox>
-      </div>
+      </section>
     </>
   );
 };
