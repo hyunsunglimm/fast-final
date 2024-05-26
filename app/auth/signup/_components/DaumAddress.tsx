@@ -1,6 +1,6 @@
 import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
 import { UseFormSetValue } from 'react-hook-form';
-import { SignupInputsValues } from './signupSchema';
+import { SignupInputsValues } from '../../schema/signupSchema';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';

@@ -2,7 +2,6 @@ import FlexBox from '@/components/ui/FlexBox';
 import { Card } from '@/components/ui/card';
 import React from 'react';
 import Text from '@/components/ui/Text';
-import Link from 'next/link';
 import Image from 'next/image';
 
 const HomeAiBannerCard = () => {

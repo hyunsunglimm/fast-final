@@ -17,9 +17,11 @@ export const ListFooter = ({ currentAmount, targetAmount }: ListFooterProps) => 
           <Text sizes='18' weight='700'>
             {currentAmount.toLocaleString('ko')}&nbsp;
           </Text>
-          <Text weight='500'>/ {targetAmount.toLocaleString('ko')}원</Text>
+          <Text sizes='14' weight='500'>
+            / {targetAmount.toLocaleString('ko')}원
+          </Text>
         </p>
-        <Text>12일째</Text>
+        <Text weight='700'>{progressPercent}%</Text>
       </FlexBox>
       <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>
         <ProgressBar barColor='white' progressPercent={progressPercent} />
