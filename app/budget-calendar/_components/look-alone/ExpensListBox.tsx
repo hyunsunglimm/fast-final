@@ -1,7 +1,13 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
-import { ExpenseItemProps } from '@/types/budgetCalendarType';
+import { ExpenseItemProps, ExpenseSummaryProps } from '@/types/budgetCalendarType';
+import ExpenseSummary from './ExpensSummary';
 import ExpenseItem from './ExpenseItem';
+
+const summaryData: ExpenseSummaryProps[] = [
+  { label: '지출', amount: '- 1,000,000' },
+  { label: '수입', amount: '+ 1,000,000' }
+];
 
 const dummyExpensesList: ExpenseItemProps[] = [
   {
@@ -32,14 +38,9 @@ const ExpensListBox = () => {
         </FlexBox>
       </FlexBox>
       <FlexBox justifyContent='between' className='mb-32 gap-[1.6rem]'>
-        <div className='w-1/2 rounded-md bg-gray-50 p-16 pb-10'>
-          <p className='mb-4 text-14 text-gray-700'>지출</p>
-          <p className='font-700'>- 1,000,000원</p>
-        </div>
-        <div className='w-1/2 rounded-md bg-gray-50 p-16 pb-10'>
-          <p className='mb-4 text-14 text-gray-700'>수입</p>
-          <p className='font-700'>+ 1,000,000원</p>
-        </div>
+        {summaryData.map((data, index) => (
+          <ExpenseSummary key={index} label={data.label} amount={data.amount} />
+        ))}
       </FlexBox>
       <div>
         <div className='flex items-center gap-[0.8rem]'>
