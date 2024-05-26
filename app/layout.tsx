@@ -17,23 +17,19 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang='ko'>
-      {/* <body className='mx-auto overflow-hidden text-black xs:w-[520px]'> */}
+    <html lang='ko' className='hide-scrollbar overflow-hidden overflow-y-scroll'>
       <body
-        className={`${suit.className} mx-auto bg-gray-200 tracking-tight text-black xs:w-[520px]`}
+        className={`${suit.className} hide-scrollbar relative mx-auto h-dvh overflow-y-scroll bg-gray-200 tracking-tight text-black xs:w-[520px]`}
       >
         <AuthProvider>
           <QueryProviders>
             {/* XXX 
               바디 구분 위해 의도적으로 색상 넣어놨습니다.
-             hide-scrollbar
              */}
-            {/* <main className={'  relative overflow-y-scroll bg-gray-50'}> */}
-            {/* <main className={'hide-scrollbar relative h-dvh overflow-y-scroll bg-gray-50'}> */}
-            <main className='hide-scrollbar h-dvh overflow-y-scroll bg-gray-50'>
+            <>
               {children}
               <Navbar />
-            </main>
+            </>
           </QueryProviders>
         </AuthProvider>
       </body>
