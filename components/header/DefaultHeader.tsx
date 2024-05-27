@@ -5,10 +5,12 @@ import Text from '../ui/Text';
 import Image from 'next/image';
 import Icon from '../Icon';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { HTMLAttributes } from 'react';
+
 type DefaultHeaderProps = {
   isHome?: boolean;
   title?: string;
-};
+} & HTMLAttributes<HTMLElement>;
 
 export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => {
   const { scrollY } = useScroll();

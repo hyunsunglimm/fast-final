@@ -3,7 +3,7 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 const TopContents = () => {
   return (
-    <div className='px-[2rem]'>
+    <>
       <Text className='mb-20 block'>
         내가 보고 싶은 내용을 6개의 메뉴로 선택할 수 있어요 <br />
         아이콘을 길게 눌러서 순서를 변경할 수 있어요.
@@ -13,7 +13,7 @@ const TopContents = () => {
           오늘 소비 날씨
         </Text>
       </Card>
-    </div>
+    </>
   );
 };
 

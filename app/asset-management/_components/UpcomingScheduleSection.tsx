@@ -123,9 +123,9 @@ const UpCommingCard = () => {
   );
 };
 const fiexedExpensesData = [
-  { title: '월세', date: '내일', imgPath: '/icons/product/product-cvs.svg' },
-  { title: '교통비', date: '2일뒤', imgPath: '/icons/product/product-traffic.svg' },
-  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/product/product-subscribe.svg' }
+  { title: '월세', date: '내일', imgPath: '/icons/asset-page/month-rental.svg' },
+  { title: '교통비', date: '2일뒤', imgPath: '/icons/asset-page/bus.svg' },
+  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/asset-page/subs.svg' }
 ];
 const FixedExpenses = () => {
   return (
@@ -138,8 +138,13 @@ const FixedExpenses = () => {
             justifyContent='between'
             className='mb-[2rem] w-full last:mb-0'
           >
-            <FlexBox className='gap-x-[0.5rem]' alignItems='center'>
-              <Icon src={item.imgPath} alt={`${item.title} 아이콘`} size='32' />
+            <FlexBox className='gap-x-8' alignItems='center'>
+              <Icon
+                src={item.imgPath}
+                alt={`${item.title} 아이콘`}
+                size='24'
+                className='rounded-none'
+              />
               <Text weight='700' sizes='16'>
                 {item.title}
               </Text>

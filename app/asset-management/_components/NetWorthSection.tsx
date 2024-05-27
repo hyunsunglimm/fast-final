@@ -7,6 +7,7 @@ import { useWindowResize } from '@/hooks/useWindowResize';
 import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
 import { useTotalWidth } from '@/hooks/useTotalWidth';
+import Icon from '@/components/Icon';
 const ItemList = [
   {
     badgeText: '4개 보유',
@@ -53,14 +54,14 @@ const NetWorthSection = () => {
 
   return (
     <>
-      <div className='mb-24 ml-20 mt-20 flex flex-col'>
+      <FlexBox flexDirection='col' className='mb-24 ml-20'>
         <Text sizes='16' weight='600' className='text-gray-600'>
           순자산
         </Text>
         <Text sizes='24' weight='700'>
           3,123,567원
         </Text>
-      </div>
+      </FlexBox>
 
       <div className={`${touchClass} relative w-full overflow-hidden`} ref={containerRef}>
         <motion.div
@@ -134,9 +135,12 @@ const AddContents = () => {
         alignItems='center'
         className='bottom-0 top-0 my-auto space-y-6'
       >
-        <FlexBox className='pointer-events-none relative h-[4rem] w-[4rem]'>
-          <Image src='/icons/asset-page/ico_plus.svg' alt='통장 이미지' fill sizes='auto' />
-        </FlexBox>
+        <Icon
+          src='/icons/asset-page/ico_plus.svg'
+          alt='자산 추가 이미지'
+          size='40'
+          className='pointer-events-none cursor-pointer'
+        />
         <Text sizes='20' weight='400' className='text-gray-500'>
           자산 추가
         </Text>
