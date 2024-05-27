@@ -58,13 +58,13 @@ const SwiperWrapper = ({
         navigation={arrow}
         loop
       >
-        {children.map((c) => (
-          <SwiperSlide key={JSON.stringify(c)}>{c}</SwiperSlide>
+        {children.map((c, idx) => (
+          <SwiperSlide key={idx}>{c}</SwiperSlide>
         ))}
         {arrow && (
           <FlexBox
             justifyContent='between'
-            className='absolute top-1/2 z-10 w-full translate-y-[-50%] px-20'
+            className='absolute top-1/2 z-10 w-full translate-y-[-5rem] px-20'
           >
             <div onClick={() => sliderRef.current?.slidePrev()}>
               <Icon src='/icons/system-icon/arrow/arrow-left.svg' alt='이전 버튼' />

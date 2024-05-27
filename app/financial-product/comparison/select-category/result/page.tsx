@@ -9,7 +9,7 @@ const ResultPage = () => {
   return (
     <>
       <SpeechBubbleHeader />
-      <div className='mt-[27rem]'>
+      <div className='mt-[21.4rem]'>
         <SwiperWrapper arrow>
           <Image
             src='/images/financial-product/result-shinhan-card.png'
