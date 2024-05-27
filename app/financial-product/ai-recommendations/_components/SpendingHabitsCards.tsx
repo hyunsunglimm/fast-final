@@ -1,5 +1,5 @@
 import Icon from '@/components/Icon';
-import MultiCarousel from '@/components/MultiCarousel';
+import SwiperWrapper from '@/components/SwiperWrapper';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
@@ -79,11 +79,12 @@ const SpendingHabitsCards = () => {
           가 높았어요!
         </Text>
       </div>
-      <MultiCarousel>
-        <div className='mx-auto h-[16rem] w-[25.4rem] rounded-xs bg-[#FF7674]' />
-        <div className='mx-auto h-[16rem] w-[25.4rem] rounded-xs bg-[#87CFDE]' />
-        <div className='mx-auto h-[16rem] w-[25.4rem] rounded-xs bg-[#959498]' />
-      </MultiCarousel>
+      <SwiperWrapper dots coverflow>
+        <div className='h-[16rem] rounded-xs bg-[#FF7674]' />
+        <div className='h-[16rem] rounded-xs bg-[#87CFDE]' />
+        <div className='h-[16rem] rounded-xs bg-[#959498]' />
+        <div className='h-[16rem] rounded-xs bg-[#959]' />
+      </SwiperWrapper>
       <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
         <Text sizes='12' className='mb-[0.2rem]'>
           하나은행
