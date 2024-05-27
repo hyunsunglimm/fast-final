@@ -1,12 +1,13 @@
+import { Suspense } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
-import React from 'react';
 import Text from '@/components/ui/Text';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
-import { getWidgetItem } from '@/actions/serverAction';
+import { getWidgetItem } from '@/service/api/home';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import ConsumeWeatherCard from './ConsumeWeatherCard';
-import HomeAiBannerCard from './HomeAiBannerCard';
+import WidgetSkeleton from './WidgetSkeleton';
+
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -16,11 +17,9 @@ import {
   WidgetMyChallenge,
   WidgetUpcomingExpenses
 } from './widget-item';
-import { DataType } from '@/types/widget-type/widgetType';
 
 const HomeWidgetSection = async () => {
-  // const res = await fetch('https://fast-final-client-kohl.vercel.app//api/widget');
-  const data: DataType = await getWidgetItem();
+  const data = await getWidgetItem();
 
   const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
     a: WidgetBudget,
@@ -58,15 +57,20 @@ const HomeWidgetSection = async () => {
       {/* 위젯 영역 */}
       <div className='mb-[3rem] grid grid-cols-2 gap-x-20 gap-y-20'>
         {data[0].showWidget.map((item) => {
-          const WidgetCOmponent = widgetMap[item.id];
-          return WidgetCOmponent ? <WidgetCOmponent key={item.id} /> : null;
+          const WidgetComponent = widgetMap[item.id];
+          return WidgetComponent ? <WidgetComponent key={item.id} /> : null;
         })}
       </div>
-
-      {/* Ai 배너 영역 */}
-      <HomeAiBannerCard />
     </>
   );
 };
 
-export default HomeWidgetSection;
+const HomeWidgetSectionWrapper = () => {
+  return (
+    <Suspense fallback={<WidgetSkeleton />}>
+      <HomeWidgetSection />
+    </Suspense>
+  );
+};
+
+export default HomeWidgetSectionWrapper;

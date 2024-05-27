@@ -2,13 +2,8 @@ import dynamic from 'next/dynamic';
 import { DefaultHeader } from '@/components/header';
 import MyWalletButton from './_components/MyWalletButton';
 import OpenWalletProvider from './context/OpenWalletProvider';
-import MyWallteBottomSheet from './_components/MyWallteBottomSheet';
 const DynamicMyWallteBottomSheet = dynamic(() => import('./_components/MyWallteBottomSheet'), {
-  ssr: false,
-  loading: ({ isLoading }) => {
-    console.log('isLoading', isLoading);
-    return <>loading...</>;
-  }
+  ssr: false
 });
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
@@ -17,7 +12,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
       <DefaultHeader title='Home' isHome={true} className='bg-gray-50' />
       <main className='bg-gray-50 pb-[13.2rem]'>{children}</main>
       <OpenWalletProvider>
-        <MyWallteBottomSheet />
+        <DynamicMyWallteBottomSheet />
         <MyWalletButton />
       </OpenWalletProvider>
     </>

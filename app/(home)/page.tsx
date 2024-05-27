@@ -3,7 +3,15 @@ import HomeBanner from './_components/HomeBanner';
 import HomeWidgetSection from './_components/HomeWidgetSection';
 import MotionCarousel from '@/components/MotionCarousel';
 import BucketListCard from './_components/BucketListCard';
-const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), { ssr: false });
+import { CardSkeleton } from '@/components/ui/skeleton';
+
+const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), {
+  ssr: false
+});
+const HomeAiBannerCard = dynamic(() => import('./_components/HomeAiBannerCard'), {
+  ssr: false,
+  loading: () => <CardSkeleton />
+});
 
 const HomePage = () => {
   return (
@@ -19,6 +27,7 @@ const HomePage = () => {
       </section>
       <section className='px-20'>
         <HomeWidgetSection />
+        <HomeAiBannerCard />
       </section>
     </>
   );

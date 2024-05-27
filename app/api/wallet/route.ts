@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 export const GET = async () => {
-  await new Promise((res) => setTimeout(res, 10000));
+  await new Promise((res) => setTimeout(res, 2000));
   const MyWalletData = [
     {
       bank: 'kakao',
