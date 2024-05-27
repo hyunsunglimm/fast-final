@@ -18,10 +18,11 @@ const HomeAiBannerCard = () => {
       </FlexBox>
       <div className='absolute bottom-0 right-[4.5rem] h-[13.1rem] w-[9.5rem]'>
         <Image
-          src='/images/home/ai-banner.svg'
+          src='/images/home/ai-banner.webp'
           alt='AI 맞춤 추천 이미지'
           fill
           sizes='auto'
+          loading='lazy'
           className='object-contain object-bottom'
         />
       </div>

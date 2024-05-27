@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       {isMatchPath(pathname) ? (
-        <nav className='fixed bottom-0 h-[7.2rem] w-full rounded-t-md border-t border-gray-100 bg-white px-20 xs:w-[520px]'>
+        <nav className='fixed bottom-0 z-10 h-[7.2rem] w-full rounded-t-md border-t border-gray-100 bg-white px-20 xs:w-[520px]'>
           <ul className='mt-10 flex items-center justify-between'>
             {NAV_DATA.map((nav) => {
               const isActive =

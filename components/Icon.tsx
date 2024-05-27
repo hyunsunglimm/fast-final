@@ -63,12 +63,17 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
     };
 
     return (
-      <div
-        className={cn(`${sizeClass[size]} relative overflow-hidden rounded-full`, className)}
+      <i
+        aria-label={alt}
+        className={cn(
+          `${sizeClass[size]} relative inline-block overflow-hidden rounded-full`,
+          className
+        )}
         {...divProps}
         ref={ref}
       >
         <Image
+          aria-hidden
           fill
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAAAL0lEQVR42u3NMQEAAAgDIJfcNPY0g4cfFCDT9S4SiUQikUgkEolEIpFIJBKJ5GYBnpg5OxOuJSoAAAAASUVORK5CYII='
           placeholder={placeholder}
@@ -76,7 +81,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
           className={imgClass}
           {...imageProps}
         />
-      </div>
+      </i>
     );
   }
 );
