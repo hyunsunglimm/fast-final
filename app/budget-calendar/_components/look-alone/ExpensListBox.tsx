@@ -1,6 +1,7 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import { ExpenseItemProps, ExpenseSummaryProps } from '@/types/budgetCalendarType';
+import { formatDate, groupByDate } from '@/utils/dateUtils';
 import ExpenseSummary from './ExpensSummary';
 import ExpenseItem from './ExpenseItem';
 
@@ -13,6 +14,7 @@ const dummyExpensesList: ExpenseItemProps[] = [
   {
     icon: '/icons/categories/background/categories-2.svg',
     iconDescription: '생활',
+    used_at: '2024-05-10',
     amount: '- 1,000,000원',
     payment: '결제처',
     method: '결제 수단',
@@ -21,6 +23,15 @@ const dummyExpensesList: ExpenseItemProps[] = [
   {
     icon: '/icons/categories/background/categories-2.svg',
     iconDescription: '생활',
+    used_at: '2024-05-10',
+    amount: '- 1,000,000원',
+    payment: '결제처',
+    method: '결제 수단'
+  },
+  {
+    icon: '/icons/categories/background/categories-2.svg',
+    iconDescription: '생활',
+    used_at: '2024-05-11',
     amount: '- 1,000,000원',
     payment: '결제처',
     method: '결제 수단'
@@ -28,6 +39,8 @@ const dummyExpensesList: ExpenseItemProps[] = [
 ];
 
 const ExpensListBox = () => {
+  const groupedExpenses = groupByDate(dummyExpensesList);
+
   return (
     <div className='px-20 py-24 text-16'>
       <FlexBox alignItems='center' justifyContent='between' className='mb-32'>
@@ -37,22 +50,26 @@ const ExpensListBox = () => {
           <p className='ml-4'>내역추가</p>
         </FlexBox>
       </FlexBox>
-      <FlexBox justifyContent='between' className='mb-32 gap-[1.6rem]'>
+      <FlexBox justifyContent='between' className='gap-[1.6rem]'>
         {summaryData.map((data, index) => (
           <ExpenseSummary key={index} label={data.label} amount={data.amount} />
         ))}
       </FlexBox>
-      <div>
-        <div className='flex items-center gap-[0.8rem]'>
-          <span className='text-14 text-gray-500'>10일 화요일</span>
-          <p className='text-12 text-warning'>이번 달 예산 초과</p>
-        </div>
-        <ul>
-          {dummyExpensesList.map((data, index) => (
-            <ExpenseItem key={index} {...data} />
-          ))}
-        </ul>
-      </div>
+      {Object.entries(groupedExpenses).map(([date, expenses]) => {
+        return (
+          <div key={date} className='mt-32'>
+            <div className='flex items-center gap-[0.8rem]'>
+              <span className='text-14 text-gray-500'>{formatDate(date)}</span>
+              <p className='text-12 text-warning'>이번 달 예산 초과</p>
+            </div>
+            <ul>
+              {expenses.map((data, index) => (
+                <ExpenseItem key={index} {...data} />
+              ))}
+            </ul>
+          </div>
+        );
+      })}
     </div>
   );
 };

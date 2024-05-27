@@ -2,6 +2,7 @@
 export type ExpenseItemProps = {
   icon: string;
   iconDescription: string;
+  used_at: string;
   amount: string;
   payment: string;
   method: string;
