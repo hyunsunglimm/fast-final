@@ -4,18 +4,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Image from 'next/image';
-import MotionCarousel from '@/components/MotionCarousel';
 import Icon from '@/components/Icon';
-
+import SwiperWrapper from '@/components/SwiperWrapper';
 const MyAssetsGraphSection = () => {
   return (
     <>
       <SectionTitle>내 자산은 어떻게</SectionTitle>
-      <MotionCarousel>
+      <SwiperWrapper dots>
         <CardList />
         <CardListTop />
         <AssetGraphCard />
-      </MotionCarousel>
+      </SwiperWrapper>
     </>
   );
 };

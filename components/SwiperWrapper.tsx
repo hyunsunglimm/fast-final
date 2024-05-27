@@ -58,8 +58,8 @@ const SwiperWrapper = ({
         navigation={arrow}
         loop
       >
-        {children.map((c) => (
-          <SwiperSlide key={JSON.stringify(c)}>{c}</SwiperSlide>
+        {children.map((c, idx) => (
+          <SwiperSlide key={idx}>{c}</SwiperSlide>
         ))}
         {arrow && (
           <FlexBox

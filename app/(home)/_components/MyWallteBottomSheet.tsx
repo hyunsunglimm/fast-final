@@ -12,7 +12,7 @@ import { getMyWalletData } from '@/service/api/home';
 const MyWallteBottomSheet = () => {
   const { openWallet, setOpenWallet } = useOpenWallet();
 
-  const { data: MyWalletData } = useQuery<any[]>({
+  const { data: MyWalletData } = useQuery({
     queryKey: ['myWallet'],
     queryFn: getMyWalletData,
     initialData: []

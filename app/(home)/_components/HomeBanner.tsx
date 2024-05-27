@@ -1,13 +1,14 @@
 import FlexBox from '@/components/ui/FlexBox';
 import React from 'react';
-import MotionCarousel from '@/components/MotionCarousel';
+
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
+import SwiperWrapper from '@/components/SwiperWrapper';
 
 const HomeBanner = () => {
   return (
-    <MotionCarousel showDots={false} showNumber>
+    <SwiperWrapper fraction>
       <Banner
         headText='4월 카드 이벤트'
         content={`나에게 맞는 카드 추천받고 <br/>
@@ -26,7 +27,7 @@ const HomeBanner = () => {
         내년 여름에 여행가자!`}
         icon='/images/home/banner/banner-saving-event.svg'
       />
-    </MotionCarousel>
+    </SwiperWrapper>
   );
 };
 export default HomeBanner;
@@ -39,7 +40,7 @@ type BannerProps = {
 
 const Banner = ({ headText, content, icon }: BannerProps) => {
   return (
-    <Card className='relative my-[2rem] w-full shrink-0 '>
+    <Card className='relative w-full '>
       <FlexBox alignItems='center' justifyContent='between'>
         <FlexBox flexDirection='col' className='px-24 py-16 pr-0'>
           <Text weight='500' sizes='12' className='mb-[0.4rem] text-gray-600'>
