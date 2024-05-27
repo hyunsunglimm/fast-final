@@ -9,27 +9,24 @@ const MyWalletButton = () => {
   const { setOpenWallet } = useOpenWallet();
 
   return (
-    <>
-      {/* 내 지갑 버튼 */}
-      <FlexBox justifyContent='end' className='fixed bottom-40 w-full px-20 xs:w-[520px]'>
-        <Button
-          onClick={() => setOpenWallet(true)}
-          size='xs'
-          className='h-[4.2rem] gap-x-8 self-end rounded-full bg-black px-16 py-8 '
-        >
-          <Icon
-            src='/icons/home/wallet.svg'
-            alt='지갑 아이콘'
-            className='rounded-none'
-            size='16'
-            aria-hidden
-          />
-          <Text sizes='14' weight='700'>
-            내 지갑
-          </Text>
-        </Button>
-      </FlexBox>
-    </>
+    <FlexBox justifyContent='end' className='fixed bottom-40 w-full px-20 xs:w-[520px]'>
+      <Button
+        onClick={() => setOpenWallet(true)}
+        size='xs'
+        className='fixed h-[4.2rem] gap-x-8 self-end rounded-full bg-black px-16 py-8 '
+      >
+        <Icon
+          src='/icons/home/wallet.svg'
+          alt='지갑 아이콘'
+          className='rounded-none'
+          size='16'
+          aria-hidden
+        />
+        <Text sizes='14' weight='700'>
+          내 지갑
+        </Text>
+      </Button>
+    </FlexBox>
   );
 };
 export default MyWalletButton;

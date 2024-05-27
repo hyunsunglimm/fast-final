@@ -37,7 +37,7 @@ const BottomSheet = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className='fixed inset-0 z-10 mx-auto flex h-full w-full items-end justify-center bg-black/70 xs:w-[520px]'
+          className='fixed inset-0 z-20 mx-auto flex h-full w-full items-end justify-center bg-black/70 xs:w-[520px]'
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               onClose();
