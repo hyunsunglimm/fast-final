@@ -1,19 +1,27 @@
+'use client';
+
 import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
 import Text from '../ui/Text';
 import Image from 'next/image';
 import Icon from '../Icon';
+import { motion, useScroll, useTransform } from 'framer-motion';
 type DefaultHeaderProps = {
   isHome?: boolean;
   title?: string;
 };
 
 export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => {
+  const { scrollY } = useScroll();
+
+  const headerColor = useTransform(scrollY, [0, 200], ['transparent', 'white']);
+
   return (
-    <header
+    <motion.header
+      style={{ backgroundColor: headerColor }}
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: 'h-[5.6rem] px-20'
+        className: 'sticky top-0 z-10 h-[5.6rem] px-20'
       })}
     >
       {isHome ? (
@@ -29,6 +37,6 @@ export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => 
         <Icon src='/icons/system-icon/header/header-alarm.svg' alt='알람 아이콘' size='24' />
         <Icon src='/icons/profile/profile.svg' alt='프로필 아이콘' size='24' />
       </FlexBox>
-    </header>
+    </motion.header>
   );
 };

@@ -1,7 +1,10 @@
+'use client';
+
 import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
 import Text from '../ui/Text';
 import Icon from '../Icon';
 import Link from 'next/link';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 type HeaderProps = {
   title?: string;
@@ -9,12 +12,17 @@ type HeaderProps = {
 };
 
 export const IsBackHeader = ({ title, href }: HeaderProps) => {
+  const { scrollY } = useScroll();
+
+  const headerColor = useTransform(scrollY, [0, 1], ['transparent', 'white']);
+
   return (
-    <header
+    <motion.header
+      style={{ backgroundColor: headerColor }}
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: 'h-[5.6rem] px-20'
+        className: 'sticky top-0 z-10 h-[5.6rem] bg-transparent px-20'
       })}
     >
       <Link href={href} aria-label='뒤로 가기 링크'>
@@ -26,6 +34,6 @@ export const IsBackHeader = ({ title, href }: HeaderProps) => {
         </Text>
       </FlexBox>
       <div className='w-[2.4rem]' aria-hidden></div>
-    </header>
+    </motion.header>
   );
 };

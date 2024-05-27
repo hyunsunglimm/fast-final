@@ -12,9 +12,7 @@ const ComparisonPage = () => {
 
   return (
     <>
-      <div className='bg-white'>
-        <IsBackHeader title='상품비교' href='./' />
-      </div>
+      <IsBackHeader title='상품비교' href='./' />
       <section className='relative pb-[13.2rem]'>
         <FilteringSection />
         <ComparisonSection />
