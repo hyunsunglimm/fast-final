@@ -1,6 +1,6 @@
-import MotionCarousel from '@/components/MotionCarousel';
 import Text from '@/components/ui/Text';
 import RecommendationCard from './RecommendationCard';
+import SwiperWrapper from '@/components/SwiperWrapper';
 
 const recommendationArray = [
   {
@@ -32,7 +32,7 @@ const CustomNavigation = () => {
       <Text sizes='20' variant='h1' weight='700' className='mb-20'>
         맞춤탐색
       </Text>
-      <MotionCarousel>
+      <SwiperWrapper dots>
         {recommendationArray.map((recommendationInfo) => {
           return (
             <RecommendationCard
@@ -41,7 +41,7 @@ const CustomNavigation = () => {
             />
           );
         })}
-      </MotionCarousel>
+      </SwiperWrapper>
     </div>
   );
 };
