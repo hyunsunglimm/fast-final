@@ -28,14 +28,25 @@ const UpcomingScheduleSection = () => {
           <FixedExpenses />
         </CardContent>
         <CardFooter className='flex w-full items-center justify-center p-0 pt-20'>
-          <Button size='sm'>내 고정 지출 알아보기</Button>
+          <Button size='sm' className='font-600'>
+            내 고정 지출 알아보기
+          </Button>
         </CardFooter>
       </Card>
       {/*  */}
       <Card className='my-[2rem] p-[2.4rem]'>
         <CardContent justifyContent='between' alignItems='center' className='w-full p-0'>
-          <FlexBox flexDirection='col'>
-            <Text>이번달 카드값이에요</Text>
+          <FlexBox flexDirection='col' className='space-y-2'>
+            <FlexBox alignItems='center' className='gap-x-2'>
+              <Text weight='500'>이번달 카드값이에요</Text>
+              <FlexBox
+                justifyContent='center'
+                alignItems='center'
+                className='h-[1.2rem] w-[1.2rem] rounded-full bg-gray-300 text-10 font-400 text-white'
+              >
+                ?
+              </FlexBox>
+            </FlexBox>
             <Text sizes='20' weight='700'>
               150,000원
             </Text>
@@ -89,11 +100,11 @@ const UpCommingCard = () => {
                   <Image src={item.imgPath} alt={item.cardName} fill sizes='auto' />
                 </div>
 
-                <FlexBox flexDirection='col'>
-                  <Text weight='700' sizes='16'>
+                <FlexBox flexDirection='col' className='gap-y-10'>
+                  <Text sizes='16' weight='700'>
                     {item.cardName}
                   </Text>
-                  <Text>{item.cardType}</Text>
+                  <Text weight='500'>{item.cardType}</Text>
                 </FlexBox>
               </FlexBox>
               <Text sizes='16' weight='500'>
@@ -104,15 +115,17 @@ const UpCommingCard = () => {
         })}
       </CardContent>
       <CardFooter className='flex items-center justify-center pb-0 pt-24'>
-        <Button size='sm'>더 알아보기</Button>
+        <Button size='sm' className='font-500'>
+          더 알아보기
+        </Button>
       </CardFooter>
     </Card>
   );
 };
 const fiexedExpensesData = [
-  { title: '월세', date: '내일', imgPath: '/icons/product/product-cvs.svg' },
-  { title: '교통비', date: '2일뒤', imgPath: '/icons/product/product-traffic.svg' },
-  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/product/product-subscribe.svg' }
+  { title: '월세', date: '내일', imgPath: '/icons/asset-page/month-rental.svg' },
+  { title: '교통비', date: '2일뒤', imgPath: '/icons/asset-page/bus.svg' },
+  { title: '구독서비스', date: '4일뒤', imgPath: '/icons/asset-page/subs.svg' }
 ];
 const FixedExpenses = () => {
   return (
@@ -125,8 +138,13 @@ const FixedExpenses = () => {
             justifyContent='between'
             className='mb-[2rem] w-full last:mb-0'
           >
-            <FlexBox className='gap-x-[0.5rem]' alignItems='center'>
-              <Icon src={item.imgPath} alt={`${item.title} 아이콘`} size='32' />
+            <FlexBox className='gap-x-8' alignItems='center'>
+              <Icon
+                src={item.imgPath}
+                alt={`${item.title} 아이콘`}
+                size='24'
+                className='rounded-none'
+              />
               <Text weight='700' sizes='16'>
                 {item.title}
               </Text>

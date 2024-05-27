@@ -5,7 +5,7 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 const MyCreditSection = () => {
   return (
-    <div>
+    <>
       <SectionTitle>내 신용 점수</SectionTitle>
       <Card>
         <CardContent
@@ -30,7 +30,7 @@ const MyCreditSection = () => {
           <FlexBox className='h-[9.2rem] w-[18.5rem] bg-orange-500'></FlexBox>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 };
 export default MyCreditSection;

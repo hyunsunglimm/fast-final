@@ -1,57 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 100;
-  src: url('../public/font/SUIT-Thin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 200;
-  src: url('../public/font/SUIT-ExtraLight.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 300;
-  src: url('../public/font/SUIT-Light.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 400;
-  src: url('../public/font/SUIT-Regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 500;
-  src: url('../public/font/SUIT-Medium.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 600;
-  src: url('../public/font/SUIT-SemiBold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 700;
-  src: url('../public/font/SUIT-Bold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 800;
-  src: url('../public/font/SUIT-ExtraBold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 900;
-  src: url('../public/font/SUIT-Heavy.woff2') format('woff2');
-}
+
 * {
   box-sizing: border-box;
 }
 html {
   font-size: 2.6667vw;
-  font-family: 'SUIT-Regular', sans-serif;
+}
+body {
+  -webkit-font-smoothing: antialiased; /* For macOS */
+  -moz-osx-font-smoothing: grayscale; /* For macOS */
+  -webkit-text-size-adjust: none;
 }
 @media (min-width: 520px) {
   html {
@@ -75,4 +35,46 @@ input {
   -webkit-user-select: none; /* Chrome, Safari, Opera */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+.swiper {
+  position: relative;
+}
+.swiper-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.4rem;
+  gap: 0.6rem;
+}
+.swiper-pagination.swiper-pagination-fraction {
+  border-radius: 10rem;
+  width: max-content;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0;
+  position: absolute;
+  background-color: #23282e;
+  color: white;
+  opacity: 0.6;
+  bottom: 1.2rem;
+  right: 1.6rem;
+  z-index: 1;
+}
+.swiper-pagination-bullet {
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #ccd1d6;
+  border-radius: 0.5rem;
+  transition: all 0.1s ease-in;
+  cursor: pointer;
+}
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  width: 1.8rem;
+  background-color: #23282e;
+}
+.swiper-button-prev {
+  background-color: red;
+  width: 10px;
 }

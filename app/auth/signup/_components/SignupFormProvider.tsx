@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SignupInputsValues, defaultValues, signupSchema } from './signupSchema';
+import { SignupInputsValues, defaultValues, signupSchema } from '../../schema/signupSchema';
 import { Form } from '@/components/ui/form';
 
 const SignUpFormProvider = ({ children }: { children: React.ReactNode }) => {

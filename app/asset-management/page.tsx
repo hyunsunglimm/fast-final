@@ -6,15 +6,21 @@ import MyAssetsGraphSection from './_components/MyAssetsGraphSection';
 const AssetManagementPage = () => {
   return (
     <>
-      <div className=''>
+      <section className='pt-20'>
         <NetWorthSection />
-      </div>
-      <div className='px-20 pb-[13.2rem]'>
+      </section>
+      <section className='px-20'>
         <MyCreditSection />
+      </section>
+      <section className='px-20'>
         <CollectAssetSection />
+      </section>
+      <section className='px-20'>
         <UpcomingScheduleSection />
+      </section>
+      <section className='px-20 pb-[13.2rem]'>
         <MyAssetsGraphSection />
-      </div>
+      </section>
     </>
   );
 };

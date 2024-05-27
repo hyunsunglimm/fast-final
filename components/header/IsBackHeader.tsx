@@ -14,7 +14,7 @@ export const IsBackHeader = ({ title, href }: HeaderProps) => {
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: 'mb-20 h-[5.6rem] px-20'
+        className: 'h-[5.6rem] px-20'
       })}
     >
       <Link href={href} aria-label='뒤로 가기 링크'>
