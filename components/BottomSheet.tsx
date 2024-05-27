@@ -1,3 +1,4 @@
+'use client';
 import { VariantProps } from 'class-variance-authority';
 import Icon from './Icon';
 import Button, { buttonVariants } from './ui/Button';
@@ -9,21 +10,25 @@ type BottomSheetProps = {
   title: string;
   buttonLabel: string;
   isOpen: boolean;
-  buttonOptions: VariantProps<typeof buttonVariants>;
+  buttonOptions?: VariantProps<typeof buttonVariants>;
   onClose: () => void;
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
+  isButtonShow?: boolean;
 };
 
 const BottomSheet = ({
   title,
   buttonLabel,
   isOpen,
-  buttonOptions: { size, styled, disabled },
+  buttonOptions,
   onClose,
   onClick,
+  isButtonShow = true,
   children
 }: BottomSheetProps) => {
+  const { size, styled, disabled } = buttonOptions || {};
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -32,7 +37,7 @@ const BottomSheet = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className='fixed inset-0 z-10 flex h-full w-full items-end justify-center bg-black/70'
+          className='fixed inset-0 z-10 mx-auto flex h-full w-full items-end justify-center bg-black/70 xs:w-[520px]'
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               onClose();
@@ -48,26 +53,28 @@ const BottomSheet = ({
           >
             <FlexBox alignItems='center' justifyContent='between' className='w-full'>
               <div />
-              <Text sizes='16' weight='500'>
+              <Text sizes='16' weight='700'>
                 {title}
               </Text>
               <Icon
                 onClick={() => onClose()}
                 src='/icons/system-icon/x.svg'
                 alt='close icon'
-                size='24'
+                size='20'
               />
             </FlexBox>
-            <div className='hide-scrollbar overflow-y-scroll'>{children}</div>
-            <Button
-              onClick={onClick}
-              size={size}
-              styled={styled}
-              disabled={disabled as boolean}
-              className='shrink-0'
-            >
-              {buttonLabel}
-            </Button>
+            <div className='hide-scrollbar overflow-y-scroll overscroll-contain'>{children}</div>
+            {isButtonShow && (
+              <Button
+                onClick={onClick}
+                size={size}
+                styled={styled}
+                disabled={disabled as boolean}
+                className='shrink-0'
+              >
+                {buttonLabel}
+              </Button>
+            )}
           </motion.div>
         </motion.section>
       )}

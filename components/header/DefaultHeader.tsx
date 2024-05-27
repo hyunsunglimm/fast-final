@@ -2,19 +2,31 @@ import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
 import Text from '../ui/Text';
 import Image from 'next/image';
 import Icon from '../Icon';
+import { HTMLAttributes } from 'react';
+import { cn } from '@/utils/twMerge';
+
 type DefaultHeaderProps = {
   isHome?: boolean;
   title?: string;
-};
+} & HTMLAttributes<HTMLElement>;
 
-export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => {
+export const DefaultHeader = ({
+  isHome = false,
+  title,
+  className,
+  ...props
+}: DefaultHeaderProps) => {
   return (
     <header
-      className={flexBoxVariants({
-        justifyContent: 'between',
-        alignItems: 'center',
-        className: 'h-[5.6rem] px-20'
-      })}
+      {...props}
+      className={cn(
+        flexBoxVariants({
+          justifyContent: 'between',
+          alignItems: 'center'
+        }),
+        'h-[5.6rem] px-20',
+        className
+      )}
     >
       {isHome ? (
         <div className='relative h-[1.96rem] w-[8.442rem]' aria-label='PORKO 로고 이미지'>

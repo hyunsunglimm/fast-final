@@ -1,8 +1,17 @@
+import dynamic from 'next/dynamic';
 import HomeBanner from './_components/HomeBanner';
 import HomeWidgetSection from './_components/HomeWidgetSection';
-import BucketListCard from './_components/BucketListCard';
-import ChallengeCard from './_components/ChallengeCard';
 import MotionCarousel from '@/components/MotionCarousel';
+import BucketListCard from './_components/BucketListCard';
+import { CardSkeleton } from '@/components/ui/skeleton';
+
+const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), {
+  ssr: false
+});
+const HomeAiBannerCard = dynamic(() => import('./_components/HomeAiBannerCard'), {
+  ssr: false,
+  loading: () => <CardSkeleton />
+});
 
 const HomePage = () => {
   return (
@@ -18,6 +27,7 @@ const HomePage = () => {
       </section>
       <section className='px-20'>
         <HomeWidgetSection />
+        <HomeAiBannerCard />
       </section>
     </>
   );
