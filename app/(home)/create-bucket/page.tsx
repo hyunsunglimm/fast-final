@@ -1,15 +1,31 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState, useRef } from 'react';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Image from 'next/image';
 import { ProgressBar } from '@/components/ProgressBar';
 import BucketBottomSheet from './_components/BucketBottomSheet';
-
+import { useWindowResize } from '@/hooks/useWindowResize';
 const DetailBucketPage = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+  const { windowHeight, windowWidth } = useWindowResize();
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      const computedStyle = window.getComputedStyle(sectionRef.current);
+      const marginTop = parseFloat(computedStyle.marginTop);
+      const marginBottom = parseFloat(computedStyle.marginBottom);
+      const totalHeight = rect.height + marginTop + marginBottom + rect.top;
+      setHeight(windowHeight - totalHeight);
+    }
+  }, [windowHeight, windowWidth]);
+
   return (
     <>
-      <section className='px-20'>
-        <FlexBox>
+      <section className='mt-20 px-20' ref={sectionRef}>
+        <FlexBox justifyContent='between'>
           <FlexBox flexDirection='col' className='text-white'>
             <Text sizes='20' weight='600' className='mb-8'>
               친구랑 유럽여행 가기
@@ -44,7 +60,7 @@ const DetailBucketPage = () => {
           <ProgressBar barColor='white' progressPercent={35} />
         </div>
       </section>
-      <BucketBottomSheet />
+      <BucketBottomSheet totalHeight={height} windowWidth={windowWidth} />
     </>
   );
 };
