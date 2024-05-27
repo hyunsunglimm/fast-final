@@ -9,7 +9,7 @@ const MyWalletButton = () => {
   const { setOpenWallet } = useOpenWallet();
 
   return (
-    <FlexBox justifyContent='end' className='fixed bottom-40 w-full px-20 xs:w-[520px]'>
+    <FlexBox justifyContent='end' className='fixed bottom-40 z-10 w-full px-20 xs:w-[520px]'>
       <Button
         onClick={() => setOpenWallet(true)}
         size='xs'
