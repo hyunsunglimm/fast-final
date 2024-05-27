@@ -19,7 +19,7 @@ export const ListHeader = ({ badgeText, headerText, subHeaderText }: ListHeaderP
           </Text>
         </div>
         <IconButton asChild>
-          <Icon src='/icons/home/three-dot.svg' alt='더 보기 아이콘' size='12' />
+          <Icon id='three-dot' src='/icons/home/three-dot.svg' alt='더 보기 아이콘' size='12' />
         </IconButton>
       </FlexBox>
       <FlexBox className='relative'>
