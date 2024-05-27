@@ -37,7 +37,7 @@ const HomeWidgetSection = async () => {
   return (
     <>
       <FlexBox justifyContent='between' alignItems='center' className='mb-[1.6rem] mt-[4rem]'>
-        <Text sizes='18' weight='600' variant='h2'>
+        <Text sizes='20' weight='700' variant='h2'>
           한 눈에 보기
         </Text>
         <Button

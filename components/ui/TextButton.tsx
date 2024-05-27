@@ -1,23 +1,26 @@
-// import NextIcon from '../icons/NextIcon';
-// import PrevIcon from '../icons/PrevIcon';
-import Text from './Text';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { cn } from '@/utils/twMerge';
+import { Slot } from '@radix-ui/react-slot';
 
 type TextButtonProps = {
-  direction?: 'left' | 'right';
-  isActive?: boolean;
   children: React.ReactNode;
-};
+  asChild?: boolean;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const TextButton = ({ direction = 'left', isActive = true, children }: TextButtonProps) => {
-  return (
-    <button className={`flex w-max items-center gap-[0.2rem] ${!isActive && 'text-gray-400'}`}>
-      {/* {direction === 'left' && <PrevIcon />} */}
-      <Text sizes='14' className='shrink-0'>
+const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
+  ({ children, asChild, className, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp
+        ref={ref}
+        {...props}
+        className={cn('text-14 underline-offset-4 hover:underline', className)}
+      >
         {children}
-      </Text>
-      {/* {direction === 'right' && <NextIcon />} */}
-    </button>
-  );
-};
+      </Comp>
+    );
+  }
+);
 
+TextButton.displayName = 'TextButton';
 export default TextButton;

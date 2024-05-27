@@ -28,14 +28,25 @@ const UpcomingScheduleSection = () => {
           <FixedExpenses />
         </CardContent>
         <CardFooter className='flex w-full items-center justify-center p-0 pt-20'>
-          <Button size='sm'>내 고정 지출 알아보기</Button>
+          <Button size='sm' className='font-600'>
+            내 고정 지출 알아보기
+          </Button>
         </CardFooter>
       </Card>
       {/*  */}
       <Card className='my-[2rem] p-[2.4rem]'>
         <CardContent justifyContent='between' alignItems='center' className='w-full p-0'>
-          <FlexBox flexDirection='col'>
-            <Text>이번달 카드값이에요</Text>
+          <FlexBox flexDirection='col' className='space-y-2'>
+            <FlexBox alignItems='center' className='gap-x-2'>
+              <Text weight='500'>이번달 카드값이에요</Text>
+              <FlexBox
+                justifyContent='center'
+                alignItems='center'
+                className='h-[1.2rem] w-[1.2rem] rounded-full bg-gray-300 text-10 font-400 text-white'
+              >
+                ?
+              </FlexBox>
+            </FlexBox>
             <Text sizes='20' weight='700'>
               150,000원
             </Text>
@@ -89,11 +100,11 @@ const UpCommingCard = () => {
                   <Image src={item.imgPath} alt={item.cardName} fill sizes='auto' />
                 </div>
 
-                <FlexBox flexDirection='col'>
-                  <Text weight='700' sizes='16'>
+                <FlexBox flexDirection='col' className='gap-y-10'>
+                  <Text sizes='16' weight='700'>
                     {item.cardName}
                   </Text>
-                  <Text>{item.cardType}</Text>
+                  <Text weight='500'>{item.cardType}</Text>
                 </FlexBox>
               </FlexBox>
               <Text sizes='16' weight='500'>
@@ -104,7 +115,9 @@ const UpCommingCard = () => {
         })}
       </CardContent>
       <CardFooter className='flex items-center justify-center pb-0 pt-24'>
-        <Button size='sm'>더 알아보기</Button>
+        <Button size='sm' className='font-500'>
+          더 알아보기
+        </Button>
       </CardFooter>
     </Card>
   );
