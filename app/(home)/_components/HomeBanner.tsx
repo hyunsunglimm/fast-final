@@ -57,8 +57,9 @@ const Banner = ({ headText, content, icon }: BannerProps) => {
           alt={`${headText} 아이콘`}
           width={120}
           height={94}
-          loading='lazy'
-          className='pointer-events-none w-[12rem]'
+          priority
+          quality='90'
+          className='pointer-events-none '
         />
       </FlexBox>
     </Card>

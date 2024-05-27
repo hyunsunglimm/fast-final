@@ -1,24 +1,22 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import BottomSheet from '@/components/BottomSheet';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
 import { useOpenWallet } from '../context/OpenWalletProvider';
+import { useQuery } from '@tanstack/react-query';
+import { getMyWalletData } from '@/service/api/home';
 
 const MyWallteBottomSheet = () => {
   const { openWallet, setOpenWallet } = useOpenWallet();
-  const [MyWalletData, setMyWalletData] = useState<any[]>([]);
 
-  const MyWalletDataFetch = async () => {
-    const res = await fetch('/api/wallet');
-    setMyWalletData(await res.json());
-  };
-
-  useEffect(() => {
-    MyWalletDataFetch();
-  }, []);
+  const { data: MyWalletData } = useQuery<any[]>({
+    queryKey: ['myWallet'],
+    queryFn: getMyWalletData,
+    initialData: []
+  });
 
   const top3Data = MyWalletData.slice(0, 3);
   const othersData = MyWalletData.slice(3);

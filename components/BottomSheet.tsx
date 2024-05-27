@@ -1,3 +1,4 @@
+'use client';
 import { VariantProps } from 'class-variance-authority';
 import Icon from './Icon';
 import Button, { buttonVariants } from './ui/Button';

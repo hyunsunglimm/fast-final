@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getWidgetItem } from '@/actions/serverAction';
+import { getWidgetItem } from '@/service/api/home';
 import { useQuery } from '@tanstack/react-query';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
@@ -14,6 +14,7 @@ import useDrag from '../hooks/useDrag';
 import useInsertAndDelete from '../hooks/useInsertAndDelete';
 import LoadingGrid from './LoadingGrid';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
+
 const DragContainer = () => {
   const [showWidget, setShowWidget] = useState<DataType[0]['showWidget']>([]);
   const [hideWidget, setHideWidget] = useState<DataType[0]['hideWidget']>([]);
@@ -89,6 +90,7 @@ const DragContainer = () => {
             숨긴 항목
           </Text>
         </div>
+
         {/* HideWidget 렌더링 */}
         <FlexBox flexDirection='col' className='gap-y-[3.2rem]'>
           {hideWidget.map((item) => {
