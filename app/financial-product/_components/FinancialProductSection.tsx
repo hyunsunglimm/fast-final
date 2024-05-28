@@ -1,5 +1,5 @@
 import Text from '@/components/ui/Text';
-import ProductCard from './ProductCard';
+import FinancialProductCardByCategory from './FinancialProductCardByCategory';
 
 const productArray = [
   {
@@ -35,7 +35,7 @@ const productArray = [
   }
 ];
 
-const FinancialProducts = () => {
+const FinancialProductSection = () => {
   return (
     <section className='mb-[4rem]'>
       <Text sizes='20' variant='h1' weight='700'>
@@ -45,7 +45,7 @@ const FinancialProducts = () => {
         {productArray.map((productInfo) => {
           return (
             <li key={productInfo.title}>
-              <ProductCard productInfo={productInfo} />
+              <FinancialProductCardByCategory productInfo={productInfo} />
             </li>
           );
         })}
@@ -54,4 +54,4 @@ const FinancialProducts = () => {
   );
 };
 
-export default FinancialProducts;
+export default FinancialProductSection;

@@ -1,5 +1,5 @@
 import Text from '@/components/ui/Text';
-import RecommendationCard from './RecommendationCard';
+import CustomNavigationCard from './CustomNavigationCard';
 import SwiperWrapper from '@/components/SwiperWrapper';
 
 const recommendationArray = [
@@ -26,7 +26,7 @@ const recommendationArray = [
   }
 ];
 
-const CustomNavigation = () => {
+const CustomNavigationSection = () => {
   return (
     <section className='mb-40'>
       <Text sizes='20' variant='h1' weight='700' className='mb-20'>
@@ -35,7 +35,7 @@ const CustomNavigation = () => {
       <SwiperWrapper dots>
         {recommendationArray.map((recommendationInfo) => {
           return (
-            <RecommendationCard
+            <CustomNavigationCard
               key={recommendationInfo.title}
               recommendationInfo={recommendationInfo}
             />
@@ -46,4 +46,4 @@ const CustomNavigation = () => {
   );
 };
 
-export default CustomNavigation;
+export default CustomNavigationSection;

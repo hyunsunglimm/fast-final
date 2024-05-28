@@ -149,6 +149,7 @@ const FilteringSection = () => {
           </Text>
         </FlexBox>
       </section>
+
       <BottomSheet
         title='카드사'
         buttonLabel='적용하기'
@@ -163,6 +164,7 @@ const FilteringSection = () => {
       >
         <SelectCardCompany items={selectedCardCompanies} onSelect={onSelectCardCompany} />
       </BottomSheet>
+
       <BottomSheet
         title='필터링'
         buttonLabel='적용하기'

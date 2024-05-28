@@ -37,7 +37,7 @@ const Themes = [
 const ThemeRecommendationsPage = () => {
   return (
     <section className='bg-white'>
-      <IsBackHeader href='./' className='mb-[1rem]' />
+      <IsBackHeader href='./' />
       <div className='px-20 pb-[6rem]'>
         <Text variant='h1' sizes='24' weight='600' className='mb-40'>
           상황에 맞는 상품을 <br /> 선택해 보세요!

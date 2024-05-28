@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card/Card';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type RecommendationInfoProps = {
+type CustomNavigationCardProps = {
   recommendationInfo: {
     title: string;
     subTitle: string;
@@ -14,9 +14,9 @@ type RecommendationInfoProps = {
   };
 };
 
-const RecommendationCard = ({
+const CustomNavigationCard = ({
   recommendationInfo: { title, subTitle, description, linkTitle, href }
-}: RecommendationInfoProps) => {
+}: CustomNavigationCardProps) => {
   const imageUrl = href.split('?')[0];
 
   return (
@@ -47,4 +47,4 @@ const RecommendationCard = ({
   );
 };
 
-export default RecommendationCard;
+export default CustomNavigationCard;
