@@ -19,7 +19,7 @@ const RootLayout = ({
   return (
     <html lang='ko'>
       <body
-        className={`${suit.className} relative mx-auto h-dvh overflow-y-scroll bg-gray-200 tracking-tight text-black xs:w-[520px]`}
+        className={`${suit.className} hide-scrollbar relative mx-auto h-dvh overflow-y-scroll bg-gray-200 tracking-tight text-black xs:w-[520px]`}
       >
         <AuthProvider>
           <QueryProviders>
