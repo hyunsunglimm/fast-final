@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useState, useCallback, useEffect } from 'react';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
@@ -17,10 +19,11 @@ export const useWindowResize = () => {
   }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMounted, handleResize]);
+  }, [isMounted]);
 
   return { windowWidth: windowSize.width, windowHeight: windowSize.height };
 };

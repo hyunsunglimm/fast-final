@@ -1,16 +1,21 @@
 'use client';
-import React, { useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { ListCard, ListHeader, ListFooter, ListContent } from './bucket-challenge';
 import Image from 'next/image';
-
+import { useRouter } from 'next/navigation';
 const BucketListCard = () => {
+  const router = useRouter();
   const [load, setLoad] = useState(false);
   const onLoadImage = () => {
     setLoad(true);
   };
-
+  const goBucketDetail = (e: MouseEvent<HTMLDivElement>) => {
+    const { id } = e.target as HTMLDivElement;
+    if (id === 'three-dot') return;
+    router.push('/bucket-detail');
+  };
   return (
-    <ListCard bgColor='bucket'>
+    <ListCard bgColor='bucket' onClick={goBucketDetail}>
       <ListHeader badgeText='버킷리스트' headerText='유럽 여행가기' />
       <ListContent textColor='bucket'>
         <Image

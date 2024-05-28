@@ -34,6 +34,7 @@ const sizeClass: { [key: string]: string } = {
 const Icon = forwardRef<HTMLDivElement, IconProps>(
   ({ size = '24', imgClass, className, ...props }, ref) => {
     const {
+      id,
       src,
       alt,
       loader,
@@ -48,6 +49,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       ...divProps
     } = props;
     const imageProps: ImageProps = {
+      id,
       src,
       alt,
       loader,
@@ -64,6 +66,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 
     return (
       <i
+        id={id}
         aria-label={alt}
         className={cn(
           `${sizeClass[size]} relative inline-block overflow-hidden rounded-full`,
