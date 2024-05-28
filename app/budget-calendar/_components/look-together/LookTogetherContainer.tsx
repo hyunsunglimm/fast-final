@@ -6,6 +6,7 @@ import Icon from '@/components/Icon';
 import Line from '../common/Line';
 import { motion } from 'framer-motion';
 import { useWindowResize } from '@/hooks/useWindowResize';
+import Title from '../common/Title';
 
 // 공유한 멤버 더미 데이터
 const items = [
@@ -56,10 +57,9 @@ const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => 
       {/* 공유한 멤버 */}
       <div className='py-40'>
         <FlexBox alignItems='center' justifyContent='between' className='mb-16 px-20'>
-          <FlexBox alignItems='center' justifyContent='between'>
-            <h2 className='mr-8 text-18 font-600'>공유한 멤버</h2>
+          <Title title='공유한 멤버'>
             <p className='text-14 font-500 text-gray-700'>9명</p>
-          </FlexBox>
+          </Title>
           <Button size='xs' styled='outline' className='px-12'>
             멤버 편집
           </Button>
@@ -98,16 +98,15 @@ const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => 
       </div>
       {/* 공유 가계부 캘린더 */}
       <div className='px-20 pb-24'>
-        <h2 className='mb-16 text-18 font-600'>{selectedProfile}님의 공유 가계부</h2>
-        <div className='h-[30rem]'>캘린더 넣을 예정</div>
+        <Title title={`${selectedProfile}님의 공유 가계부`} />
+        <div className='mt-16 h-[30rem]'>캘린더 넣을 예정</div>
       </div>
       <Line />
       {/* 소비 날씨 */}
       <div className='px-20 py-32 text-12'>
-        <FlexBox justifyContent='between' alignItems='center'>
-          <h2 className='mb-16 text-18 font-600'>{selectedProfile}님의 소비 날씨는?</h2>
+        <Title title={`${selectedProfile}님의 소비 날씨는?`}>
           <Icon size='16' src='/icons/system-icon/info.svg' alt='정보' />
-        </FlexBox>
+        </Title>
         <FlexBox justifyContent='between' className='my-40 rounded-md bg-gray-300 p-24'>
           <div>
             <h4 className='mb-8 flex h-[5.4rem] items-center text-14 font-700'>
@@ -139,7 +138,7 @@ const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => 
       <Line />
       {/* 쓰고 후회한 돈 */}
       <div className='px-20 py-32 text-14'>
-        <h2 className='mb-16 text-18 font-600'>쓰고 후회한 돈</h2>
+        <Title title='쓰고 후회한 돈' />
         <div className='text-center'>
           <div className='mb-40 h-[15.9rem] w-[16rem] text-[16rem]'></div>
           <div className='mb-16'>
