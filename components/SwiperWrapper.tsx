@@ -16,6 +16,7 @@ type SwiperWrapperProps = {
   dots?: boolean;
   fraction?: boolean;
   coverflow?: boolean;
+  setIndex?: (arg: number) => void;
   children: Array<React.ReactNode>;
 };
 
@@ -24,6 +25,7 @@ const SwiperWrapper = ({
   dots = false,
   fraction = false,
   coverflow = false,
+  setIndex,
   children
 }: SwiperWrapperProps) => {
   const sliderRef = useRef<SwiperType | null>();
@@ -55,6 +57,7 @@ const SwiperWrapper = ({
       }}
       pagination={dots ? pagination : fraction ? fractionPagination : false}
       navigation={arrow}
+      onRealIndexChange={(swiper) => setIndex && setIndex(swiper.realIndex)}
       loop
     >
       {children.map((c, idx) => (
