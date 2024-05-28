@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { ExpenseItemProps } from '@/types/budgetCalendarType';
 import Icon from '@/components/Icon';
 
