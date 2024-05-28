@@ -1,7 +1,7 @@
 import Text from '@/components/ui/Text';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import ComparisonCard from './ComparisonCard';
+import { useQueryString } from '@/hooks/useQueryString';
 
 const comparisonCards = [
   {
@@ -44,9 +44,7 @@ const comparisonCards = [
 const QUERY_KEY = 'card';
 
 const ComparisonSection = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const { searchParams, pathname, router } = useQueryString();
 
   const params = useMemo(() => new URLSearchParams(searchParams.toString()), [searchParams]);
 

@@ -6,10 +6,12 @@ import SpendingHabitsCardSection from './_components/SpendingHabitsCardSection';
 const AiRecommendationsPage = () => {
   return (
     <>
-      <IsBackHeader title='AI 맞춤' href='./' />
-      <AiBanner />
-      <PerfectFinancialProductSection />
-      <SpendingHabitsCardSection />
+      <IsBackHeader title='AI 맞춤' href='./' defaultColor='#f2f4f6' />
+      <main className='bg-gray-50'>
+        <AiBanner />
+        <PerfectFinancialProductSection />
+        <SpendingHabitsCardSection />
+      </main>
     </>
   );
 };

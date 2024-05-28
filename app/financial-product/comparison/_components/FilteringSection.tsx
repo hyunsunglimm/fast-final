@@ -5,28 +5,24 @@ import Text from '@/components/ui/Text';
 import { useState } from 'react';
 import SelectCardCompany, { cardCompanies } from './SelectCardCompany';
 import SelectFiltering from './SelectFiltering';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import FlexBox from '@/components/ui/FlexBox';
 import FilteringPlace from './FilteringPlace';
+import { useQueryString } from '@/hooks/useQueryString';
 
 export type CardCompany = { title: string; iconPath: string };
 
 const FilteringSection = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { router, pathname, params, queryValues } = useQueryString();
   const [option, setOption] = useState('');
 
-  const params = new URLSearchParams(searchParams.toString());
-
-  const selectedCardCompaniesByQueryString = searchParams.getAll('card-company').map((title) => {
+  const selectedCardCompaniesByQueryString = queryValues('card-company').map((title) => {
     return {
       title,
       iconPath: cardCompanies.find((cardCompany) => cardCompany.title === title)!.iconPath
     };
   });
 
-  const selectedFilteringsByQueryString = searchParams.getAll('filtering');
+  const selectedFilteringsByQueryString = queryValues('filtering');
 
   const [selectedCardCompanies, setSelectedCardCompanies] = useState<CardCompany[]>(
     selectedCardCompaniesByQueryString

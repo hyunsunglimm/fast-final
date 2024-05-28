@@ -55,8 +55,8 @@ const SelectCategoryPage = () => {
 
   return (
     <>
-      <IsBackHeader href={`./?${searchParams.toString()}`} />
-      <section className='px-20 pb-[13.2rem]'>
+      <IsBackHeader href={`./?${searchParams.toString()}`} defaultColor='#f2f4f6' />
+      <main className='bg-gray-50 px-20 pb-[13.2rem]'>
         <FlexBox flexDirection='col' className='gap-8'>
           <Text sizes='24' weight='500'>
             어떤 항목을 기준으로 <br /> 비교하고 싶으세요?
@@ -81,13 +81,13 @@ const SelectCategoryPage = () => {
             );
           })}
         </ul>
-      </section>
-      {selectedCategories.length >= 2 && (
-        <BottomButton
-          title='결과보기'
-          path='/financial-product/comparison/select-category/result'
-        />
-      )}
+        {selectedCategories.length >= 2 && (
+          <BottomButton
+            title='결과보기'
+            path='/financial-product/comparison/select-category/result'
+          />
+        )}
+      </main>
     </>
   );
 };

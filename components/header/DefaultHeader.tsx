@@ -22,7 +22,7 @@ export const DefaultHeader = ({
 }: DefaultHeaderProps) => {
   const { scrollY } = useScroll();
 
-  const headerColor = useTransform(scrollY, [0, 500], [`${defaultColor || 'transparent'}`, '#fff']);
+  const headerColor = useTransform(scrollY, [0, 1], [`${defaultColor || 'transparent'}`, '#fff']);
 
   return (
     <motion.header
