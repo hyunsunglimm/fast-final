@@ -18,18 +18,22 @@ const FilteringSection = () => {
 
   const params = new URLSearchParams(searchParams.toString());
 
-  const initialCardCompanies = searchParams.getAll('card-company').map((title) => {
+  const selectedCardCompaniesByQueryString = searchParams.getAll('card-company').map((title) => {
     return {
       title,
       iconPath: cardCompanies.find((cardCompany) => cardCompany.title === title)!.iconPath
     };
   });
 
-  const initialFilterings = searchParams.getAll('filtering');
+  const selectedFilteringsByQueryString = searchParams.getAll('filtering');
 
-  const [selectedCardCompanies, setSelectedCardCompanies] =
-    useState<CardCompany[]>(initialCardCompanies);
-  const [selectedFilterings, setSelectedFilterings] = useState<string[]>(initialFilterings);
+  const [selectedCardCompanies, setSelectedCardCompanies] = useState<CardCompany[]>(
+    selectedCardCompaniesByQueryString
+  );
+
+  const [selectedFilterings, setSelectedFilterings] = useState<string[]>(
+    selectedFilteringsByQueryString
+  );
 
   const cardCompanyIsOpen = option === 'card company';
   const filteringIsOpen = option === 'filtering';
@@ -80,7 +84,7 @@ const FilteringSection = () => {
 
   return (
     <>
-      <div className='mb-40 bg-white'>
+      <section className='mb-40 bg-white'>
         <Tab type='underline' array={['예적금', '대출', '카드', '보험']} tabKey='tab1' />
         <div className='border-b border-gray-100 px-20 py-16'>
           <Tab type='box' array={['신용카드', '체크카드']} tabKey='tab2' />
@@ -95,23 +99,23 @@ const FilteringSection = () => {
             <Text
               sizes='12'
               weight='700'
-              className={`${selectedCardCompanies.length > 0 ? 'text-primary' : 'text-gray-500'}`}
+              className={`${selectedCardCompaniesByQueryString.length > 0 ? 'text-primary' : 'text-gray-500'}`}
             >
               카드사
             </Text>
-            {selectedCardCompanies.length > 0 && (
+            {selectedCardCompaniesByQueryString.length > 0 && (
               <Text
                 sizes='10'
                 weight='500'
                 className='absolute right-[-0.6rem] top-[-0.5rem] flex h-[1.6rem] w-[1.6rem] items-center justify-center rounded-full bg-primary text-white'
               >
-                {selectedCardCompanies.length}
+                {selectedCardCompaniesByQueryString.length}
               </Text>
             )}
           </div>
           <div className='mx-16 h-[2.6rem] w-[0.1rem] border border-gray-200' />
           <ul className='hide-scrollbar flex gap-[1.6rem] overflow-x-scroll'>
-            {selectedCardCompanies.map(({ title, iconPath }) => {
+            {selectedCardCompaniesByQueryString.map(({ title, iconPath }) => {
               return (
                 <li key={title}>
                   <Icon src={iconPath} alt={title} size='32' />
@@ -130,23 +134,23 @@ const FilteringSection = () => {
             <Text
               sizes='12'
               weight='700'
-              className={`${selectedFilterings.length > 0 ? 'text-primary' : 'text-gray-500'}`}
+              className={`${selectedFilteringsByQueryString.length > 0 ? 'text-primary' : 'text-gray-500'}`}
             >
               필터링
             </Text>
-            {selectedFilterings.length > 0 && (
+            {selectedFilteringsByQueryString.length > 0 && (
               <Text
                 sizes='10'
                 weight='500'
                 className='absolute right-[-0.6rem] top-[-0.5rem] flex h-[1.6rem] w-[1.6rem] items-center justify-center rounded-full bg-primary text-white'
               >
-                {selectedFilterings.length}
+                {selectedFilteringsByQueryString.length}
               </Text>
             )}
           </div>
           <div className='mx-16 h-[2.6rem] w-[0.1rem] border border-gray-200' />
           <ul className='hide-scrollbar flex gap-[0.8rem] overflow-x-scroll'>
-            {selectedFilterings.map((filter) => {
+            {selectedFilteringsByQueryString.map((filter) => {
               return (
                 <li
                   key={filter}
@@ -176,7 +180,7 @@ const FilteringSection = () => {
             필터를 적용하면 상품비교 정확도가 올라가요!
           </Text>
         </FlexBox>
-      </div>
+      </section>
       <BottomSheet
         title='카드사'
         buttonLabel='적용하기'

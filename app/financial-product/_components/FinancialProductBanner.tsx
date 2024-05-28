@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const FinancialProductBanner = () => {
   return (
-    <div className='my-20'>
+    <section className='py-20'>
       <SwiperWrapper fraction>
         <Card className='relative flex justify-between p-24'>
           <FlexBox flexDirection='col'>
@@ -43,7 +43,7 @@ const FinancialProductBanner = () => {
           />
         </Card>
       </SwiperWrapper>
-    </div>
+    </section>
   );
 };
 
