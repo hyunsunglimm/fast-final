@@ -52,7 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <label
           htmlFor={id}
           className={cn(
-            'absolute top-5 z-10 origin-[0] -translate-y-12 scale-75 transform text-14 text-gray-600 duration-300',
+            'absolute top-5 z-10 origin-[0] -translate-y-12 scale-75 transform cursor-pointer text-14 text-gray-600 duration-300',
             validation === 'success' && 'peer-focus:text-active',
             validation === 'error' && 'peer-focus:text-warning',
             'peer-placeholder-shown:-translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-12 peer-focus:scale-75 peer-disabled:text-gray-300 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4'
