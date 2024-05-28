@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
-import FlexBox from '@/components/ui/FlexBox';
-import Icon from '@/components/Icon';
 import Line from '../common/Line';
 import Title from '../common/Title';
 import SharedCalendar from './SharedCalendar';
 import SharedMembers from './SharedMembers';
 import ConsumptionWeather from './ConsumptionWeather';
-
-// 소비 날씨
-const weatherData = [
-  { src: '/icons/weather/weather-3.svg', alt: '흐림', days: '11일' },
-  { src: '/icons/weather/weather-2.svg', alt: '맑음', days: '9일' },
-  { src: '/icons/weather/weather-5.svg', alt: '천둥번개', days: '5일' },
-  { src: '/icons/weather/weather-1.svg', alt: '무지개', days: '2일' }
-];
 
 const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => {
   // 함께봐요
