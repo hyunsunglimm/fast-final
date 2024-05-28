@@ -1,6 +1,5 @@
-import FlexBox from '@/components/ui/FlexBox';
-import Icon from '@/components/Icon';
 import Title from '../common/Title';
+import Icon from '@/components/Icon';
 
 const ExpensCalendarBox = () => {
   return (
