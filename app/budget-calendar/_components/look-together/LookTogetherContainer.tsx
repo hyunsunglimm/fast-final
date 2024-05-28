@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Line from '../common/Line';
-import Title from '../common/Title';
 import SharedCalendar from './SharedCalendar';
 import SharedMembers from './SharedMembers';
 import ConsumptionWeather from './ConsumptionWeather';
 import RegretSpending from './RegretSpending';
 
 const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => {
-  // 함께봐요
+  // 선택중인 프로필
   const [selectedProfile, setSelectedProfile] = useState('나');
 
   return (
