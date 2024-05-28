@@ -7,9 +7,13 @@ import FlexBox from './FlexBox';
 // Input 컴포넌트의 스타일 변형을 정의합니다.
 
 const inputVariants = cva(
-  'peer block w-full border-gray-500 appearance-none border-0 border-b-2 pb-[0.1rem] pt-4 text-16 focus:outline-none focus:ring-0 bg-transparent disabled:cursor-not-allowed disabled:border-b-gray-300 pr-28',
+  'peer block w-full appearance-none pb-[0.1rem] pt-4 text-16 focus:outline-none focus:ring-0 bg-transparent disabled:cursor-not-allowed  pr-28',
   {
     variants: {
+      border: {
+        underline: 'border-gray-500 border-0 border-b-2 disabled:border-b-gray-300',
+        nonborder: 'border-none'
+      },
       validation: {
         default: 'focus:border-active focus:text-active',
         success: 'focus:border-active focus:text-active',
@@ -17,30 +21,32 @@ const inputVariants = cva(
       }
     },
     defaultVariants: {
-      validation: 'default'
+      validation: 'default',
+      border: 'underline'
     },
-    compoundVariants: []
+    compoundVariants: [
+      {
+        border: 'nonborder',
+        className: 'focus:text-black'
+      }
+    ]
   }
 );
 
 type InputProps = {
-  icon?: (React.JSX.Element | null)[] | React.JSX.Element | null;
   trailingText?: string;
 } & VariantProps<typeof inputVariants> &
   React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    { id, placeholder, validation, className, icon: Icon, trailingText, ...props }: InputProps,
-    ref
-  ) => {
+  ({ id, placeholder, validation, border, className, trailingText, ...props }: InputProps, ref) => {
     return (
       <div className='relative flex w-full items-center'>
         <input
           {...props}
           ref={ref}
           id={id}
-          className={cn(inputVariants({ className, validation }))}
+          className={cn(inputVariants({ className, validation, border }))}
           placeholder=' '
         />
         <label
@@ -56,27 +62,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </label>
 
         {trailingText && (
-          <FlexBox className='absolute right-3 h-full pt-3' alignItems='center'>
+          <FlexBox className='absolute right-3 h-full' alignItems='center'>
             <Text sizes='14' className=' text-gray-600'>
               {trailingText}
             </Text>
-          </FlexBox>
-        )}
-        {Icon && (
-          <FlexBox className='flex items-center gap-x-4 pe-3'>
-            {Array.isArray(Icon) ? (
-              Icon.map((item, idx) => {
-                return (
-                  <button key={idx} type='button' className='flex items-center justify-center'>
-                    {item}
-                  </button>
-                );
-              })
-            ) : (
-              <button type='button' className='flex items-center justify-center'>
-                {Icon}
-              </button>
-            )}
           </FlexBox>
         )}
       </div>
