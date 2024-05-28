@@ -1,25 +1,26 @@
 import { useState, useCallback, useEffect } from 'react';
-import { debounce } from '@/utils/debounce';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
 export const useWindowResize = () => {
-  const [documentSize, setDocumentSize] = useState(0);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
 
   const isMounted = useIsMounted();
-  const handleResize = debounce(
-    useCallback(() => {
-      const documentWidth = document.documentElement.clientWidth;
-      setDocumentSize(documentWidth);
-    }, []),
-    300
-  );
+
+  const handleResize = useCallback(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }, []);
 
   useEffect(() => {
-    if (isMounted()) {
-      window.addEventListener('resize', handleResize);
-    }
+    window.addEventListener('resize', handleResize);
+
     return () => window.removeEventListener('resize', handleResize);
   }, [isMounted, handleResize]);
 
-  return { documentSize };
+  return { windowWidth: windowSize.width, windowHeight: windowSize.height };
 };

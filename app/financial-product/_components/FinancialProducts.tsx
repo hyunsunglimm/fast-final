@@ -37,7 +37,7 @@ const productArray = [
 
 const FinancialProducts = () => {
   return (
-    <div className='mb-[4rem]'>
+    <section className='mb-[4rem]'>
       <Text sizes='20' variant='h1' weight='700'>
         금융상품
       </Text>
@@ -50,7 +50,7 @@ const FinancialProducts = () => {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 };
 

@@ -76,7 +76,7 @@ const ComparisonSection = () => {
   };
 
   return (
-    <div className='px-20'>
+    <section className='px-20'>
       <Text>
         최대 <Text weight='700'>2개</Text>까지만 선택할 수 있어요
       </Text>
@@ -134,7 +134,7 @@ const ComparisonSection = () => {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 };
 

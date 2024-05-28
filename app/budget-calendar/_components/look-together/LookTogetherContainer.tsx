@@ -37,7 +37,7 @@ const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => 
   const [containerWidth, setContainerWidth] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
   const [selectedProfile, setSelectedProfile] = useState('나');
-  const { documentSize } = useWindowResize();
+  const { windowWidth } = useWindowResize();
 
   // 공유한 멤버 스크롤 될 수 있는 width 영역
   useEffect(() => {
@@ -45,7 +45,7 @@ const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => 
       setContainerWidth(containerRef.current.offsetWidth);
       setContentWidth(containerRef.current.scrollWidth);
     }
-  }, [documentSize, viewMode]);
+  }, [windowWidth, viewMode]);
 
   // 공유한 멤버 select
   const handleProfileClick = (name: string) => {
