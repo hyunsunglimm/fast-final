@@ -19,10 +19,13 @@ const RootLayout = ({
   return (
     <html lang='ko' className='hide-scrollbar bg-gray-200'>
       <body
-        className={`${suit.className} relative mx-auto h-dvh tracking-tight text-black xs:w-[520px]`}
+        className={`${suit.className} relative mx-auto h-dvh overflow-y-scroll tracking-tight text-black xs:w-[520px]`}
       >
         <AuthProvider>
           <QueryProviders>
+            {/* XXX 
+              바디 구분 위해 의도적으로 색상 넣어놨습니다.
+             */}
             {children}
             <Navbar />
           </QueryProviders>
