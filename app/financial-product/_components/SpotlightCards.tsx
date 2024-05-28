@@ -47,7 +47,7 @@ const spotlightCards = [
 
 const SpotlightCards = () => {
   return (
-    <div>
+    <section>
       <FlexBox alignItems='center'>
         <Text
           sizes='20'
@@ -76,7 +76,7 @@ const SpotlightCards = () => {
       <Button size='md' styled='outline'>
         더보기
       </Button>
-    </div>
+    </section>
   );
 };
 

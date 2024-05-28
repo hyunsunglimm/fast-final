@@ -10,12 +10,19 @@ import { HTMLAttributes } from 'react';
 type DefaultHeaderProps = {
   isHome?: boolean;
   title?: string;
+  defaultColor?: string;
+  isFixed?: boolean;
 } & HTMLAttributes<HTMLElement>;
 
-export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => {
+export const DefaultHeader = ({
+  isHome = false,
+  title,
+  defaultColor,
+  isFixed = true
+}: DefaultHeaderProps) => {
   const { scrollY } = useScroll();
 
-  const headerColor = useTransform(scrollY, [0, 200], ['transparent', 'white']);
+  const headerColor = useTransform(scrollY, [0, 500], [`${defaultColor || 'transparent'}`, '#fff']);
 
   return (
     <motion.header
@@ -23,7 +30,7 @@ export const DefaultHeader = ({ isHome = false, title }: DefaultHeaderProps) => 
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: 'sticky top-0 z-10 h-[5.6rem] px-20'
+        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] px-20`
       })}
     >
       {isHome ? (

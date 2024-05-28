@@ -9,12 +9,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 type HeaderProps = {
   title?: string;
   href: string;
+  defaultColor?: string;
+  isFixed?: boolean;
 };
 
-export const IsBackHeader = ({ title, href }: HeaderProps) => {
+export const IsBackHeader = ({ title, href, defaultColor, isFixed = true }: HeaderProps) => {
   const { scrollY } = useScroll();
 
-  const headerColor = useTransform(scrollY, [0, 1], ['transparent', 'white']);
+  const headerColor = useTransform(scrollY, [0, 500], [`${defaultColor || 'transparent'}`, '#fff']);
 
   return (
     <motion.header
@@ -22,7 +24,7 @@ export const IsBackHeader = ({ title, href }: HeaderProps) => {
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: 'sticky top-0 z-10 h-[5.6rem] bg-transparent px-20'
+        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] px-20`
       })}
     >
       <Link href={href} aria-label='뒤로 가기 링크'>

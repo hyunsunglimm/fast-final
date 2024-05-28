@@ -11,16 +11,14 @@ const ComparisonPage = () => {
   const selectedCards = searchParams.getAll('card');
 
   return (
-    <>
-      <IsBackHeader title='상품비교' href='./' />
-      <section className='relative pb-[13.2rem]'>
-        <FilteringSection />
-        <ComparisonSection />
-      </section>
+    <div className='pb-[13.2rem]'>
+      <IsBackHeader title='상품비교' href='./' defaultColor='#fff' />
+      <FilteringSection />
+      <ComparisonSection />
       {selectedCards.length >= 2 && (
         <BottomButton title='비교하기' path='/financial-product/comparison/select-category' />
       )}
-    </>
+    </div>
   );
 };
 
