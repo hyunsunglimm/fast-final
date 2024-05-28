@@ -43,7 +43,7 @@ const ExpensListBox = () => {
   const groupedExpenses = groupByDate(dummyExpensesList);
 
   return (
-    <div className='px-20 py-24 text-16'>
+    <section className='px-20 py-24 text-16'>
       <Title title='소비 내역' className='mb-32'>
         <FlexBox alignItems='center' className='cursor-pointer text-14 text-gray-500'>
           <Icon src='/icons/system-icon/plus-gray.svg' alt='추가' size='16' />
@@ -70,7 +70,7 @@ const ExpensListBox = () => {
           </div>
         );
       })}
-    </div>
+    </section>
   );
 };
 

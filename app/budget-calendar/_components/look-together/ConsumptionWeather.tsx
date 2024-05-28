@@ -13,7 +13,7 @@ const weatherData = [
 
 const ConsumptionWeather: React.FC<{ selectedProfile: string }> = ({ selectedProfile }) => {
   return (
-    <div className='px-20 py-32 text-12'>
+    <section className='px-20 py-32 text-12'>
       <Title title={`${selectedProfile}님의 소비 날씨는?`}>
         <Icon size='16' src='/icons/system-icon/info.svg' alt='정보' />
       </Title>
@@ -44,7 +44,7 @@ const ConsumptionWeather: React.FC<{ selectedProfile: string }> = ({ selectedPro
           );
         })}
       </FlexBox>
-    </div>
+    </section>
   );
 };
 
