@@ -49,6 +49,7 @@ const SpeechBubbleHeader = ({ id, annualBenefit }: SpeechBubbleHeaderProps) => {
           width={530}
           height={290}
           className='absolute top-[-11rem] w-full'
+          priority
         />
       </section>
     </>

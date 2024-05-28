@@ -140,6 +140,7 @@ const ResultPage = () => {
             width={400}
             height={160}
             className='pointer-events-none mx-auto w-[25.2rem]'
+            priority
           />
           <Image
             src='/images/financial-product/result-shinhan-mrlife-card.png'
@@ -147,6 +148,7 @@ const ResultPage = () => {
             width={400}
             height={160}
             className='pointer-events-none mx-auto w-[25.2rem]'
+            priority
           />
         </SwiperWrapper>
       </section>
