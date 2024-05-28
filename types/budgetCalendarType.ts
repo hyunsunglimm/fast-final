@@ -14,3 +14,10 @@ export type ExpenseSummaryProps = {
   label: string;
   amount: string;
 };
+
+// 공유멤버
+export type SharedMembersProps = {
+  viewMode: string;
+  selectedProfile: string;
+  setSelectedProfile: (name: string) => void;
+};
