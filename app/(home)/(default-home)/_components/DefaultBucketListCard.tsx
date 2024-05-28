@@ -38,7 +38,7 @@ const DefaultBucketListCard = () => {
       </CardContent>
       <CardFooter>
         <Button asChild size='md' className='text-16 font-600'>
-          <Link href='/create-bucket' aria-label='버킷 리스트 생성으로 이동'>
+          <Link href='/create-bucket?step=1' aria-label='버킷 리스트 생성으로 이동'>
             시작하기
           </Link>
         </Button>

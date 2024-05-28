@@ -9,7 +9,7 @@ export function useIsMounted(): () => boolean {
     return () => {
       isMounted.current = false;
     };
-  }, []);
+  }, [isMounted]);
 
   return useCallback(() => isMounted.current, []);
 }
