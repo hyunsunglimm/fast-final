@@ -9,7 +9,7 @@ const DynamicMyWallteBottomSheet = dynamic(() => import('./_components/MyWallteB
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <DefaultHeader title='Home' isHome={true} className='bg-gray-50' />
+      <DefaultHeader title='Home' isHome={true} defaultColor='#f2f4f6' />
       <main className='bg-gray-50 pb-[13.2rem]'>{children}</main>
       <OpenWalletProvider>
         <DynamicMyWallteBottomSheet />
