@@ -3,7 +3,7 @@ import { useWindowResize } from '@/hooks/useWindowResize';
 
 export const useTotalWidth = (ref: MutableRefObject<HTMLElement | null>) => {
   const [totalWidth, setTotalWidth] = useState(0);
-  const { documentSize } = useWindowResize();
+  const { windowWidth } = useWindowResize();
 
   useEffect(() => {
     if (ref.current) {
@@ -17,7 +17,7 @@ export const useTotalWidth = (ref: MutableRefObject<HTMLElement | null>) => {
 
       setTotalWidth(width);
     }
-  }, [ref, documentSize]);
+  }, [ref, windowWidth]);
 
   return { totalWidth, ref };
 };

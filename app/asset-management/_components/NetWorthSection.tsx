@@ -28,7 +28,7 @@ const NetWorthSection = () => {
   const motionRef = useRef<HTMLDivElement | null>(null);
   const [constraints, setConstraints] = useState({ left: 0, right: 0 });
   const [dragging, setDragging] = useState(false);
-  const { documentSize } = useWindowResize();
+  const { windowWidth } = useWindowResize();
   const { totalWidth } = useTotalWidth(motionRef);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const NetWorthSection = () => {
         right: 0
       });
     }
-  }, [documentSize]);
+  }, [windowWidth]);
 
   const handleItemClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
