@@ -30,7 +30,7 @@ const Tab = ({ array, type, tabKey, onTabChange }: TabProps) => {
 
   return (
     <FlexBox
-      className={`${type === 'box' ? 'gap-[0.8rem]' : 'w-full border-b border-gray-200 px-[2rem]'}`}
+      className={`${type === 'box' ? 'gap-[0.8rem]' : 'w-full border-b border-gray-200 px-20'}`}
     >
       {array.map((label) => {
         return (

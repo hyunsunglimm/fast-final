@@ -1,13 +1,12 @@
 'use client';
 
-import Icon from '@/components/Icon';
 import { IsBackHeader } from '@/components/header';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { Card } from '@/components/ui/card';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import BottomButton from '../_components/BottomButton';
+import CategoryCard from './_components/CategoryCard';
 
 const categories = [
   { title: '대중교통', iconPath: '/icons/product/product-traffic.svg' },
@@ -72,21 +71,12 @@ const SelectCategoryPage = () => {
 
             return (
               <li key={title}>
-                <Card
-                  className={`flex flex-col items-center justify-center gap-6 px-24 pb-16 pt-28 ${isSelected && 'relative ring-1 ring-primary'}`}
-                  onClick={() => onSelect(title)}
-                >
-                  <Icon src={iconPath} alt='bus icon' size='40' />
-                  <Text>{title}</Text>
-                  {isSelected && (
-                    <Icon
-                      src='/icons/system-icon/checkbox/round-checkbox-on.svg'
-                      alt='check icon'
-                      size='20'
-                      className='absolute right-[0.8rem] top-[0.8rem]'
-                    />
-                  )}
-                </Card>
+                <CategoryCard
+                  title={title}
+                  iconPath={iconPath}
+                  isSelected={isSelected}
+                  onSelect={onSelect}
+                />
               </li>
             );
           })}

@@ -6,7 +6,12 @@ import Text from '@/components/ui/Text';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
-const SpeechBubbleHeader = () => {
+type SpeechBubbleHeaderProps = {
+  id: number;
+  annualBenefit: number;
+};
+
+const SpeechBubbleHeader = ({ id, annualBenefit }: SpeechBubbleHeaderProps) => {
   const searchParams = useSearchParams();
 
   return (
@@ -24,8 +29,8 @@ const SpeechBubbleHeader = () => {
           <FlexBox justifyContent='center' className='text-center'>
             <Text sizes='16' weight='500'>
               연간{' '}
-              <Text sizes='16' weight='800' className='text-active'>
-                약 550,020원
+              <Text sizes='16' weight='800' className={id === 0 ? 'text-active' : 'text-warning'}>
+                약 {annualBenefit.toLocaleString()}원
               </Text>
               의 혜택을 <br /> 받을 수 있어요
             </Text>
