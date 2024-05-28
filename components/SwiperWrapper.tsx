@@ -58,9 +58,13 @@ const SwiperWrapper = ({
         navigation={arrow}
         loop
       >
-        {children.map((c, idx) => (
-          <SwiperSlide key={idx}>{c}</SwiperSlide>
-        ))}
+        {children.map((c, idx) => {
+          return (
+            <SwiperSlide className='cursor-grab' key={idx}>
+              {c}
+            </SwiperSlide>
+          );
+        })}
         {arrow && (
           <FlexBox
             justifyContent='between'

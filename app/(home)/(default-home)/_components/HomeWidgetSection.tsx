@@ -45,7 +45,7 @@ const HomeWidgetSection = async () => {
           size='xs'
           className='focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
         >
-          <Link aria-label='위젯 편집으로 이동' href='/edit-widget'>
+          <Link aria-label='위젯 편집으로 이동' href='/edit-widget' scroll={false}>
             편집
           </Link>
         </Button>

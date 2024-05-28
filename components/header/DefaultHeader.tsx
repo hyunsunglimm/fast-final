@@ -34,7 +34,10 @@ export const DefaultHeader = ({
       })}
     >
       {isHome ? (
-        <div className='relative h-[1.96rem] w-[8.442rem]' aria-label='PORKO 로고 이미지'>
+        <div
+          className='relative h-[1.96rem] w-[8.442rem] cursor-pointer'
+          aria-label='PORKO 로고 이미지'
+        >
           <Image src='/images/porko-logo.svg' fill alt='PORKO 로고 이미지' sizes='auto' priority />
         </div>
       ) : (
@@ -43,8 +46,18 @@ export const DefaultHeader = ({
         </Text>
       )}
       <FlexBox className='gap-x-12'>
-        <Icon src='/icons/system-icon/header/header-alarm.svg' alt='알람 아이콘' size='24' />
-        <Icon src='/icons/profile/profile.svg' alt='프로필 아이콘' size='24' />
+        <Icon
+          src='/icons/system-icon/header/header-alarm.svg'
+          alt='알람 아이콘'
+          size='24'
+          className='cursor-pointer'
+        />
+        <Icon
+          src='/icons/profile/profile.svg'
+          alt='프로필 아이콘'
+          size='24'
+          className='cursor-pointer'
+        />
       </FlexBox>
     </motion.header>
   );
