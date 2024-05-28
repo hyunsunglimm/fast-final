@@ -16,6 +16,7 @@ type SwiperWrapperProps = {
   dots?: boolean;
   fraction?: boolean;
   coverflow?: boolean;
+  setIndex?: (arg: number) => void;
   children: Array<React.ReactNode>;
 };
 
@@ -24,6 +25,7 @@ const SwiperWrapper = ({
   dots = false,
   fraction = false,
   coverflow = false,
+  setIndex,
   children
 }: SwiperWrapperProps) => {
   const sliderRef = useRef<SwiperType | null>();
@@ -41,41 +43,40 @@ const SwiperWrapper = ({
   };
 
   return (
-    <>
-      <Swiper
-        onSwiper={(swiper) => (sliderRef.current = swiper)}
-        modules={[EffectCoverflow, Pagination, Navigation]}
-        spaceBetween={coverflow ? 20 : 10}
-        centeredSlides={coverflow}
-        effect={coverflow ? 'coverflow' : undefined}
-        slidesPerView={coverflow ? 1.4 : 1}
-        coverflowEffect={{
-          rotate: 0,
-          slideShadows: false,
-          scale: 0.9
-        }}
-        pagination={dots ? pagination : fraction ? fractionPagination : false}
-        navigation={arrow}
-        loop
-      >
-        {children.map((c, idx) => (
-          <SwiperSlide key={idx}>{c}</SwiperSlide>
-        ))}
-        {arrow && (
-          <FlexBox
-            justifyContent='between'
-            className='absolute top-1/2 z-10 w-full translate-y-[-5rem] px-20'
-          >
-            <div onClick={() => sliderRef.current?.slidePrev()}>
-              <Icon src='/icons/system-icon/arrow/arrow-left.svg' alt='이전 버튼' />
-            </div>
-            <div onClick={() => sliderRef.current?.slideNext()}>
-              <Icon src='/icons/system-icon/arrow/arrow-right.svg' alt='다음 버튼' />
-            </div>
-          </FlexBox>
-        )}
-      </Swiper>
-    </>
+    <Swiper
+      onSwiper={(swiper) => (sliderRef.current = swiper)}
+      modules={[EffectCoverflow, Pagination, Navigation]}
+      spaceBetween={coverflow ? 20 : 10}
+      centeredSlides={coverflow}
+      effect={coverflow ? 'coverflow' : undefined}
+      slidesPerView={coverflow ? 1.4 : 1}
+      coverflowEffect={{
+        rotate: 0,
+        slideShadows: false,
+        scale: 0.9
+      }}
+      pagination={dots ? pagination : fraction ? fractionPagination : false}
+      navigation={arrow}
+      onRealIndexChange={(swiper) => setIndex && setIndex(swiper.realIndex)}
+      loop
+    >
+      {children.map((c, idx) => (
+        <SwiperSlide key={idx}>{c}</SwiperSlide>
+      ))}
+      {arrow && (
+        <FlexBox
+          justifyContent='between'
+          className='absolute top-1/2 z-10 w-full translate-y-[-5rem] px-20'
+        >
+          <div onClick={() => sliderRef.current?.slidePrev()}>
+            <Icon src='/icons/system-icon/arrow/arrow-left.svg' alt='이전 버튼' />
+          </div>
+          <div onClick={() => sliderRef.current?.slideNext()}>
+            <Icon src='/icons/system-icon/arrow/arrow-right.svg' alt='다음 버튼' />
+          </div>
+        </FlexBox>
+      )}
+    </Swiper>
   );
 };
 

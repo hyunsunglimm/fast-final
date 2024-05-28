@@ -3,7 +3,7 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
-import SpotlightCardItem from './SpotlightCardItem';
+import SpotlightCardItem from './SpotlightCard';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
 
@@ -45,7 +45,7 @@ const spotlightCards = [
   }
 ];
 
-const SpotlightCards = () => {
+const SpotlightCardSection = () => {
   return (
     <section>
       <FlexBox alignItems='center'>
@@ -80,4 +80,4 @@ const SpotlightCards = () => {
   );
 };
 
-export default SpotlightCards;
+export default SpotlightCardSection;

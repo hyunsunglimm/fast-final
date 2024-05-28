@@ -1,13 +1,12 @@
 'use client';
 
-import Icon from '@/components/Icon';
 import { IsBackHeader } from '@/components/header';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { Card } from '@/components/ui/card';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import BottomButton from '../_components/BottomButton';
+import CategoryCard from './_components/CategoryCard';
 
 const categories = [
   { title: '대중교통', iconPath: '/icons/product/product-traffic.svg' },
@@ -56,8 +55,8 @@ const SelectCategoryPage = () => {
 
   return (
     <>
-      <IsBackHeader href={`./?${searchParams.toString()}`} />
-      <section className='px-20 pb-[13.2rem]'>
+      <IsBackHeader href={`./?${searchParams.toString()}`} defaultColor='#f2f4f6' />
+      <main className='bg-gray-50 px-20 pb-[13.2rem]'>
         <FlexBox flexDirection='col' className='gap-8'>
           <Text sizes='24' weight='500'>
             어떤 항목을 기준으로 <br /> 비교하고 싶으세요?
@@ -72,32 +71,23 @@ const SelectCategoryPage = () => {
 
             return (
               <li key={title}>
-                <Card
-                  className={`flex flex-col items-center justify-center gap-6 px-24 pb-16 pt-28 ${isSelected && 'relative ring-1 ring-primary'}`}
-                  onClick={() => onSelect(title)}
-                >
-                  <Icon src={iconPath} alt='bus icon' size='40' />
-                  <Text>{title}</Text>
-                  {isSelected && (
-                    <Icon
-                      src='/icons/system-icon/checkbox/round-checkbox-on.svg'
-                      alt='check icon'
-                      size='20'
-                      className='absolute right-[0.8rem] top-[0.8rem]'
-                    />
-                  )}
-                </Card>
+                <CategoryCard
+                  title={title}
+                  iconPath={iconPath}
+                  isSelected={isSelected}
+                  onSelect={onSelect}
+                />
               </li>
             );
           })}
         </ul>
-      </section>
-      {selectedCategories.length >= 2 && (
-        <BottomButton
-          title='결과보기'
-          path='/financial-product/comparison/select-category/result'
-        />
-      )}
+        {selectedCategories.length >= 2 && (
+          <BottomButton
+            title='결과보기'
+            path='/financial-product/comparison/select-category/result'
+          />
+        )}
+      </main>
     </>
   );
 };

@@ -1,22 +1,22 @@
 'use client';
 
 import { DefaultHeader } from '@/components/header';
-import CustomNavigation from './_components/CustomNavigation';
-import FinancialProducts from './_components/FinancialProducts';
-import SpotlightCards from './_components/SpotlightCards';
+import CustomNavigationSection from './_components/CustomNavigationSection';
 import FinancialProductBanner from './_components/FinancialProductBanner';
+import SpotlightCardSection from './_components/SpotlightCardSection';
+import FinancialProductSection from './_components/FinancialProductSection';
 
 const FinancialProductPage = () => {
   return (
-    <div className=''>
-      <DefaultHeader title='상품탐색' />
-      <div className='px-20 pb-[13.2rem]'>
+    <>
+      <DefaultHeader title='상품탐색' defaultColor='#f2f4f6' />
+      <main className='bg-gray-50 px-20 pb-[13.2rem]'>
         <FinancialProductBanner />
-        <CustomNavigation />
-        <FinancialProducts />
-        <SpotlightCards />
-      </div>
-    </div>
+        <CustomNavigationSection />
+        <FinancialProductSection />
+        <SpotlightCardSection />
+      </main>
+    </>
   );
 };
 export default FinancialProductPage;

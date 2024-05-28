@@ -4,7 +4,7 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
 
-type SpotlightCardItemProps = {
+type SpotlightCardProps = {
   card: {
     title: string;
     annualBenefits: number;
@@ -15,10 +15,10 @@ type SpotlightCardItemProps = {
   count: number;
 };
 
-const SpotlightCardItem = ({
+const SpotlightCard = ({
   card: { title, annualBenefits, annualFee, image, isEvent },
   count
-}: SpotlightCardItemProps) => {
+}: SpotlightCardProps) => {
   return (
     <Card className='flex items-center p-16'>
       <FlexBox flexDirection='col' alignItems='center' className='mr-20'>
@@ -60,4 +60,4 @@ const SpotlightCardItem = ({
   );
 };
 
-export default SpotlightCardItem;
+export default SpotlightCard;
