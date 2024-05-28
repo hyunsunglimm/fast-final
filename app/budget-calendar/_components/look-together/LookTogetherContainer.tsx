@@ -1,27 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
-import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
 import Line from '../common/Line';
-import { motion } from 'framer-motion';
-import { useWindowResize } from '@/hooks/useWindowResize';
 import Title from '../common/Title';
-
-// 공유한 멤버 더미 데이터
-const items = [
-  { profile: '/icons/profile/profile.svg', name: '나' },
-  { profile: '/icons/profile/profile.svg', name: 'John' },
-  { profile: '/icons/profile/profile.svg', name: 'Jane' },
-  { profile: '/icons/profile/profile.svg', name: 'Alice' },
-  { profile: '/icons/profile/profile.svg', name: 'Bob' },
-  { profile: '/icons/profile/profile.svg', name: 'Eve' },
-  { profile: '/icons/profile/profile.svg', name: 'Mike' },
-  { profile: '/icons/profile/profile.svg', name: 'Anna' },
-  { profile: '/icons/profile/profile.svg', name: 'Tom' },
-  { profile: '/icons/profile/profile.svg', name: 'Lisa' },
-  { profile: '/icons/profile/profile.svg', name: 'David' }
-];
+import SharedCalendar from './SharedCalendar';
+import SharedMembers from './SharedMembers';
 
 // 소비 날씨
 const weatherData = [
@@ -33,74 +16,18 @@ const weatherData = [
 
 const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => {
   // 함께봐요
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [contentWidth, setContentWidth] = useState(0);
   const [selectedProfile, setSelectedProfile] = useState('나');
-  const { windowWidth } = useWindowResize();
-
-  // 공유한 멤버 스크롤 될 수 있는 width 영역
-  useEffect(() => {
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
-      setContentWidth(containerRef.current.scrollWidth);
-    }
-  }, [windowWidth, viewMode]);
-
-  // 공유한 멤버 select
-  const handleProfileClick = (name: string) => {
-    setSelectedProfile(name);
-  };
 
   return (
     <>
       {/* 공유한 멤버 */}
-      <div className='py-40'>
-        <FlexBox alignItems='center' justifyContent='between' className='mb-16 px-20'>
-          <Title title='공유한 멤버'>
-            <p className='text-14 font-500 text-gray-700'>9명</p>
-          </Title>
-          <Button size='xs' styled='outline' className='px-12'>
-            멤버 편집
-          </Button>
-        </FlexBox>
-        <div className='w-full overflow-hidden px-20' ref={containerRef}>
-          <motion.ul
-            className='flex gap-16 text-center'
-            drag='x'
-            dragConstraints={{ left: -(contentWidth - containerWidth), right: 0 }}
-            style={{ cursor: 'grab' }}
-          >
-            {items.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  className='relative p-4'
-                  onClick={() => handleProfileClick(item.name)}
-                >
-                  {selectedProfile === item.name && (
-                    <div className='absolute z-[2] h-[4rem] w-[4rem] rounded-full border-[0.3rem] border-primary'></div>
-                  )}
-                  <Icon
-                    src={item.profile}
-                    alt={item.name}
-                    size='40'
-                    className={'pointer-events-none mb-8'}
-                  />
-                  <p className={`${selectedProfile === item.name ? 'text-primary' : ''}`}>
-                    {item.name}
-                  </p>
-                </li>
-              );
-            })}
-          </motion.ul>
-        </div>
-      </div>
+      <SharedMembers
+        viewMode={viewMode}
+        selectedProfile={selectedProfile}
+        setSelectedProfile={setSelectedProfile}
+      />
       {/* 공유 가계부 캘린더 */}
-      <div className='px-20 pb-24'>
-        <Title title={`${selectedProfile}님의 공유 가계부`} />
-        <div className='mt-16 h-[30rem]'>캘린더 넣을 예정</div>
-      </div>
+      <SharedCalendar selectedProfile={selectedProfile} />
       <Line />
       {/* 소비 날씨 */}
       <div className='px-20 py-32 text-12'>
