@@ -36,7 +36,7 @@ const spendingData = [
 
 const MonthSpending = () => {
   return (
-    <div className='px-20 py-32'>
+    <section className='px-20 py-32'>
       <Text variant='h2' sizes='18' weight='700' className='mb-24'>
         ㅇㅇㅇ님의
         <br />
@@ -58,7 +58,7 @@ const MonthSpending = () => {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 };
 
