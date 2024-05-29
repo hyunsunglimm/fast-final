@@ -17,6 +17,9 @@ const SignUpFormProvider = ({ children }: { children: React.ReactNode }) => {
   const onSubmit = (formValues: SignupInputsValues) => {
     console.log(formValues);
     // alert(JSON.stringify(formValues));
+
+    // 회원가입 성공 후 입력정보 파기
+    sessionStorage.removeItem('signup-storage');
   };
 
   return (
