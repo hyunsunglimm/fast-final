@@ -66,6 +66,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
       {/* 버킷 이름 */}
       <InputCard>
         <Input
+          isTranslate
           placeholder='버킷리스트를 작성해주세요'
           id='bucket-name'
           name='bucket-name'
@@ -78,6 +79,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
       {/* 금액 */}
       <InputCard>
         <Input
+          isTranslate
           placeholder='금액을 적어주세요'
           id='target-amount'
           name='target-amount'
