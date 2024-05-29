@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react';
-import TransitonContainer from './_components/TransitonContainer';
+import TransitonContainer from '@/components/TransitonContainer';
 import FixedBottom from './_components/FixedBottom';
 import '@/app/globals.css';
 

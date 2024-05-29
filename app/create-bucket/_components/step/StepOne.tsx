@@ -23,6 +23,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
     'bucket-name': searchParams.get('bucket-name') || '',
     'target-amount': searchParams.get('target-amount') || ''
   });
+
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let newValue: string;
@@ -30,13 +31,14 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
       const numericValue = deleteCommaReturnNumber(value);
       if (!isNaN(numericValue)) {
         newValue = numericValue.toLocaleString();
+        setInputValues((prev) => ({ ...prev, [name]: newValue }));
       } else {
-        newValue = '';
+        newValue = '50,000';
+        setInputValues((prev) => ({ ...prev, [name]: newValue }));
       }
-      setInputValues((prev) => ({ ...prev, [name]: newValue }));
-      return;
+    } else {
+      setInputValues((prev) => ({ ...prev, [name]: value }));
     }
-    setInputValues((prev) => ({ ...prev, [name]: value }));
   }, []);
 
   const handleSelectDone = () => {
@@ -120,7 +122,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
         </div>
       </BottomSheet>
       <NextButton
-        disabled={!(inputValues['bucket-name'] && inputValues['target-amount'])}
+        disabled={!(inputValues['bucket-name'] && inputValues['target-amount'].length > 5)}
         buttonLabel='다음'
         currentStep='1'
         type='button'

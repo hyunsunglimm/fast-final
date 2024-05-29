@@ -105,7 +105,7 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
         />
       </InputCard>
       <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
-        {inputValues['day-of-week'] && inputValues['savings-amount'] ? (
+        {inputValues['day-of-week'] && inputValues['savings-amount'].length >= 5 ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
@@ -148,7 +148,7 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
       </BottomSheet>
 
       <NextButton
-        disabled={!(inputValues['savings-amount'] && inputValues['day-of-week'])}
+        disabled={!(inputValues['savings-amount'].length > 3 && inputValues['day-of-week'])}
         buttonLabel='다음'
         currentStep='3'
         type='button'

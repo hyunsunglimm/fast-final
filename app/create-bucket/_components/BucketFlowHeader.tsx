@@ -13,7 +13,7 @@ const BucketFlowHeader = ({ currentStep }: { currentStep: string | undefined }) 
   const justifyContent = transNumberStep > 1 ? 'justify-start' : 'justify-end';
 
   return (
-    <div className={`flex h-[5.6rem] w-full items-center ${justifyContent}`}>
+    <div className={`relative z-10 flex h-[5.6rem] w-full items-center ${justifyContent}`}>
       {transNumberStep > 1 ? (
         <IconButton asChild>
           <Link href={linkHref} aria-label='뒤로 가기'>
