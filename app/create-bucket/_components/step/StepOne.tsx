@@ -67,6 +67,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
           border='nonborder'
           value={inputValues['bucket-name']}
           onChange={handleInputChange}
+          maxLength={16}
         />
       </InputCard>
 

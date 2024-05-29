@@ -1,7 +1,7 @@
 'use client';
 import React, { MouseEvent } from 'react';
 import Button from '@/components/ui/Button';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getLinkHref } from '../util';
 
@@ -21,8 +21,12 @@ const NextButton = ({
   asChild
 }: NextButtonProps) => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const transNumberStep = Number(currentStep);
-  const linkHref = getLinkHref(transNumberStep, 1, searchParams);
+  const nextStepHref = getLinkHref(transNumberStep, 1, searchParams);
+
+  const linkHref =
+    transNumberStep < 4 ? pathname + nextStepHref : `${pathname}/result${nextStepHref}`;
 
   const handleDisabledAnchorClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (disabled) {
@@ -40,13 +44,9 @@ const NextButton = ({
         styled='fill_black'
         className='mt-24 w-full text-16 font-400'
       >
-        {transNumberStep < 4 ? (
-          <Link href={linkHref} onClick={handleDisabledAnchorClick}>
-            {buttonLabel}
-          </Link>
-        ) : (
-          buttonLabel
-        )}
+        <Link href={linkHref} onClick={handleDisabledAnchorClick}>
+          {buttonLabel}
+        </Link>
       </Button>
     </>
   );
