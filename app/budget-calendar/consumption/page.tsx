@@ -1,6 +1,7 @@
 import React from 'react';
 import { IsBackHeader } from '@/components/header';
 import MonthlyOverview from './_components/MonthlyOverview';
+import MonthSpending from './_components/MonthSpending';
 import Line from '../_components/common/Line';
 
 const ConsumptionPage = () => {
@@ -9,6 +10,8 @@ const ConsumptionPage = () => {
       <IsBackHeader href='./'></IsBackHeader>
       <main>
         <MonthlyOverview />
+        <Line />
+        <MonthSpending />
         <Line />
       </main>
     </div>
