@@ -1,18 +1,21 @@
 'use client';
 import React, { useCallback } from 'react';
-import { StepOne, StepTwo, StepFour } from './step';
+import { StepOne, StepTwo, StepThree, StepFour } from './step';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import NextButton from './NextButton';
 
 type BucketStepFormProps = {
   currentStep: string | undefined;
 };
 
-export type QueryType = 'bucket-name' | 'target-amount' | 'spend-book' | 'saving-book';
-export type TermsType = {
-  'bucket-name': string;
-  'target-amount': string;
-};
+export type QueryType =
+  | 'bucket-name'
+  | 'target-amount'
+  | 'spend-book'
+  | 'saving-book'
+  | 'day-of-week'
+  | 'savings-amount'
+  | 'my-saving-product';
+
 const BucketStepForm = ({ currentStep }: BucketStepFormProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -36,9 +39,8 @@ const BucketStepForm = ({ currentStep }: BucketStepFormProps) => {
     <form className='mt-24 flex flex-col gap-y-8'>
       {currentStep === '1' && <StepOne handleChangeQueryString={handleChangeQueryString} />}
       {currentStep === '2' && <StepTwo handleChangeQueryString={handleChangeQueryString} />}
-      {currentStep === '3' && <StepTwo handleChangeQueryString={handleChangeQueryString} />}
+      {currentStep === '3' && <StepThree handleChangeQueryString={handleChangeQueryString} />}
       {currentStep === '4' && <StepFour handleChangeQueryString={handleChangeQueryString} />}
-      <NextButton currentStep={currentStep} />
     </form>
   );
 };

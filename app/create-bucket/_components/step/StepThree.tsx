@@ -93,7 +93,7 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
         ) : null}
       </FlexBox>
 
-      {/* 요일 선택 바텀 시트 */}
+      {/* 상품 선택 바텀 시트 */}
       <BottomSheet
         title='요일선택'
         buttonLabel='선택'
