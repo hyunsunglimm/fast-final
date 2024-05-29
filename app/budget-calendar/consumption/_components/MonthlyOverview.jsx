@@ -12,7 +12,7 @@ const data = [
 const MonthlyOverview = () => {
   return (
     <section className='px-20 py-32'>
-      <div className='rounded-consumption min-h-[37.6rem] bg-[#FFEDE1] px-24 pb-32 pt-40 text-center'>
+      <div className='rounded-consumption bg-[#FFEDE1] px-24 pb-32 pt-40 text-center'>
         <Text
           variant='h2'
           sizes='12'
@@ -21,18 +21,18 @@ const MonthlyOverview = () => {
         >
           이번 달 목표
         </Text>
-        <FlexBox alignItems='center' justifyContent='center'>
-          <Text>600,000원</Text>
+        <FlexBox alignItems='center' justifyContent='center' className='gap-4'>
+          <Text sizes='20' weight='700'>
+            600,000원
+          </Text>
           <Text>/ 1,000,000원</Text>
           <Icon src='/icons/system-icon/info.svg' alt='정보' size='16' />
         </FlexBox>
-        <div className='my-16 p-[2.67rem]'>
-          <Icon
-            src='/icons/weather/weather-3.svg'
-            alt='구름'
-            className='h-[10.7rem] w-[10.7rem] rounded-none'
-          />
-        </div>
+        <Icon
+          src='/icons/weather/consumption/weather-3.svg'
+          alt='구름'
+          className='my-16 h-[16rem] w-[16rem] rounded-none'
+        />
         <FlexBox justifyContent='between'>
           {data.map((item, index) => {
             return (
