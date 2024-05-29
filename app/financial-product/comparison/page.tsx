@@ -12,7 +12,7 @@ const ComparisonPage = () => {
 
   return (
     <>
-      <IsBackHeader title='상품비교' href='./' defaultColor='#fff' />
+      <IsBackHeader title='상품비교' href='./?tab=신용카드' defaultColor='#fff' />
       <main className='bg-gray-50 pb-[13.2rem]'>
         <FilteringSection />
         <ComparisonSection />
