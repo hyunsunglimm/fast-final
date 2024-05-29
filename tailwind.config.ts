@@ -86,7 +86,8 @@ const config: Config = {
         xs: '0.8rem',
         sm: '1.2rem',
         md: '1.6rem',
-        lg: '2.4rem'
+        lg: '2.4rem',
+        consumption: '16rem 16rem 1.6rem 1.6rem'
       },
       colors: {
         bucket: '#53B7FF',
