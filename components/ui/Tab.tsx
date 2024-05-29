@@ -1,10 +1,10 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
 import FlexBox from './FlexBox';
 import Text from './Text';
 import Link from 'next/link';
 import { useCallback } from 'react';
+import { useQueryString } from '@/hooks/useQueryString';
 
 type TabProps = {
   array: string[];
@@ -14,9 +14,9 @@ type TabProps = {
 };
 
 const Tab = ({ array, type, tabKey, onTabChange }: TabProps) => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const selectedTab = searchParams.get(tabKey);
+  const { searchParams, pathname, queryValue } = useQueryString();
+
+  const selectedTab = queryValue(tabKey);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
