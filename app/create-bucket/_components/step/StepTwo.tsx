@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
@@ -8,6 +8,9 @@ import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
+import NextButton from '../NextButton';
+import { spendBookData, savingBookData } from '../../data';
+
 type StepTwoProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
@@ -15,8 +18,15 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
   const searchParams = useSearchParams();
   const [openSpendSheet, setOpenSpendSheet] = useState(false);
   const [openSavingSheet, setOpenSavingSheet] = useState(false);
-  const [spendBook, setSpendBook] = useState<string | null>(null);
-  const [savingBook, setSavingBook] = useState<string | null>(null);
+  const [inputValues, setInputValues] = useState({
+    'spend-book': searchParams.get('spend-book') || '',
+    'saving-book': searchParams.get('saving-book') || ''
+  });
+
+  const handleChangeInputValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputValues((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
   const handleOpenSpendBookBtSheet = () => {
     setOpenSpendSheet(true);
@@ -25,15 +35,15 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
     setOpenSavingSheet(true);
   };
 
-  const isSelectSpendBook = () => {
-    if (!spendBook) return;
-    handleChangeQueryString('spend-book', spendBook);
+  const handleSelectDoneSpendBook = () => {
+    if (!inputValues['spend-book']) return;
+    handleChangeQueryString('spend-book', inputValues['spend-book']);
     setOpenSpendSheet(false);
   };
 
-  const isSelectSavingBoook = () => {
-    if (!savingBook) return;
-    handleChangeQueryString('saving-book', savingBook);
+  const handleSelectDoneSavingBoook = () => {
+    if (!inputValues['saving-book']) return;
+    handleChangeQueryString('saving-book', inputValues['saving-book']);
     setOpenSavingSheet(false);
   };
 
@@ -41,12 +51,15 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
     <>
       <InputCard>
         <Input
-          className='z-10 cursor-pointer caret-transparent'
+          readOnly
+          className='peer/spend z-10 cursor-pointer caret-transparent'
           placeholder='출금통장을 선택해주세요'
           id='spend-book'
           border='nonborder'
           onFocus={handleOpenSpendBookBtSheet}
-          defaultValue={searchParams.get('spend-book'?.toString()) || ''}
+          value={inputValues['spend-book']}
+          isTranslate
+          inputMode='none'
         />
         <Icon
           src='/icons/system-icon/arrow/arrow-down.svg'
@@ -57,12 +70,15 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
       </InputCard>
       <InputCard>
         <Input
+          readOnly
+          isTranslate
           className='z-10 cursor-pointer caret-transparent'
           placeholder='저축통장을 선택해주세요'
           id='saving-book'
           border='nonborder'
           onFocus={handleOpenSavingBookBtSheet}
-          defaultValue={searchParams.get('saving-book'?.toString()) || ''}
+          value={inputValues['saving-book']}
+          inputMode='none'
         />
         <Icon
           src='/icons/system-icon/arrow/arrow-down.svg'
@@ -71,61 +87,106 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           className='absolute right-[2rem]'
         />
       </InputCard>
-      <FlexBox
-        alignItems='end'
-        justifyContent='center'
-        className='mt-32 h-[11.3rem] w-full'
-      ></FlexBox>
+      <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
+        {inputValues['spend-book'] && inputValues['saving-book'] ? (
+          <FlexBox
+            alignItems='center'
+            justifyContent='center'
+            className='w-full rounded-2xl bg-white p-16'
+          >
+            <Text weight='500'>
+              <span className='text-primary'>{inputValues['spend-book']}</span>에서{' '}
+              <span className='text-primary'>{inputValues['saving-book']}</span>으로 저축할거에요
+            </Text>
+          </FlexBox>
+        ) : null}
+      </FlexBox>
+
+      {/* 출금 통장 바텀 시트 */}
       <BottomSheet
         title='출금통장'
         buttonLabel='선택'
         isOpen={openSpendSheet}
         onClose={() => setOpenSpendSheet(false)}
-        buttonOptions={{ size: 'md', disabled: spendBook ? false : true }}
+        buttonOptions={{ size: 'md', disabled: inputValues['spend-book'] ? false : true }}
         buttonType='button'
-        onClick={() => isSelectSpendBook()}
+        onClick={() => handleSelectDoneSpendBook()}
       >
         <div className='mt-0 space-y-[0.8rem]'>
-          {[...Array(16)].map((item, idx) => (
-            <SpendBookCard key={idx} id={idx} setSpendBook={setSpendBook} />
-          ))}
+          {spendBookData.map((item) => {
+            return (
+              <BottomSheetCard
+                key={item.bank}
+                item={item}
+                onChange={handleChangeInputValues}
+                value={inputValues['spend-book']}
+                name='spend-book'
+              />
+            );
+          })}
         </div>
       </BottomSheet>
+
+      {/* 저축 통장 바텀 시트 */}
       <BottomSheet
         title='저축통장'
         buttonLabel='선택'
         isOpen={openSavingSheet}
         onClose={() => setOpenSavingSheet(false)}
-        buttonOptions={{ size: 'md', disabled: savingBook ? false : true }}
+        buttonOptions={{ size: 'md', disabled: inputValues['saving-book'] ? false : true }}
         buttonType='button'
-        onClick={() => isSelectSavingBoook()}
+        onClick={() => handleSelectDoneSavingBoook()}
       >
         <div className='mt-0 space-y-[0.8rem]'>
-          {[...Array(16)].map((item, idx) => (
-            <SavingBookCard key={idx} id={idx} setSavingBook={setSavingBook} />
-          ))}
+          {savingBookData.map((item) => {
+            return (
+              <BottomSheetCard
+                key={item.bank}
+                item={item}
+                value={inputValues['saving-book']}
+                onChange={handleChangeInputValues}
+                name='saving-book'
+              />
+            );
+          })}
         </div>
       </BottomSheet>
+      <NextButton
+        disabled={!(inputValues['saving-book'] && inputValues['spend-book'])}
+        buttonLabel='다음'
+        currentStep='2'
+        type='button'
+        asChild
+      />
     </>
   );
 };
 
-const SpendBookCard = ({
-  id,
-  setSpendBook
-}: {
-  id: number;
-  setSpendBook: React.Dispatch<React.SetStateAction<string | null>>;
-}) => {
+// 바텀시트 내용
+
+type ItemType = {
+  bank: string;
+  amount: number;
+  imgSrc: string;
+};
+
+type BottomSheetCard = {
+  item: ItemType;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+};
+
+const BottomSheetCard = ({ item, value, onChange, name }: BottomSheetCard) => {
+  const { bank, amount, imgSrc } = item;
   return (
     <>
       <label
-        htmlFor={`${id}`}
+        htmlFor={bank}
         className={cn(
           flexBoxVariants({
             className:
-              'cursor-pointer gap-12 rounded-full bg-gray-100 px-20 py-16  has-[:checked]:bg-select',
-
+              'cursor-pointer gap-12 rounded-full bg-gray-100 px-20 py-16 has-[:checked]:bg-select',
             alignItems: 'center'
           })
         )}
@@ -134,56 +195,20 @@ const SpendBookCard = ({
           type='radio'
           className='hidden'
           aria-hidden
-          name='spendbook'
-          id={`${id}`}
-          onChange={(e) => setSpendBook(e.currentTarget.id)}
+          name={name}
+          id={bank}
+          value={bank}
+          defaultChecked={bank === value}
+          onChange={onChange}
         />
-        <Icon src='/icons/logos/bank/bank-toss.svg' alt='아이콘' size='32' />
+        <Icon src={imgSrc} alt='아이콘' size='32' />
         <FlexBox flexDirection='col'>
-          <Text sizes='12'>카카오뱅크</Text>
+          <Text sizes='12'>{bank} </Text>
           <Text sizes='16' weight='500'>
-            200,000원
+            {amount.toLocaleString()}원
           </Text>
         </FlexBox>
       </label>
     </>
-  );
-};
-
-const SavingBookCard = ({
-  id,
-  setSavingBook
-}: {
-  id: number;
-  setSavingBook: React.Dispatch<React.SetStateAction<string | null>>;
-}) => {
-  return (
-    <label
-      htmlFor={`${id}`}
-      className={cn(
-        flexBoxVariants({
-          className:
-            'cursor-pointer gap-12 rounded-full bg-gray-100 px-20 py-16  has-[:checked]:bg-select',
-
-          alignItems: 'center'
-        })
-      )}
-    >
-      <input
-        type='radio'
-        className='hidden'
-        aria-hidden
-        name='spendbook'
-        id={`${id}`}
-        onChange={(e) => setSavingBook(e.currentTarget.id)}
-      />
-      <Icon src='/icons/logos/bank/bank-toss.svg' alt='아이콘' size='32' />
-      <FlexBox flexDirection='col'>
-        <Text sizes='12'>카카오뱅크</Text>
-        <Text sizes='16' weight='500'>
-          200,000원
-        </Text>
-      </FlexBox>
-    </label>
   );
 };
