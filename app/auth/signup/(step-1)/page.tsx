@@ -15,6 +15,7 @@ import { CardContent } from '@/components/ui/card';
 import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
 import { SignupInputsValues } from '../../schema/signupSchema';
+import { useSignupStore } from '@/store/signup';
 
 const StepOnePage = () => {
   const router = useRouter();
@@ -30,6 +31,8 @@ const StepOnePage = () => {
     setError,
     clearErrors
   } = useFormContext<SignupInputsValues>();
+
+  const { setStorage } = useSignupStore();
 
   type Tdata = {
     userId: string;
@@ -102,6 +105,12 @@ const StepOnePage = () => {
       } else {
         clearErrors('email');
       }
+
+      // session storage에 저장
+      setStorage('email', getValues('email'));
+      setStorage('checkEmail', getValues('checkEmail'));
+      setStorage('password', getValues('password'));
+      setStorage('confirmPassword', getValues('confirmPassword'));
       router.push('/auth/signup/step-2');
     }
   };
@@ -109,7 +118,6 @@ const StepOnePage = () => {
   return (
     <>
       <AuthHeader currentStep='1' title='회원가입' />
-
       <CardContent flexDirection='col' className='mt-32 w-full space-y-20'>
         {/* 이메일 */}
         <FormField

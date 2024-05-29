@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
 import { SignupInputsValues } from '../../schema/signupSchema';
+import { useSignupStore } from '@/store/signup';
 
 const StepTwoPage = () => {
   const router = useRouter();
@@ -19,10 +20,14 @@ const StepTwoPage = () => {
     setValue
   } = useFormContext<SignupInputsValues>();
 
+  const { setStorage } = useSignupStore();
+
   const onClickNext = async () => {
     const isEmailValid = await trigger('name', { shouldFocus: true });
     const isPasswordValid = await trigger('phoneNumber', { shouldFocus: true });
     if (isEmailValid && isPasswordValid) {
+      setStorage('name', getValues('name'));
+      setStorage('phoneNumber', getValues('phoneNumber'));
       router.push('/auth/signup/step-3');
     }
   };

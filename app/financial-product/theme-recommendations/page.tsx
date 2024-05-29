@@ -37,7 +37,7 @@ const Themes = [
 const ThemeRecommendationsPage = () => {
   return (
     <>
-      <IsBackHeader href='./' defaultColor='#fff' />
+      <IsBackHeader href='./?tab=신용카드' defaultColor='#fff' />
       <main className='bg-white px-20 pb-[6rem]'>
         <Text variant='h1' sizes='24' weight='600' className='mb-40'>
           상황에 맞는 상품을 <br /> 선택해 보세요!

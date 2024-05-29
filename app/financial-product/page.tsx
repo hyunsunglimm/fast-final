@@ -1,5 +1,3 @@
-'use client';
-
 import { DefaultHeader } from '@/components/header';
 import CustomNavigationSection from './_components/CustomNavigationSection';
 import FinancialProductBanner from './_components/FinancialProductBanner';

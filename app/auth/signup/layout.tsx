@@ -1,4 +1,3 @@
-import React from 'react';
 import SignUpFormProvider from './_components/SignupFormProvider';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
