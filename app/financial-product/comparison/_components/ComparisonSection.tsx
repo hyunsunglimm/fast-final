@@ -1,5 +1,5 @@
 import Text from '@/components/ui/Text';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import ComparisonCard from './ComparisonCard';
 import { useQueryString } from '@/hooks/useQueryString';
 
@@ -44,9 +44,7 @@ const comparisonCards = [
 const QUERY_KEY = 'card';
 
 const ComparisonSection = () => {
-  const { searchParams, pathname, router } = useQueryString();
-
-  const params = useMemo(() => new URLSearchParams(searchParams.toString()), [searchParams]);
+  const { searchParams, pathname, router, params } = useQueryString();
 
   const selectedCards = searchParams.getAll(QUERY_KEY);
 

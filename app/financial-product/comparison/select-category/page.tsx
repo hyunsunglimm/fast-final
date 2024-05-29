@@ -3,10 +3,10 @@
 import { IsBackHeader } from '@/components/header';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import BottomButton from '../_components/BottomButton';
 import CategoryCard from './_components/CategoryCard';
+import { useQueryString } from '@/hooks/useQueryString';
 
 const categories = [
   { title: '대중교통', iconPath: '/icons/product/product-traffic.svg' },
@@ -26,13 +26,9 @@ const categories = [
 const QUERY_KEY = 'category';
 
 const SelectCategoryPage = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { searchParams, router, pathname, queryValues, params } = useQueryString();
 
-  const selectedCategories = searchParams.getAll(QUERY_KEY);
-
-  const params = useMemo(() => new URLSearchParams(searchParams.toString()), [searchParams]);
+  const selectedCategories = queryValues(QUERY_KEY);
 
   useEffect(() => {
     if (selectedCategories.length > 2) {
