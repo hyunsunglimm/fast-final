@@ -24,7 +24,6 @@ const BucketStepForm = ({ currentStep }: BucketStepFormProps) => {
   const handleChangeQueryString = useCallback(
     (query: QueryType, term: string) => {
       const params = new URLSearchParams(searchParams.toString());
-
       if (term) {
         params.set(query, term);
       } else {

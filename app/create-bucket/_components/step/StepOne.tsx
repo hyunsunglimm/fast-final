@@ -10,6 +10,7 @@ import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { recommandedBucketData } from '../../data';
+import { deleteCommaReturnNumber } from '@/utils/deleteComma';
 
 type StepOneProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
@@ -22,9 +23,19 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
     'bucket-name': searchParams.get('bucket-name') || '',
     'target-amount': searchParams.get('target-amount') || ''
   });
-
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let newValue: string;
+    if (name === 'target-amount') {
+      const numericValue = deleteCommaReturnNumber(value);
+      if (!isNaN(numericValue)) {
+        newValue = numericValue.toLocaleString();
+      } else {
+        newValue = '';
+      }
+      setInputValues((prev) => ({ ...prev, [name]: newValue }));
+      return;
+    }
     setInputValues((prev) => ({ ...prev, [name]: value }));
   }, []);
 
@@ -67,9 +78,6 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
           border='nonborder'
           trailingText='원'
           type='text'
-          // min={100000}
-          // max={50000000}
-          // step={10000}
           inputMode='numeric'
           value={inputValues['target-amount']}
           onChange={handleInputChange}
