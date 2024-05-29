@@ -2,8 +2,11 @@ import React from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox from '@/components/ui/FlexBox';
-
-export const StepFour = () => {
+import { QueryType } from '../BucketStepForm';
+type StepFourProps = {
+  handleChangeQueryString: (query: QueryType, term: string) => void;
+};
+export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   return (
     <>
       <InputCard>

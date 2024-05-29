@@ -12,7 +12,7 @@ const BucketListCard = () => {
   const goBucketDetail = (e: MouseEvent<HTMLDivElement>) => {
     const { id } = e.target as HTMLDivElement;
     if (id === 'three-dot') return;
-    router.push('/bucket-detail');
+    router.push('/bucket-detail', { scroll: false });
   };
   return (
     <ListCard bgColor='bucket' onClick={goBucketDetail}>
