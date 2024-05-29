@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import { getStepConfig } from '../createBucketConfig';
 import FlexBox from '@/components/ui/FlexBox';
+// import cloudfrontLoader from '@/utils/imageLoader';
+
 type PorkoImageProps = {
   currentStep: string | undefined;
 };
@@ -30,6 +32,7 @@ const PorkoImage = ({ currentStep }: PorkoImageProps) => {
         className={imgWidth}
         quality={100}
         priority
+        // loader={cloudfrontLoader}
       />
     </FlexBox>
   );
