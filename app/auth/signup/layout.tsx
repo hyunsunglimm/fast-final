@@ -1,9 +1,8 @@
-import React from 'react';
 import SignUpFormProvider from './_components/SignupFormProvider';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className='relative h-full bg-white'>
+    <section className='relative h-dvh bg-white'>
       <SignUpFormProvider>{children}</SignUpFormProvider>
     </section>
   );
