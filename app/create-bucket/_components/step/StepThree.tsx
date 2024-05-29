@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
+import React, { ChangeEvent, useCallback, useState, useEffect, useRef } from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
@@ -11,6 +11,8 @@ import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { dayOfTheWeek } from '../../data';
+import { deleteCommaReturnNumber } from '@/utils/deleteComma';
+import { calculateSavingPlan } from '@/utils/dateUtils';
 
 type StepThreeProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
@@ -18,8 +20,9 @@ type StepThreeProps = {
 
 export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
   const searchParams = useSearchParams();
+  const targetAmountRef = useRef<string | null>(searchParams.get('target-amount'));
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-
+  const [expireDate, setExpireDate] = useState<Date>(new Date());
   const [inputValues, setInputValues] = useState({
     'day-of-week': searchParams.get('day-of-week') || '',
     'savings-amount': searchParams.get('savings-amount') || ''
@@ -27,6 +30,22 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
 
   const handleChangeInputValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let newValue: string;
+    if (name === 'savings-amount') {
+      const targetAmount = deleteCommaReturnNumber(targetAmountRef.current ?? '');
+      const numericValue = deleteCommaReturnNumber(value);
+      if (numericValue >= targetAmount) {
+        setInputValues((prev) => ({ ...prev, [name]: targetAmount.toLocaleString() }));
+        return;
+      }
+      if (!isNaN(numericValue)) {
+        newValue = numericValue.toLocaleString();
+      } else {
+        newValue = '';
+      }
+      setInputValues((prev) => ({ ...prev, [name]: newValue }));
+      return;
+    }
     setInputValues((prev) => ({ ...prev, [name]: value }));
   }, []);
 
@@ -41,6 +60,12 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
   };
 
   useEffect(() => {
+    if (inputValues['savings-amount']) {
+      const targetAmount = deleteCommaReturnNumber(targetAmountRef.current ?? '');
+      const numericValue = deleteCommaReturnNumber(inputValues['savings-amount']);
+      const { completionDate } = calculateSavingPlan(targetAmount, numericValue, new Date());
+      setExpireDate(completionDate);
+    }
     handleChangeQueryString('savings-amount', inputValues['savings-amount']);
   }, [handleChangeQueryString, inputValues['savings-amount']]);
 
@@ -87,7 +112,11 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
             className='w-full rounded-2xl bg-white p-16'
           >
             <Text weight='500'>
-              <span className='text-primary'>25년 8월 17일</span> 만기 예정이에요
+              <span className='text-primary'>
+                {expireDate?.getFullYear()}년 {expireDate?.getMonth() + 1}월 {expireDate?.getDate()}
+                일
+              </span>{' '}
+              만기 예정이에요
             </Text>
           </FlexBox>
         ) : null}
