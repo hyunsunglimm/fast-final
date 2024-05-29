@@ -1,11 +1,7 @@
-import Icon from '@/components/Icon';
-import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { Card } from '@/components/ui/card';
-import { benefitCategoryIconPath } from '@/utils/benefitCategoryIconPath';
-import Image from 'next/image';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
+import ComparisonCard from './ComparisonCard';
+import { useQueryString } from '@/hooks/useQueryString';
 
 const comparisonCards = [
   {
@@ -48,11 +44,7 @@ const comparisonCards = [
 const QUERY_KEY = 'card';
 
 const ComparisonSection = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const params = useMemo(() => new URLSearchParams(searchParams.toString()), [searchParams]);
+  const { searchParams, pathname, router, params } = useQueryString();
 
   const selectedCards = searchParams.getAll(QUERY_KEY);
 
@@ -86,50 +78,7 @@ const ComparisonSection = () => {
 
           return (
             <li key={card.id}>
-              <Card
-                className={`p-24 ${isSelected && 'relative ring-1 ring-primary'}`}
-                onClick={() => onSelect(card.id)}
-              >
-                <FlexBox>
-                  <Image
-                    src={`/images/financial-product/${card.fileName}.png`}
-                    alt={card.title}
-                    width={100}
-                    height={70}
-                    className='mr-16 w-[4.4rem]'
-                  />
-                  <FlexBox flexDirection='col'>
-                    <Text sizes='16' weight='600' className='mb-[0.2rem]'>
-                      {card.title}
-                    </Text>
-                    <Text className='mb-[1rem]'>{card.description}</Text>
-                    <ul className='flex gap-[0.8rem]'>
-                      {card.benefits.map((benefit) => {
-                        return (
-                          <li key={benefit} className='flex items-center gap-[0.2rem]'>
-                            <Icon
-                              src={benefitCategoryIconPath[benefit]}
-                              alt={`${benefit} icon`}
-                              size='12'
-                            />
-                            <Text sizes='12' className='text-gray-600'>
-                              {benefit}
-                            </Text>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </FlexBox>
-                </FlexBox>
-                {isSelected && (
-                  <Icon
-                    src='/icons/system-icon/checkbox/round-checkbox-on.svg'
-                    alt='check icon'
-                    size='24'
-                    className='absolute right-[2.4rem] top-1/2 w-[2.4rem] translate-y-[-50%]'
-                  />
-                )}
-              </Card>
+              <ComparisonCard isSelected={isSelected} onSelect={onSelect} card={card} />
             </li>
           );
         })}

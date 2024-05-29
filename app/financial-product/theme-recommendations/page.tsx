@@ -36,9 +36,9 @@ const Themes = [
 
 const ThemeRecommendationsPage = () => {
   return (
-    <section className='bg-white'>
-      <IsBackHeader href='./' className='mb-[1rem]' />
-      <div className='px-20 pb-[6rem]'>
+    <>
+      <IsBackHeader href='./' defaultColor='#fff' />
+      <main className='bg-white px-20 pb-[6rem]'>
         <Text variant='h1' sizes='24' weight='600' className='mb-40'>
           상황에 맞는 상품을 <br /> 선택해 보세요!
         </Text>
@@ -56,14 +56,14 @@ const ThemeRecommendationsPage = () => {
                     </Text>
                     <Text sizes='14'>{theme.subTitle}</Text>
                   </div>
-                  <Icon src={theme.iconPath} alt={theme.title} size='48' />
+                  <Icon src={theme.iconPath} alt={theme.title} size='48' className='rounded-none' />
                 </Link>
               </li>
             );
           })}
         </ul>
-      </div>
-    </section>
+      </main>
+    </>
   );
 };
 

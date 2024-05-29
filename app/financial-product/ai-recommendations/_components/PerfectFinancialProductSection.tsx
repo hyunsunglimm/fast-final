@@ -46,9 +46,9 @@ const savings = [
   }
 ];
 
-const PerfectFinancialProducts = () => {
+const PerfectFinancialProductSection = () => {
   return (
-    <div className='px-20 py-40'>
+    <section className='px-20 py-40'>
       <FlexBox justifyContent='between' alignItems='center'>
         <Text variant='h2' sizes='20' weight='600'>
           꼭 맞는 금융상품
@@ -73,8 +73,8 @@ const PerfectFinancialProducts = () => {
       <Button size='md' styled='outline'>
         더보기
       </Button>
-    </div>
+    </section>
   );
 };
 
-export default PerfectFinancialProducts;
+export default PerfectFinancialProductSection;

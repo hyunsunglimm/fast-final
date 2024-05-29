@@ -59,9 +59,9 @@ const benefits = [
   }
 ];
 
-const SpendingHabitsCards = () => {
+const SpendingHabitsCardSection = () => {
   return (
-    <div className='bg-white pb-[6rem] pt-40'>
+    <section className='bg-white pb-[6rem] pt-40'>
       <Text variant='h2' sizes='20' weight='600' className='mb-[2.6rem] text-center'>
         소비습관에 맞는 카드
       </Text>
@@ -105,8 +105,8 @@ const SpendingHabitsCards = () => {
           })}
         </ul>
       </FlexBox>
-    </div>
+    </section>
   );
 };
 
-export default SpendingHabitsCards;
+export default SpendingHabitsCardSection;
