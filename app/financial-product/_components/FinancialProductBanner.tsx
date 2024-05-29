@@ -18,7 +18,7 @@ const FinancialProductBanner = () => {
             </Text>
           </FlexBox>
           <Image
-            src='/images/financial-product/pig-mansour.png'
+            src='/images/financial-product/pig-mansour.webp'
             alt='돼수르'
             width={1000}
             height={107}
@@ -35,7 +35,7 @@ const FinancialProductBanner = () => {
             </Text>
           </FlexBox>
           <Image
-            src='/images/financial-product/pig-mansour.png'
+            src='/images/financial-product/pig-mansour.webp'
             alt='돼수르'
             width={1000}
             height={107}

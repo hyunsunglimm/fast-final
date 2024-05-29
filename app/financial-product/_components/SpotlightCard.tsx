@@ -36,7 +36,7 @@ const SpotlightCard = ({
         </Text>
       </FlexBox>
       <Image
-        src={`/images/financial-product/${image}.png`}
+        src={`/images/financial-product/${image}.webp`}
         alt={title}
         width={100}
         height={82}

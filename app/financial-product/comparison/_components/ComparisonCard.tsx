@@ -27,7 +27,7 @@ const ComparisonCard = ({ isSelected, onSelect, card }: ComparisonCardProps) => 
     >
       <FlexBox>
         <Image
-          src={`/images/financial-product/${card.fileName}.png`}
+          src={`/images/financial-product/${card.fileName}.webp`}
           alt={card.title}
           width={100}
           height={70}

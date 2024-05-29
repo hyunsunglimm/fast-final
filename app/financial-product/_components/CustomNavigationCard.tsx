@@ -32,7 +32,7 @@ const CustomNavigationCard = ({
       </Text>
       <div className='my-[3.6rem] flex justify-center'>
         <Image
-          src={`/images/financial-product/${imageUrl}.png`}
+          src={`/images/financial-product/${imageUrl}.webp`}
           alt='search products'
           width={300}
           height={142}
