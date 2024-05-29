@@ -34,7 +34,7 @@ export const getStepConfig = (step: string | undefined): CreateBucketStep => {
     createBucketConfig[stepIndex] || {
       title: '유효하지 않은 단계입니다.',
       stepText: '에러',
-      imgSrc: ''
+      imgSrc: '/images/create-bucket/flow-4.png'
     }
   );
 };
