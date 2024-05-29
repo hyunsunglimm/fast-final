@@ -1,26 +1,53 @@
 'use client';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import Button from '@/components/ui/Button';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getLinkHref } from '../util';
 
-const NextButton = ({ currentStep }: { currentStep: string | undefined }) => {
+type NextButtonProps = {
+  currentStep: string | undefined;
+  buttonLabel: string;
+  disabled?: boolean;
+  type: HTMLButtonElement['type'];
+  asChild?: boolean;
+};
+
+const NextButton = ({
+  currentStep,
+  buttonLabel,
+  type = 'button',
+  disabled = false,
+  asChild
+}: NextButtonProps) => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const transNumberStep = Number(currentStep);
-  const linkHref = getLinkHref(transNumberStep, 1, searchParams);
+  const nextStepHref = getLinkHref(transNumberStep, 1, searchParams);
+
+  const linkHref =
+    transNumberStep < 4 ? pathname + nextStepHref : `${pathname}/result${nextStepHref}`;
+
+  const handleDisabledAnchorClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (disabled) {
+      e.preventDefault();
+    }
+  };
 
   return (
     <>
-      {transNumberStep < 4 ? (
-        <Button asChild size='lg' className='mt-24 w-full'>
-          <Link href={linkHref}>다음</Link>
-        </Button>
-      ) : (
-        <Button type='submit' size='lg' className='mt-24 w-full text-16 font-400 '>
-          완료
-        </Button>
-      )}
+      <Button
+        asChild={asChild}
+        disabled={disabled}
+        type={type}
+        size='lg'
+        styled='fill_black'
+        className='mt-24 w-full text-16 font-400'
+      >
+        <Link href={linkHref} onClick={handleDisabledAnchorClick}>
+          {buttonLabel}
+        </Link>
+      </Button>
     </>
   );
 };

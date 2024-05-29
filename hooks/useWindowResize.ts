@@ -5,8 +5,8 @@ import { useIsMounted } from '@/hooks/useIsMounted';
 
 export const useWindowResize = () => {
   const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
+    width: window.innerWidth || 0,
+    height: window.innerHeight || 0
   });
 
   const isMounted = useIsMounted();

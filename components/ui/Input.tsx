@@ -35,12 +35,14 @@ const inputVariants = cva(
 
 type InputProps = {
   trailingText?: string;
+  isTranslate?: boolean;
 } & VariantProps<typeof inputVariants> &
   React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      isTranslate,
       id,
       placeholder,
       defaultValue,
@@ -57,8 +59,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div
         className={cn(
           'duration-50 relative flex w-full items-center transition-transform ease-out will-change-transform',
-          defaultValue && 'translate-y-3',
-          value && 'translate-y-3'
+          isTranslate && defaultValue && 'translate-y-3',
+          isTranslate && value && 'translate-y-3'
         )}
       >
         <input

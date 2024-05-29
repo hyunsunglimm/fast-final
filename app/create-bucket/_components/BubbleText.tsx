@@ -46,6 +46,7 @@ const BubbleText = ({ currentStep }: BubbleTextProps) => {
       </FlexBox>
       <FlexBox className='h-[5.6rem]'>
         <Text
+          variant='h3'
           sizes='20'
           weight='600'
           className='text-center'

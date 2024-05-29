@@ -8,21 +8,13 @@ import BottomSheet from '@/components/BottomSheet';
 import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
+import NextButton from '../NextButton';
+import { recommandedBucketData } from '../../data';
+import { deleteCommaReturnNumber } from '@/utils/deleteComma';
 
 type StepOneProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
-
-const recommandedBucketData = [
-  '🎁 부모님 명품 선물 사드리기',
-  '🐮 친구랑 유럽여행가기',
-  '💻 맥북 사기',
-  '✈️ 제주도 여행',
-  '📷 카메라 사기',
-  '🏠 월세 보증금 구하기',
-  '🏨 비싼 호텔에서 호캉스',
-  '🐮 한우 오마카세 가보기'
-];
 
 export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
   const searchParams = useSearchParams();
@@ -31,31 +23,33 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
     'bucket-name': searchParams.get('bucket-name') || '',
     'target-amount': searchParams.get('target-amount') || ''
   });
-  const [displayValue, setDisplayValue] = useState({
-    'bucket-name': searchParams.get('bucket-name') || '',
-    'target-amount': searchParams.get('target-amount')
-      ? Number(searchParams.get('target-amount')).toLocaleString()
-      : ''
-  });
-  const [selectHasBucketData, setSelectHasBucketData] = useState(true);
 
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputValues((prev) => ({ ...prev, [name]: value }));
+    let newValue: string;
+    if (name === 'target-amount') {
+      const numericValue = deleteCommaReturnNumber(value);
+      if (!isNaN(numericValue)) {
+        newValue = numericValue.toLocaleString();
+        setInputValues((prev) => ({ ...prev, [name]: newValue }));
+      } else {
+        newValue = '50,000';
+        setInputValues((prev) => ({ ...prev, [name]: newValue }));
+      }
+    } else {
+      setInputValues((prev) => ({ ...prev, [name]: value }));
+    }
   }, []);
 
-  const isSelectData = () => {
+  const handleSelectDone = () => {
+    if (!inputValues['bucket-name']) return;
+    handleChangeQueryString('bucket-name', inputValues['bucket-name']);
     setOpenBottomSheet(false);
   };
 
   useEffect(() => {
     handleChangeQueryString('bucket-name', inputValues['bucket-name']);
-    if (inputValues['bucket-name']) {
-      setSelectHasBucketData(false);
-    } else {
-      setSelectHasBucketData(true);
-    }
-  }, [handleChangeQueryString, inputValues['bucket-name'], searchParams]);
+  }, [handleChangeQueryString, inputValues['bucket-name']]);
 
   useEffect(() => {
     handleChangeQueryString('target-amount', inputValues['target-amount']);
@@ -66,29 +60,29 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
       {/* 버킷 이름 */}
       <InputCard>
         <Input
+          isTranslate
           placeholder='버킷리스트를 작성해주세요'
           id='bucket-name'
           name='bucket-name'
           border='nonborder'
           value={inputValues['bucket-name']}
           onChange={handleInputChange}
+          maxLength={16}
         />
       </InputCard>
 
       {/* 금액 */}
       <InputCard>
         <Input
+          isTranslate
           placeholder='금액을 적어주세요'
           id='target-amount'
           name='target-amount'
           border='nonborder'
           trailingText='원'
           type='text'
-          // min={100000}
-          // max={50000000}
-          // step={10000}
           inputMode='numeric'
-          value={Number(inputValues['target-amount']).toLocaleString()}
+          value={inputValues['target-amount']}
           onChange={handleInputChange}
         />
       </InputCard>
@@ -110,24 +104,31 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
         buttonLabel='선택'
         isOpen={openBottomSheet}
         onClose={() => setOpenBottomSheet(false)}
-        buttonOptions={{ size: 'md', disabled: selectHasBucketData }}
+        buttonOptions={{ size: 'md', disabled: inputValues['bucket-name'] ? false : true }}
         buttonType='button'
-        onClick={() => isSelectData()}
+        onClick={() => handleSelectDone()}
       >
         <div className='mt-0 space-y-[0.8rem] py-20'>
-          {recommandedBucketData.map((item, idx) => {
+          {recommandedBucketData.map((item) => {
             return (
               <RecommandedBucketList
-                value={searchParams.get('bucket-name'?.toString()) || ''}
+                value={inputValues['bucket-name']}
                 key={item}
                 text={item}
-                id={`${idx}`}
+                id={item}
                 handleInputChange={handleInputChange}
               />
             );
           })}
         </div>
       </BottomSheet>
+      <NextButton
+        disabled={!(inputValues['bucket-name'] && inputValues['target-amount'].length > 5)}
+        buttonLabel='다음'
+        currentStep='1'
+        type='button'
+        asChild
+      />
     </>
   );
 };
