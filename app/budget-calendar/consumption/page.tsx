@@ -3,6 +3,7 @@ import { IsBackHeader } from '@/components/header';
 import MonthlyOverview from './_components/MonthlyOverview';
 import MonthSpending from './_components/MonthSpending';
 import Line from '../_components/common/Line';
+import ExpenseComparison from './_components/ExpenseComparison';
 
 const ConsumptionPage = () => {
   return (
@@ -13,6 +14,7 @@ const ConsumptionPage = () => {
         <Line />
         <MonthSpending />
         <Line />
+        <ExpenseComparison />
       </main>
     </div>
   );
