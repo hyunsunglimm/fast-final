@@ -1,11 +1,11 @@
 import Text from '@/components/ui/Text';
 import { useEffect } from 'react';
-import ComparisonCard from './ComparisonCard';
 import { useQueryString } from '@/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import { getCardsToCompare } from '@/service/api/financial-product/cards';
 import Spinner from '@/components/Spinner';
 import FlexBox from '@/components/ui/FlexBox';
+import CardsToCompare from './CardsToCompare';
 
 const QUERY_KEY = 'card';
 
@@ -53,7 +53,7 @@ const ComparisonSection = () => {
 
             return (
               <li key={card.id}>
-                <ComparisonCard isSelected={isSelected} onSelect={onSelect} card={card} />
+                <CardsToCompare isSelected={isSelected} onSelect={onSelect} card={card} />
               </li>
             );
           })}
