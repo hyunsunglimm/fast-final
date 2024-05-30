@@ -7,21 +7,7 @@ import { useEffect } from 'react';
 import BottomButton from '../_components/BottomButton';
 import CategoryCard from './_components/CategoryCard';
 import { useQueryString } from '@/hooks/useQueryString';
-
-const categories = [
-  { title: '대중교통', iconPath: '/icons/product/product-traffic.svg' },
-  { title: '쇼핑', iconPath: '/icons/product/product-shopping.svg' },
-  { title: '카페', iconPath: '/icons/product/product-cafe.svg' },
-  { title: '편의점', iconPath: '/icons/product/product-cvs.svg' },
-  { title: '마트', iconPath: '/icons/product/product-mart.svg' },
-  { title: '문화', iconPath: '/icons/product/product-culture.svg' },
-  { title: '백화점', iconPath: '/icons/product/product-stores.svg' },
-  { title: '통신비', iconPath: '/icons/product/product-communication.svg' },
-  { title: '주유', iconPath: '/icons/product/product-oiling.svg' },
-  { title: '여행', iconPath: '/icons/product/product-travel.svg' },
-  { title: '온라인', iconPath: '/icons/product/product-online.svg' },
-  { title: '구독', iconPath: '/icons/product/product-subscribe.svg' }
-];
+import { COMPARISON_STANDARD } from '@/utils/financial-product/staticData';
 
 const QUERY_KEY = 'category';
 
@@ -62,7 +48,7 @@ const SelectCategoryPage = () => {
           </Text>
         </FlexBox>
         <ul className='mt-28 grid grid-cols-3 gap-12'>
-          {categories.map(({ title, iconPath }) => {
+          {COMPARISON_STANDARD.map(({ title, iconPath }) => {
             const isSelected = selectedCategories.some((c) => c === title);
 
             return (
