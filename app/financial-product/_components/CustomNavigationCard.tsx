@@ -1,3 +1,5 @@
+'use client';
+
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card/Card';
@@ -40,9 +42,11 @@ const CustomNavigationCard = ({
           className='pointer-events-none h-[14.2rem] w-auto'
         />
       </div>
-      <Link href={`/financial-product/${href}`}>
-        <Button size='md'>{linkTitle}</Button>
-      </Link>
+      <Button asChild size='md'>
+        <Link href={`/financial-product/${href}`} aria-label={`${title} 이동`}>
+          {linkTitle}
+        </Link>
+      </Button>
     </Card>
   );
 };
