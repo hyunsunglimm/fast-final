@@ -12,11 +12,9 @@ const BottomButton = ({ title, path }: BottomButtonProps) => {
 
   return (
     <div className='fixed bottom-0 left-0 right-0 mx-auto bg-gradient-to-t from-gray-200 to-white/20 px-20 py-32 xs:w-[520px]'>
-      <Link href={`${path}?${searchParams.toString()}`}>
-        <Button size='lg' styled='fill_black'>
-          {title}
-        </Button>
-      </Link>
+      <Button size='lg' styled='fill_black' asChild>
+        <Link href={`${path}?${searchParams.toString()}`}>{title}</Link>
+      </Button>
     </div>
   );
 };
