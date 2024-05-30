@@ -16,3 +16,11 @@ export type SpendingHabitsCard = {
     detail: string;
   }[];
 };
+
+export type ComparisonCard = {
+  id: string;
+  title: string;
+  description: string;
+  fileName: string;
+  benefits: string[];
+};
