@@ -12,7 +12,7 @@ const LookAloneContainer = () => {
         <Tab array={['캘린더 보기', '내역 보기']} type='box' tabKey='displayMode' />
       </div>
       <div className='px-20 text-12'>
-        <BudgetBanner />
+        <BudgetBanner icon={true} text='목표 예산 중 50%를 썼어요' showArrow={true} />
         <ExpensCalendarBox />
       </div>
       <Line />

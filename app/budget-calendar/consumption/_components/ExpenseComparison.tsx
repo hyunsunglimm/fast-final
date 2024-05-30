@@ -35,7 +35,7 @@ const ExpenseComparison = () => {
           );
         })}
       </ul>
-      <BudgetBanner />
+      <BudgetBanner text='한 달에 평균 1,000,000원 정도 써요' />
     </section>
   );
 };
