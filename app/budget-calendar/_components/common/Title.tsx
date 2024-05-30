@@ -22,7 +22,7 @@ const Title: React.FC<TitleProps> = ({ title, children, className, justifyConten
           {children}
         </FlexBox>
       ) : (
-        <h2 className={`text-18 font-600 ${className}`}>{title}</h2>
+        <h2 className={`text-18 font-600${className ? ` ${className}` : ''}`}>{title}</h2>
       )}
     </>
   );
