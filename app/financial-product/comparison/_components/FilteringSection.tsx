@@ -110,6 +110,7 @@ const FilteringSection = () => {
           option='filtering'
           selectedItems={selectedFilteringsByQueryString}
           setOption={setOption}
+          borderBottom={false}
           selectedContents={
             <ul className='hide-scrollbar flex gap-[0.8rem] overflow-x-scroll'>
               {selectedFilteringsByQueryString.map((filter) => {

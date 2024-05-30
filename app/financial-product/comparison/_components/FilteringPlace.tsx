@@ -1,14 +1,14 @@
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { CardCompany } from './FilteringSection';
-import { ReactNode } from 'react';
 
 type FilteringPlaceProps = {
   title: string;
   option: string;
   selectedItems: string[] | CardCompany[];
   setOption: (arg: string) => void;
-  selectedContents: ReactNode;
+  selectedContents: React.ReactNode;
+  borderBottom?: boolean;
 };
 
 const FilteringPlace = ({
@@ -16,10 +16,11 @@ const FilteringPlace = ({
   option,
   selectedItems,
   setOption,
-  selectedContents
+  selectedContents,
+  borderBottom = true
 }: FilteringPlaceProps) => {
   return (
-    <div className='flex items-center border-b border-gray-100 px-20 py-16'>
+    <div className={`flex items-center px-20 py-16 ${borderBottom && 'border-b border-gray-100'}`}>
       <div
         className='relative flex shrink-0 gap-[0.6rem] rounded-xs border border-gray-200 px-[1rem] py-[0.7rem]'
         onClick={() => setOption(option)}
