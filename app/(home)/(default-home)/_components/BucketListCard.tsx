@@ -1,14 +1,14 @@
 'use client';
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent } from 'react';
 import { ListCard, ListHeader, ListFooter, ListContent } from './bucket-challenge';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import useOnloadImage from '@/hooks/useOnloadImage';
+
 const BucketListCard = () => {
   const router = useRouter();
-  const [load, setLoad] = useState(false);
-  const onLoadImage = () => {
-    setLoad(true);
-  };
+  const { onLoadImage, onload } = useOnloadImage();
+
   const goBucketDetail = (e: MouseEvent<HTMLDivElement>) => {
     const { id } = e.target as HTMLDivElement;
     if (id === 'three-dot') return;
@@ -26,7 +26,7 @@ const BucketListCard = () => {
           title='버킷리스트 이미지'
           loading='lazy'
           onLoad={onLoadImage}
-          quality={load ? '100' : '10'}
+          quality={onload ? '100' : '10'}
           placeholder='blur'
           blurDataURL='data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSAwAAAABAAI7W2YAZAAA/v////8vQUxQSAwAAAABAAI7W2YAZA'
           className='pointer-events-none h-[15.5rem] w-[15.5rem]'

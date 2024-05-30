@@ -1,16 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-
+import useOnloadImage from '@/hooks/useOnloadImage';
 const DefaultBucketListCard = () => {
-  const [load, setLoad] = useState(false);
-  const onLoadImage = () => {
-    setLoad(true);
-  };
+  const { onload, onLoadImage } = useOnloadImage();
+
   return (
     <Card className='flex aspect-square flex-col justify-between p-20'>
       <CardHeader>
@@ -30,7 +28,7 @@ const DefaultBucketListCard = () => {
           title='버킷리스트 이미지'
           loading='lazy'
           onLoad={onLoadImage}
-          quality={load ? '100' : '10'}
+          quality={onload ? '100' : '10'}
           placeholder='blur'
           blurDataURL='data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSAwAAAABAAI7W2YAZAAA/v////8vQUxQSAwAAAABAAI7W2YAZA'
           className='pointer-events-none absolute bottom-8 right-0 h-[17.5rem] w-[17.4rem]'
