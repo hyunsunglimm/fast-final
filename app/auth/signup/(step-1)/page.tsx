@@ -21,7 +21,7 @@ const StepOnePage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [emailMessage, setEmailMessage] = useState('');
+
   const {
     setValue,
     getValues,
@@ -43,7 +43,10 @@ const StepOnePage = () => {
     mutationFn: (id) => checkEmailDuplicate(id),
     onSuccess: (data) => {
       if (data) {
-        setEmailMessage(data.message);
+        setError('email', {
+          type: 'manual',
+          message: data.message || ''
+        });
         setValue('checkEmail', true);
       }
     },
@@ -57,33 +60,20 @@ const StepOnePage = () => {
 
   const email = useWatch({
     control,
-    name: 'email',
-    defaultValue: ''
+    name: 'email'
   });
 
   const validateEmail = useCallback(async () => {
     const isValidEmail = await trigger('email');
-    // console.log('isValidEmail', isValidEmail);
-    // console.log('getvalues', getValues('checkEmail'));
     if (!isValidEmail) {
       setError('email', {
         type: 'manual',
         message: errors.email?.message || ''
       });
     } else {
-      // isValidEmail에 true 면 checkEmail은 false가 되어야 한다.
-      // 페이지가 갔다 오면 isValidEmail이 true라 checkEmail이 다시 false가 된다.
       clearErrors('email');
       setValue('checkEmail', false);
-      // setValue('checkEmail', false);
-      // if (getValues('checkEmail')) {
-      //   console.log('else in getvalue true');
-      //   return;
-      // }
-      // console.log('else out getvalue true');
     }
-    // setIsButtonDisabled(!isValidEmail);
-    setEmailMessage('');
   }, [trigger, setError, clearErrors, errors.email, setValue]);
 
   useEffect(() => {
@@ -154,14 +144,11 @@ const StepOnePage = () => {
                   </FlexBox>
                 </FormControl>
 
-                {errors.email && <FormMessage className='text-12 font-400 text-warning' />}
-                {emailMessage ? (
+                {errors.email && (
                   <FormMessage
-                    className={`text-12 font-400 ${emailMessage.includes('가능한') ? 'text-active' : 'text-warning'}`}
-                  >
-                    {emailMessage}
-                  </FormMessage>
-                ) : null}
+                    className={`text-12 font-400 ${errors.email.message?.includes('가능한') ? 'text-active' : 'text-warning'}`}
+                  />
+                )}
               </FormItem>
             );
           }}
@@ -233,7 +220,12 @@ const StepOnePage = () => {
         />
       </CardContent>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
-        <Button type='button' className='w-full' onClick={onClickNext}>
+        <Button
+          disabled={!(getValues('email') && getValues('password') && getValues('confirmPassword'))}
+          type='button'
+          className='w-full'
+          onClick={onClickNext}
+        >
           다음
         </Button>
       </div>
