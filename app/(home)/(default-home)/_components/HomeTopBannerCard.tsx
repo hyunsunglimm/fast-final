@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import Image from 'next/image';
 import SwiperWrapper from '@/components/SwiperWrapper';
 
-const HomeBanner = () => {
+const HomeTopBannerCard = () => {
   return (
     <SwiperWrapper fraction>
       <Banner
@@ -30,7 +30,7 @@ const HomeBanner = () => {
     </SwiperWrapper>
   );
 };
-export default HomeBanner;
+export default HomeTopBannerCard;
 
 type BannerProps = {
   headText: string;

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import HomeBanner from './_components/HomeBanner';
+import HomeTopBannerCard from './_components/HomeTopBannerCard';
 import HomeWidgetSection from './_components/HomeWidgetSection';
 import BucketListCard from './_components/BucketListCard';
 import DefaultBucketListCard from './_components/DefaultBucketListCard';
@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <>
       <section className='mb-20 px-20'>
-        <HomeBanner />
+        <HomeTopBannerCard />
       </section>
       <section className='mb-24 px-20'>
         <SwiperWrapper dots>

@@ -35,20 +35,18 @@ const NextButton = ({
   };
 
   return (
-    <>
-      <Button
-        asChild={asChild}
-        disabled={disabled}
-        type={type}
-        size='lg'
-        styled='fill_black'
-        className='mt-24 w-full text-16 font-400'
-      >
-        <Link href={linkHref} onClick={handleDisabledAnchorClick}>
-          {buttonLabel}
-        </Link>
-      </Button>
-    </>
+    <Button
+      asChild={asChild}
+      disabled={disabled}
+      type={type}
+      size='lg'
+      styled='fill_black'
+      className='mt-24 w-full text-16 font-400'
+    >
+      <Link href={linkHref} onClick={handleDisabledAnchorClick}>
+        {buttonLabel}
+      </Link>
+    </Button>
   );
 };
 
