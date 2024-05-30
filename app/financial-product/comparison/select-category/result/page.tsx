@@ -42,13 +42,13 @@ const comporisonCards = [
 const comporisonResultA = [
   {
     title: '카드 A',
-    imgPath: '/images/financial-product/kakao-shinhan-time.png',
+    imgPath: '/images/financial-product/kakao-shinhan-time.webp',
     categories: '시내버스, 지하철, 택시',
     benefits: ['10% 할인', '월 최대 1만원']
   },
   {
     title: '카드 B',
-    imgPath: '/images/financial-product/shinhan-mrlife.png',
+    imgPath: '/images/financial-product/shinhan-mrlife.webp',
     categories: '시내버스, 지하철',
     benefits: ['건별 200월 할인', '월 최대 5천원']
   }
@@ -57,13 +57,13 @@ const comporisonResultA = [
 const comporisonResultB = [
   {
     title: '카드 A',
-    imgPath: '/images/financial-product/kakao-shinhan-time.png',
+    imgPath: '/images/financial-product/kakao-shinhan-time.webp',
     categories: '투썸플레이스, 스타벅스, 커피빈, 폴바셋',
     benefits: ['50% 할인', '월 최대 1만원']
   },
   {
     title: '카드 B',
-    imgPath: '/images/financial-product/shinhan-mrlife.png',
+    imgPath: '/images/financial-product/shinhan-mrlife.webp',
     categories: '투썸플레이스, 스타벅스',
     benefits: ['60% 할인', '월 최대 1만원']
   }
@@ -140,7 +140,7 @@ const ResultPage = () => {
         <section className='pt-[14.4rem]'>
           <SwiperWrapper arrow setIndex={setCurrentCardIndex}>
             <Image
-              src='/images/financial-product/result-shinhan-card.png'
+              src='/images/financial-product/result-shinhan-card.webp'
               alt='신한 카드 비교 결과 이미지'
               width={400}
               height={160}
@@ -148,7 +148,7 @@ const ResultPage = () => {
               priority
             />
             <Image
-              src='/images/financial-product/result-shinhan-mrlife-card.png'
+              src='/images/financial-product/result-shinhan-mrlife-card.webp'
               alt='신한 카드 비교 결과 이미지'
               width={400}
               height={160}

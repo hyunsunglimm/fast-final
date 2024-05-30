@@ -6,46 +6,20 @@ import Text from '@/components/ui/Text';
 import SpotlightCardItem from './SpotlightCard';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
-
-const spotlightCards = [
-  {
-    title: '카카오뱅크 신한카드 Time',
-    annualBenefits: 100602,
-    annualFee: '연회비 1만원',
-    image: 'kakao-shinhan-time',
-    isEvent: false
-  },
-  {
-    title: '신한카드 Mr.Life',
-    annualBenefits: 91162,
-    annualFee: '연회비 1만 5천원',
-    image: 'shinhan-mrlife',
-    isEvent: false
-  },
-  {
-    title: '카카오페이 신한 라이언',
-    annualBenefits: 80000,
-    annualFee: '연회비 이벤트',
-    image: 'kakao-shinhan-lion',
-    isEvent: true
-  },
-  {
-    title: 'BC 바로 클리어 플러스',
-    annualBenefits: 71165,
-    annualFee: '연회비 1만원',
-    image: 'bc-clear-plus',
-    isEvent: false
-  },
-  {
-    title: 'BC 바로 클리어',
-    annualBenefits: 56428,
-    annualFee: '연회비 이벤트',
-    image: 'balance',
-    isEvent: true
-  }
-];
+import { getSpotlightCards } from '@/service/api/financial-product/cards';
+import { useQueryString } from '@/hooks/useQueryString';
+import { useQuery } from '@tanstack/react-query';
+import Spinner from '@/components/Spinner';
 
 const SpotlightCardSection = () => {
+  const { queryValue } = useQueryString();
+  const type = queryValue('tab');
+
+  const { data: spotlightCards, isPending } = useQuery({
+    queryKey: ['spotlightCard', type],
+    queryFn: () => getSpotlightCards(type)
+  });
+
   return (
     <section>
       <FlexBox alignItems='center'>
@@ -64,18 +38,27 @@ const SpotlightCardSection = () => {
       <div className='mb-24 mt-16'>
         <Tab array={['신용카드', '체크카드']} type='box' tabKey='tab' />
       </div>
-      <ul className='mb-24 flex flex-col gap-[1.2rem]'>
-        {spotlightCards.map((card, index) => {
-          return (
-            <li key={card.title}>
-              <SpotlightCardItem card={card} count={index + 1} />
-            </li>
-          );
-        })}
-      </ul>
-      <Button size='md' styled='outline'>
-        더보기
-      </Button>
+      {isPending ? (
+        <FlexBox justifyContent='center'>
+          <Spinner />
+        </FlexBox>
+      ) : (
+        <ul className='mb-24 flex flex-col gap-[1.2rem]'>
+          {spotlightCards?.map((card, index) => {
+            return (
+              <li key={card.title}>
+                <SpotlightCardItem card={card} count={index + 1} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
+      {spotlightCards && (
+        <Button size='md' styled='outline'>
+          더보기
+        </Button>
+      )}
     </section>
   );
 };

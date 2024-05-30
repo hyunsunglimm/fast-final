@@ -19,7 +19,7 @@ const AiBanner = () => {
           <Icon src='/icons/system-icon/arrow/arrow-right-white.svg' alt='next icon' size='16' />
         </div>
         <Image
-          src='/images/financial-product/ai-banner-porko.png'
+          src='/images/financial-product/ai-banner-porko.webp'
           alt='ai 배너 이미지'
           width={300}
           height={133}

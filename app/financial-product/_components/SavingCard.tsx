@@ -27,7 +27,12 @@ const SavingCard = ({ saving }: SavingCardProps) => {
             {bank}
           </Text>
         </div>
-        <Icon src='/icons/system-icon/heart-stroke.svg' alt='heart icon' size='20' />
+        <Icon
+          src='/icons/system-icon/heart-stroke.svg'
+          alt='heart icon'
+          size='20'
+          className='rounded-none'
+        />
       </div>
 
       <div className='flex justify-between'>
