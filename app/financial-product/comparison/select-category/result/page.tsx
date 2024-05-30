@@ -12,7 +12,7 @@ import BenefitCircle from './_components/BenefitCircle';
 import { IsBackHeader } from '@/components/header';
 import { useSearchParams } from 'next/navigation';
 
-const comporisonCards = [
+const comparedCards = [
   {
     id: 0,
     annualBenefit: 550020,
@@ -39,7 +39,7 @@ const comporisonCards = [
   }
 ];
 
-const comporisonResultA = [
+const comparedResultA = [
   {
     title: '카드 A',
     imgPath: '/images/financial-product/kakao-shinhan-time.webp',
@@ -54,7 +54,7 @@ const comporisonResultA = [
   }
 ];
 
-const comporisonResultB = [
+const comparedResultB = [
   {
     title: '카드 A',
     imgPath: '/images/financial-product/kakao-shinhan-time.webp',
@@ -69,7 +69,7 @@ const comporisonResultB = [
   }
 ];
 
-const circleInfo = [
+const cafeBenefitInfo = [
   {
     id: 'c1',
     title: '스타벅스',
@@ -117,7 +117,7 @@ const circleInfo = [
 const ResultPage = () => {
   const searchParams = useSearchParams();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const currentCard = comporisonCards[currentCardIndex];
+  const currentCard = comparedCards[currentCardIndex];
 
   const {
     id,
@@ -170,7 +170,7 @@ const ResultPage = () => {
           difference={diffByStandardA}
           standard={0}
           id={id}
-          comporisonResult={comporisonResultA}
+          comporisonResult={comparedResultA}
           content={
             <FlexBox justifyContent='center' className='my-28 gap-[4rem]' alignItems='end'>
               <FlexBox flexDirection='col' className='gap-16'>
@@ -192,10 +192,10 @@ const ResultPage = () => {
           difference={diffByStandardB}
           standard={1}
           id={id}
-          comporisonResult={comporisonResultB}
+          comporisonResult={comparedResultB}
           content={
             <div className='relative my-28 h-[24.5rem] w-full'>
-              {circleInfo.map(({ id, title, rate, color, positionClass }) => {
+              {cafeBenefitInfo.map(({ id, title, rate, color, positionClass }) => {
                 return (
                   <BenefitCircle
                     key={id}
