@@ -1,3 +1,5 @@
+'use client';
+
 import FlexBox from '@/components/ui/FlexBox';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
@@ -5,10 +7,14 @@ import SavingCard from '../../_components/SavingCard';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
 import { getSavings } from '@/service/api/financial-product/savings';
+import { useQuery } from '@tanstack/react-query';
+import Spinner from '@/components/Spinner';
 
-const PerfectFinancialProductSection = async () => {
-  await new Promise((res) => setTimeout(res, 2000));
-  const savings = await getSavings();
+const PerfectFinancialProductSection = () => {
+  const { data: savings, isPending } = useQuery({
+    queryKey: ['savings'],
+    queryFn: getSavings
+  });
 
   return (
     <section className='px-20 py-40'>
@@ -24,18 +30,26 @@ const PerfectFinancialProductSection = async () => {
       <div className='mb-16 mt-20'>
         <Tab type='box' array={['예적금', '카드', '대출', '청약']} tabKey='tab' />
       </div>
-      <ul className='mb-24 flex flex-col gap-[1.2rem]'>
-        {savings.map((saving) => {
-          return (
-            <li key={saving.title}>
-              <SavingCard saving={saving} />
-            </li>
-          );
-        })}
-      </ul>
-      <Button size='md' styled='outline'>
-        더보기
-      </Button>
+      {isPending ? (
+        <FlexBox justifyContent='center'>
+          <Spinner />
+        </FlexBox>
+      ) : (
+        <ul className='mb-24 flex flex-col gap-[1.2rem]'>
+          {savings?.map((saving) => {
+            return (
+              <li key={saving.title}>
+                <SavingCard saving={saving} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      {savings && (
+        <Button size='md' styled='outline'>
+          더보기
+        </Button>
+      )}
     </section>
   );
 };
