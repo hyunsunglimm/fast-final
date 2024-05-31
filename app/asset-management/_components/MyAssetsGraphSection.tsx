@@ -6,6 +6,8 @@ import FlexBox from '@/components/ui/FlexBox';
 import Image from 'next/image';
 import Icon from '@/components/Icon';
 import SwiperWrapper from '@/components/SwiperWrapper';
+import AssetGraphCard from './AssetGraphCard';
+
 const MyAssetsGraphSection = () => {
   return (
     <>
@@ -77,29 +79,6 @@ const CardListTop = () => {
             />
           </div>
         </FlexBox>
-      </CardContent>
-    </Card>
-  );
-};
-
-const AssetGraphCard = () => {
-  return (
-    <Card className='h-[23rem] w-full shrink-0'>
-      <CardContent flexDirection='col' className='gap-y-16 p-24'>
-        <FlexBox flexDirection='col' className='text-gray-500'>
-          <Text weight='500' sizes='16'>
-            가지고 있는 자산 중에
-          </Text>
-          <FlexBox alignItems='center' className='gap-x-1'>
-            <Text weight='500' sizes='16'>
-              <Text className='text-black' weight='700' sizes='16'>
-                입출금
-              </Text>
-              이 가장 많아요
-            </Text>
-          </FlexBox>
-        </FlexBox>
-        <div className='h-[11.4rem] w-full bg-orange-500 px-[0.8rem]'>graph</div>
       </CardContent>
     </Card>
   );
