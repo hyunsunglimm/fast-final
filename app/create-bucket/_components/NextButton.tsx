@@ -1,16 +1,50 @@
-import React from 'react';
+'use client';
+import React, { MouseEvent } from 'react';
 import Button from '@/components/ui/Button';
+import { useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { getLinkHref } from '../util';
 
-const NextButton = ({ currentStep }: { currentStep: string | undefined }) => {
-  const linkHref = currentStep
-    ? `/create-bucket?step=${Number(currentStep) + 1}`
-    : '/create-bucket?step=1';
+type NextButtonProps = {
+  currentStep: string | undefined;
+  buttonLabel: string;
+  disabled?: boolean;
+  type: HTMLButtonElement['type'];
+  asChild?: boolean;
+};
+
+const NextButton = ({
+  currentStep,
+  buttonLabel,
+  type = 'button',
+  disabled = false,
+  asChild
+}: NextButtonProps) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const transNumberStep = Number(currentStep);
+  const nextStepHref = getLinkHref(transNumberStep, 1, searchParams);
+
+  const linkHref =
+    transNumberStep < 4 ? pathname + nextStepHref : `${pathname}/result${nextStepHref}`;
+
+  const handleDisabledAnchorClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (disabled) {
+      e.preventDefault();
+    }
+  };
 
   return (
-    <Button asChild size='lg' className='w-full'>
-      <Link href={linkHref} className='text-16 font-400'>
-        다음
+    <Button
+      asChild={asChild}
+      disabled={disabled}
+      type={type}
+      size='lg'
+      styled='fill_black'
+      className='mt-24 w-full text-16 font-400'
+    >
+      <Link href={linkHref} onClick={handleDisabledAnchorClick}>
+        {buttonLabel}
       </Link>
     </Button>
   );

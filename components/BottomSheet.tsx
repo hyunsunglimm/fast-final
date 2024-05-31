@@ -10,6 +10,7 @@ type BottomSheetProps = {
   title: string;
   buttonLabel: string;
   isOpen: boolean;
+  buttonType?: HTMLButtonElement['type'];
   buttonOptions?: VariantProps<typeof buttonVariants>;
   onClose: () => void;
   onClick?: () => void;
@@ -21,6 +22,7 @@ const BottomSheet = ({
   title,
   buttonLabel,
   isOpen,
+  buttonType,
   buttonOptions,
   onClose,
   onClick,
@@ -52,7 +54,7 @@ const BottomSheet = ({
             className='flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
           >
             <FlexBox alignItems='center' justifyContent='between' className='w-full'>
-              <div />
+              <div className='w-[1.6rem]' />
               <Text sizes='16' weight='700'>
                 {title}
               </Text>
@@ -66,6 +68,7 @@ const BottomSheet = ({
             <div className='hide-scrollbar overflow-y-scroll overscroll-contain'>{children}</div>
             {isButtonShow && (
               <Button
+                type={buttonType}
                 onClick={onClick}
                 size={size}
                 styled={styled}

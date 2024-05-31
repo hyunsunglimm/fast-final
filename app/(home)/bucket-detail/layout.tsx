@@ -1,12 +1,15 @@
 import React from 'react';
-import { IsBackHeader } from '@/components/header';
+import DetailHeader from './_components/DetailHeader';
+import TransitonContainer from '@/components/TransitonContainer';
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const BucketDetailLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='relative h-full w-full overflow-hidden bg-active'>
-      <IsBackHeader href='/' title='버킷리스트' />
-      {children}
-    </div>
+    <TransitonContainer>
+      <div className='relative h-dvh w-full overflow-hidden bg-active'>
+        <DetailHeader />
+        {children}
+      </div>
+    </TransitonContainer>
   );
 };
-export default layout;
+export default BucketDetailLayout;

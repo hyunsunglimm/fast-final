@@ -4,21 +4,23 @@ import { IsBackHeader } from '@/components/header';
 import FilteringSection from './_components/FilteringSection';
 import ComparisonSection from './_components/ComparisonSection';
 import BottomButton from './_components/BottomButton';
-import { useSearchParams } from 'next/navigation';
+import { useQueryString } from '@/hooks/useQueryString';
 
 const ComparisonPage = () => {
-  const searchParams = useSearchParams();
-  const selectedCards = searchParams.getAll('card');
+  const { queryValues } = useQueryString();
+  const selectedCards = queryValues('card');
 
   return (
-    <div className='pb-[13.2rem]'>
-      <IsBackHeader title='상품비교' href='./' defaultColor='#fff' />
-      <FilteringSection />
-      <ComparisonSection />
-      {selectedCards.length >= 2 && (
-        <BottomButton title='비교하기' path='/financial-product/comparison/select-category' />
-      )}
-    </div>
+    <>
+      <IsBackHeader title='상품비교' href='./?tab=신용카드' defaultColor='#fff' />
+      <main className='bg-gray-50 pb-[13.2rem]'>
+        <FilteringSection />
+        <ComparisonSection />
+        {selectedCards.length >= 2 && (
+          <BottomButton path='/financial-product/comparison/select-category'>비교하기</BottomButton>
+        )}
+      </main>
+    </>
   );
 };
 

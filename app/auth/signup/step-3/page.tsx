@@ -13,6 +13,7 @@ import { SignupInputsValues } from '../../schema/signupSchema';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
+import { useSignupStore } from '@/store/signup';
 
 const StepThreePage = () => {
   const [visiblePostDaum, setVisiblePostDaum] = useState(false);
@@ -29,12 +30,17 @@ const StepThreePage = () => {
     formState: { errors }
   } = useFormContext<SignupInputsValues>();
 
+  const { setStorage } = useSignupStore();
+
   const onClickNext = async () => {
     const isRoadNameAdress = await trigger('address.roadName', { shouldFocus: true });
     const isDetailAdress = await trigger('address.detail', { shouldFocus: true });
     const isGenderChecked = await trigger('gender');
 
     if (isRoadNameAdress && isDetailAdress && isGenderChecked) {
+      setStorage('roadName', getValues('address.roadName'));
+      setStorage('detail', getValues('address.detail'));
+      setStorage('gender', getValues('gender'));
       router.push('/auth/signup/step-4');
     }
   };
@@ -66,6 +72,8 @@ const StepThreePage = () => {
                 <FormControl>
                   <>
                     <Input
+                      readOnly
+                      onFocus={() => setVisiblePostDaum(true)}
                       className='pr-[6rem]'
                       placeholder='주소 검색하기'
                       id='address.roadName'
@@ -129,7 +137,12 @@ const StepThreePage = () => {
         <CheckedGender register={register} errors={errors} />
       </CardContent>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
-        <Button type='button' className='w-full' onClick={onClickNext}>
+        <Button
+          type='button'
+          className='w-full'
+          onClick={onClickNext}
+          disabled={!(getValues('address') && getValues('gender'))}
+        >
           다음
         </Button>
       </div>

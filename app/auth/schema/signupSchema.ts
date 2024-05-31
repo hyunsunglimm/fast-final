@@ -29,16 +29,21 @@ export const signupSchema = z
 
 export type SignupInputsValues = z.infer<typeof signupSchema>;
 
+const getSessionValue = (key: string) => {
+  const item = typeof window !== 'undefined' ? sessionStorage.getItem('signup-storage') : null;
+  return item ? JSON.parse(item).state[key] : null;
+};
+
 export const defaultValues: SignupInputsValues = {
-  email: '',
-  checkEmail: true,
-  password: '',
-  confirmPassword: '',
-  name: '',
-  phoneNumber: '',
+  email: getSessionValue('email') || '',
+  checkEmail: getSessionValue('checkEmail') || true,
+  password: getSessionValue('password') || '',
+  confirmPassword: getSessionValue('confirmPassword') || '',
+  name: getSessionValue('name') || '',
+  phoneNumber: getSessionValue('phoneNumber') || '',
   address: {
-    roadName: '',
-    detail: ''
+    roadName: getSessionValue('roadName') || '',
+    detail: getSessionValue('detail') || ''
   },
-  gender: ''
+  gender: getSessionValue('gender') || ''
 };

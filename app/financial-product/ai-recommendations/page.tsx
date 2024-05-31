@@ -1,17 +1,17 @@
 import { IsBackHeader } from '@/components/header';
-import PerfectFinancialProducts from './_components/PerfectFinancialProducts';
-import SpendingHabitsCards from './_components/SpendingHabitsCards';
 import AiBanner from './_components/AiBanner';
+import PerfectFinancialProductSection from './_components/PerfectFinancialProductSection';
+import SpendingHabitsCardSection from './_components/SpendingHabitsCardSection';
 
 const AiRecommendationsPage = () => {
   return (
     <>
-      <IsBackHeader title='AI 맞춤' href='./' />
-      <section>
+      <IsBackHeader title='AI 맞춤' href='./?tab=신용카드' defaultColor='#f2f4f6' />
+      <main className='bg-gray-50'>
         <AiBanner />
-        <PerfectFinancialProducts />
-        <SpendingHabitsCards />
-      </section>
+        <PerfectFinancialProductSection />
+        <SpendingHabitsCardSection />
+      </main>
     </>
   );
 };

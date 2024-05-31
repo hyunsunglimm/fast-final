@@ -68,13 +68,13 @@ const upcommingData = [
     cardName: 'KB국민카드',
     cardType: '체크',
     amount: 135000,
-    imgPath: '/images/asset-page/kb-card.svg'
+    imgPath: '/images/asset-page/kb-card.webp'
   },
   {
     cardName: '신한카드',
     cardType: '체크',
     amount: 15000,
-    imgPath: '/images/asset-page/shinhan-card.svg'
+    imgPath: '/images/asset-page/shinhan-card.webp'
   }
 ];
 

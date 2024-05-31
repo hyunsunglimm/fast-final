@@ -23,3 +23,35 @@ export const groupByDate = (expenses: ExpenseItemProps[]) => {
 
   return grouped;
 };
+
+/**
+ * 날짜 리턴
+ * @returns 년,월,일 리턴
+ */
+export const returnDate = () => {
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return { day, month, year };
+};
+
+/**
+ *
+ * @param targetAmount 목표 금액
+ * @param weeklySavingAmount 매주 저축 할 금액
+ * @param startDate 시작하는 날짜
+ * @returns 만료 날짜
+ */
+export const calculateSavingPlan = (
+  targetAmount: number,
+  weeklySavingAmount: number,
+  startDate: Date
+) => {
+  const weeksNeeded = Math.ceil(targetAmount / weeklySavingAmount);
+
+  const completionDate = new Date(startDate);
+  completionDate.setDate(startDate.getDate() + weeksNeeded * 7);
+
+  return { completionDate };
+};

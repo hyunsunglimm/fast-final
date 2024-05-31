@@ -97,6 +97,7 @@ const config: Config = {
         active: '#5A7EFF',
         warning: '#FF5C46',
         red_500: '#F5553F',
+        select: '#FFEDE1',
         'gray-10': '#F7F9FA',
         'gray-50': '#F2F4F6',
         'gray-100': '#EDF0F3',
