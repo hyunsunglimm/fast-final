@@ -2,7 +2,7 @@
 import React from 'react';
 import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import DoughnutChart from '@/components/DoughnutChart';
-import { creditDataConfig, creditOptions } from './graphConfig';
+import { creditDataConfig, creditOptions } from '@/utils/graph-config/doughnutConfig';
 
 export const WidgetMyCredit = () => {
   return (
