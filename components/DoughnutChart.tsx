@@ -11,19 +11,6 @@ import {
 import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const TOTAL_CREDIT = 1000;
-const MY_CREDIT = 880;
-export const data = {
-  labels: ['내 신용점수'],
-  datasets: [
-    {
-      data: [MY_CREDIT, TOTAL_CREDIT - MY_CREDIT],
-      backgroundColor: ['rgba(255, 159, 64, 1)', '#ddd'],
-      borderWidth: 0,
-      border: 0
-    }
-  ]
-};
 
 const options: ChartOptions<'doughnut'> = {
   rotation: -90,
@@ -37,13 +24,11 @@ const options: ChartOptions<'doughnut'> = {
       callbacks: {
         label: (item) => {
           const count = item.dataset.data[0];
-          if (item.label === '내 신용점수') {
-            return ` ${count}점`;
-          }
-          return '';
+          return `${count}점`;
         }
       }
     },
+
     filler: {
       drawTime: 'beforeDraw'
     }
@@ -60,13 +45,12 @@ const backgroundCircle: Plugin<'doughnut'> = {
       const firstPoint = meta.data[0];
       const xCoor = firstPoint.x;
       const yCoor = firstPoint.y;
-      const innerRadius = (firstPoint as any).innerRadius; // 타입 캐스팅으로 오류 방지
-      const outerRadius = (firstPoint as any).outerRadius; // 타입 캐스팅으로 오류 방지
+      const innerRadius = (firstPoint as ArcElement).innerRadius;
+      const outerRadius = (firstPoint as ArcElement).outerRadius;
       const width = outerRadius - innerRadius;
       ctx.beginPath();
       ctx.lineWidth = width;
-      ctx.lineDashOffset = 500;
-      ctx.strokeStyle = '#ddd';
+      ctx.strokeStyle = '#edf0f3';
       ctx.arc(xCoor, yCoor, outerRadius - width / 2, Math.PI, Math.PI * 2);
       ctx.stroke();
     }
@@ -74,8 +58,24 @@ const backgroundCircle: Plugin<'doughnut'> = {
 };
 
 type DoughnutChartProps = {
-  data: ChartData<'doughnut', number[], string>;
+  dataConfig: ChartData<'doughnut'>;
+  cutout?: number;
 };
 
-const DoughnutChart = () => <Doughnut data={data} options={options} plugins={[backgroundCircle]} />;
+const DoughnutChart = ({ dataConfig, cutout }: DoughnutChartProps) => {
+  const { labels, datasets } = dataConfig;
+  const data: ChartData<'doughnut', number[], unknown> = {
+    labels,
+    datasets: [
+      {
+        data: datasets[0].data,
+        backgroundColor: datasets[0].backgroundColor,
+        borderWidth: 0,
+        borderRadius: { innerEnd: 30, outerEnd: 30 },
+        hoverBackgroundColor: datasets[0].hoverBackgroundColor
+      }
+    ]
+  };
+  return <Doughnut data={data} options={{ ...options, cutout }} plugins={[backgroundCircle]} />;
+};
 export default DoughnutChart;

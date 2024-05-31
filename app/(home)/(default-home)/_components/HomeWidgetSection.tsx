@@ -13,7 +13,7 @@ import {
   WidgetCardPerformance,
   WidgetCurrentMonth,
   WidgetLastMonth,
-  WidgetMtCredit,
+  WidgetMyCredit,
   WidgetMyChallenge,
   WidgetUpcomingExpenses
 } from './widget-item';
@@ -26,7 +26,7 @@ const HomeWidgetSection = async () => {
     b: WidgetCardPerformance,
     c: WidgetCurrentMonth,
     d: WidgetLastMonth,
-    e: WidgetMtCredit,
+    e: WidgetMyCredit,
     f: WidgetMyChallenge,
     g: WidgetUpcomingExpenses,
     h: WidgetMyChallenge,
