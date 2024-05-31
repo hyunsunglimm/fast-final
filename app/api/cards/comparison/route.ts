@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const comparisonCards = [
+const cardsToCompare = [
   {
     id: 'c1',
     title: '신한카드 Mr.Life',
@@ -40,5 +40,5 @@ const comparisonCards = [
 
 export const GET = async () => {
   await new Promise((res) => setTimeout(res, 2000));
-  return NextResponse.json(comparisonCards);
+  return NextResponse.json(cardsToCompare);
 };

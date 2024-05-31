@@ -2,24 +2,17 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
+import { CardsToCompare as CardsToCompareType } from '@/types/card';
 import { benefitCategoryIconPath } from '@/utils/benefitCategoryIconPath';
 import Image from 'next/image';
-
-type ComparisonCard = {
-  id: string;
-  title: string;
-  description: string;
-  fileName: string;
-  benefits: string[];
-};
 
 type ComparisonCardProps = {
   isSelected: boolean;
   onSelect: (cardId: string) => void;
-  card: ComparisonCard;
+  card: CardsToCompareType;
 };
 
-const ComparisonCard = ({ isSelected, onSelect, card }: ComparisonCardProps) => {
+const CardsToCompare = ({ isSelected, onSelect, card }: ComparisonCardProps) => {
   return (
     <Card
       className={`p-24 ${isSelected && 'relative ring-1 ring-primary'}`}
@@ -64,4 +57,4 @@ const ComparisonCard = ({ isSelected, onSelect, card }: ComparisonCardProps) => 
   );
 };
 
-export default ComparisonCard;
+export default CardsToCompare;

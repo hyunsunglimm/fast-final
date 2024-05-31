@@ -17,8 +17,9 @@ const ThemeRecommendationsPage = () => {
             return (
               <li key={theme.title}>
                 <Link
+                  style={{ backgroundColor: theme.color }}
                   href={`/financial-product/theme-recommendations/${theme.href}`}
-                  className={`flex items-center justify-between rounded-[1.6rem] px-[2.4rem] py-[2.8rem] text-white ${theme.color}`}
+                  className='flex items-center justify-between rounded-[1.6rem] px-[2.4rem] py-[2.8rem] text-white'
                 >
                   <div className='grow'>
                     <Text variant='h2' sizes='18' weight='700'>

@@ -17,7 +17,7 @@ const ComparisonPage = () => {
         <FilteringSection />
         <ComparisonSection />
         {selectedCards.length >= 2 && (
-          <BottomButton title='비교하기' path='/financial-product/comparison/select-category' />
+          <BottomButton path='/financial-product/comparison/select-category'>비교하기</BottomButton>
         )}
       </main>
     </>

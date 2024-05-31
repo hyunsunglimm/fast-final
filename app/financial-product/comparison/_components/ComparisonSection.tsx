@@ -1,18 +1,18 @@
 import Text from '@/components/ui/Text';
 import { useEffect } from 'react';
-import ComparisonCard from './ComparisonCard';
 import { useQueryString } from '@/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
-import { getComparisonCards } from '@/service/api/financial-product/cards';
+import { getCardsToCompare } from '@/service/api/financial-product/cards';
 import Spinner from '@/components/Spinner';
 import FlexBox from '@/components/ui/FlexBox';
+import CardsToCompare from './CardsToCompare';
 
 const QUERY_KEY = 'card';
 
 const ComparisonSection = () => {
-  const { data: comparisonCards, isPending } = useQuery({
-    queryKey: ['comparisonCards'],
-    queryFn: getComparisonCards
+  const { data: cardsToCompare, isPending } = useQuery({
+    queryKey: ['cardsToCompare'],
+    queryFn: getCardsToCompare
   });
   const { searchParams, pathname, router, params } = useQueryString();
 
@@ -48,12 +48,12 @@ const ComparisonSection = () => {
         </FlexBox>
       ) : (
         <ul className='mt-20 flex flex-col gap-[1.2rem]'>
-          {comparisonCards?.map((card) => {
+          {cardsToCompare?.map((card) => {
             const isSelected = selectedCards.some((c) => c === card.id);
 
             return (
               <li key={card.id}>
-                <ComparisonCard isSelected={isSelected} onSelect={onSelect} card={card} />
+                <CardsToCompare isSelected={isSelected} onSelect={onSelect} card={card} />
               </li>
             );
           })}

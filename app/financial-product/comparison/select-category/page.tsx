@@ -3,16 +3,20 @@
 import { IsBackHeader } from '@/components/header';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import BottomButton from '../_components/BottomButton';
 import CategoryCard from './_components/CategoryCard';
 import { useQueryString } from '@/hooks/useQueryString';
 import { COMPARISON_STANDARD } from '@/utils/financial-product/staticData';
+import { useQueryClient } from '@tanstack/react-query';
+import { getComparedCards } from '@/service/api/financial-product/cards';
 
 const QUERY_KEY = 'category';
 
 const SelectCategoryPage = () => {
   const { searchParams, router, pathname, queryValues, params } = useQueryString();
+  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
 
   const selectedCategories = queryValues(QUERY_KEY);
 
@@ -33,6 +37,17 @@ const SelectCategoryPage = () => {
     router.push(pathname + '?' + params.toString(), {
       scroll: false
     });
+  };
+
+  const handleNavigateToResultPage = async () => {
+    setIsLoading(true);
+    await queryClient.prefetchQuery({
+      queryKey: ['comparedCards'],
+      queryFn: getComparedCards
+    });
+
+    router.push(`${pathname}/result?${searchParams.toString()}`);
+    setIsLoading(false);
   };
 
   return (
@@ -65,9 +80,12 @@ const SelectCategoryPage = () => {
         </ul>
         {selectedCategories.length >= 2 && (
           <BottomButton
-            title='결과보기'
+            onClick={handleNavigateToResultPage}
             path='/financial-product/comparison/select-category/result'
-          />
+            isLoading={isLoading}
+          >
+            결과보기
+          </BottomButton>
         )}
       </main>
     </>
