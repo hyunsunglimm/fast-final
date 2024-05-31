@@ -21,3 +21,10 @@ export type SharedMembersProps = {
   selectedProfile: string;
   setSelectedProfile: (name: string) => void;
 };
+
+// 지출 비교
+export type BudgetBannerProps = {
+  icon?: boolean;
+  text: string;
+  showArrow?: boolean;
+};
