@@ -2,6 +2,7 @@ import React from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import { BudgetBannerProps } from '@/types/budgetCalendarType';
+import IconDot from './IconDot';
 
 const BudgetBanner: React.FC<BudgetBannerProps> = ({ icon, text, showArrow }) => {
   return (
@@ -14,7 +15,7 @@ const BudgetBanner: React.FC<BudgetBannerProps> = ({ icon, text, showArrow }) =>
         {icon ? (
           <Icon src='/icons/budget-calendar/small-pig.svg' alt='pig' className='mr-12' />
         ) : (
-          <div className='mr-8 h-[0.8rem] w-[0.8rem] rounded-full bg-primary'></div>
+          <IconDot />
         )}
         <p>{text}</p>
       </FlexBox>
