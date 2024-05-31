@@ -1,13 +1,13 @@
 // 이번 달 카드실적
 import React from 'react';
-import { WidgetItemCard } from './_components/WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 
 export const WidgetCardPerformance = () => {
   return (
-    <WidgetItemCard title='이번 달 카드실적' subText='245,000원'>
+    <WidgetItemCardContainer title='이번 달 카드실적' subText='245,000원'>
       <CardContent justifyContent='between' alignItems='end'>
         <Icon
           src='/icons/categories/non-background/card.svg'
@@ -20,6 +20,6 @@ export const WidgetCardPerformance = () => {
           70%
         </Text>
       </CardContent>
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };

@@ -1,4 +1,4 @@
-export * from './_components/WidgetItemCard';
+export * from './_components/WidgetItemCardContainer';
 export * from './WidgetBudget';
 export * from './WidgetCardPerformance';
 export * from './WidgetCurrentMonth';

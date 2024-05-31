@@ -1,6 +1,6 @@
 // 매월 나가는 돈
 import React from 'react';
-import { WidgetItemCard } from './_components/WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
@@ -9,7 +9,7 @@ import { ProgressBar } from '@/components/ProgressBar';
 
 export const WidgetSpentEveryMonth = () => {
   return (
-    <WidgetItemCard title='매월 나가는 돈' subText='245,000원'>
+    <WidgetItemCardContainer title='매월 나가는 돈' subText='245,000원'>
       <CardContent flexDirection='col' justifyContent='between'>
         <FlexBox alignItems='end' justifyContent='between' className='mb-8 mt-10 w-full'>
           <Icon
@@ -24,6 +24,6 @@ export const WidgetSpentEveryMonth = () => {
           <ProgressBar progressPercent={30} barColor='primary' />
         </div>
       </CardContent>
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };

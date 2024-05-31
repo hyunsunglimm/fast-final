@@ -1,13 +1,13 @@
 // 나의 챌린지
 import React from 'react';
-import { WidgetItemCard } from './_components/WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import { CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import Icon from '@/components/Icon';
 
 export const WidgetMyChallenge = () => {
   return (
-    <WidgetItemCard title='나의 챌린지' subText='250,000원'>
+    <WidgetItemCardContainer title='나의 챌린지' subText='250,000원'>
       <CardContent justifyContent='between' alignItems='end'>
         <Icon
           src='/icons/categories/non-background/Layer_11.svg'
@@ -20,6 +20,6 @@ export const WidgetMyChallenge = () => {
           2개
         </Text>
       </CardContent>
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };

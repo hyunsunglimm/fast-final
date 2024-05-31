@@ -1,6 +1,6 @@
 // 현재 ?달 소비
 import React from 'react';
-import { WidgetItemCard } from './_components/WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
@@ -8,7 +8,7 @@ import Text from '@/components/ui/Text';
 
 export const WidgetCurrentMonth = () => {
   return (
-    <WidgetItemCard title='4월 현재 소비' subText='300,000원'>
+    <WidgetItemCardContainer title='4월 현재 소비' subText='300,000원'>
       <CardContent flexDirection='col' justifyContent='between'>
         <FlexBox alignItems='end' justifyContent='between' className='w-full'>
           <Icon
@@ -22,6 +22,6 @@ export const WidgetCurrentMonth = () => {
           </Text>
         </FlexBox>
       </CardContent>
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };

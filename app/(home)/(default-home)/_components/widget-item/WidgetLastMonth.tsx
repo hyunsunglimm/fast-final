@@ -1,6 +1,6 @@
 // 지난 달 소비
 import React from 'react';
-import { WidgetItemCard } from './_components/WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
@@ -8,7 +8,7 @@ import FlexBox from '@/components/ui/FlexBox';
 
 export const WidgetLastMonth = () => {
   return (
-    <WidgetItemCard title='저번달에 쓴 돈'>
+    <WidgetItemCardContainer title='저번달에 쓴 돈'>
       <CardContent className='relative mt-8 block flex-1'>
         <FlexBox
           alignItems='center'
@@ -54,6 +54,6 @@ export const WidgetLastMonth = () => {
           </Text>
         </FlexBox>
       </CardContent>
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };

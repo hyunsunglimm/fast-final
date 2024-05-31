@@ -1,6 +1,6 @@
 // 이번 달 남은 예산
 import React from 'react';
-import { WidgetItemCard } from './_components/WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import type { BudgetDataType } from '@/app/api/widget/budget/route';
 import { ProgressBar } from '@/components/ProgressBar';
 import { CardContent } from '@/components/ui/card';
@@ -12,7 +12,7 @@ const isBudgetData = (data: BudgetDataType): data is Exclude<BudgetDataType, { m
   (data as { message: string }).message === undefined;
 
 export const WidgetBudget = async () => {
-  const currentMonth = (new Date().getMonth() + 1).toLocaleString('ko-KR');
+  const currentMonth = new Date().getMonth().toLocaleString('ko-KR');
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/widget/budget?month=${currentMonth}`
@@ -20,7 +20,10 @@ export const WidgetBudget = async () => {
   const data = await res.json();
 
   return (
-    <WidgetItemCard title='이번 달 남은 예산' subText={`${data.remainingCost.toLocaleString()}원`}>
+    <WidgetItemCardContainer
+      title='이번 달 남은 예산'
+      subText={`${data.remainingCost.toLocaleString()}원`}
+    >
       {isBudgetData(data) && (
         <CardContent flexDirection='col' justifyContent='between'>
           <FlexBox alignItems='end' justifyContent='between' className='mb-8 mt-10 w-full'>
@@ -37,6 +40,6 @@ export const WidgetBudget = async () => {
           </div>
         </CardContent>
       )}
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };
