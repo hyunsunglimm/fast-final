@@ -15,7 +15,8 @@ import {
   WidgetLastMonth,
   WidgetMyCredit,
   WidgetMyChallenge,
-  WidgetUpcomingExpenses
+  WidgetUpcomingExpenses,
+  WidgetSpentEveryMonth
 } from './widget-item';
 
 const HomeWidgetSection = async () => {
@@ -23,14 +24,13 @@ const HomeWidgetSection = async () => {
 
   const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
     a: WidgetBudget,
-    b: WidgetCardPerformance,
-    c: WidgetCurrentMonth,
-    d: WidgetLastMonth,
-    e: WidgetMyCredit,
+    b: WidgetUpcomingExpenses,
+    c: WidgetLastMonth,
+    d: WidgetCurrentMonth,
+    e: WidgetCardPerformance,
     f: WidgetMyChallenge,
-    g: WidgetUpcomingExpenses,
-    h: WidgetMyChallenge,
-    i: WidgetMyChallenge
+    g: WidgetMyCredit,
+    h: WidgetSpentEveryMonth
   };
 
   return (

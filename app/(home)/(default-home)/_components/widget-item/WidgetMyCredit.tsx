@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { WidgetItemCard } from './WidgetItemCard';
+import { WidgetItemCard } from './_components/WidgetItemCard';
 import DoughnutChart from '@/components/DoughnutChart';
 import { ChartData } from 'chart.js';
 import { getGradient } from '@/utils/chartGetGradient';

@@ -1,6 +1,6 @@
 // 이번 달 카드실적
 import React from 'react';
-import { WidgetItemCard } from './WidgetItemCard';
+import { WidgetItemCard } from './_components/WidgetItemCard';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import Text from '@/components/ui/Text';

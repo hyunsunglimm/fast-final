@@ -1,6 +1,6 @@
-// 현재 달 소비
+// 현재 ?달 소비
 import React from 'react';
-import { WidgetItemCard } from './WidgetItemCard';
+import { WidgetItemCard } from './_components/WidgetItemCard';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';

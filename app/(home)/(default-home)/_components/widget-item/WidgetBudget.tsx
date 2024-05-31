@@ -1,6 +1,6 @@
 // 이번 달 남은 예산
 import React from 'react';
-import { WidgetItemCard } from './WidgetItemCard';
+import { WidgetItemCard } from './_components/WidgetItemCard';
 import type { BudgetDataType } from '@/app/api/widget/budget/route';
 import { ProgressBar } from '@/components/ProgressBar';
 import { CardContent } from '@/components/ui/card';
