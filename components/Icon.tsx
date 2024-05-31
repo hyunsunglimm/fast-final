@@ -4,7 +4,7 @@ import Image, { ImageProps } from 'next/image';
 import { cn } from '@/utils/twMerge';
 
 type IconProps = {
-  size?: '12' | '16' | '20' | '24' | '28' | '32' | '36' | '40' | '48' | '52' | '56';
+  size?: '12' | '16' | '20' | '24' | '28' | '28.8' | '32' | '36' | '40' | '48' | '52' | '56';
   imgClass?: HTMLAttributes<HTMLImageElement>['className'];
 } & HTMLAttributes<HTMLDivElement> &
   ImageProps;
@@ -15,6 +15,7 @@ const sizeClass: { [key: string]: string } = {
   '20': 'w-[2rem] h-[2rem]',
   '24': 'w-[2.4rem] h-[2.4rem]',
   '28': 'w-[2.8rem] h-[2.8rem]',
+  '28.8': 'w-[2.88rem] h-[2.88rem]',
   '32': 'w-[3.2rem] h-[3.2rem]',
   '36': 'w-[3.6rem] h-[3.6rem]',
   '40': 'w-[4rem] h-[4rem]',
