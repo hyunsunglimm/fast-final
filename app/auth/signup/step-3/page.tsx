@@ -72,6 +72,8 @@ const StepThreePage = () => {
                 <FormControl>
                   <>
                     <Input
+                      readOnly
+                      onFocus={() => setVisiblePostDaum(true)}
                       className='pr-[6rem]'
                       placeholder='주소 검색하기'
                       id='address.roadName'
@@ -135,7 +137,12 @@ const StepThreePage = () => {
         <CheckedGender register={register} errors={errors} />
       </CardContent>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
-        <Button type='button' className='w-full' onClick={onClickNext}>
+        <Button
+          type='button'
+          className='w-full'
+          onClick={onClickNext}
+          disabled={!(getValues('address') && getValues('gender'))}
+        >
           다음
         </Button>
       </div>

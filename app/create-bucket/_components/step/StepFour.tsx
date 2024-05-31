@@ -22,7 +22,7 @@ type StepFourProps = {
 export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const skipUrl = getSkipHref(searchParams);
+  const skipHref = getSkipHref(searchParams);
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [allCheck, setAllCheck] = useState(false);
   const [checkItems, setCheckItems] = useState<string[]>(
@@ -91,7 +91,7 @@ export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
       </InputCard>
 
       <FlexBox alignItems='end' justifyContent='center' className='mt-32 h-[19.7rem] w-full'>
-        <Link href={`${pathname}/result${skipUrl}`} aria-label='저축 상품 연결 건너뛰기'>
+        <Link href={`${pathname}/result${skipHref}`} aria-label='저축 상품 연결 건너뛰기'>
           <Text sizes='16' weight='500' className='underline'>
             건너뛰기
           </Text>

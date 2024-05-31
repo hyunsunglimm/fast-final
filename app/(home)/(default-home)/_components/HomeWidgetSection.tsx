@@ -55,7 +55,7 @@ const HomeWidgetSection = async () => {
       <ConsumeWeatherCard />
 
       {/* 위젯 영역 */}
-      <div className='mb-[3rem] grid grid-cols-2 gap-x-20 gap-y-20'>
+      <div className='mb-[3rem] grid grid-cols-2 justify-items-center gap-[1.6rem]'>
         {data[0].showWidget.map((item) => {
           const WidgetComponent = widgetMap[item.id];
           return WidgetComponent ? <WidgetComponent key={item.id} /> : null;

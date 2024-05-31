@@ -93,7 +93,12 @@ const StepTwoPage = () => {
         />
       </CardContent>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
-        <Button type='button' className='w-full' onClick={onClickNext}>
+        <Button
+          type='button'
+          className='w-full'
+          onClick={onClickNext}
+          disabled={!(getValues('name') && getValues('phoneNumber'))}
+        >
           다음
         </Button>
       </div>
