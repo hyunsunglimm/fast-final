@@ -1,9 +1,10 @@
 import React from 'react';
 import { IsBackHeader } from '@/components/header';
+import Line from '../_components/common/Line';
 import MonthlyOverview from './_components/MonthlyOverview';
 import MonthSpending from './_components/MonthSpending';
-import Line from '../_components/common/Line';
 import ExpenseComparison from './_components/ExpenseComparison';
+import SpendingCategories from './_components/SpendingCategories';
 
 const ConsumptionPage = () => {
   return (
@@ -15,6 +16,8 @@ const ConsumptionPage = () => {
         <MonthSpending />
         <Line />
         <ExpenseComparison />
+        <Line />
+        <SpendingCategories />
       </main>
     </div>
   );
