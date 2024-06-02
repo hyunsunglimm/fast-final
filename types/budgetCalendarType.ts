@@ -1,3 +1,10 @@
+// 가계부 배너
+export type BudgetBannerProps = {
+  icon?: boolean;
+  text: string;
+  showArrow?: boolean;
+};
+
 // 소비내역 리스트 아이템
 export type ExpenseItemProps = {
   icon: string;
@@ -20,11 +27,4 @@ export type SharedMembersProps = {
   viewMode: string;
   selectedProfile: string;
   setSelectedProfile: (name: string) => void;
-};
-
-// 지출 비교
-export type BudgetBannerProps = {
-  icon?: boolean;
-  text: string;
-  showArrow?: boolean;
 };
