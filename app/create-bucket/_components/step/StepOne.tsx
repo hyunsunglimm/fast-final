@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import React, { ChangeEvent, useState, useEffect, useCallback } from 'react';
 import InputCard from '../InputCard';

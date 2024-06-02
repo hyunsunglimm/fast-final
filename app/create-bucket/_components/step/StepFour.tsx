@@ -46,7 +46,7 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   };
 
   const handleSelectDoneDayOfWeek = () => {
-    const queryString = encodeURIComponent(mySavingProduct.map((item) => item).join('|'));
+    const queryString = encodeURIComponent(mySavingProduct.join('|'));
     handleChangeQueryString('my-saving-product', queryString);
     setOpenBottomSheet(false);
   };
@@ -68,11 +68,7 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   );
 
   useEffect(() => {
-    if (mySavingProduct.length === myProductData.length) {
-      setAllCheck(true);
-    } else {
-      setAllCheck(false);
-    }
+    setAllCheck(mySavingProduct.length === myProductData.length);
   }, [mySavingProduct]);
 
   return (

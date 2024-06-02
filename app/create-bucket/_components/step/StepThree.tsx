@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
 import InputCard from '../InputCard';
@@ -46,7 +45,7 @@ const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
       }
       dispatch({ type: 'SET_INPUT_VALUE', payload: { name: name as keyof StateType, value } });
     },
-    [dispatch]
+    [dispatch, targetAmount]
   );
 
   const handleOpenSpendBookBtSheet = () => {
@@ -67,7 +66,7 @@ const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
       setExpireDate(completionDate);
     }
     handleChangeQueryString('savings-amount', savingsAmount);
-  }, [handleChangeQueryString, savingsAmount]);
+  }, [handleChangeQueryString, savingsAmount, targetAmount]);
 
   return (
     <>
