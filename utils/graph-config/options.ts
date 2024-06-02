@@ -1,6 +1,30 @@
 import { Chart, ChartOptions } from 'chart.js';
 
 /**
+ * 나의 자산 증가 그래프 옵션
+ */
+export const increaseMyAssetOptions: ChartOptions<'bar'> = {
+  responsive: true,
+  scales: {
+    y: {
+      display: false
+    },
+    x: {
+      grid: {
+        display: false
+      },
+      ticks: {
+        padding: 5
+      }
+    }
+  },
+  plugins: {
+    legend: { display: false },
+    title: { display: false }
+  }
+};
+
+/**
  * 나의 신용점수 그래프 옵션 반원형태
  */
 export const myCreditScoreGraphOptions: ChartOptions<'doughnut'> = {
@@ -30,14 +54,11 @@ export const myCreditScoreGraphOptions: ChartOptions<'doughnut'> = {
  * 나의 자산 그래프 옵션 반원형태
  */
 export const myAssetsOptions: ChartOptions<'doughnut'> = {
-  responsive: true,
   animation: { animateScale: true },
-  aspectRatio: 2,
+  maintainAspectRatio: false,
   layout: {
     autoPadding: true,
-    padding: {
-      left: 24
-    }
+    padding: { left: 25 }
   },
   plugins: {
     legend: {
@@ -45,7 +66,7 @@ export const myAssetsOptions: ChartOptions<'doughnut'> = {
       position: 'left',
       align: 'center',
       labels: {
-        padding: 12,
+        padding: 10,
         usePointStyle: true,
         boxPadding: 20,
         boxWidth: 20,

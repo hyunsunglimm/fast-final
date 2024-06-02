@@ -1,6 +1,7 @@
 import { ChartData, ChartDataset, ChartTypeRegistry } from 'chart.js';
 
 export type DoughnutChartDataset = ChartDataset<'doughnut'>;
+export type BarChartDataset = ChartDataset<'bar'>;
 
 /**
  *
@@ -8,9 +9,7 @@ export type DoughnutChartDataset = ChartDataset<'doughnut'>;
  * @param datasets 그래프 데이터
  * @returns
  */
-export const generateDoughnutChartData = <
-  TType extends keyof ChartTypeRegistry = keyof ChartTypeRegistry
->(
+export const generateChartData = <TType extends keyof ChartTypeRegistry = keyof ChartTypeRegistry>(
   labels: string[],
   datasets: ChartDataset<TType>[]
 ): ChartData<TType> => {

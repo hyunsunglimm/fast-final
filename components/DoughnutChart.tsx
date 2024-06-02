@@ -43,6 +43,13 @@ type DoughnutChartProps = {
 
 const DoughnutChart = ({ dataConfig, options, plugins }: DoughnutChartProps) => {
   const Plugin = plugins ?? { id: 'null' };
-  return <Doughnut data={dataConfig} options={options} plugins={[backgroundCircle, Plugin]} />;
+  return (
+    <Doughnut
+      id='doughnut'
+      data={dataConfig}
+      options={options}
+      plugins={[backgroundCircle, Plugin]}
+    />
+  );
 };
 export default DoughnutChart;

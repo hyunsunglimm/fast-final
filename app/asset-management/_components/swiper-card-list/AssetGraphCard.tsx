@@ -1,15 +1,11 @@
 'use client';
-import React from 'react';
+import dynamic from 'next/dynamic';
 import { Plugin } from 'chart.js';
 import { Card, CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import DoughnutChart from '@/components/DoughnutChart';
-import {
-  generateDoughnutChartData,
-  myAssetsOptions,
-  DoughnutChartDataset
-} from '@/utils/graph-config';
+import { generateChartData, myAssetsOptions, DoughnutChartDataset } from '@/utils/graph-config';
+const DoughnutChart = dynamic(() => import('@/components/DoughnutChart'), { ssr: false });
 
 const AssetGraphCard = () => {
   const labels = ['입출금 65%', '예적금 25%', '투자 10%', '보험', '부동산'];
@@ -22,18 +18,9 @@ const AssetGraphCard = () => {
   ];
 
   const legendMargin: Plugin<'doughnut'> = {
-    id: 'legendMargin',
-    afterLayout: (chart) => {
-      const padding = 50;
-      if (chart) {
-        const chartArea = chart.chartArea;
-        if (chartArea) {
-          chartArea.left += padding;
-          chartArea.right -= padding;
-        }
-      }
-    }
+    id: 'legendMargin'
   };
+
   return (
     <Card className='h-[23rem] w-full shrink-0'>
       <CardContent flexDirection='col' className='gap-y-16 p-24'>
@@ -51,9 +38,9 @@ const AssetGraphCard = () => {
           </FlexBox>
         </FlexBox>
         <div className='relative h-[11.8rem] w-full px-[0.8rem]'>
-          <div className='absolute -top-5 left-0 right-0 mx-auto h-[13.8rem] w-full'>
+          <div className='absolute inset-0 my-auto h-[13.8rem] w-full'>
             <DoughnutChart
-              dataConfig={generateDoughnutChartData(labels, dataSets)}
+              dataConfig={generateChartData(labels, dataSets)}
               options={myAssetsOptions}
               plugins={legendMargin}
             />
