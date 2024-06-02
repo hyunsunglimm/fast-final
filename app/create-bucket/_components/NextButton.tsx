@@ -3,7 +3,7 @@ import React, { MouseEvent } from 'react';
 import Button from '@/components/ui/Button';
 import { useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { getLinkHref } from '../util';
+import { getLinkHref } from '@/utils/create-bucket';
 
 type NextButtonProps = {
   currentStep: string | undefined;

@@ -4,7 +4,7 @@ import Icon from '@/components/Icon';
 import IconButton from '@/components/ui/IconButton';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { getLinkHref } from '../util';
+import { getLinkHref } from '@/utils/create-bucket';
 
 const BucketFlowHeader = ({ currentStep }: { currentStep: string | undefined }) => {
   const searchParams = useSearchParams();
