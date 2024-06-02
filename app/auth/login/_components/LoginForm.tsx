@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, defaultValues, LoginInputsValues } from '../../schema/loginSchema';
@@ -14,9 +14,18 @@ import Checkbox from '@/components/ui/CheckBox';
 import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
 import Link from 'next/link';
+import { signInWithCredentials } from '@/actions/auth';
+
+type SigninResponse = {
+  message: string;
+};
+
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [autoLoginCheck, setAutoLoginCheck] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [signinResponse, setSigninResponse] = useState<SigninResponse | undefined>();
 
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
@@ -31,14 +40,20 @@ const LoginForm = () => {
     control
   } = form;
 
-  const onSubmit = (data: LoginInputsValues) => {
-    console.log(data);
-  };
+  const onSubmit = handleSubmit(async (data) => {
+    startTransition(async () => {
+      const result = await signInWithCredentials(data);
+      setSigninResponse(result);
+      // 로그인 후 금융 상품페이지로 이동합니다.
+      // 테스트 용도이므로 추후 홈 페이지로 이동 예정입니다.
+      // router.replace('/financial-product');
+    });
+  });
 
   return (
     <Form {...form}>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         className='flex h-[59.6rem] flex-col items-center justify-between bg-white px-20 pb-24'
       >
         <CardContent flexDirection='col' alignItems='center' className='w-full'>
@@ -118,9 +133,15 @@ const LoginForm = () => {
             </Checkbox>
           </FlexBox>
           <Footer />
-        </CardContent>
 
-        <Button type='submit' className='w-full self-end'>
+          {/* API에서 반환하는 에러메시지 */}
+          {signinResponse && (
+            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>
+              {JSON.stringify(signinResponse.message)}
+            </p>
+          )}
+        </CardContent>
+        <Button type='submit' className='w-full self-end' disabled={isPending}>
           로그인
         </Button>
       </form>
