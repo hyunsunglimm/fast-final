@@ -33,9 +33,14 @@ export const myAssetsOptions: ChartOptions<'doughnut'> = {
   responsive: true,
   animation: { animateScale: true },
   aspectRatio: 2,
+  layout: {
+    autoPadding: true,
+    padding: {
+      left: 24
+    }
+  },
   plugins: {
     legend: {
-      maxWidth: 300,
       fullSize: true,
       position: 'left',
       align: 'center',

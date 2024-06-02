@@ -22,12 +22,17 @@ const AssetGraphCard = () => {
   ];
 
   const legendMargin: Plugin<'doughnut'> = {
-    id: 'legendMargin'
-    // beforeLayout: (chart) => {
-    //   if (chart.legend) {
-    //     chart.legend.options.labels.boxPadding = 320; // Increase the padding between legend items and chart
-    //   }
-    // }
+    id: 'legendMargin',
+    afterLayout: (chart) => {
+      const padding = 50;
+      if (chart) {
+        const chartArea = chart.chartArea;
+        if (chartArea) {
+          chartArea.left += padding;
+          chartArea.right -= padding;
+        }
+      }
+    }
   };
   return (
     <Card className='h-[23rem] w-full shrink-0'>
