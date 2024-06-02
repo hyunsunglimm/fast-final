@@ -5,6 +5,7 @@ import FixedBottom from './_components/FixedBottom';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
+  title: 'PORKO 위젯 데이터 편집',
   description: '위젯 데이터 편집'
 };
 

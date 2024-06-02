@@ -6,20 +6,27 @@ import Image from 'next/image';
 import { ProgressBar } from '@/components/ProgressBar';
 import BucketBottomSheet from './_components/BucketBottomSheet';
 import { useWindowResize } from '@/hooks/useWindowResize';
+
 const DetailBucketPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
+  const [totalHeight, setTotalHeight] = useState(0);
   const { windowHeight, windowWidth } = useWindowResize();
 
   useEffect(() => {
-    if (sectionRef.current) {
-      const rect = sectionRef.current.getBoundingClientRect();
-      const computedStyle = window.getComputedStyle(sectionRef.current);
-      const marginTop = parseFloat(computedStyle.marginTop);
-      const marginBottom = parseFloat(computedStyle.marginBottom);
-      const totalHeight = rect.height + marginTop + marginBottom + rect.top;
-      setHeight(windowHeight - totalHeight);
-    }
+    const updateHeight = () => {
+      if (sectionRef.current) {
+        const computedStyle = window.getComputedStyle(sectionRef.current);
+        const rect = sectionRef.current.getBoundingClientRect();
+        const marginTop = parseFloat(computedStyle.marginTop);
+        const marginBottom = parseFloat(computedStyle.marginBottom);
+        const totalReactHeight = rect.height + marginTop + marginBottom + rect.top;
+
+        setTotalHeight(windowHeight - totalReactHeight);
+      }
+    };
+    const timeoutId = setTimeout(updateHeight, 100);
+
+    return () => clearTimeout(timeoutId);
   }, [windowHeight, windowWidth]);
 
   return (
@@ -60,7 +67,7 @@ const DetailBucketPage = () => {
           <ProgressBar barColor='white' progressPercent={35} />
         </div>
       </section>
-      <BucketBottomSheet totalHeight={height} windowWidth={windowWidth} />
+      <BucketBottomSheet totalHeight={totalHeight} windowWidth={windowWidth} />
     </>
   );
 };

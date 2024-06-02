@@ -1,6 +1,6 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || '';
 
 const createOptions = (token?: string) => {
   const headers: HeadersInit = {
@@ -28,25 +28,31 @@ export const requestFetch = async <T>(
     if (res.ok) {
       return (await res.json()) as T;
     }
-    const error: Error = await res.json();
-    throw new Error(error.message);
-    //
-  } catch (error) {
-    throw { message: getErrorMessage(error) };
+
+    let errorMessage = 'Something went wrong';
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.message || errorMessage;
+    } catch (parseError) {
+      console.error('Error parsing JSON response:', parseError);
+    }
+
+    throw new Error(errorMessage);
+  } catch (networkError) {
+    console.error('Network or fetch error:', networkError);
+    throw new Error(getErrorMessage(networkError));
   }
 };
 
 const getErrorMessage = (error: unknown): string => {
-  let message: string = '';
-
   if (error instanceof Error) {
-    message = error.message;
-  } else if (error && typeof error === 'object' && 'message' in error) {
-    message = String(error.message);
-  } else if (typeof error === 'string') {
-    message = error;
-  } else {
-    message = 'Something went wrong';
+    return error.message;
   }
-  return message;
+  if (error && typeof error === 'object' && 'message' in error) {
+    return String((error as { message: unknown }).message);
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return 'Something went wrong';
 };

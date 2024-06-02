@@ -1,10 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { ChangeEvent, useCallback, useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
+import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
-import { useSearchParams } from 'next/navigation';
-import BottomSheet from '@/components/BottomSheet';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
@@ -13,61 +11,62 @@ import NextButton from '../NextButton';
 import { dayOfTheWeek } from '../../data';
 import { deleteCommaReturnNumber } from '@/utils/deleteComma';
 import { calculateSavingPlan } from '@/utils/dateUtils';
+import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepThreeProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
 
-export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
-  const searchParams = useSearchParams();
-  const targetAmountRef = useRef<string | null>(searchParams.get('target-amount'));
+const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [expireDate, setExpireDate] = useState<Date>(new Date());
-  const [inputValues, setInputValues] = useState({
-    'day-of-week': searchParams.get('day-of-week') || '',
-    'savings-amount': searchParams.get('savings-amount') || ''
-  });
+  const { state, dispatch } = useCreateBucketContext();
+  const {
+    'day-of-week': dayOfWeek,
+    'savings-amount': savingsAmount,
+    'target-amount': targetAmount
+  } = state;
 
-  const handleChangeInputValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    let newValue: string;
-    if (name === 'savings-amount') {
-      const targetAmount = deleteCommaReturnNumber(targetAmountRef.current ?? '');
-      const numericValue = deleteCommaReturnNumber(value);
-      if (numericValue >= targetAmount) {
-        setInputValues((prev) => ({ ...prev, [name]: targetAmount.toLocaleString() }));
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      let newValue: string;
+      if (name === 'savings-amount') {
+        const numericTargetAmount = deleteCommaReturnNumber(targetAmount);
+        const numericValue = deleteCommaReturnNumber(value);
+        if (numericValue >= numericTargetAmount) {
+          newValue = numericTargetAmount.toLocaleString();
+        } else {
+          newValue = !isNaN(numericValue) ? numericValue.toLocaleString() : '';
+        }
+        dispatch({ type: 'SET_INPUT_VALUE', payload: { name, value: newValue } });
         return;
       }
-      if (!isNaN(numericValue)) {
-        newValue = numericValue.toLocaleString();
-      } else {
-        newValue = '';
-      }
-      setInputValues((prev) => ({ ...prev, [name]: newValue }));
-      return;
-    }
-    setInputValues((prev) => ({ ...prev, [name]: value }));
-  }, []);
+      dispatch({ type: 'SET_INPUT_VALUE', payload: { name: name as keyof StateType, value } });
+    },
+    [dispatch, targetAmount]
+  );
 
   const handleOpenSpendBookBtSheet = () => {
     setOpenBottomSheet(true);
   };
 
   const handleSelectDoneDayOfWeek = () => {
-    if (!inputValues['day-of-week']) return;
-    handleChangeQueryString('day-of-week', inputValues['day-of-week']);
+    if (!dayOfWeek) return;
+    handleChangeQueryString('day-of-week', dayOfWeek);
     setOpenBottomSheet(false);
   };
 
   useEffect(() => {
-    if (inputValues['savings-amount']) {
-      const targetAmount = deleteCommaReturnNumber(targetAmountRef.current ?? '');
-      const numericValue = deleteCommaReturnNumber(inputValues['savings-amount']);
-      const { completionDate } = calculateSavingPlan(targetAmount, numericValue, new Date());
+    if (savingsAmount) {
+      const numericTargetAmount = deleteCommaReturnNumber(targetAmount);
+      const numericValue = deleteCommaReturnNumber(savingsAmount);
+      const { completionDate } = calculateSavingPlan(numericTargetAmount, numericValue, new Date());
       setExpireDate(completionDate);
     }
-    handleChangeQueryString('savings-amount', inputValues['savings-amount']);
-  }, [handleChangeQueryString, inputValues['savings-amount']]);
+    handleChangeQueryString('savings-amount', savingsAmount);
+  }, [handleChangeQueryString, savingsAmount, targetAmount]);
 
   return (
     <>
@@ -79,7 +78,7 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
           id='day-of-week'
           border='nonborder'
           onFocus={handleOpenSpendBookBtSheet}
-          value={inputValues['day-of-week']}
+          value={dayOfWeek}
           isTranslate
           inputMode='none'
         />
@@ -98,14 +97,14 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
           id='savings-amount'
           name='savings-amount'
           border='nonborder'
-          value={inputValues['savings-amount']}
+          value={savingsAmount}
           inputMode='numeric'
           trailingText='원'
-          onChange={handleChangeInputValues}
+          onChange={handleInputChange}
         />
       </InputCard>
       <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
-        {inputValues['day-of-week'] && inputValues['savings-amount'].length >= 5 ? (
+        {dayOfWeek && savingsAmount.length >= 5 ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
@@ -128,7 +127,7 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
         buttonLabel='선택'
         isOpen={openBottomSheet}
         onClose={() => setOpenBottomSheet(false)}
-        buttonOptions={{ size: 'md', disabled: inputValues['day-of-week'] ? false : true }}
+        buttonOptions={{ size: 'md', disabled: dayOfWeek ? false : true }}
         buttonType='button'
         onClick={() => handleSelectDoneDayOfWeek()}
       >
@@ -138,8 +137,8 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
               <BottomSheetCard
                 key={item}
                 item={item}
-                onChange={handleChangeInputValues}
-                value={inputValues['day-of-week']}
+                onChange={handleInputChange}
+                value={dayOfWeek}
                 name='day-of-week'
               />
             );
@@ -148,7 +147,7 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
       </BottomSheet>
 
       <NextButton
-        disabled={!(inputValues['savings-amount'].length > 3 && inputValues['day-of-week'])}
+        disabled={!(savingsAmount.length > 3 && dayOfWeek)}
         buttonLabel='다음'
         currentStep='3'
         type='button'
@@ -158,16 +157,18 @@ export const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
   );
 };
 
+export default StepThree;
+
 // 바텀시트 내용
 
-type BottomSheetCard = {
+type BottomSheetCardProps = {
   item: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string;
 };
 
-const BottomSheetCard = ({ item, value, onChange, name }: BottomSheetCard) => {
+const BottomSheetCard = ({ item, value, onChange, name }: BottomSheetCardProps) => {
   return (
     <>
       <label

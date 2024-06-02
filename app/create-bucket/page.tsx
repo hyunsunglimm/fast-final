@@ -3,6 +3,7 @@ import BucketFlowHeader from './_components/BucketFlowHeader';
 import BubbleText from './_components/BubbleText';
 import PorkoImage from './_components/PorkoImage';
 import BucketStepForm from './_components/BucketStepForm';
+
 type CreateBucketPageProps = {
   searchParams: Record<string, string | undefined>;
 };
