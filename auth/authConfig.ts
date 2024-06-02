@@ -1,4 +1,4 @@
-import { mySignIn } from '@/utils/auth';
+import { mySignIn } from '@/service/api/auth';
 import { type NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
