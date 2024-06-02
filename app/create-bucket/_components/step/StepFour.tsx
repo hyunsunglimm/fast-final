@@ -10,9 +10,9 @@ import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { myProductData } from '../../data';
 import Checkbox from '@/components/ui/CheckBox';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { getSkipHref } from '@/utils/create-bucket';
+import useGetHref from '../../hooks/useGetHref';
 import { useCreateBucketContext } from '../../context/createBucketContext';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
@@ -21,9 +21,9 @@ type StepFourProps = {
 };
 
 const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
-  const searchParams = useSearchParams();
   const pathname = usePathname();
-  const skipHref = getSkipHref(searchParams);
+  const { getSkipHref } = useGetHref();
+  const skipHref = getSkipHref();
   const { state, dispatch } = useCreateBucketContext();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [allCheck, setAllCheck] = useState(false);

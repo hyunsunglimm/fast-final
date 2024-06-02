@@ -1,9 +1,9 @@
 'use client';
 import React, { MouseEvent } from 'react';
 import Button from '@/components/ui/Button';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { getLinkHref } from '@/utils/create-bucket';
+import useGetHref from '../hooks/useGetHref';
 
 type NextButtonProps = {
   currentStep: string | undefined;
@@ -20,10 +20,10 @@ const NextButton = ({
   disabled = false,
   asChild
 }: NextButtonProps) => {
-  const searchParams = useSearchParams();
+  const { getLinkHref } = useGetHref();
   const pathname = usePathname();
   const transNumberStep = Number(currentStep);
-  const nextStepHref = getLinkHref(transNumberStep, 1, searchParams);
+  const nextStepHref = getLinkHref(transNumberStep, 1);
 
   const linkHref =
     transNumberStep < 4 ? pathname + nextStepHref : `${pathname}/result${nextStepHref}`;

@@ -3,13 +3,12 @@ import React from 'react';
 import Icon from '@/components/Icon';
 import IconButton from '@/components/ui/IconButton';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { getLinkHref } from '@/utils/create-bucket';
+import useGetHref from '../hooks/useGetHref';
 
 const BucketFlowHeader = ({ currentStep }: { currentStep: string | undefined }) => {
-  const searchParams = useSearchParams();
+  const { getLinkHref } = useGetHref();
   const transNumberStep = Number(currentStep);
-  const linkHref = getLinkHref(transNumberStep, -1, searchParams);
+  const linkHref = getLinkHref(transNumberStep, -1);
   const justifyContent = transNumberStep > 1 ? 'justify-start' : 'justify-end';
 
   return (
