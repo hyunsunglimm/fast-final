@@ -7,7 +7,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import DoughnutChart from '@/components/DoughnutChart';
 import {
   getGradient,
-  generateDoughnutChartData,
+  generateChartData,
   myCreditScoreGraphOptions,
   DoughnutChartDataset
 } from '@/utils/graph-config';
@@ -73,7 +73,7 @@ const MyCreditSection = () => {
           <FlexBox className='relative h-[9.2rem] w-[18.5rem]'>
             <div className='absolute -top-[35%] min-h-full w-full'>
               <DoughnutChart
-                dataConfig={generateDoughnutChartData([label], dataSets)}
+                dataConfig={generateChartData([label], dataSets)}
                 options={myCreditScoreGraphOptions}
               />
             </div>

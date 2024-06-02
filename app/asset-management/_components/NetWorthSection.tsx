@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState, useRef, MouseEvent } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 import { motion } from 'framer-motion';
@@ -40,9 +40,6 @@ const NetWorthSection = () => {
     }
   }, [windowWidth]);
 
-  const handleItemClick = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
   const onDragStart = () => {
     setDragging(true);
   };
