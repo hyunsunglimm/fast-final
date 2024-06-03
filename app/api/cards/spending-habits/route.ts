@@ -4,7 +4,7 @@ const spendingHabitsCards = [
   {
     title: '하나은행',
     cardName: '카카오페이 CHECK',
-    image: 'bg-[#FF7674]',
+    image: 'hana-kakao-pay-card-width1',
     benefits: [
       {
         title: '대중교통',
@@ -31,7 +31,7 @@ const spendingHabitsCards = [
   {
     title: '토스은행',
     cardName: '토스페이 NICE',
-    image: 'bg-[#959498]',
+    image: 'hana-kakao-pay-card-width2',
     benefits: [
       {
         title: '대중교통',
@@ -58,7 +58,7 @@ const spendingHabitsCards = [
   {
     title: '기업은행',
     cardName: '기업페이 GOOD',
-    image: 'bg-[#87CFDE]',
+    image: 'hana-kakao-pay-card-width3',
     benefits: [
       {
         title: '대중교통',
@@ -79,34 +79,6 @@ const spendingHabitsCards = [
         title: '전월실적',
         iconPath: '/icons/system-icon/system/card-performance.svg',
         detail: '전월실적 75만원 이상'
-      }
-    ]
-  },
-
-  {
-    title: '농협은행',
-    cardName: '넘예븐행 챌린지',
-    image: 'bg-[#959]',
-    benefits: [
-      {
-        title: '대중교통',
-        iconPath: '/icons/system-icon/system/card-bus.svg',
-        detail: '대중교통 20% 캐시백'
-      },
-      {
-        title: '카카오페이',
-        iconPath: '/icons/system-icon/system/card-pay.svg',
-        detail: '카카오페이 28% 캐시백'
-      },
-      {
-        title: '스타벅스',
-        iconPath: '/icons/system-icon/system/card-cafe.svg',
-        detail: '스타벅스 20% 캐시백'
-      },
-      {
-        title: '전월실적',
-        iconPath: '/icons/system-icon/system/card-performance.svg',
-        detail: '전월실적 100만원 이상'
       }
     ]
   }
