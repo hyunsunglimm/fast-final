@@ -16,13 +16,12 @@ const MyWallteBottomSheet = () => {
 
   const { data: MyWalletData, isFetching } = useQuery({
     queryKey: ['myWallet'],
-    queryFn: () => getMyWalletData(),
-    initialData: []
+    queryFn: getMyWalletData,
+    enabled: openWallet
   });
-
-  const top3Data = MyWalletData.slice(0, 3);
-  const othersData = MyWalletData.slice(3);
-  const othersTotalAmount = othersData.reduce((sum, item) => sum + item.amount, 0);
+  const top3Data = MyWalletData?.slice(0, 3) || [];
+  const othersData = MyWalletData?.slice(3) || [];
+  const othersTotalAmount = othersData?.reduce((sum, item) => sum + item.amount, 0);
 
   return (
     <BottomSheet
@@ -79,9 +78,9 @@ const MyWallteBottomSheet = () => {
                     + {item.lastDeposit.toLocaleString()}원
                   </Text>
                 ) : null}
-                {item.lasSpending ? (
+                {item.lastSpending ? (
                   <Text sizes='12' className='text-warning' weight='500'>
-                    - {item.lasSpending.toLocaleString()}원
+                    - {item.lastSpending.toLocaleString()}원
                   </Text>
                 ) : null}
               </FlexBox>

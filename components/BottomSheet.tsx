@@ -63,6 +63,7 @@ const BottomSheet = ({
                 src='/icons/system-icon/x.svg'
                 alt='close icon'
                 size='20'
+                className='cursor-pointer'
               />
             </FlexBox>
             <div className='hide-scrollbar overflow-y-scroll overscroll-contain'>{children}</div>

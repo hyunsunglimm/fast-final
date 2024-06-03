@@ -4,7 +4,7 @@ import QueryProviders from '@/context/queryProvider';
 import AuthProvider from '@/context/authProvider';
 import Navbar from '@/components/Navbar';
 import { suit } from './font';
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 export const metadata: Metadata = {
   // FIXME -> 추후 메타데이터 수정
   title: 'PORKO',
@@ -28,6 +28,7 @@ const RootLayout = ({
              */}
             {children}
             <Navbar />
+            <ReactQueryDevtools />
           </QueryProviders>
         </AuthProvider>
       </body>
