@@ -9,7 +9,8 @@ import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { recommandedBucketData } from '../../data';
 import { deleteCommaReturnNumber } from '@/utils/deleteComma';
-import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import type { StateType } from '../../types';
 
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
@@ -19,7 +20,7 @@ type StepOneProps = {
 
 const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const { 'bucket-name': bucketName, 'target-amount': targetAmount } = state;
 
   const handleInputChange = useCallback(

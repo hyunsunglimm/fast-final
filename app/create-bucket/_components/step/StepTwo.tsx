@@ -5,13 +5,15 @@ import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
+import NextButton from '../NextButton';
+import RoundedSkeleton from '../RoundedSkeleton';
+import { useQueries, UseQueryResult } from '@tanstack/react-query';
 import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
-import NextButton from '../NextButton';
-import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
-import { useQueries, UseQueryResult } from '@tanstack/react-query';
-import RoundedSkeleton from '../RoundedSkeleton';
 import { spendBookQueryFn, savingBookQueryFn } from '@/service/api/create-bucket';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import type { StateType } from '../../types';
+
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 type BankDataType = {
   bank: string;
@@ -25,7 +27,7 @@ type StepTwoProps = {
 const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
   const [openSpendSheet, setOpenSpendSheet] = useState(false);
   const [openSavingSheet, setOpenSavingSheet] = useState(false);
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const { 'spend-book': spendBook, 'saving-book': savingBook } = state;
   const queryResults = useQueries({
     queries: [

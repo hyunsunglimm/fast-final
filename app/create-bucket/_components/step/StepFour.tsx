@@ -13,7 +13,7 @@ import Checkbox from '@/components/ui/CheckBox';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import useGetHref from '../../hooks/useGetHref';
-import { useCreateBucketContext } from '../../context/createBucketContext';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepFourProps = {
@@ -24,7 +24,7 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   const pathname = usePathname();
   const { getSkipHref } = useGetHref();
   const skipHref = getSkipHref();
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [allCheck, setAllCheck] = useState(false);
   const { 'my-saving-product': mySavingProduct } = state;

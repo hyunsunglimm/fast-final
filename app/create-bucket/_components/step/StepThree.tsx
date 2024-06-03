@@ -11,7 +11,8 @@ import NextButton from '../NextButton';
 import { dayOfTheWeek } from '../../data';
 import { deleteCommaReturnNumber } from '@/utils/deleteComma';
 import { calculateSavingPlan } from '@/utils/dateUtils';
-import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import type { StateType } from '../../types';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepThreeProps = {
@@ -21,7 +22,7 @@ type StepThreeProps = {
 const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [expireDate, setExpireDate] = useState<Date>(new Date());
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const {
     'day-of-week': dayOfWeek,
     'savings-amount': savingsAmount,
