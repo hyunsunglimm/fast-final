@@ -44,9 +44,6 @@ const LoginForm = () => {
     startTransition(async () => {
       const result = await signInWithCredentials(data);
       setSigninResponse(result);
-      // 로그인 후 금융 상품페이지로 이동합니다.
-      // 테스트 용도이므로 추후 홈 페이지로 이동 예정입니다.
-      // router.replace('/financial-product');
     });
   });
 
