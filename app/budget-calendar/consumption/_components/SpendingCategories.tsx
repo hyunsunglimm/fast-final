@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import Title from '../../_components/common/Title';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
@@ -6,6 +7,7 @@ import Icon, { IconProps } from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import IconDot, { dotVariants } from '../../_components/common/IconDot';
 import { VariantProps } from 'class-variance-authority';
+import useDefaultParam from '@/hooks/useDefaultParam';
 
 type SpendingData = {
   name: string;
@@ -78,10 +80,13 @@ const spendingData: SpendingData[] = [
 ];
 
 const SpendingCategories = () => {
+  // tab 기본값 설정
+  useDefaultParam('viewType', '금액');
+
   return (
     <div className='px-20 py-32'>
       <Title title='지출 비교' className='mb-16' />
-      <Tab array={['금액', '건수']} type='box' tabKey='veiwType' />
+      <Tab array={['금액', '건수']} type='box' tabKey='viewType' />
       <div className='relative my-40 min-h-[20.2rem]'>
         {spendingData.map((item, index) => {
           const sizeClass = `w-[${item.size}] h-[${item.size}]`;

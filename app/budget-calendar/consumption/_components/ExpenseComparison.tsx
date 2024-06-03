@@ -1,8 +1,10 @@
-import React from 'react';
+'use client';
+
 import Tab from '@/components/ui/Tab';
 import Title from '../../_components/common/Title';
 import Text from '@/components/ui/Text';
 import BudgetBanner from '../../_components/common/BudgetBanner';
+import useDefaultParam from '@/hooks/useDefaultParam';
 
 const data = [
   { amount: '131만', month: '23.12월', height: '80%' },
@@ -13,6 +15,8 @@ const data = [
 ];
 
 const ExpenseComparison = () => {
+  useDefaultParam('daily', '월별');
+
   return (
     <section className='px-20 py-32'>
       <Title title='지출 비교' className='mb-16' />
