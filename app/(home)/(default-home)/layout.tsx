@@ -22,7 +22,7 @@ const HomeLayout = ({
     <>
       <DefaultHeader title='Home' isHome={true} defaultColor='#f2f4f6' />
       <OpenWalletProvider>
-        <main className='bg-gray-50 pb-[13.2rem]'>
+        <main className='relative bg-gray-50 pb-[13.2rem]'>
           {children}
           {widgetSection}
           <section className='px-20'>

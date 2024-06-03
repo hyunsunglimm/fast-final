@@ -1,7 +1,7 @@
 import { Chart, ChartOptions } from 'chart.js';
 
 /**
- * 나의 자산 증가 그래프 옵션
+ * 나의 자산 증가 막대 그래프 옵션
  */
 export const increaseMyAssetOptions: ChartOptions<'bar'> = {
   responsive: true,
@@ -51,7 +51,7 @@ export const myCreditScoreGraphOptions: ChartOptions<'doughnut'> = {
 };
 
 /**
- * 나의 자산 그래프 옵션 반원형태
+ * 나의 자산 그래프 옵션 형태
  */
 export const myAssetsOptions: ChartOptions<'doughnut'> = {
   animation: { animateScale: true },

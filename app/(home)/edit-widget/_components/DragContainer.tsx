@@ -27,7 +27,7 @@ const DragContainer = () => {
   );
   const { data, isLoading } = useQuery<DataType>({
     queryKey: ['fetchWidget'],
-    queryFn: () => getWidgetItem()
+    queryFn: getWidgetItem
   });
 
   useEffect(() => {
