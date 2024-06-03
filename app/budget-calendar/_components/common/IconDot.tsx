@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
-const dotVariants = cva('', {
+export const dotVariants = cva('', {
   variants: {
     color: {
       primary: 'bg-primary',
