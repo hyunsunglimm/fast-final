@@ -26,20 +26,18 @@ const ConsumptionWeather: React.FC<{ selectedProfile: string }> = ({ selectedPro
           </h4>
           <p className='text-gray-600'>목표 예산에서 평균 80% 썼어요</p>
         </div>
-        <div className='p-[1.33rem]'>
-          <Icon
-            src='/icons/weather/weather-4.svg'
-            alt='비 날씨'
-            className='h-[5.33rem] w-[5.33rem]'
-          />
-        </div>
+        <Icon
+          src='/icons/weather/consumption/weather-4.svg'
+          alt='비 날씨'
+          className='h-[8rem] w-[8rem]'
+        />
       </FlexBox>
       <FlexBox justifyContent='center' className='gap-24 text-center'>
         {weatherData.map((weather, index) => {
           return (
-            <div key={index} className='p-8 pb-8'>
-              <Icon src={weather.src} alt={weather.alt} size='32' />
-              <p className='mt-12'>{weather.days}</p>
+            <div key={index}>
+              <Icon src={weather.src} alt={weather.alt} size='48' />
+              <p className='mt-4'>{weather.days}</p>
             </div>
           );
         })}
