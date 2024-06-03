@@ -14,7 +14,10 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       <Comp
         ref={ref}
         {...props}
-        className={cn('text-14 underline-offset-4 hover:underline', className)}
+        className={cn(
+          'text-14 underline-offset-4 hover:underline disabled:cursor-not-allowed disabled:text-gray-300',
+          className
+        )}
       >
         {children}
       </Comp>

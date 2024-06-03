@@ -104,12 +104,12 @@ const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
           onChange={handleInputChange}
         />
       </InputCard>
-      <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
+      <FlexBox alignItems='start' justifyContent='center' className=' h-[11.3rem] w-full'>
         {dayOfWeek && savingsAmount.length >= 5 ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
-            className='w-full rounded-2xl bg-white p-16'
+            className='mt-24 w-full rounded-2xl bg-white p-16'
           >
             <Text weight='500'>
               <span className='text-primary'>

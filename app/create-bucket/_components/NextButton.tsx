@@ -41,7 +41,7 @@ const NextButton = ({
       type={type}
       size='lg'
       styled='fill_black'
-      className='mt-24 w-full text-16 font-400'
+      className='w-full text-16 font-400'
     >
       <Link href={linkHref} onClick={handleDisabledAnchorClick}>
         {buttonLabel}

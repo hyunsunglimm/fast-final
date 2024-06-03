@@ -79,7 +79,7 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         <Input
           readOnly
           className='peer/spend z-10 cursor-pointer caret-transparent'
-          placeholder='출금통장을 선택해주세요'
+          placeholder='주거래 계좌를 선택해주세요'
           id='spend-book'
           border='nonborder'
           onFocus={handleOpenSpendBookBtSheet}
@@ -99,7 +99,7 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           readOnly
           isTranslate
           className='z-10 cursor-pointer caret-transparent'
-          placeholder='저축통장을 선택해주세요'
+          placeholder='저축할 계좌를 선택해주세요'
           id='saving-book'
           border='nonborder'
           onFocus={handleOpenSavingBookBtSheet}
@@ -113,12 +113,12 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           className='absolute right-[2rem]'
         />
       </InputCard>
-      <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
+      <FlexBox alignItems='start' justifyContent='center' className=' h-[11.3rem] w-full'>
         {spendBook && savingBook ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
-            className='w-full rounded-2xl bg-white p-16'
+            className='mt-24 w-full rounded-2xl bg-white p-16'
           >
             <Text weight='500'>
               <span className='text-primary'>{spendBook}</span>에서{' '}

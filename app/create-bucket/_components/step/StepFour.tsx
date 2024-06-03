@@ -11,6 +11,7 @@ import NextButton from '../NextButton';
 import { myProductData } from '../../data';
 import Checkbox from '@/components/ui/CheckBox';
 import { usePathname } from 'next/navigation';
+import TextButton from '@/components/ui/TextButton';
 import Link from 'next/link';
 import useGetHref from '../../hooks/useGetHref';
 import { useCreateBucket } from '../../hooks/useCreateBucket';
@@ -93,12 +94,12 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
         />
       </InputCard>
 
-      <FlexBox alignItems='end' justifyContent='center' className='mt-32 h-[19.7rem] w-full'>
-        <Link href={`${pathname}/result${skipHref}`} aria-label='저축 상품 연결 건너뛰기'>
-          <Text sizes='16' weight='500' className='underline'>
+      <FlexBox alignItems='end' justifyContent='center' className='h-[19.7rem] w-full'>
+        <TextButton className='mb-16 underline' asChild>
+          <Link href={`${pathname}/result${skipHref}`} aria-label='저축 상품 연결 건너뛰기'>
             건너뛰기
-          </Text>
-        </Link>
+          </Link>
+        </TextButton>
       </FlexBox>
 
       {/* 요일 선택 바텀 시트 */}

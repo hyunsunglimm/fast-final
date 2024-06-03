@@ -9,8 +9,8 @@ type BubbleTextProps = {
 };
 
 const BubbleText = ({ currentStep }: BubbleTextProps) => {
-  const stepIndex = Number(currentStep);
-  const { title, stepText } = getStepConfig(currentStep);
+  const currentStepIndex = Number(currentStep);
+  const { title } = getStepConfig(currentStep);
 
   return (
     <FlexBox
@@ -19,26 +19,36 @@ const BubbleText = ({ currentStep }: BubbleTextProps) => {
       flexDirection='col'
       alignItems='center'
     >
-      <FlexBox alignItems='center'>
+      <FlexBox alignItems='center' className='gap-x-4'>
         {[...Array(4)].map((_, idx) => {
-          const isActiveStep = stepIndex === idx + 1;
-          const currentStepWidthClass = isActiveStep
-            ? ' px-[0.8rem] py-[0.4rem]'
-            : 'w-[1.6rem] h-[1.6rem] ';
-          const overStepBgClass = stepIndex >= idx + 1 ? 'bg-gray-700' : 'bg-gray-300';
+          const overStepBgClass =
+            currentStepIndex === idx + 1
+              ? 'bg-primary text-white border-none'
+              : currentStepIndex < idx + 1
+                ? 'border border-gray-300 text-gray-300'
+                : 'bg-gray-300 text-white';
 
           return (
             <React.Fragment key={idx}>
-              {idx > 0 && <div className={cn('h-[0.1rem] w-[2.4rem]', overStepBgClass)}></div>}
+              {idx > 0 && (
+                <FlexBox className='gap-x-2'>
+                  <span className='h-[0.2rem] w-[0.2rem] rounded-full bg-gray-300'></span>
+                  <span className='h-[0.2rem] w-[0.2rem] rounded-full bg-gray-300'></span>
+                  <span className='h-[0.2rem] w-[0.2rem] rounded-full bg-gray-300'></span>
+                </FlexBox>
+              )}
+
               <FlexBox
                 alignItems='center'
+                justifyContent='center'
                 className={cn(
-                  'rounded-full text-white transition-transform duration-200',
-                  currentStepWidthClass,
+                  'h-[2.4rem] w-[2.4rem] rounded-full transition-transform duration-200',
                   overStepBgClass
                 )}
               >
-                {stepIndex === idx + 1 && <Text sizes='12'>{stepText}</Text>}
+                <Text sizes='12' weight='700'>
+                  {idx + 1}
+                </Text>
               </FlexBox>
             </React.Fragment>
           );
