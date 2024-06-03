@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import dynamic from 'next/dynamic';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
-import BottomSheet from '@/components/BottomSheet';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
@@ -11,62 +10,66 @@ import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { myProductData } from '../../data';
 import Checkbox from '@/components/ui/CheckBox';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { getSkipHref } from '../../util';
+import useGetHref from '../../hooks/useGetHref';
+import { useCreateBucketContext } from '../../context/createBucketContext';
+const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepFourProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
 
-export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
-  const searchParams = useSearchParams();
+const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   const pathname = usePathname();
-  const skipHref = getSkipHref(searchParams);
+  const { getSkipHref } = useGetHref();
+  const skipHref = getSkipHref();
+  const { state, dispatch } = useCreateBucketContext();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [allCheck, setAllCheck] = useState(false);
-  const [checkItems, setCheckItems] = useState<string[]>(
-    decodeURIComponent(searchParams.get('my-saving-product') || '')
-      .split('|')
-      .filter((item) => item.trim() !== '')
-  );
+  const { 'my-saving-product': mySavingProduct } = state;
 
-  const handleChangeInputValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setCheckItems((prev) => [...prev, value]);
-    } else {
-      setCheckItems((prev) => prev.filter((item) => item !== value));
-    }
-  }, []);
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value, checked } = e.target;
+      if (checked) {
+        dispatch({ type: 'SET_CHECK_ITEMS', payload: [...mySavingProduct, value] });
+      } else {
+        dispatch({ type: 'SET_CHECK_ITEMS', payload: mySavingProduct.filter((item) => !item) });
+      }
+    },
+    [dispatch, mySavingProduct]
+  );
 
   const handleOpenSpendBookBtSheet = () => {
     setOpenBottomSheet(true);
   };
 
   const handleSelectDoneDayOfWeek = () => {
-    const queryString = encodeURIComponent(checkItems.map((item) => item).join('|'));
+    const queryString = encodeURIComponent(mySavingProduct.join('|'));
     handleChangeQueryString('my-saving-product', queryString);
     setOpenBottomSheet(false);
   };
 
-  const handleCheckAll = (e: ChangeEvent<HTMLInputElement>) => {
-    setAllCheck((prev) => !prev);
-    const { checked } = e.target;
-    if (checked) {
-      setCheckItems(myProductData.map((item) => item.productName));
-    } else {
-      setCheckItems([]);
-    }
-  };
+  const handleCheckAll = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setAllCheck((prev) => !prev);
+      const { checked } = e.target;
+      if (checked) {
+        dispatch({
+          type: 'SET_CHECK_ITEMS',
+          payload: myProductData.map((item) => item.productName)
+        });
+      } else {
+        dispatch({ type: 'SET_CHECK_ITEMS', payload: [] });
+      }
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
-    if (checkItems.length === myProductData.length) {
-      setAllCheck(true);
-    } else {
-      setAllCheck(false);
-    }
-  }, [checkItems]);
+    setAllCheck(mySavingProduct.length === myProductData.length);
+  }, [mySavingProduct]);
 
   return (
     <>
@@ -78,7 +81,7 @@ export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
           id='my-saving-product'
           border='nonborder'
           onFocus={handleOpenSpendBookBtSheet}
-          value={checkItems.length > 0 ? `상품 ${checkItems.length}개 선택함` : ''}
+          value={mySavingProduct.length > 0 ? `상품 ${mySavingProduct.length}개 선택함` : ''}
           isTranslate
           inputMode='none'
         />
@@ -127,9 +130,9 @@ export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
               <BottomSheetCard
                 key={item.productName}
                 item={item}
-                onChange={handleChangeInputValues}
+                onChange={handleInputChange}
                 name='my-saving-product'
-                checkItems={checkItems}
+                mySavingProduct={mySavingProduct}
               />
             );
           })}
@@ -141,16 +144,18 @@ export const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   );
 };
 
+export default StepFour;
+
 // 바텀시트 내용
 type ItemType = (typeof myProductData)[0];
 type BottomSheetCard = {
   item: ItemType;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string;
-  checkItems: string[];
+  mySavingProduct: string[];
 };
 
-const BottomSheetCard = ({ item, onChange, name, checkItems }: BottomSheetCard) => {
+const BottomSheetCard = ({ item, onChange, name, mySavingProduct }: BottomSheetCard) => {
   const { productName, amount, imgSrc } = item;
   return (
     <>
@@ -171,7 +176,7 @@ const BottomSheetCard = ({ item, onChange, name, checkItems }: BottomSheetCard) 
           name={name}
           id={productName}
           value={productName}
-          checked={checkItems.includes(productName)}
+          checked={mySavingProduct.includes(productName)}
           onChange={onChange}
         />
         <Icon src={imgSrc} alt='아이콘' size='32' />

@@ -1,59 +1,55 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import dynamic from 'next/dynamic';
 import React, { ChangeEvent, useState, useEffect, useCallback } from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
-import { useSearchParams } from 'next/navigation';
-import BottomSheet from '@/components/BottomSheet';
 import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { recommandedBucketData } from '../../data';
 import { deleteCommaReturnNumber } from '@/utils/deleteComma';
+import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepOneProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
 
-export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
-  const searchParams = useSearchParams();
+const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    'bucket-name': searchParams.get('bucket-name') || '',
-    'target-amount': searchParams.get('target-amount') || ''
-  });
+  const { state, dispatch } = useCreateBucketContext();
+  const { 'bucket-name': bucketName, 'target-amount': targetAmount } = state;
 
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    let newValue: string;
-    if (name === 'target-amount') {
-      const numericValue = deleteCommaReturnNumber(value);
-      if (!isNaN(numericValue)) {
-        newValue = numericValue.toLocaleString();
-        setInputValues((prev) => ({ ...prev, [name]: newValue }));
-      } else {
-        newValue = '50,000';
-        setInputValues((prev) => ({ ...prev, [name]: newValue }));
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      let newValue = value;
+      if (name === 'target-amount') {
+        const numericValue = deleteCommaReturnNumber(value);
+        newValue = !isNaN(numericValue) ? numericValue.toLocaleString() : '50,000';
       }
-    } else {
-      setInputValues((prev) => ({ ...prev, [name]: value }));
-    }
-  }, []);
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: name as keyof StateType, value: newValue }
+      });
+    },
+    [dispatch]
+  );
 
   const handleSelectDone = () => {
-    if (!inputValues['bucket-name']) return;
-    handleChangeQueryString('bucket-name', inputValues['bucket-name']);
+    if (!bucketName) return;
+    handleChangeQueryString('bucket-name', bucketName);
     setOpenBottomSheet(false);
   };
 
   useEffect(() => {
-    handleChangeQueryString('bucket-name', inputValues['bucket-name']);
-  }, [handleChangeQueryString, inputValues['bucket-name']]);
+    handleChangeQueryString('bucket-name', bucketName);
+  }, [handleChangeQueryString, bucketName]);
 
   useEffect(() => {
-    handleChangeQueryString('target-amount', inputValues['target-amount']);
-  }, [handleChangeQueryString, inputValues['target-amount']]);
+    handleChangeQueryString('target-amount', targetAmount);
+  }, [handleChangeQueryString, targetAmount]);
 
   return (
     <>
@@ -65,7 +61,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
           id='bucket-name'
           name='bucket-name'
           border='nonborder'
-          value={inputValues['bucket-name']}
+          value={bucketName}
           onChange={handleInputChange}
           maxLength={16}
         />
@@ -82,7 +78,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
           trailingText='원'
           type='text'
           inputMode='numeric'
-          value={inputValues['target-amount']}
+          value={targetAmount}
           onChange={handleInputChange}
         />
       </InputCard>
@@ -104,7 +100,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
         buttonLabel='선택'
         isOpen={openBottomSheet}
         onClose={() => setOpenBottomSheet(false)}
-        buttonOptions={{ size: 'md', disabled: inputValues['bucket-name'] ? false : true }}
+        buttonOptions={{ size: 'md', disabled: bucketName ? false : true }}
         buttonType='button'
         onClick={() => handleSelectDone()}
       >
@@ -112,7 +108,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
           {recommandedBucketData.map((item) => {
             return (
               <RecommandedBucketList
-                value={inputValues['bucket-name']}
+                value={bucketName}
                 key={item}
                 text={item}
                 id={item}
@@ -123,7 +119,7 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
         </div>
       </BottomSheet>
       <NextButton
-        disabled={!(inputValues['bucket-name'] && inputValues['target-amount'].length > 5)}
+        disabled={!(bucketName && targetAmount.length > 5)}
         buttonLabel='다음'
         currentStep='1'
         type='button'
@@ -132,6 +128,8 @@ export const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
     </>
   );
 };
+
+export default StepOne;
 
 //  추천 버킷 바텀 시트
 type RecommandedBucketListProps = {

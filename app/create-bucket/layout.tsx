@@ -1,5 +1,12 @@
 import React from 'react';
 import TransitonContainer from '@/components/TransitonContainer';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'PORKO 버킷 생성 페이지',
+  description: '버킷 생성 페이지'
+};
+
 const CreateBucketLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <TransitonContainer>

@@ -9,18 +9,14 @@ export const GET = async () => {
         { id: 'c', title: '저번달에 쓴 돈' },
         { id: 'd', title: '?월 현재 소비' },
         { id: 'e', title: '이번달 카드실적' },
-        { id: 'g', title: 'hide 1' }
+        { id: 'g', title: '나의 신용점수' }
       ],
       hideWidget: [
-        { id: 'f', title: '나의 신용점수' },
-        { id: 'h', title: 'hide 2' },
-        { id: 'i', title: 'hide 3' },
-        { id: 'j', title: 'hide 4' }
+        { id: 'f', title: '나의 챌린지' },
+        { id: 'h', title: '매월 나가는 돈' }
       ]
     }
   ];
   await new Promise((res) => setTimeout(res, 3000));
   return NextResponse.json(data);
 };
-
-export const POST = async (body: any) => {};

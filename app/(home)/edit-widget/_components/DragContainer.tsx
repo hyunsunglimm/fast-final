@@ -37,6 +37,7 @@ const DragContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
   const findItemTitle = (id: UniqueIdentifier | undefined) => {
     const item = showWidget.find((item) => item.id === id);
     if (!item) return '';

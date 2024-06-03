@@ -1,13 +1,17 @@
 import { Card, CardHeader } from '@/components/ui/card';
 import Text from '@/components/ui/Text';
 
-type WidgetItemCardProps = {
+type WidgetItemCardContainerProps = {
   title: string;
   subText?: string;
   children: React.ReactNode;
 };
 
-export const WidgetItemCard = ({ title, children, subText }: WidgetItemCardProps) => {
+export const WidgetItemCardContainer = ({
+  title,
+  children,
+  subText
+}: WidgetItemCardContainerProps) => {
   return (
     <Card className='flex h-[17rem] w-[16rem] flex-col justify-between px-16 py-24'>
       <CardHeader>
