@@ -1,38 +1,35 @@
-import { Suspense } from 'react';
+import React from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import Link from 'next/link';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
+import ConsumeWeatherCard from '../_components/ConsumeWeatherCard';
 import { getWidgetItem } from '@/service/api/home';
-import { UniqueIdentifier } from '@dnd-kit/core';
-import ConsumeWeatherCard from './ConsumeWeatherCard';
-import WidgetSkeleton from './WidgetSkeleton';
-
+import { UniqueIdentifier } from '@dnd-kit/core/dist/types';
 import {
   WidgetBudget,
   WidgetCardPerformance,
   WidgetCurrentMonth,
   WidgetLastMonth,
-  WidgetMtCredit,
+  WidgetMyCredit,
   WidgetMyChallenge,
-  WidgetUpcomingExpenses
-} from './widget-item';
+  WidgetUpcomingExpenses,
+  WidgetSpentEveryMonth
+} from './_components';
 
-const HomeWidgetSection = async () => {
+const WidgeSectionPage = async () => {
   const data = await getWidgetItem();
 
   const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
     a: WidgetBudget,
-    b: WidgetCardPerformance,
-    c: WidgetCurrentMonth,
-    d: WidgetLastMonth,
-    e: WidgetMtCredit,
+    b: WidgetUpcomingExpenses,
+    c: WidgetLastMonth,
+    d: WidgetCurrentMonth,
+    e: WidgetCardPerformance,
     f: WidgetMyChallenge,
-    g: WidgetUpcomingExpenses,
-    h: WidgetMyChallenge,
-    i: WidgetMyChallenge
+    g: WidgetMyCredit,
+    h: WidgetSpentEveryMonth
   };
-
   return (
     <>
       <FlexBox justifyContent='between' alignItems='center' className='mb-[1.6rem] mt-[4rem]'>
@@ -65,12 +62,4 @@ const HomeWidgetSection = async () => {
   );
 };
 
-const HomeWidgetSectionWrapper = () => {
-  return (
-    <Suspense fallback={<WidgetSkeleton />}>
-      <HomeWidgetSection />
-    </Suspense>
-  );
-};
-
-export default HomeWidgetSectionWrapper;
+export default WidgeSectionPage;

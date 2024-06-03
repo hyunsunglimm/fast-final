@@ -1,32 +1,37 @@
+import dynamic from 'next/dynamic';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
-import { useSearchParams } from 'next/navigation';
-import BottomSheet from '@/components/BottomSheet';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { spendBookData, savingBookData } from '../../data';
+import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepTwoProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
-export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
-  const searchParams = useSearchParams();
+const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
   const [openSpendSheet, setOpenSpendSheet] = useState(false);
   const [openSavingSheet, setOpenSavingSheet] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    'spend-book': searchParams.get('spend-book') || '',
-    'saving-book': searchParams.get('saving-book') || ''
-  });
+  const { state, dispatch } = useCreateBucketContext();
+  const { 'spend-book': spendBook, 'saving-book': savingBook } = state;
 
-  const handleChangeInputValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputValues((prev) => ({ ...prev, [name]: value }));
-  }, []);
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: name as keyof StateType, value }
+      });
+    },
+    [dispatch]
+  );
 
   const handleOpenSpendBookBtSheet = () => {
     setOpenSpendSheet(true);
@@ -36,14 +41,14 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
   };
 
   const handleSelectDoneSpendBook = () => {
-    if (!inputValues['spend-book']) return;
-    handleChangeQueryString('spend-book', inputValues['spend-book']);
+    if (!spendBook) return;
+    handleChangeQueryString('spend-book', spendBook);
     setOpenSpendSheet(false);
   };
 
   const handleSelectDoneSavingBoook = () => {
-    if (!inputValues['saving-book']) return;
-    handleChangeQueryString('saving-book', inputValues['saving-book']);
+    if (!savingBook) return;
+    handleChangeQueryString('saving-book', savingBook);
     setOpenSavingSheet(false);
   };
 
@@ -57,7 +62,7 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           id='spend-book'
           border='nonborder'
           onFocus={handleOpenSpendBookBtSheet}
-          value={inputValues['spend-book']}
+          value={spendBook}
           isTranslate
           inputMode='none'
         />
@@ -77,7 +82,7 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           id='saving-book'
           border='nonborder'
           onFocus={handleOpenSavingBookBtSheet}
-          value={inputValues['saving-book']}
+          value={savingBook}
           inputMode='none'
         />
         <Icon
@@ -88,15 +93,15 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         />
       </InputCard>
       <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
-        {inputValues['spend-book'] && inputValues['saving-book'] ? (
+        {spendBook && savingBook ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
             className='w-full rounded-2xl bg-white p-16'
           >
             <Text weight='500'>
-              <span className='text-primary'>{inputValues['spend-book']}</span>에서{' '}
-              <span className='text-primary'>{inputValues['saving-book']}</span>으로 저축할거에요
+              <span className='text-primary'>{spendBook}</span>에서{' '}
+              <span className='text-primary'>{savingBook}</span>으로 저축할거에요
             </Text>
           </FlexBox>
         ) : null}
@@ -108,7 +113,7 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         buttonLabel='선택'
         isOpen={openSpendSheet}
         onClose={() => setOpenSpendSheet(false)}
-        buttonOptions={{ size: 'md', disabled: inputValues['spend-book'] ? false : true }}
+        buttonOptions={{ size: 'md', disabled: spendBook ? false : true }}
         buttonType='button'
         onClick={() => handleSelectDoneSpendBook()}
       >
@@ -118,8 +123,8 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
               <BottomSheetCard
                 key={item.bank}
                 item={item}
-                onChange={handleChangeInputValues}
-                value={inputValues['spend-book']}
+                onChange={handleInputChange}
+                value={spendBook}
                 name='spend-book'
               />
             );
@@ -133,7 +138,7 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         buttonLabel='선택'
         isOpen={openSavingSheet}
         onClose={() => setOpenSavingSheet(false)}
-        buttonOptions={{ size: 'md', disabled: inputValues['saving-book'] ? false : true }}
+        buttonOptions={{ size: 'md', disabled: savingBook ? false : true }}
         buttonType='button'
         onClick={() => handleSelectDoneSavingBoook()}
       >
@@ -143,8 +148,8 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
               <BottomSheetCard
                 key={item.bank}
                 item={item}
-                value={inputValues['saving-book']}
-                onChange={handleChangeInputValues}
+                value={savingBook}
+                onChange={handleInputChange}
                 name='saving-book'
               />
             );
@@ -152,7 +157,7 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         </div>
       </BottomSheet>
       <NextButton
-        disabled={!(inputValues['saving-book'] && inputValues['spend-book'])}
+        disabled={!(savingBook && spendBook)}
         buttonLabel='다음'
         currentStep='2'
         type='button'
@@ -161,6 +166,7 @@ export const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
     </>
   );
 };
+export default StepTwo;
 
 // 바텀시트 내용
 

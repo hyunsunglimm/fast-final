@@ -5,21 +5,24 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, defaultValues, LoginInputsValues } from '../../schema/loginSchema';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
-import EyeIcon from '../../_components/EyeIcon';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import FlexBox from '@/components/ui/FlexBox';
-import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import Checkbox from '@/components/ui/CheckBox';
 import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
-import Link from 'next/link';
 import { signInWithCredentials } from '@/actions/auth';
 
 type SigninResponse = {
   message: string;
 };
 
+const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
+const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
+  ssr: false
+});
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [autoLoginCheck, setAutoLoginCheck] = useState(false);

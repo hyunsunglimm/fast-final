@@ -1,6 +1,6 @@
 // 다가오는 지출
 import React from 'react';
-import { WidgetItemCard } from './WidgetItemCard';
+import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
@@ -8,7 +8,7 @@ import Text from '@/components/ui/Text';
 
 export const WidgetUpcomingExpenses = () => {
   return (
-    <WidgetItemCard title='다가오는 지출' subText='12,000원'>
+    <WidgetItemCardContainer title='다가오는 지출' subText='12,000원'>
       <CardContent alignItems='end' justifyContent='between'>
         <FlexBox flexDirection='col' className='w-[7.1rem] '>
           <Text sizes='12' className='text-gray-700'>
@@ -25,6 +25,6 @@ export const WidgetUpcomingExpenses = () => {
           className='rounded-none'
         />
       </CardContent>
-    </WidgetItemCard>
+    </WidgetItemCardContainer>
   );
 };

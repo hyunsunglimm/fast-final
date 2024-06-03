@@ -6,7 +6,7 @@ import CheckedGender from '../_components/CheckedGender';
 import DaumAddress from '../_components/DaumAddress';
 import Icon from '@/components/Icon';
 import Input from '@/components/ui/Input';
-import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
+import dynamic from 'next/dynamic';
 import Button from '@/components/ui/Button';
 import { useFormContext } from 'react-hook-form';
 import { SignupInputsValues } from '../../schema/signupSchema';
@@ -14,6 +14,9 @@ import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
 import { useSignupStore } from '@/store/signup';
+const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
+  ssr: false
+});
 
 const StepThreePage = () => {
   const [visiblePostDaum, setVisiblePostDaum] = useState(false);

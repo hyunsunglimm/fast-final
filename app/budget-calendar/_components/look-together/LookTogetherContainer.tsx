@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Line from '../common/Line';
 import SharedCalendar from './SharedCalendar';
 import SharedMembers from './SharedMembers';
-import ConsumptionWeather from './ConsumptionWeather';
-import RegretSpending from './RegretSpending';
+import ConsumptionWeather from '../shared/ConsumptionWeather';
+import RegretSpending from '../shared/RegretSpending';
 
 const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => {
   // 선택중인 프로필

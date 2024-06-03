@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
+import dynamic from 'next/dynamic';
 import { useState, useEffect, useCallback } from 'react';
 import Input from '@/components/ui/Input';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/Spinner';
-import EyeIcon from '../../_components/EyeIcon';
 import AuthHeader from '../../_components/AuthHeader';
-import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
@@ -16,6 +15,10 @@ import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
 import { SignupInputsValues } from '../../schema/signupSchema';
 import { useSignupStore } from '@/store/signup';
+const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
+  ssr: false
+});
+const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
 
 const StepOnePage = () => {
   const router = useRouter();

@@ -3,7 +3,7 @@ import React, { forwardRef, HTMLAttributes } from 'react';
 import Image, { ImageProps } from 'next/image';
 import { cn } from '@/utils/twMerge';
 
-type IconProps = {
+export type IconProps = {
   size?: '12' | '16' | '20' | '24' | '28' | '28.8' | '32' | '34' | '36' | '40' | '48' | '52' | '56';
   imgClass?: HTMLAttributes<HTMLImageElement>['className'];
 } & HTMLAttributes<HTMLDivElement> &
