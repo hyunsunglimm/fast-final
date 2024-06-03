@@ -1,14 +1,17 @@
 'use client';
+import dynamic from 'next/dynamic';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import AuthHeader from '../../_components/AuthHeader';
-import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
 import { SignupInputsValues } from '../../schema/signupSchema';
 import { useSignupStore } from '@/store/signup';
+const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
+  ssr: false
+});
 
 const StepTwoPage = () => {
   const router = useRouter();
