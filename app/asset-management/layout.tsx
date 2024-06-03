@@ -7,12 +7,26 @@ export const metadata: Metadata = {
   description: '자산관리 페이지'
 };
 
-const AssetLayout = ({ children }: { children: React.ReactNode }) => {
+type MyAssetPageLayoutProps = {
+  children: React.ReactNode;
+  UpcomingScheduleSection: React.ReactNode;
+  MyAssetsGraphSection: React.ReactNode;
+};
+
+const MyAssetPageLayout = ({
+  children,
+  UpcomingScheduleSection,
+  MyAssetsGraphSection
+}: MyAssetPageLayoutProps) => {
   return (
     <>
       <DefaultHeader title='자산' defaultColor='#f2f4f6' />
-      <main className='bg-gray-50'>{children}</main>
+      <main className='bg-gray-50'>
+        {children}
+        <section className='px-20'>{UpcomingScheduleSection}</section>
+        <section className='px-20 pb-[13.2rem]'>{MyAssetsGraphSection}</section>
+      </main>
     </>
   );
 };
-export default AssetLayout;
+export default MyAssetPageLayout;
