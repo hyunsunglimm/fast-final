@@ -4,7 +4,21 @@ import Image, { ImageProps } from 'next/image';
 import { cn } from '@/utils/twMerge';
 
 export type IconProps = {
-  size?: '12' | '16' | '20' | '24' | '28' | '28.8' | '32' | '34' | '36' | '40' | '48' | '52' | '56';
+  size?:
+    | '12'
+    | '16'
+    | '20'
+    | '24'
+    | '28'
+    | '28.8'
+    | '32'
+    | '34'
+    | '36'
+    | '40'
+    | '44'
+    | '48'
+    | '52'
+    | '56';
   imgClass?: HTMLAttributes<HTMLImageElement>['className'];
 } & HTMLAttributes<HTMLDivElement> &
   ImageProps;
@@ -20,6 +34,7 @@ const sizeClass: { [key: string]: string } = {
   '34': 'w-[3.4rem] h-[3.4rem]',
   '36': 'w-[3.6rem] h-[3.6rem]',
   '40': 'w-[4rem] h-[4rem]',
+  '44': 'w-[4.4rem] h-[4.4rem]',
   '48': 'w-[4.8rem] h-[4.8rem]',
   '52': 'w-[5.2rem] h-[5.2rem]',
   '56': 'w-[5.6rem] h-[5.6rem]'
