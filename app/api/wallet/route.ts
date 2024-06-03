@@ -6,7 +6,7 @@ export const GET = async () => {
       bankBookName: '생활비통장',
       amount: 763750,
       lastDeposit: 56000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-kakao.svg'
     },
     {
@@ -14,7 +14,7 @@ export const GET = async () => {
       bankBookName: '신한 주거래 우대통장',
       amount: 562050,
       lastDeposit: 0,
-      lasSpending: 23000,
+      lastSpending: 23000,
       iconSrc: '/icons/logos/bank/bank-shinhan.svg'
     },
     {
@@ -22,7 +22,7 @@ export const GET = async () => {
       bankBookName: 'KB마이핏통장',
       amount: 240210,
       lastDeposit: 40000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-kb.svg'
     },
     {
@@ -30,7 +30,7 @@ export const GET = async () => {
       bankBookName: '우리통장',
       amount: 240210,
       lastDeposit: 40000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-woori.svg'
     },
     {
@@ -38,7 +38,7 @@ export const GET = async () => {
       bankBookName: '농협통장',
       amount: 240210,
       lastDeposit: 40000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-nh.svg'
     },
     {
@@ -46,7 +46,7 @@ export const GET = async () => {
       bankBookName: '하나통장',
       amount: 240210,
       lastDeposit: 40000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-hana.svg'
     },
     {
@@ -54,7 +54,7 @@ export const GET = async () => {
       bankBookName: '롯데통장',
       amount: 240210,
       lastDeposit: 40000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-lotte.svg'
     },
     {
@@ -62,7 +62,7 @@ export const GET = async () => {
       bankBookName: '롯데통장',
       amount: 240210,
       lastDeposit: 40000,
-      lasSpending: 0,
+      lastSpending: 0,
       iconSrc: '/icons/logos/bank/bank-lotte.svg'
     }
   ];
