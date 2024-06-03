@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 export const GET = async () => {
-  await new Promise((res) => setTimeout(res, 2000));
   const MyWalletData = [
     {
       bank: 'kakao',
@@ -67,6 +66,6 @@ export const GET = async () => {
       iconSrc: '/icons/logos/bank/bank-lotte.svg'
     }
   ];
-
+  await new Promise((res) => setTimeout(res, 2000));
   return NextResponse.json(MyWalletData);
 };

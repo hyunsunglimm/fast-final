@@ -10,6 +10,7 @@ import NextButton from '../NextButton';
 import { recommandedBucketData } from '../../data';
 import { deleteCommaReturnNumber } from '@/utils/deleteComma';
 import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepOneProps = {

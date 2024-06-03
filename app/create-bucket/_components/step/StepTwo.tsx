@@ -8,19 +8,37 @@ import Text from '@/components/ui/Text';
 import { cn } from '@/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
-import { spendBookData, savingBookData } from '../../data';
 import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+import { useQueries, UseQueryResult } from '@tanstack/react-query';
+import RoundedSkeleton from '../RoundedSkeleton';
+import { spendBookQueryFn, savingBookQueryFn } from '@/service/api/create-bucket';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
-
+type BankDataType = {
+  bank: string;
+  amount: number;
+  imgSrc: string;
+}[];
 type StepTwoProps = {
   handleChangeQueryString: (query: QueryType, term: string) => void;
 };
+
 const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
   const [openSpendSheet, setOpenSpendSheet] = useState(false);
   const [openSavingSheet, setOpenSavingSheet] = useState(false);
   const { state, dispatch } = useCreateBucketContext();
   const { 'spend-book': spendBook, 'saving-book': savingBook } = state;
-
+  const queryResults = useQueries({
+    queries: [
+      {
+        queryKey: ['spend-book'],
+        queryFn: spendBookQueryFn
+      },
+      {
+        queryKey: ['saving-book'],
+        queryFn: savingBookQueryFn
+      }
+    ]
+  });
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -32,6 +50,7 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
     },
     [dispatch]
   );
+  const [spendBookResult, savingBookResult] = queryResults as UseQueryResult<BankDataType, Error>[];
 
   const handleOpenSpendBookBtSheet = () => {
     setOpenSpendSheet(true);
@@ -118,17 +137,19 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         onClick={() => handleSelectDoneSpendBook()}
       >
         <div className='mt-0 space-y-[0.8rem]'>
-          {spendBookData.map((item) => {
-            return (
-              <BottomSheetCard
-                key={item.bank}
-                item={item}
-                onChange={handleInputChange}
-                value={spendBook}
-                name='spend-book'
-              />
-            );
-          })}
+          {spendBookResult.isFetching
+            ? [...Array(6)].map((_, index) => <RoundedSkeleton key={index} />)
+            : spendBookResult.data?.map((item) => {
+                return (
+                  <BottomSheetCard
+                    key={item.bank}
+                    item={item}
+                    onChange={handleInputChange}
+                    value={spendBook}
+                    name='spend-book'
+                  />
+                );
+              })}
         </div>
       </BottomSheet>
 
@@ -143,17 +164,19 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         onClick={() => handleSelectDoneSavingBoook()}
       >
         <div className='mt-0 space-y-[0.8rem]'>
-          {savingBookData.map((item) => {
-            return (
-              <BottomSheetCard
-                key={item.bank}
-                item={item}
-                value={savingBook}
-                onChange={handleInputChange}
-                name='saving-book'
-              />
-            );
-          })}
+          {savingBookResult.isFetching
+            ? [...Array(6)].map((_, index) => <RoundedSkeleton key={index} />)
+            : savingBookResult.data?.map((item) => {
+                return (
+                  <BottomSheetCard
+                    key={item.bank}
+                    item={item}
+                    value={savingBook}
+                    onChange={handleInputChange}
+                    name='saving-book'
+                  />
+                );
+              })}
         </div>
       </BottomSheet>
       <NextButton
