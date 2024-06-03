@@ -8,6 +8,7 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import { getSpendingHabitsCards } from '@/service/api/financial-product/cards';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const SpendingHabitsCardSection = () => {
@@ -49,9 +50,18 @@ const SpendingHabitsCardSection = () => {
       ) : (
         <>
           <SwiperWrapper dots coverflow setIndex={setCurrentCardIndex}>
-            {spendingHabitsCards.map(({ title, image }) => (
-              <div key={title} className={`h-[16rem] rounded-xs ${image}`} />
-            ))}
+            {spendingHabitsCards.map(({ title, image }) => {
+              return (
+                <Image
+                  key={title}
+                  src={`/images/financial-product/${image}.webp`}
+                  alt={title}
+                  width={400}
+                  height={160}
+                  className='w-full'
+                />
+              );
+            })}
           </SwiperWrapper>
           <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
             <Text sizes='12' className='mb-[0.2rem]'>
