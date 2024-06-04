@@ -50,7 +50,6 @@ const SubmitEmojiBottomSheet = ({
         <Text className='text-gray-700'>4월 10일 수요일</Text>
         <FlexBox className='mt-16 gap-8'>
           <TextButton
-            onClick={handleEmojiClick}
             role='button'
             className='h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 hover:bg-gray-200 hover:no-underline active:scale-95'
           >
@@ -60,7 +59,6 @@ const SubmitEmojiBottomSheet = ({
             1
           </TextButton>
           <TextButton
-            onClick={handleEmojiClick}
             role='button'
             className='h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 hover:bg-gray-200 hover:no-underline active:scale-95'
           >
