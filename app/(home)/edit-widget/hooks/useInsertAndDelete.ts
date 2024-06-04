@@ -2,14 +2,14 @@ import { MouseEvent } from 'react';
 import type {
   SetShowWidgetType,
   SetHideWidgetType,
-  DataType
+  EditWidgetDataType
 } from '@/types/widget-type/widgetType';
 
 const useInsertAndDelete = (
   setShowWidget: SetShowWidgetType,
   setHideWidget: SetHideWidgetType,
-  showWidget: DataType[0]['showWidget'],
-  hideWidget: DataType[0]['hideWidget']
+  showWidget: EditWidgetDataType[0]['showWidget'],
+  hideWidget: EditWidgetDataType[0]['hideWidget']
 ) => {
   const handleDeleteWidgetItem = (e: MouseEvent<HTMLButtonElement>) => {
     const currentClickItem = e.currentTarget.id;
