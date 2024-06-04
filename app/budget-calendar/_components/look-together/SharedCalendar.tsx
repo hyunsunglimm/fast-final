@@ -3,29 +3,27 @@ import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
 import TextButton from '@/components/ui/TextButton';
 import Icon from '@/components/Icon';
-import BottomSheet from '@/components/BottomSheet';
 import SubmitEmojiBottomSheet from './_components/SubmitEmojiBottomSheet';
+import ReactionBottomSheet from './_components/ReactionBottomSheet';
+import BudgetBanner from '../common/BudgetBanner';
+
 type SharedCalendarProps = {
   selectedProfile: string;
 };
 
 const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
-  const [openReactionBottomSheet, setOpenReactionBottomShee] = useState(false);
-
-  const handleOpenReactionBottomSheet = () => {
-    // unicodeEmoji.getEmojis();
-    setOpenReactionBottomShee((prev) => !prev);
-  };
+  const [openReactionSheet, setOpenReactionSheet] = useState(false);
+  const [openEmojiSheet, setOpenEmojiSheet] = useState(false);
 
   return (
     <>
       <section className='px-20 pb-24'>
         <Title title={`${selectedProfile}님의 공유 가계부`} />
-        <FlexBox className='w-full' justifyContent='between'>
+        <FlexBox className='mb-24 mt-16 w-full' alignItems='center' justifyContent='between'>
           <div>4월</div>
           <TextButton
             className='flex items-center justify-center gap-8 text-12'
-            onClick={handleOpenReactionBottomSheet}
+            onClick={() => setOpenReactionSheet(true)}
           >
             <FlexBox
               alignItems='center'
@@ -37,18 +35,23 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
             반응 12개
           </TextButton>
         </FlexBox>
-        <div className='mt-16 h-[30rem]'>캘린더 넣을 예정</div>
+        <BudgetBanner icon={true} text='목표 예산 중 50%를 썼어요' showArrow={false} />
+        <div className='mt-16 h-[30rem]' onClick={() => setOpenEmojiSheet(true)}>
+          캘린더 넣을 예정
+        </div>
       </section>
-      <BottomSheet
-        buttonLabel=''
-        title='반응 보기'
-        isButtonShow={false}
-        isOpen={openReactionBottomSheet}
-        onClose={handleOpenReactionBottomSheet}
-      >
-        dddd
-      </BottomSheet>
-      <SubmitEmojiBottomSheet />
+
+      {/* 반응 보기 바텀 시트 */}
+      <ReactionBottomSheet
+        openReactionSheet={openReactionSheet}
+        setOpenReactionSheet={setOpenReactionSheet}
+      />
+
+      {/* 이모지 바텀 시트 */}
+      <SubmitEmojiBottomSheet
+        openEmojiSheet={openEmojiSheet}
+        setOpenEmojiSheet={setOpenEmojiSheet}
+      />
     </>
   );
 };
