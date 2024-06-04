@@ -4,7 +4,7 @@ import { getWidgetItem } from '@/service/api/home';
 import { useQuery } from '@tanstack/react-query';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { EditWidgetDataType } from '@/service/types/widget-type';
+import { EditWidgetDataType } from '@/shared/types/widgetDataType';
 import { Card } from '@/components/ui/card';
 import DragOverWidget from './DragOverWidget';
 import IsEditWidgetItem from './IsEditWidgetItem';

@@ -1,6 +1,6 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
-import { ExpenseItemProps, ExpenseSummaryProps } from '@/service/types/budgetCalendarType';
+import { ExpenseItemProps, ExpenseSummaryProps } from '@/shared/types/budgetCalendarType';
 import { formatDate, groupByDate } from '@/shared/utils/dateUtils';
 import Title from '../common/Title';
 import ExpenseSummary from './ExpensSummary';
