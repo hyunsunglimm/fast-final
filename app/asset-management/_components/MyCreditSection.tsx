@@ -70,7 +70,14 @@ const MyCreditSection = () => {
               50점 (03.08 대비)
             </Text>
           </FlexBox>
-          <FlexBox className='relative h-[9.2rem] w-[18.5rem]'>
+          <FlexBox
+            alignItems='center'
+            justifyContent='center'
+            className='relative h-[9.2rem] w-[18.5rem]'
+          >
+            <Text sizes='18' weight='700' className='absolute -bottom-2 self-end'>
+              KCB
+            </Text>
             <div className='absolute -top-[35%] min-h-full w-full'>
               <DoughnutChart
                 dataConfig={generateChartData([label], dataSets)}
