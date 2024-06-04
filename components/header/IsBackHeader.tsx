@@ -38,15 +38,13 @@ export const IsBackHeader = ({
   return (
     <motion.header
       style={{ backgroundColor: headerColor }}
-      className={
-        (cn(
-          flexBoxVariants({
-            justifyContent: 'between',
-            alignItems: 'center'
-          })
-        ),
-        `${fixedClass} h-[5.6rem] px-20 backdrop-blur-lg`)
-      }
+      className={cn(
+        flexBoxVariants({
+          justifyContent: 'between',
+          alignItems: 'center'
+        }),
+        `${fixedClass} h-[5.6rem] px-20 backdrop-blur-lg`
+      )}
     >
       {!isClose ? (
         <Link href={linkUrl} aria-label='뒤로 가기 링크' scroll={false}>

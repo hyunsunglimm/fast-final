@@ -32,6 +32,7 @@ export type SharedMembersProps = {
 export type CalendarProps = {
   year: number;
   month: number;
+  isAlone?: boolean;
 };
 
 export type DateInfo = {
