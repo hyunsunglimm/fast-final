@@ -16,7 +16,7 @@ const BucketLandingPartOneFirstSection = () => {
       />
       <FlexBox flexDirection='col' alignItems='center' className='pt-[6.4rem]'>
         <Image
-          src='/images/bucket-landing/speech-bubble-1.webp'
+          src='/images/bucket-landing/part1-speech-bubble-1.webp'
           alt='말풍선 이미지 1'
           width={200}
           height={30}
