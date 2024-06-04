@@ -39,8 +39,8 @@ const BucketBottomSheet = ({ totalHeight, windowWidth }: BucketBottomSheetProps)
   };
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.y < -30) {
-      if (height >= initialHeight + 24) return;
-      setHeight((prevHeight) => prevHeight + 24);
+      if (height >= initialHeight + 26) return;
+      setHeight((prevHeight) => prevHeight + 26);
       setHasDragged(true);
     } else if (info.offset.y > 30) {
       setHeight(initialHeight);

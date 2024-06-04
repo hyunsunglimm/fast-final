@@ -4,7 +4,7 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Title from '../common/Title';
-import { SharedMembersProps } from '@/service/types/budgetCalendarType';
+import { SharedMembersProps } from '@/shared/types/budgetCalendarType';
 import { useWindowResize } from '@/shared/hooks/useWindowResize';
 
 // 공유한 멤버 더미 데이터

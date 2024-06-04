@@ -39,7 +39,7 @@ const BottomSheet = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className='fixed inset-0 z-20 mx-auto flex h-full w-full items-end justify-center bg-black/70 xs:w-[520px]'
+          className='fixed inset-0 z-20 mx-auto flex h-full w-full touch-none items-end justify-center bg-black/70 xs:w-[520px]'
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               onClose();
@@ -51,7 +51,7 @@ const BottomSheet = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className='flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
+            className='relative flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
           >
             <FlexBox alignItems='center' justifyContent='between' className='w-full'>
               <div className='w-[1.6rem]' />
