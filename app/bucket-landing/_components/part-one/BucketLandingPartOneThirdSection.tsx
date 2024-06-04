@@ -8,7 +8,7 @@ const BucketLandingPartOneThirdSection = () => {
     <section className='bg-white pb-[6.4rem]'>
       <FlexBox flexDirection='col' alignItems='center' className='pt-[6.4rem]'>
         <Image
-          src='/images/bucket-landing/speech-bubble-3.webp'
+          src='/images/bucket-landing/part1-speech-bubble-3.webp'
           alt='말풍선 이미지 3'
           width={200}
           height={30}
