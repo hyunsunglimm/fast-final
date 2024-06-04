@@ -70,6 +70,19 @@ const SpendingHabitsCardSection = () => {
             <Text sizes='18' weight='600' className='mb-16'>
               {currentCard?.cardName}
             </Text>
+
+            <ul className='mb-20 flex gap-8'>
+              {currentCard?.conditions.map((condition) => {
+                return (
+                  <li key={condition} className='rounded-[10rem] bg-gray-50 px-12 py-8'>
+                    <Text sizes='12' weight='500' className='text-gray-700'>
+                      {condition}
+                    </Text>
+                  </li>
+                );
+              })}
+            </ul>
+
             <ul className='flex w-full flex-col gap-[0.6rem]'>
               {currentCard?.benefits.map(({ title, iconPath, detail }) => {
                 const content = detail.split(' ');

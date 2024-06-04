@@ -13,6 +13,8 @@ import { IsBackHeader } from '@/components/header';
 import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getComparedCards } from '@/service/api/financial-product/cards';
+import Button from '@/components/ui/Button';
+import Link from 'next/link';
 
 const comparedResultA = [
   {
@@ -188,6 +190,18 @@ const ResultPage = () => {
             </div>
           }
         />
+        <FlexBox className='gap-6 bg-white px-20 pb-[3.4rem] pt-20'>
+          <Button asChild styled='outline'>
+            <Link href='/financial-product/comparison?tab1=카드&tab2=신용카드'>
+              <Text sizes='16'>상품비교 다시하기</Text>
+            </Link>
+          </Button>
+          <Button asChild styled='fill_black'>
+            <Link href='/financial-product'>
+              <Text sizes='16'>확인</Text>
+            </Link>
+          </Button>
+        </FlexBox>
       </main>
     </>
   );
