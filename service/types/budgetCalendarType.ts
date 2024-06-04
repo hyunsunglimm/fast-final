@@ -28,3 +28,17 @@ export type SharedMembersProps = {
   selectedProfile: string;
   setSelectedProfile: (name: string) => void;
 };
+
+// 달력
+export type CalendarProps = {
+  year: number;
+  month: number;
+};
+
+export type DateInfo = {
+  date: number | null;
+  imgSrc?: string;
+  income?: number | null;
+  expense?: number | null;
+  today?: boolean;
+};

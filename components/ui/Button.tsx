@@ -5,7 +5,7 @@ import { Slot } from '@radix-ui/react-slot';
 export const buttonVariants = cva('flex items-center justify-center active:opacity-90', {
   variants: {
     size: {
-      xs: 'h-[3.2rem] rounded-xs px-16 text-12',
+      xs: 'h-[3.2rem] rounded-xs px-12 text-12',
       sm: 'h-[4rem] rounded-xs px-16 text-14',
       md: 'h-[4.8rem] w-full rounded-sm text-16 px-20',
       lg: 'h-[5.6rem] w-full rounded-sm text-16 px-20'
