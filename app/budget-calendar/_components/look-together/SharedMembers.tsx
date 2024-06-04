@@ -22,11 +22,7 @@ const items = [
   { profile: '/icons/profile/profile.svg', name: 'David' }
 ];
 
-const SharedMembers: React.FC<SharedMembersProps> = ({
-  viewMode,
-  selectedProfile,
-  setSelectedProfile
-}) => {
+const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: SharedMembersProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
@@ -54,7 +50,7 @@ const SharedMembers: React.FC<SharedMembersProps> = ({
           멤버 편집
         </Button>
       </FlexBox>
-      <div className='w-full overflow-hidden px-20' ref={containerRef}>
+      <div className='mx-20 w-full overflow-hidden' ref={containerRef}>
         <motion.ul
           className='flex gap-16 text-center'
           drag='x'
