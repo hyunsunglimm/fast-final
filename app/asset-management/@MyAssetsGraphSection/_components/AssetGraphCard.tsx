@@ -4,7 +4,11 @@ import { Plugin } from 'chart.js';
 import { Card, CardContent } from '@/components/ui/card';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { generateChartData, myAssetsOptions, DoughnutChartDataset } from '@/utils/graph-config';
+import {
+  generateChartData,
+  myAssetsOptions,
+  DoughnutChartDataset
+} from '@/shared/utils/graph-config';
 const DoughnutChart = dynamic(() => import('@/components/DoughnutChart'), { ssr: false });
 
 const AssetGraphCard = () => {

@@ -1,7 +1,7 @@
 import { requestFetch } from '../fetchOptions';
-import { DataType } from '@/types/widget-type/widgetType';
+import { EditWidgetDataType } from '@/service/types/widget-type/widgetType';
 
-export const getWidgetItem = (): Promise<DataType> => {
+export const getWidgetItem = (): Promise<EditWidgetDataType> => {
   return requestFetch('/api/widget');
 };
 

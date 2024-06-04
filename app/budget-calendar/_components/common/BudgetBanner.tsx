@@ -1,7 +1,7 @@
 import React from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
-import { BudgetBannerProps } from '@/types/budgetCalendarType';
+import { BudgetBannerProps } from '@/service/types/budgetCalendarType';
 import IconDot from './IconDot';
 
 const BudgetBanner: React.FC<BudgetBannerProps> = ({ icon, text, showArrow }) => {

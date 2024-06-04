@@ -16,7 +16,11 @@ type HeaderProps = {
 export const IsBackHeader = ({ title, href, defaultColor, isFixed = true }: HeaderProps) => {
   const { scrollY } = useScroll();
 
-  const headerColor = useTransform(scrollY, [0, 1], [`${defaultColor || 'transparent'}`, '#fff']);
+  const headerColor = useTransform(
+    scrollY,
+    [0, 1],
+    [`${defaultColor || 'transparent'}`, '#ffffff96']
+  );
 
   return (
     <motion.header
@@ -24,10 +28,10 @@ export const IsBackHeader = ({ title, href, defaultColor, isFixed = true }: Head
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] px-20`
+        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] border-b border-b-gray-100 px-20 backdrop-blur-lg`
       })}
     >
-      <Link href={href} aria-label='뒤로 가기 링크'>
+      <Link href={href} aria-label='뒤로 가기 링크' scroll={false}>
         <Icon aria-hidden size='24' alt='뒤로가기' src='/icons/system-icon/arrow/arrow-prev.svg' />
       </Link>
       <FlexBox justifyContent='center'>

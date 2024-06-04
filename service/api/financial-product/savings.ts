@@ -1,4 +1,4 @@
-import { Saving } from '@/types/saving';
+import { Saving } from '@/shared/types/saving';
 import { requestFetch } from '../fetchOptions';
 
 export const getSavings = (): Promise<Saving[]> => {

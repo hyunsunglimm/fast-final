@@ -1,5 +1,5 @@
 import { useEffect, useState, MutableRefObject } from 'react';
-import { useWindowResize } from '@/hooks/useWindowResize';
+import { useWindowResize } from '@/shared/hooks/useWindowResize';
 
 export const useTotalWidth = (ref: MutableRefObject<HTMLElement | null>) => {
   const [totalWidth, setTotalWidth] = useState(0);

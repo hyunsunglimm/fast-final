@@ -1,23 +1,6 @@
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { useSearchParams } from 'next/navigation';
-export type StateType = {
-  'bucket-name': string;
-  'target-amount': string;
-  'spend-book': string;
-  'saving-book': string;
-  'day-of-week': string;
-  'savings-amount': string;
-  'my-saving-product': string[];
-};
-
-type ActionType =
-  | { type: 'SET_INPUT_VALUE'; payload: { name: keyof StateType; value: string } }
-  | { type: 'SET_CHECK_ITEMS'; payload: string[] };
-
-type CreateBucketContextProps = {
-  state: StateType;
-  dispatch: React.Dispatch<ActionType>;
-};
+import { StateType, ActionType, CreateBucketContextProps } from '../types';
 
 const reducer = (state: StateType, action: ActionType): StateType => {
   switch (action.type) {
@@ -30,7 +13,7 @@ const reducer = (state: StateType, action: ActionType): StateType => {
   }
 };
 
-const CreateBucketContext = createContext<CreateBucketContextProps | undefined>(undefined);
+export const CreateBucketContext = createContext<CreateBucketContextProps | undefined>(undefined);
 
 export const CreateBucketProvider = ({ children }: { children: React.ReactNode }) => {
   const searchParams = useSearchParams();
@@ -52,12 +35,4 @@ export const CreateBucketProvider = ({ children }: { children: React.ReactNode }
       {children}
     </CreateBucketContext.Provider>
   );
-};
-
-export const useCreateBucketContext = () => {
-  const context = useContext(CreateBucketContext);
-  if (!context) {
-    throw new Error('use provider');
-  }
-  return context;
 };

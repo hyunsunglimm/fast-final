@@ -5,15 +5,16 @@ import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { myProductData } from '../../data';
 import Checkbox from '@/components/ui/CheckBox';
 import { usePathname } from 'next/navigation';
+import TextButton from '@/components/ui/TextButton';
 import Link from 'next/link';
 import useGetHref from '../../hooks/useGetHref';
-import { useCreateBucketContext } from '../../context/createBucketContext';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepFourProps = {
@@ -24,7 +25,7 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
   const pathname = usePathname();
   const { getSkipHref } = useGetHref();
   const skipHref = getSkipHref();
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [allCheck, setAllCheck] = useState(false);
   const { 'my-saving-product': mySavingProduct } = state;
@@ -93,12 +94,12 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
         />
       </InputCard>
 
-      <FlexBox alignItems='end' justifyContent='center' className='mt-32 h-[19.7rem] w-full'>
-        <Link href={`${pathname}/result${skipHref}`} aria-label='저축 상품 연결 건너뛰기'>
-          <Text sizes='16' weight='500' className='underline'>
+      <FlexBox alignItems='end' justifyContent='center' className='h-[19.7rem] w-full'>
+        <TextButton className='mb-16 underline' asChild>
+          <Link href={`${pathname}/result${skipHref}`} aria-label='저축 상품 연결 건너뛰기'>
             건너뛰기
-          </Text>
-        </Link>
+          </Link>
+        </TextButton>
       </FlexBox>
 
       {/* 요일 선택 바텀 시트 */}

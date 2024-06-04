@@ -19,8 +19,6 @@ const ChallengeCard = () => {
           title='챌린지 이미지'
           loading='lazy'
           className='pointer-events-none mt-[2.3rem] h-[13.2rem] w-[13.8rem]'
-          placeholder='blur'
-          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAAAL0lEQVR42u3NMQEAAAgDIJfcNPY0g4cfFCDT9S4SiUQikUgkEolEIpFIJBKJ5GYBnpg5OxOuJSoAAAAASUVORK5CYII='
         />
       </ListContent>
       <ListFooter targetAmount={2000000} currentAmount={350000} />
