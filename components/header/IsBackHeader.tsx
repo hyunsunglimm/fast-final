@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import IconButton from '../ui/IconButton';
 import { useQueryString } from '@/shared/hooks/useQueryString';
+import { cn } from '@/shared/utils/twMerge';
 
 type HeaderProps = {
   title?: string;
@@ -33,15 +34,19 @@ export const IsBackHeader = ({
     [0, 1],
     [`${defaultColor || 'transparent'}`, '#ffffff96']
   );
-
+  const fixedClass = isFixed ? 'sticky top-0 z-20' : '';
   return (
     <motion.header
       style={{ backgroundColor: headerColor }}
-      className={flexBoxVariants({
-        justifyContent: 'between',
-        alignItems: 'center',
-        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] border-b border-b-gray-100 px-20 backdrop-blur-lg`
-      })}
+      className={
+        (cn(
+          flexBoxVariants({
+            justifyContent: 'between',
+            alignItems: 'center'
+          })
+        ),
+        `${fixedClass} h-[5.6rem] px-20 backdrop-blur-lg`)
+      }
     >
       {!isClose ? (
         <Link href={linkUrl} aria-label='뒤로 가기 링크' scroll={false}>
