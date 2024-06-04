@@ -29,8 +29,6 @@ const DefaultBucketListCard = () => {
           loading='lazy'
           onLoad={onLoadImage}
           quality={onload ? '100' : '10'}
-          placeholder='blur'
-          blurDataURL='data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSAwAAAABAAI7W2YAZAAA/v////8vQUxQSAwAAAABAAI7W2YAZA'
           className='pointer-events-none absolute bottom-8 right-0 h-[17.5rem] w-[17.4rem]'
         />
       </CardContent>

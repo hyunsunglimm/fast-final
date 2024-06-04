@@ -6,12 +6,12 @@ import Image from 'next/image';
 import { ProgressBar } from '@/components/ProgressBar';
 import BucketBottomSheet from './_components/BucketBottomSheet';
 import { useWindowResize } from '@/hooks/useWindowResize';
-
+import useOnloadImage from '@/hooks/useOnloadImage';
 const DetailBucketPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [totalHeight, setTotalHeight] = useState(0);
   const { windowHeight, windowWidth } = useWindowResize();
-
+  const { onload, onLoadImage } = useOnloadImage();
   useEffect(() => {
     const updateHeight = () => {
       if (sectionRef.current) {
@@ -47,9 +47,9 @@ const DetailBucketPage = () => {
             alt='버킷리스트'
             title='버킷리스트 이미지'
             loading='lazy'
-            placeholder='blur'
-            blurDataURL='data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSAwAAAABAAI7W2YAZAAA/v////8vQUxQSAwAAAABAAI7W2YAZA'
             className='pointer-events-none h-[15.5rem] w-[15.5rem]'
+            onLoad={onLoadImage}
+            quality={onload ? '100' : '10'}
           />
         </FlexBox>
         <FlexBox className='mb-16 gap-x-8'>
@@ -66,6 +66,9 @@ const DetailBucketPage = () => {
         <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>
           <ProgressBar barColor='white' progressPercent={35} />
         </div>
+        <Text className='mt-4 inline-block w-full self-end text-end text-white' weight='500'>
+          35%
+        </Text>
       </section>
       <BucketBottomSheet totalHeight={totalHeight} windowWidth={windowWidth} />
     </>
