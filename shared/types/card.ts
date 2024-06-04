@@ -10,6 +10,7 @@ export type SpendingHabitsCard = {
   title: string;
   cardName: string;
   image: string;
+  conditions: string[];
   benefits: {
     title: string;
     iconPath: string;

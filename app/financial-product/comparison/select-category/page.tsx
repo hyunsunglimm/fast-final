@@ -3,7 +3,7 @@
 import { IsBackHeader } from '@/components/header';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { useEffect, useState } from 'react';
+import { useEffect, useTransition } from 'react';
 import BottomButton from '../_components/BottomButton';
 import CategoryCard from './_components/CategoryCard';
 import { useQueryString } from '@/shared/hooks/useQueryString';
@@ -16,7 +16,7 @@ const QUERY_KEY = 'category';
 const SelectCategoryPage = () => {
   const { searchParams, router, pathname, queryValues, params } = useQueryString();
   const queryClient = useQueryClient();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const selectedCategories = queryValues(QUERY_KEY);
 
@@ -40,14 +40,13 @@ const SelectCategoryPage = () => {
   };
 
   const handleNavigateToResultPage = async () => {
-    setIsLoading(true);
-    await queryClient.prefetchQuery({
-      queryKey: ['comparedCards'],
-      queryFn: getComparedCards
+    startTransition(async () => {
+      await queryClient.prefetchQuery({
+        queryKey: ['comparedCards'],
+        queryFn: getComparedCards
+      });
     });
-
     router.push(`${pathname}/result?${searchParams.toString()}`);
-    setIsLoading(false);
   };
 
   return (
@@ -82,7 +81,7 @@ const SelectCategoryPage = () => {
           <BottomButton
             onClick={handleNavigateToResultPage}
             path='/financial-product/comparison/select-category/result'
-            isLoading={isLoading}
+            isLoading={isPending}
           >
             결과보기
           </BottomButton>

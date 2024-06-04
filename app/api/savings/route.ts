@@ -8,7 +8,8 @@ const savings = [
     rate: '연 6%',
     iconPath: '/icons/logos/bank/bank-kakao.svg',
     startAmount: '5000원',
-    endAmount: 1772807
+    endAmount: 1772807,
+    period: '6.5개월'
   },
   {
     bank: '기업은행',
@@ -17,7 +18,8 @@ const savings = [
     rate: '연 5.15%',
     iconPath: '/icons/logos/bank/bank-ibk.svg',
     startAmount: '월 20만원',
-    endAmount: 1215249
+    endAmount: 1215249,
+    period: '6개월'
   },
   {
     bank: '카카오뱅크',
@@ -26,7 +28,8 @@ const savings = [
     rate: '연 5%',
     iconPath: '/icons/logos/bank/bank-kakao.svg',
     startAmount: '월 30만원',
-    endAmount: 1822207
+    endAmount: 1822207,
+    period: '6개월'
   },
   {
     bank: '농협은행',
@@ -35,7 +38,8 @@ const savings = [
     rate: '연 4.7%',
     iconPath: '/icons/logos/bank/bank-nh.svg',
     startAmount: '월 50만원',
-    endAmount: 3034792
+    endAmount: 3034792,
+    period: '6개월'
   }
 ];
 
