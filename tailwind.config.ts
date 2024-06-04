@@ -8,6 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'apple color emoji',
+          'segoe ui emoji',
+          'noto color emoji',
+          'android emoji',
+          'emojisymbols',
+          'emojione mozilla',
+          'twemoji mozilla'
+        ]
+      },
       backgroundSize: {
         auto: 'auto',
         cover: 'cover',
