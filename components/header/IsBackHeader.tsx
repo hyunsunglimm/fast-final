@@ -6,6 +6,7 @@ import Icon from '../Icon';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import IconButton from '../ui/IconButton';
+import { useQueryString } from '@/shared/hooks/useQueryString';
 
 type HeaderProps = {
   title?: string;
@@ -23,6 +24,9 @@ export const IsBackHeader = ({
   isClose = false
 }: HeaderProps) => {
   const { scrollY } = useScroll();
+  const { queryValue } = useQueryString();
+
+  const linkUrl = queryValue('callbackUrl') || href;
 
   const headerColor = useTransform(
     scrollY,
@@ -40,7 +44,7 @@ export const IsBackHeader = ({
       })}
     >
       {!isClose ? (
-        <Link href={href} aria-label='뒤로 가기 링크' scroll={false}>
+        <Link href={linkUrl} aria-label='뒤로 가기 링크' scroll={false}>
           <Icon
             aria-hidden
             size='24'
@@ -58,7 +62,7 @@ export const IsBackHeader = ({
       </FlexBox>
       {isClose ? (
         <IconButton asChild>
-          <Link href={href} aria-label={`${href}로 이동`}>
+          <Link href={linkUrl} aria-label={`${linkUrl}로 이동`}>
             <Icon src='/icons/system-icon/x.svg' alt='취소 아이콘' size='20' aria-hidden />
           </Link>
         </IconButton>

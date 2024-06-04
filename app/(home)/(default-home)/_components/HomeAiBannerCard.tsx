@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const HomeAiBannerCard = () => {
   return (
-    <Link href='/financial-product/ai-recommendations?tab=카드'>
+    <Link href='/financial-product/ai-recommendations?tab=카드&callbackUrl=/'>
       <Card className='relative flex h-[13.4rem] justify-between overflow-hidden bg-[#79624D] p-24'>
         <FlexBox flexDirection='col' justifyContent='center' className='h-full gap-y-10 text-white'>
           <Text sizes='12' weight='500'>
