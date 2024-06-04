@@ -1,9 +1,6 @@
 import { MouseEvent } from 'react';
-import type {
-  SetShowWidgetType,
-  SetHideWidgetType,
-  EditWidgetDataType
-} from '@/service/types/widget-type/widgetType';
+import type { EditWidgetDataType } from '@/service/types/widget-type';
+import type { SetShowWidgetType, SetHideWidgetType } from '../types';
 
 const useInsertAndDelete = (
   setShowWidget: SetShowWidgetType,
