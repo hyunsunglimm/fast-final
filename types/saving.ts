@@ -6,4 +6,5 @@ export type Saving = {
   iconPath: string;
   startAmount: string;
   endAmount: number;
+  period: string;
 };
