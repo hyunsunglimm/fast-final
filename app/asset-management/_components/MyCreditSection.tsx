@@ -10,7 +10,7 @@ import {
   generateChartData,
   myCreditScoreGraphOptions,
   DoughnutChartDataset
-} from '@/utils/graph-config';
+} from '@/shared/utils/graph-config';
 
 const MyCreditSection = () => {
   const TOTAL_CREDIT = 1000;

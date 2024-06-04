@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { getStepConfig } from '../createBucketConfig';
 
 type BubbleTextProps = {

@@ -5,7 +5,7 @@ import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import useOnloadImage from '@/hooks/useOnloadImage';
+import useOnloadImage from '@/shared/hooks/useOnloadImage';
 const DefaultBucketListCard = () => {
   const { onload, onLoadImage } = useOnloadImage();
 

@@ -5,7 +5,7 @@ import { UniqueIdentifier } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import Icon from '@/components/Icon';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import '@/app/globals.css';
 type IsEditWidgetItemProps = {
   title: string;

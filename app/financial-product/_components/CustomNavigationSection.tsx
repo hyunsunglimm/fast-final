@@ -1,7 +1,7 @@
 import Text from '@/components/ui/Text';
 import CustomNavigationCard from './CustomNavigationCard';
 import SwiperWrapper from '@/components/SwiperWrapper';
-import { FINANCIAL_PRODUCT_NAVIGATION } from '@/utils/financial-product/staticData';
+import { FINANCIAL_PRODUCT_NAVIGATION } from '@/shared/utils/financial-product/staticData';
 
 const CustomNavigationSection = () => {
   return (

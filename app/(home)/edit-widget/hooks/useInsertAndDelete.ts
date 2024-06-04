@@ -3,7 +3,7 @@ import type {
   SetShowWidgetType,
   SetHideWidgetType,
   EditWidgetDataType
-} from '@/types/widget-type/widgetType';
+} from '@/service/types/widget-type/widgetType';
 
 const useInsertAndDelete = (
   setShowWidget: SetShowWidgetType,

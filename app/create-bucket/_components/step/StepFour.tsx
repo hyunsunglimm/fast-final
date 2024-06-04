@@ -5,7 +5,7 @@ import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { myProductData } from '../../data';

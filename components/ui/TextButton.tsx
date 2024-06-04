@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { Slot } from '@radix-ui/react-slot';
 
 type TextButtonProps = {

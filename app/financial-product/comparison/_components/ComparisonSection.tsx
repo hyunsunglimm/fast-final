@@ -1,6 +1,6 @@
 import Text from '@/components/ui/Text';
 import { useEffect } from 'react';
-import { useQueryString } from '@/hooks/useQueryString';
+import { useQueryString } from '@/shared/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import { getCardsToCompare } from '@/service/api/financial-product/cards';
 import Spinner from '@/components/Spinner';

@@ -8,7 +8,7 @@ import Text from '@/components/ui/Text';
 import NextButton from '../NextButton';
 import RoundedSkeleton from '../RoundedSkeleton';
 import { useQueries, UseQueryResult } from '@tanstack/react-query';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import { spendBookQueryFn, savingBookQueryFn } from '@/service/api/create-bucket';
 import { useCreateBucket } from '../../hooks/useCreateBucket';

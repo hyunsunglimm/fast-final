@@ -13,7 +13,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import Checkbox from '@/components/ui/CheckBox';
 import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
-import { signInWithCredentials } from '@/actions/auth';
+import { signInWithCredentials } from '@/shared/actions/auth';
 
 type SigninResponse = {
   message: string;

@@ -3,7 +3,7 @@ import React, { MouseEvent } from 'react';
 import { ListCard, ListHeader, ListFooter, ListContent } from './bucket-challenge';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import useOnloadImage from '@/hooks/useOnloadImage';
+import useOnloadImage from '@/shared/hooks/useOnloadImage';
 
 const BucketListCard = () => {
   const router = useRouter();

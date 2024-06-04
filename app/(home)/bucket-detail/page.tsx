@@ -5,8 +5,8 @@ import FlexBox from '@/components/ui/FlexBox';
 import Image from 'next/image';
 import { ProgressBar } from '@/components/ProgressBar';
 import BucketBottomSheet from './_components/BucketBottomSheet';
-import { useWindowResize } from '@/hooks/useWindowResize';
-import useOnloadImage from '@/hooks/useOnloadImage';
+import { useWindowResize } from '@/shared/hooks/useWindowResize';
+import useOnloadImage from '@/shared/hooks/useOnloadImage';
 const DetailBucketPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [totalHeight, setTotalHeight] = useState(0);

@@ -4,12 +4,12 @@ import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import TextButton from '@/components/ui/TextButton';
 import NextButton from '../NextButton';
 import { recommandedBucketData } from '../../data';
-import { deleteCommaReturnNumber } from '@/utils/deleteComma';
+import { deleteCommaReturnNumber } from '@/shared/utils/deleteComma';
 import { useCreateBucket } from '../../hooks/useCreateBucket';
 import type { StateType } from '../../types';
 

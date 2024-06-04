@@ -7,7 +7,7 @@ import {
   myCreditScoreGraphOptions,
   DoughnutChartDataset,
   getGradient
-} from '@/utils/graph-config';
+} from '@/shared/utils/graph-config';
 
 export const WidgetMyCredit = () => {
   const LABEL = '나의 신용점수';
