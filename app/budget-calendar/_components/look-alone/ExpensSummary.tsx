@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpenseSummaryProps } from '@/service/types/budgetCalendarType';
+import { ExpenseSummaryProps } from '@/shared/types/budgetCalendarType';
 
 const ExpenseSummary: React.FC<ExpenseSummaryProps> = ({ label, amount }) => {
   return (

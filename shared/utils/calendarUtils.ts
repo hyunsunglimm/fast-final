@@ -1,4 +1,4 @@
-import { CalendarProps, DateInfo } from '@/service/types/budgetCalendarType';
+import { CalendarProps, DateInfo } from '@/shared/types/budgetCalendarType';
 
 const dailyData = [
   { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },

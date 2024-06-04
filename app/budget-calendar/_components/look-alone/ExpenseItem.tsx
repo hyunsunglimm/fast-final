@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpenseItemProps } from '@/service/types/budgetCalendarType';
+import { ExpenseItemProps } from '@/shared/types/budgetCalendarType';
 import Icon from '@/components/Icon';
 
 const ExpenseItem: React.FC<ExpenseItemProps> = ({
