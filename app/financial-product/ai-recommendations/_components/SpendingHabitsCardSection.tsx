@@ -59,6 +59,7 @@ const SpendingHabitsCardSection = () => {
                   width={400}
                   height={160}
                   className='w-full'
+                  priority
                 />
               );
             })}
