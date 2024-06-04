@@ -1,25 +1,22 @@
 // /finacial-product
 export const FINANCIAL_PRODUCT_NAVIGATION = [
   {
-    title: '상품비교',
-    subTitle: '하나하나 살펴보기 힘들죠?',
-    description: '원하는 혜택을 쉽게 비교해보세요',
-    linkTitle: '상품비교 바로가기',
-    href: 'comparison?tab1=카드&tab2=신용카드'
+    title: 'AI 맞춤 추천',
+    subTitle: '꼭 맞는 상품 여기있어요',
+    href: 'ai-recommendations?tab=예적금',
+    color: '#597BFF'
   },
   {
     title: '테마별 추천',
-    subTitle: '뚜렷한 목표가 없으신가요?',
-    description: '상황별로 딱 맞는 상품을 알려드릴게요',
-    linkTitle: '테마별 추천 바로가기',
-    href: 'theme-recommendations'
+    subTitle: '상황별로 딱 맞는 상품은 여기있어요',
+    href: 'theme-recommendations',
+    color: '#8D72F9'
   },
   {
-    title: 'AI맞춤 추천',
-    subTitle: '꼭 맞는 상품 여기있어요!',
-    description: '복잡한 금융상품 알아서 찾아드릴게요',
-    linkTitle: '맞춤 추천 바로가기',
-    href: 'ai-recommendations?tab=예적금'
+    title: '상품비교',
+    subTitle: '원하는 혜택을 쉽게 비교해보세요',
+    href: 'comparison?tab1=카드&tab2=신용카드',
+    color: '#4DC450'
   }
 ];
 
