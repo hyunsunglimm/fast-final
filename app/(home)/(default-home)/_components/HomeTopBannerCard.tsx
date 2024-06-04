@@ -1,6 +1,4 @@
 import FlexBox from '@/components/ui/FlexBox';
-import React from 'react';
-
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';

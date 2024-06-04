@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Line from '../common/Line';
 import SharedCalendar from './SharedCalendar';
 import SharedMembers from './SharedMembers';
-import ConsumptionWeather from '../shared/ConsumptionWeather';
+import ConsumptionWeather from './_components/ConsumptionWeather';
 import RegretSpending from '../shared/RegretSpending';
 
 const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => {
