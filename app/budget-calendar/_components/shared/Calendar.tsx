@@ -2,8 +2,8 @@ import React from 'react';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { getCurrentMonthDates, getWeeklyData } from '@/utils/calendarUtils';
-import { CalendarProps } from '@/types/budgetCalendarType';
+import { getCurrentMonthDates, getWeeklyData } from '@/shared/utils/calendarUtils';
+import { CalendarProps } from '@/service/types/budgetCalendarType';
 
 const Calendar = ({ year, month }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
