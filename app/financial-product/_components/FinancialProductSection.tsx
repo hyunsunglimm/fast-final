@@ -1,6 +1,6 @@
 import Text from '@/components/ui/Text';
 import FinancialProductCardByCategory from './FinancialProductCardByCategory';
-import { FINANCIAL_PRODUCT_CATEGORIES } from '@/utils/financial-product/staticData';
+import { FINANCIAL_PRODUCT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 
 const FinancialProductSection = () => {
   return (

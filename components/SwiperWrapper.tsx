@@ -42,6 +42,8 @@ const SwiperWrapper = ({
     }
   };
 
+  const isLoop = !coverflow || children.length >= 4;
+
   return (
     <Swiper
       onSwiper={(swiper) => (sliderRef.current = swiper)}
@@ -58,7 +60,7 @@ const SwiperWrapper = ({
       pagination={dots ? pagination : fraction ? fractionPagination : false}
       navigation={arrow}
       onRealIndexChange={(swiper) => setIndex && setIndex(swiper.realIndex)}
-      loop
+      loop={isLoop}
     >
       {children.map((c, idx) => (
         <SwiperSlide key={idx}>{c}</SwiperSlide>

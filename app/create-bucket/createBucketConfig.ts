@@ -1,9 +1,4 @@
-export type CreateBucketStep = {
-  title: string;
-  stepText: string;
-  imgSrc: string;
-};
-export type CreateBucketConfigType = { [key: number]: CreateBucketStep };
+import { CreateBucketConfigType, CreateBucketStep } from './types';
 
 export const createBucketConfig: CreateBucketConfigType = {
   1: {

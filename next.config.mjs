@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // images: {
-  //   loader: 'cloudfrontLoader',
+  //   loader: 'custom',
   //   path: '',
-  //   loaderFile: '/utils/imageLoader.ts'
+  //   loaderFile: './shared/utils/imageLoader.ts'
   // }
 };
 

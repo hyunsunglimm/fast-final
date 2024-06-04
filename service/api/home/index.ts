@@ -1,9 +1,18 @@
 import { requestFetch } from '../fetchOptions';
-import { DataType } from '@/types/widget-type/widgetType';
+import { EditWidgetDataType } from '@/service/types/widget-type/widgetType';
 
-export const getWidgetItem = (): Promise<DataType> => {
+export const getWidgetItem = (): Promise<EditWidgetDataType> => {
   return requestFetch('/api/widget');
 };
-export const getMyWalletData = (): Promise<any[]> => {
+
+type WalletDataType = {
+  bank: string;
+  bankBookName: string;
+  amount: number;
+  lastDeposit: number;
+  lastSpending: number;
+  iconSrc: string;
+}[];
+export const getMyWalletData = (): Promise<WalletDataType> => {
   return requestFetch('/api/wallet');
 };

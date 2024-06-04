@@ -43,7 +43,7 @@ const CustomNavigationCard = ({
         />
       </div>
       <Button asChild size='md'>
-        <Link href={`/financial-product/${href}`} aria-label={`${title} 이동`}>
+        <Link href={`/financial-product/${href}`} aria-label={`${title} 이동`} scroll={false}>
           {linkTitle}
         </Link>
       </Button>

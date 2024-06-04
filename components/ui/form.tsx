@@ -10,7 +10,7 @@ import {
   FormProvider,
   useFormContext
 } from 'react-hook-form';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { Label } from '@/components/ui/label';
 
 const Form = FormProvider;

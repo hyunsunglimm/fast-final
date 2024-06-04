@@ -4,12 +4,15 @@ import InputCard from '../InputCard';
 import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
+import TextButton from '@/components/ui/TextButton';
 import NextButton from '../NextButton';
 import { recommandedBucketData } from '../../data';
-import { deleteCommaReturnNumber } from '@/utils/deleteComma';
-import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+import { deleteCommaReturnNumber } from '@/shared/utils/deleteComma';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import type { StateType } from '../../types';
+
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepOneProps = {
@@ -18,7 +21,7 @@ type StepOneProps = {
 
 const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const { 'bucket-name': bucketName, 'target-amount': targetAmount } = state;
 
   const handleInputChange = useCallback(
@@ -53,6 +56,13 @@ const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
 
   return (
     <>
+      <TextButton
+        type='button'
+        className='absolute -top-[3.2rem] mb-12 mr-12 self-end text-primary'
+        onClick={() => setOpenBottomSheet(true)}
+      >
+        이런 버킷리스트 어때요 {'>'}
+      </TextButton>
       {/* 버킷 이름 */}
       <InputCard>
         <Input
@@ -83,16 +93,7 @@ const StepOne = ({ handleChangeQueryString }: StepOneProps) => {
         />
       </InputCard>
 
-      {/* 추천 버킷 버튼 */}
-      <FlexBox alignItems='end' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
-        <button
-          type='button'
-          className='rounded-full border border-active px-12 py-8 text-active active:bg-active/10 active:text-active/80'
-          onClick={() => setOpenBottomSheet(true)}
-        >
-          이런 버킷리스트 어때요 {'>'}
-        </button>
-      </FlexBox>
+      <FlexBox alignItems='end' justifyContent='center' className='h-[11.3rem] w-full'></FlexBox>
 
       {/* 바텀 시트 */}
       <BottomSheet

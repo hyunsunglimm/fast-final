@@ -2,8 +2,8 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
-import { CardsToCompare as CardsToCompareType } from '@/types/card';
-import { benefitCategoryIconPath } from '@/utils/benefitCategoryIconPath';
+import { CardsToCompare as CardsToCompareType } from '@/service/types/card';
+import { benefitCategoryIconPath } from '@/shared/utils/benefitCategoryIconPath';
 import Image from 'next/image';
 
 type ComparisonCardProps = {

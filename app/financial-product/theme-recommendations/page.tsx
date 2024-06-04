@@ -2,7 +2,7 @@ import Text from '@/components/ui/Text';
 import Link from 'next/link';
 import { IsBackHeader } from '@/components/header';
 import Icon from '@/components/Icon';
-import { THEMES } from '@/utils/financial-product/staticData';
+import { THEMES } from '@/shared/utils/financial-product/staticData';
 
 const ThemeRecommendationsPage = () => {
   return (

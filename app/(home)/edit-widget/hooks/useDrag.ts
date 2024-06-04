@@ -9,7 +9,7 @@ import {
   useSensors
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import type { SetShowWidgetType } from '@/types/widget-type/widgetType';
+import type { SetShowWidgetType } from '@/service/types/widget-type/widgetType';
 
 const useDrag = (setShowWidget: SetShowWidgetType) => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);

@@ -1,4 +1,5 @@
 import Icon from '@/components/Icon';
+import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import React from 'react';
@@ -12,11 +13,12 @@ type SavingCardProps = {
     iconPath: string;
     startAmount: string;
     endAmount: number;
+    period: string;
   };
 };
 
 const SavingCard = ({ saving }: SavingCardProps) => {
-  const { bank, title, description, rate, iconPath, startAmount, endAmount } = saving;
+  const { bank, title, description, rate, iconPath, startAmount, endAmount, period } = saving;
 
   return (
     <Card className='flex flex-col gap-[1.6rem] p-24'>
@@ -45,15 +47,20 @@ const SavingCard = ({ saving }: SavingCardProps) => {
           </Text>
         </div>
         <div>
-          <div className='flex items-center'>
-            <Text
-              sizes='10'
-              weight='500'
-              className='mr-[0.4rem] rounded-[10rem] bg-gray-10 px-[0.6rem] py-[0.2rem]'
-            >
-              최고
+          <div>
+            <FlexBox alignItems='center'>
+              <Text
+                sizes='10'
+                weight='500'
+                className='mr-[0.4rem] rounded-[10rem] bg-gray-10 px-[0.6rem] py-[0.2rem]'
+              >
+                최고
+              </Text>
+              <Text weight='700'>{rate}</Text>
+            </FlexBox>
+            <Text className='mt-[0.4rem] flex justify-end' sizes='12'>
+              {period}
             </Text>
-            <Text weight='700'>{rate}</Text>
           </div>
         </div>
       </div>

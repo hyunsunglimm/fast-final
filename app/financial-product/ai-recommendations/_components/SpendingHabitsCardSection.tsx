@@ -8,6 +8,7 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import { getSpendingHabitsCards } from '@/service/api/financial-product/cards';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const SpendingHabitsCardSection = () => {
@@ -49,9 +50,18 @@ const SpendingHabitsCardSection = () => {
       ) : (
         <>
           <SwiperWrapper dots coverflow setIndex={setCurrentCardIndex}>
-            {spendingHabitsCards.map(({ title, image }) => (
-              <div key={title} className={`h-[16rem] rounded-xs ${image}`} />
-            ))}
+            {spendingHabitsCards.map(({ title, image }) => {
+              return (
+                <Image
+                  key={title}
+                  src={`/images/financial-product/${image}.webp`}
+                  alt={title}
+                  width={400}
+                  height={160}
+                  className='w-full'
+                />
+              );
+            })}
           </SwiperWrapper>
           <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
             <Text sizes='12' className='mb-[0.2rem]'>
@@ -60,6 +70,19 @@ const SpendingHabitsCardSection = () => {
             <Text sizes='18' weight='600' className='mb-16'>
               {currentCard?.cardName}
             </Text>
+
+            <ul className='mb-20 flex gap-8'>
+              {currentCard?.conditions.map((condition) => {
+                return (
+                  <li key={condition} className='rounded-[10rem] bg-gray-50 px-12 py-8'>
+                    <Text sizes='12' weight='500' className='text-gray-700'>
+                      {condition}
+                    </Text>
+                  </li>
+                );
+              })}
+            </ul>
+
             <ul className='flex w-full flex-col gap-[0.6rem]'>
               {currentCard?.benefits.map(({ title, iconPath, detail }) => {
                 const content = detail.split(' ');

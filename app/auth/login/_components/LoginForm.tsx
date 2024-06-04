@@ -1,22 +1,34 @@
 'use client';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, defaultValues, LoginInputsValues } from '../../schema/loginSchema';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { CardContent } from '@/components/ui/card';
-import EyeIcon from '../../_components/EyeIcon';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import FlexBox from '@/components/ui/FlexBox';
-import ClearInputValueIcon from '../../_components/ClearInputValueIcon';
 import Checkbox from '@/components/ui/CheckBox';
 import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
-import Link from 'next/link';
+import { signInWithCredentials } from '@/shared/actions/auth';
+
+type SigninResponse = {
+  message: string;
+};
+
+const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
+const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
+  ssr: false
+});
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [autoLoginCheck, setAutoLoginCheck] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [signinResponse, setSigninResponse] = useState<SigninResponse | undefined>();
 
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
@@ -31,14 +43,17 @@ const LoginForm = () => {
     control
   } = form;
 
-  const onSubmit = (data: LoginInputsValues) => {
-    console.log(data);
-  };
+  const onSubmit = handleSubmit(async (data) => {
+    startTransition(async () => {
+      const result = await signInWithCredentials(data);
+      setSigninResponse(result);
+    });
+  });
 
   return (
     <Form {...form}>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         className='flex h-[59.6rem] flex-col items-center justify-between bg-white px-20 pb-24'
       >
         <CardContent flexDirection='col' alignItems='center' className='w-full'>
@@ -118,9 +133,15 @@ const LoginForm = () => {
             </Checkbox>
           </FlexBox>
           <Footer />
-        </CardContent>
 
-        <Button type='submit' className='w-full self-end'>
+          {/* API에서 반환하는 에러메시지 */}
+          {signinResponse && (
+            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>
+              {JSON.stringify(signinResponse.message)}
+            </p>
+          )}
+        </CardContent>
+        <Button type='submit' className='w-full self-end' disabled={isPending}>
           로그인
         </Button>
       </form>

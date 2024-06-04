@@ -41,7 +41,7 @@ const BucketStepForm = ({ currentStep }: BucketStepFormProps) => {
 
   return (
     <CreateBucketProvider>
-      <form className='mt-24 flex flex-col gap-y-8'>
+      <form className='relative mt-32 flex flex-col gap-y-8'>
         {currentStep === '1' && <StepOne handleChangeQueryString={handleChangeQueryString} />}
         {currentStep === '2' && <StepTwo handleChangeQueryString={handleChangeQueryString} />}
         {currentStep === '3' && <StepThree handleChangeQueryString={handleChangeQueryString} />}

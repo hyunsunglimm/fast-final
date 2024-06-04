@@ -1,6 +1,6 @@
 import Text from '@/components/ui/Text';
 import { useEffect } from 'react';
-import { useQueryString } from '@/hooks/useQueryString';
+import { useQueryString } from '@/shared/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import { getCardsToCompare } from '@/service/api/financial-product/cards';
 import Spinner from '@/components/Spinner';
@@ -39,7 +39,10 @@ const ComparisonSection = () => {
 
   return (
     <section className='px-20'>
-      <Text>
+      <Text variant='h2' sizes='20' weight='700' className='mb-4'>
+        비교할 카드 선택하기
+      </Text>
+      <Text variant='p'>
         최대 <Text weight='700'>2개</Text>까지만 선택할 수 있어요
       </Text>
       {isPending ? (

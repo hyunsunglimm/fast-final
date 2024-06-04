@@ -3,7 +3,7 @@ import React, { MouseEvent } from 'react';
 import { ListCard, ListHeader, ListFooter, ListContent } from './bucket-challenge';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import useOnloadImage from '@/hooks/useOnloadImage';
+import useOnloadImage from '@/shared/hooks/useOnloadImage';
 
 const BucketListCard = () => {
   const router = useRouter();
@@ -27,8 +27,6 @@ const BucketListCard = () => {
           loading='lazy'
           onLoad={onLoadImage}
           quality={onload ? '100' : '10'}
-          placeholder='blur'
-          blurDataURL='data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSAwAAAABAAI7W2YAZAAA/v////8vQUxQSAwAAAABAAI7W2YAZA'
           className='pointer-events-none h-[15.5rem] w-[15.5rem]'
         />
       </ListContent>

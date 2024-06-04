@@ -4,7 +4,7 @@ import { getWidgetItem } from '@/service/api/home';
 import { useQuery } from '@tanstack/react-query';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { DataType } from '@/types/widget-type/widgetType';
+import { EditWidgetDataType } from '@/service/types/widget-type/widgetType';
 import { Card } from '@/components/ui/card';
 import DragOverWidget from './DragOverWidget';
 import IsEditWidgetItem from './IsEditWidgetItem';
@@ -16,8 +16,8 @@ import LoadingGrid from './LoadingGrid';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
 
 const DragContainer = () => {
-  const [showWidget, setShowWidget] = useState<DataType[0]['showWidget']>([]);
-  const [hideWidget, setHideWidget] = useState<DataType[0]['hideWidget']>([]);
+  const [showWidget, setShowWidget] = useState<EditWidgetDataType[0]['showWidget']>([]);
+  const [hideWidget, setHideWidget] = useState<EditWidgetDataType[0]['hideWidget']>([]);
   const { activeId, sensors, handleDragStart, handleDragEnd } = useDrag(setShowWidget);
   const { handleDeleteWidgetItem, handleInsertWidgetItem } = useInsertAndDelete(
     setShowWidget,
@@ -25,9 +25,9 @@ const DragContainer = () => {
     showWidget,
     hideWidget
   );
-  const { data, isLoading } = useQuery<DataType>({
+  const { data, isLoading } = useQuery<EditWidgetDataType>({
     queryKey: ['fetchWidget'],
-    queryFn: () => getWidgetItem()
+    queryFn: getWidgetItem
   });
 
   useEffect(() => {

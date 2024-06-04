@@ -2,7 +2,7 @@
 import React from 'react';
 import { getStepConfig } from '../createBucketConfig';
 import Image from 'next/image';
-import useOnloadImage from '@/hooks/useOnloadImage';
+import useOnloadImage from '@/shared/hooks/useOnloadImage';
 
 const getImgWidthClass = (stepIndex: number) => {
   if (stepIndex === 3) {
