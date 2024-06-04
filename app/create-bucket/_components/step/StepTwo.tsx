@@ -5,13 +5,15 @@ import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
-import { cn } from '@/utils/twMerge';
-import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
-import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
-import { useQueries, UseQueryResult } from '@tanstack/react-query';
 import RoundedSkeleton from '../RoundedSkeleton';
+import { useQueries, UseQueryResult } from '@tanstack/react-query';
+import { cn } from '@/shared/utils/twMerge';
+import { QueryType } from '../BucketStepForm';
 import { spendBookQueryFn, savingBookQueryFn } from '@/service/api/create-bucket';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import type { StateType } from '../../types';
+
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 type BankDataType = {
   bank: string;
@@ -25,7 +27,7 @@ type StepTwoProps = {
 const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
   const [openSpendSheet, setOpenSpendSheet] = useState(false);
   const [openSavingSheet, setOpenSavingSheet] = useState(false);
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const { 'spend-book': spendBook, 'saving-book': savingBook } = state;
   const queryResults = useQueries({
     queries: [
@@ -77,7 +79,7 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         <Input
           readOnly
           className='peer/spend z-10 cursor-pointer caret-transparent'
-          placeholder='출금통장을 선택해주세요'
+          placeholder='주거래 계좌를 선택해주세요'
           id='spend-book'
           border='nonborder'
           onFocus={handleOpenSpendBookBtSheet}
@@ -97,7 +99,7 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           readOnly
           isTranslate
           className='z-10 cursor-pointer caret-transparent'
-          placeholder='저축통장을 선택해주세요'
+          placeholder='저축할 계좌를 선택해주세요'
           id='saving-book'
           border='nonborder'
           onFocus={handleOpenSavingBookBtSheet}
@@ -111,12 +113,12 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
           className='absolute right-[2rem]'
         />
       </InputCard>
-      <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
+      <FlexBox alignItems='start' justifyContent='center' className=' h-[11.3rem] w-full'>
         {spendBook && savingBook ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
-            className='w-full rounded-2xl bg-white p-16'
+            className='mt-24 w-full rounded-2xl bg-white p-16'
           >
             <Text weight='500'>
               <span className='text-primary'>{spendBook}</span>에서{' '}

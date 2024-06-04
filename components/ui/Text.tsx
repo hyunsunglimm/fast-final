@@ -1,6 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import React, { HTMLAttributes, forwardRef } from 'react';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 
 const textVariants = cva('', {
   variants: {

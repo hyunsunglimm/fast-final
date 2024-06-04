@@ -7,7 +7,7 @@ import Icon, { IconProps } from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import IconDot, { dotVariants } from '../../_components/common/IconDot';
 import { VariantProps } from 'class-variance-authority';
-import useDefaultParam from '@/hooks/useDefaultParam';
+import useDefaultParam from '@/shared/hooks/useDefaultParam';
 
 type SpendingData = {
   name: string;

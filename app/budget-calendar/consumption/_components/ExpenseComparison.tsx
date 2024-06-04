@@ -4,7 +4,7 @@ import Tab from '@/components/ui/Tab';
 import Title from '../../_components/common/Title';
 import Text from '@/components/ui/Text';
 import BudgetBanner from '../../_components/common/BudgetBanner';
-import useDefaultParam from '@/hooks/useDefaultParam';
+import useDefaultParam from '@/shared/hooks/useDefaultParam';
 
 const data = [
   { amount: '131만', month: '23.12월', height: '80%' },

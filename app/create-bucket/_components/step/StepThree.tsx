@@ -5,13 +5,14 @@ import Input from '@/components/ui/Input';
 import FlexBox, { flexBoxVariants } from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
 import NextButton from '../NextButton';
 import { dayOfTheWeek } from '../../data';
-import { deleteCommaReturnNumber } from '@/utils/deleteComma';
-import { calculateSavingPlan } from '@/utils/dateUtils';
-import { useCreateBucketContext, StateType } from '../../context/createBucketContext';
+import { deleteCommaReturnNumber } from '@/shared/utils/deleteComma';
+import { calculateSavingPlan } from '@/shared/utils/dateUtils';
+import { useCreateBucket } from '../../hooks/useCreateBucket';
+import type { StateType } from '../../types';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepThreeProps = {
@@ -21,7 +22,7 @@ type StepThreeProps = {
 const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [expireDate, setExpireDate] = useState<Date>(new Date());
-  const { state, dispatch } = useCreateBucketContext();
+  const { state, dispatch } = useCreateBucket();
   const {
     'day-of-week': dayOfWeek,
     'savings-amount': savingsAmount,
@@ -103,12 +104,12 @@ const StepThree = ({ handleChangeQueryString }: StepThreeProps) => {
           onChange={handleInputChange}
         />
       </InputCard>
-      <FlexBox alignItems='start' justifyContent='center' className='mt-32 h-[11.3rem] w-full'>
+      <FlexBox alignItems='start' justifyContent='center' className=' h-[11.3rem] w-full'>
         {dayOfWeek && savingsAmount.length >= 5 ? (
           <FlexBox
             alignItems='center'
             justifyContent='center'
-            className='w-full rounded-2xl bg-white p-16'
+            className='mt-24 w-full rounded-2xl bg-white p-16'
           >
             <Text weight='500'>
               <span className='text-primary'>

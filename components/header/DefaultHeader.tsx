@@ -22,7 +22,11 @@ export const DefaultHeader = ({
 }: DefaultHeaderProps) => {
   const { scrollY } = useScroll();
 
-  const headerColor = useTransform(scrollY, [0, 1], [`${defaultColor || 'transparent'}`, '#fff']);
+  const headerColor = useTransform(
+    scrollY,
+    [0, 1],
+    [`${defaultColor || 'transparent'}`, '#ffffff96']
+  );
 
   return (
     <motion.header
@@ -30,7 +34,7 @@ export const DefaultHeader = ({
       className={flexBoxVariants({
         justifyContent: 'between',
         alignItems: 'center',
-        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] px-20`
+        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] border-b border-b-gray-100 px-20 backdrop-blur-lg`
       })}
     >
       {isHome ? (

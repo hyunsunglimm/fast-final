@@ -4,8 +4,8 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Title from '../common/Title';
-import { SharedMembersProps } from '@/types/budgetCalendarType';
-import { useWindowResize } from '@/hooks/useWindowResize';
+import { SharedMembersProps } from '@/service/types/budgetCalendarType';
+import { useWindowResize } from '@/shared/hooks/useWindowResize';
 
 // 공유한 멤버 더미 데이터
 const items = [
@@ -22,11 +22,7 @@ const items = [
   { profile: '/icons/profile/profile.svg', name: 'David' }
 ];
 
-const SharedMembers: React.FC<SharedMembersProps> = ({
-  viewMode,
-  selectedProfile,
-  setSelectedProfile
-}) => {
+const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: SharedMembersProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
@@ -45,7 +41,7 @@ const SharedMembers: React.FC<SharedMembersProps> = ({
     setSelectedProfile(name);
   };
   return (
-    <section className='py-40'>
+    <section className='py-40 text-12'>
       <FlexBox alignItems='center' justifyContent='between' className='mb-16 px-20'>
         <Title title='공유한 멤버'>
           <p className='text-14 font-500 text-gray-700'>9명</p>
@@ -54,7 +50,7 @@ const SharedMembers: React.FC<SharedMembersProps> = ({
           멤버 편집
         </Button>
       </FlexBox>
-      <div className='w-full overflow-hidden px-20' ref={containerRef}>
+      <div className='mx-20 w-full overflow-hidden' ref={containerRef}>
         <motion.ul
           className='flex gap-16 text-center'
           drag='x'

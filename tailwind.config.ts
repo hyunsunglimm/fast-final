@@ -83,6 +83,7 @@ const config: Config = {
         '40': '4rem'
       },
       borderRadius: {
+        xxs: '0.4rem',
         xs: '0.8rem',
         sm: '1.2rem',
         md: '1.6rem',

@@ -4,7 +4,7 @@ import FlexBox from './FlexBox';
 import Text from './Text';
 import Link from 'next/link';
 import { useCallback } from 'react';
-import { useQueryString } from '@/hooks/useQueryString';
+import { useQueryString } from '@/shared/hooks/useQueryString';
 
 type TabProps = {
   array: string[];

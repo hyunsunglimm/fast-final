@@ -5,8 +5,12 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Icon from '@/components/Icon';
 import BarChart from '@/components/BarChart';
-import { BarChartDataset, generateChartData, increaseMyAssetOptions } from '@/utils/graph-config';
-import { useWindowResize } from '@/hooks/useWindowResize';
+import {
+  BarChartDataset,
+  generateChartData,
+  increaseMyAssetOptions
+} from '@/shared/utils/graph-config';
+import { useWindowResize } from '@/shared/hooks/useWindowResize';
 const IncreaseMyAssetCard = () => {
   const { windowWidth } = useWindowResize();
 

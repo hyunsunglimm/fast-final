@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils/twMerge';
+import { cn } from '@/shared/utils/twMerge';
 
 const switchVariants = cva('', {
   variants: {

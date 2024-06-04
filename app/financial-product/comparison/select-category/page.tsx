@@ -6,8 +6,8 @@ import Text from '@/components/ui/Text';
 import { useEffect, useTransition } from 'react';
 import BottomButton from '../_components/BottomButton';
 import CategoryCard from './_components/CategoryCard';
-import { useQueryString } from '@/hooks/useQueryString';
-import { COMPARISON_STANDARD } from '@/utils/financial-product/staticData';
+import { useQueryString } from '@/shared/hooks/useQueryString';
+import { COMPARISON_STANDARD } from '@/shared/utils/financial-product/staticData';
 import { useQueryClient } from '@tanstack/react-query';
 import { getComparedCards } from '@/service/api/financial-product/cards';
 

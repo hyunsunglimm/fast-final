@@ -1,4 +1,9 @@
-import { CardsToCompare, ComparedCards, SpendingHabitsCard, SpotlightCard } from '@/types/card';
+import {
+  CardsToCompare,
+  ComparedCards,
+  SpendingHabitsCard,
+  SpotlightCard
+} from '@/service/types/card';
 import { requestFetch } from '../fetchOptions';
 
 export const getSpotlightCards = (type: string | null): Promise<SpotlightCard[]> => {

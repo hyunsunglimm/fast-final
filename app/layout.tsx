@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import QueryProviders from '@/context/queryProvider';
-import AuthProvider from '@/context/authProvider';
+import QueryProviders from '@/shared/context/queryProvider';
+import AuthProvider from '@/shared/context/authProvider';
 import Navbar from '@/components/Navbar';
 import { suit } from './font';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';

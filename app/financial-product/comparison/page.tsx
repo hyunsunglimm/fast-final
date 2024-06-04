@@ -4,7 +4,7 @@ import { IsBackHeader } from '@/components/header';
 import FilteringSection from './_components/FilteringSection';
 import ComparisonSection from './_components/ComparisonSection';
 import BottomButton from './_components/BottomButton';
-import { useQueryString } from '@/hooks/useQueryString';
+import { useQueryString } from '@/shared/hooks/useQueryString';
 
 const ComparisonPage = () => {
   const { queryValues } = useQueryString();

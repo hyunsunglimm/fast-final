@@ -7,7 +7,7 @@ import SpotlightCardItem from './SpotlightCard';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
 import { getSpotlightCards } from '@/service/api/financial-product/cards';
-import { useQueryString } from '@/hooks/useQueryString';
+import { useQueryString } from '@/shared/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '@/components/Spinner';
 
