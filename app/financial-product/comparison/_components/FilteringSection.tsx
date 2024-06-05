@@ -1,3 +1,5 @@
+'use client';
+
 import BottomSheet from '@/components/BottomSheet';
 import Icon from '@/components/Icon';
 import Tab from '@/components/ui/Tab';

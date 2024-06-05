@@ -3,6 +3,12 @@ import Link from 'next/link';
 import { IsBackHeader } from '@/components/header';
 import Icon from '@/components/Icon';
 import { THEMES } from '@/shared/utils/financial-product/staticData';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'PORKO | 테마별 추천',
+  description: 'PORKO 테마별 추천 페이지'
+};
 
 const ThemeRecommendationsPage = () => {
   return (

@@ -4,6 +4,12 @@ import FinancialProductBanner from './_components/FinancialProductBanner';
 import SpotlightCardSection from './_components/SpotlightCardSection';
 import FinancialProductSection from './_components/FinancialProductSection';
 import { auth } from '@/auth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'PORKO | 금융상품 탐색',
+  description: 'PORKO 금융상품 탐색 페이지'
+};
 
 const FinancialProductPage = async () => {
   const session = await auth();

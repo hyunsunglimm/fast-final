@@ -2,6 +2,12 @@ import { IsBackHeader } from '@/components/header';
 import AiBanner from './_components/AiBanner';
 import PerfectFinancialProductSection from './_components/PerfectFinancialProductSection';
 import SpendingHabitsCardSection from './_components/SpendingHabitsCardSection';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'PORKO | AI 맞춤 추천',
+  description: 'PORKO AI 맞춤 추천 페이지'
+};
 
 const AiRecommendationsPage = () => {
   return (
