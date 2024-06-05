@@ -176,7 +176,7 @@ const Footer = () => {
       </TextButton>
       <div className='h-6 w-[1px] bg-gray-300' aria-hidden></div>
       <TextButton type='button' className='text-gray-700' asChild>
-        <Link href='#' aria-label='회원가입으로 가기'>
+        <Link href='/auth/signup' aria-label='회원가입으로 가기'>
           회원가입
         </Link>
       </TextButton>

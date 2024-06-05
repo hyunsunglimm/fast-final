@@ -14,6 +14,7 @@ export default {
 
           try {
             const user = await login({ email, password });
+
             if (user) {
               return {
                 id: user.email,
