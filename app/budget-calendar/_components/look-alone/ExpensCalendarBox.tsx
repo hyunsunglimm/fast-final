@@ -11,7 +11,10 @@ const dailyData = [
   { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
   { date: '2024-06-17', income: 23000, expense: 0, weatherId: 3, reaction: false },
   { date: '2024-06-18', income: 50000, expense: 20000, weatherId: 4, reaction: false },
-  { date: '2024-06-20', income: 2600000, expense: 70000, weatherId: 1, reaction: false }
+  { date: '2024-06-1', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
+  { date: '2024-06-10', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
+  { date: '2024-06-21', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
+  { date: '2024-06-30', income: 2600000, expense: 70000, weatherId: 1, reaction: false }
   // 추가적인 날짜 데이터 추가
 ];
 
@@ -52,8 +55,13 @@ const ExpensCalendarBox = () => {
           </Link>
         </Button>
       </FlexBox>
-      <Calendar year={selectedYear} month={selectedMonth} weeklyData={weeklyData} />
-      <Calendar year={selectedYear} month={selectedMonth} />
+      <Calendar
+        year={selectedYear}
+        month={selectedMonth}
+        weeklyData={weeklyData}
+        dailyData={dailyData}
+      />
+      {/* <Calendar year={selectedYear} month={selectedMonth} /> */}
     </section>
   );
 };
