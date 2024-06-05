@@ -28,10 +28,13 @@ export type SharedMembersProps = {
   selectedProfile: string;
   setSelectedProfile: (name: string) => void;
 };
+
 // 달력
 export type CalendarProps = {
   year: number;
   month: number;
+  dailyData?: DateInfo[];
+  weeklyData?: WeeklyDataItem[];
   isAlone?: boolean;
 };
 
@@ -41,4 +44,18 @@ export type DateInfo = {
   income?: number | null;
   expense?: number | null;
   today?: boolean;
+};
+
+export type WeeklyDataItem = {
+  month: number;
+  week: number;
+  income: number;
+  expense: number;
+};
+
+// 날짜 dropdown
+export type YearMonthDropdownProps = {
+  selectedYear: number;
+  selectedMonth: number;
+  onSelect: (year: number, month: number) => void;
 };

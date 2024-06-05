@@ -1,4 +1,4 @@
-import { ExpenseItemProps } from '@/service/types/budgetCalendarType';
+import { ExpenseItemProps } from '@/shared/types/budgetCalendarType';
 
 // 날짜 형식 변환 (몇일 몇요일)
 export const formatDate = (dateString: string): string => {
