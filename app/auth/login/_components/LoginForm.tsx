@@ -163,19 +163,19 @@ export default LoginForm;
 const Footer = () => {
   return (
     <FlexBox className='mt-[4.8rem] gap-x-22' alignItems='center'>
-      <TextButton type='button' className='text-gray-700' asChild>
+      <TextButton type='button' className='text-12 text-gray-500' asChild>
         <Link href='#' aria-label='포코계정 찾기로 가기'>
           포코계정 찾기
         </Link>
       </TextButton>
       <div className='h-6 w-[1px] bg-gray-300' aria-hidden></div>
-      <TextButton type='button' className='text-gray-700' asChild>
+      <TextButton type='button' className='text-12 text-gray-500' asChild>
         <Link href='#' aria-label='비밀번호 찾기로 가기'>
           비밀번호 찾기
         </Link>
       </TextButton>
       <div className='h-6 w-[1px] bg-gray-300' aria-hidden></div>
-      <TextButton type='button' className='text-gray-700' asChild>
+      <TextButton type='button' className='text-12 text-gray-500' asChild>
         <Link href='/auth/signup' aria-label='회원가입으로 가기'>
           회원가입
         </Link>
