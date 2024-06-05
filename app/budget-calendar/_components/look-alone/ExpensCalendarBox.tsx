@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Title from '../common/Title';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
@@ -10,6 +10,7 @@ const ExpensCalendarBox = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -20,6 +21,19 @@ const ExpensCalendarBox = () => {
     setSelectedMonth(month);
     setIsOpen(false);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const renderOptions = () => {
     const options = [];
@@ -35,8 +49,12 @@ const ExpensCalendarBox = () => {
     }
     return options.map(({ year, month }) => {
       return (
-        <li key={`${year}-${month}`} onClick={() => handleYearMonthSelect(year, month)}>
-          {year}년 {month}월
+        <li
+          key={`${year}-${month}`}
+          onClick={() => handleYearMonthSelect(year, month)}
+          className='py-4'
+        >
+          {String(year).slice(2)}년 {month}월
         </li>
       );
     });
@@ -48,14 +66,23 @@ const ExpensCalendarBox = () => {
         <Icon src='/icons/system-icon/info.svg' alt='정보' size='16' />
       </Title>
       <FlexBox justifyContent='between' alignItems='center' className='relative mb-24'>
-        <div>
-          <div onClick={handleToggleDropdown}>
+        <div className='relative' ref={dropdownRef}>
+          <FlexBox alignItems='center' onClick={handleToggleDropdown} className='text-16 font-700'>
             {selectedYear !== new Date().getFullYear()
               ? `${String(selectedYear).slice(2)}년 `
               : null}
             {selectedMonth}월
-          </div>
-          {isOpen && <ul>{renderOptions()}</ul>}
+            <Icon
+              src='/icons/system-icon/arrow/bxs-down-arrow.svg'
+              alt='화살표'
+              className='ml-2 h-[0.6rem] w-[0.8rem] rounded-none'
+            />
+          </FlexBox>
+          {isOpen && (
+            <ul className='absolute z-[2] w-[10rem] rounded-sm border bg-white px-4 py-8 text-center text-14'>
+              {renderOptions()}
+            </ul>
+          )}
         </div>
         <Button asChild size='xs' styled='outline'>
           <Link
