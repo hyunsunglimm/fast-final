@@ -1,7 +1,8 @@
+'use client';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
-import Title from '../../common/Title';
+import Title from '../common/Title';
 import Icon from '@/components/Icon';
 const WeatherInfoBottomSheet = dynamic(() => import('./WeatherInfoBottomSheet'));
 // 소비 날씨
