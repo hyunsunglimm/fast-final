@@ -3,7 +3,7 @@ import {
   ComparedCards,
   SpendingHabitsCard,
   SpotlightCard
-} from '@/service/types/card';
+} from '@/shared/types/card';
 import { requestFetch } from '../fetchOptions';
 
 export const getSpotlightCards = (type: string | null): Promise<SpotlightCard[]> => {

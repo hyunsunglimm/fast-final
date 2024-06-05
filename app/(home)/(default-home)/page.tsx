@@ -10,7 +10,7 @@ const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), {
 const HomePage = () => {
   return (
     <>
-      <section className='mb-20 px-20'>
+      <section className='mb-24 px-20'>
         <HomeTopBannerCard />
       </section>
       <section className='mb-24 px-20'>
