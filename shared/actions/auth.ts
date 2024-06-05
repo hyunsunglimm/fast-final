@@ -20,6 +20,9 @@ export const signInWithCredentials = async (data: z.infer<typeof loginSchema>) =
     return { success: 'Login successful!' };
   } catch (error) {
     if (error instanceof AuthError) {
+      if (error.cause?.err instanceof Error) {
+        return { error: error.cause.err.message }; // return "custom error"
+      }
       switch (error.type) {
         case 'CredentialsSignin':
           return { error: '아이디를 확인해 주세요.' };

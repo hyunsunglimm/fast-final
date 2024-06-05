@@ -49,7 +49,7 @@ const LoginForm = () => {
         setSuccess(result.success);
       }
       if (result.error) {
-        setSuccess(result.error);
+        setError(result.error);
       }
     });
   });
@@ -140,10 +140,14 @@ const LoginForm = () => {
 
           {/* API에서 반환하는 에러메시지 */}
           {success && (
-            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>{success}</p>
+            <p className='mt-20 rounded-xs bg-green-200 px-20 py-10 text-14 text-black'>
+              {success}
+            </p>
           )}
           {error && (
-            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>{error}</p>
+            <p className='mt-20 rounded-xs bg-warning/40 px-20 py-10 text-14 text-warning'>
+              {error}
+            </p>
           )}
         </CardContent>
         <Button type='submit' className='w-full self-end' disabled={isPending}>

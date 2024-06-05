@@ -14,7 +14,6 @@ export default {
 
           try {
             const user = await login({ email, password });
-
             if (user) {
               return {
                 id: user.email,
@@ -25,7 +24,9 @@ export default {
             }
           } catch (error) {
             console.error('Authorization error:', error);
-            return null;
+            if (error instanceof Error) {
+              throw new Error(error.message);
+            }
           }
         }
 
