@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { DefaultHeader } from '@/components/header';
 import Tab from '@/components/ui/Tab';
 import LookAloneContainer from './_components/look-alone/LookAloneContainer';
 import LookTogetherContainer from './_components/look-together/LookTogetherContainer';
@@ -48,8 +47,7 @@ const BudgetCalendarPage = () => {
   };
 
   return (
-    <div className='min-h-full bg-white pb-[13.2rem]'>
-      <DefaultHeader title='가계부' />
+    <>
       <Tab
         array={['혼자봐요', '함께봐요']}
         type='underline'
@@ -58,7 +56,7 @@ const BudgetCalendarPage = () => {
       />
       {viewMode === '혼자봐요' && <LookAloneContainer />}
       {viewMode === '함께봐요' && <LookTogetherContainer viewMode={viewMode} />}
-    </div>
+    </>
   );
 };
 

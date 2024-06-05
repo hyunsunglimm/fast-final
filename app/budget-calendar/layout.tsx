@@ -9,9 +9,9 @@ type CalendarLayoutProps = {
 const CalendarLayout = ({ children }: CalendarLayoutProps) => {
   return (
     <>
-      <Popup />
+      {/* <Popup /> */}
       <DefaultHeader title='가계부' defaultColor='#fff' />
-      {children}
+      <main className='min-h-full bg-white pb-[13.2rem]'>{children}</main>
     </>
   );
 };

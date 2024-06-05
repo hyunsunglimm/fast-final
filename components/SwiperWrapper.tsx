@@ -1,16 +1,12 @@
 'use client';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import { Swiper as SwiperType, PaginationOptions } from 'swiper/types';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 import FlexBox from './ui/FlexBox';
 import Icon from './Icon';
-
 type SwiperWrapperProps = {
   arrow?: boolean;
   dots?: boolean;
@@ -19,8 +15,7 @@ type SwiperWrapperProps = {
   setIndex?: (arg: number) => void;
   children: Array<React.ReactNode>;
 };
-
-const SwiperWrapper = forwardRef<HTMLElement, SwiperWrapperProps>(
+const SwiperWrapper = forwardRef<{ next: () => void }, SwiperWrapperProps>(
   (
     { arrow = false, dots = false, fraction = false, coverflow = false, setIndex, children },
     ref
@@ -32,23 +27,18 @@ const SwiperWrapper = forwardRef<HTMLElement, SwiperWrapperProps>(
         }
       };
     });
-
     const sliderRef = useRef<SwiperType | null>();
-
     const pagination: PaginationOptions = {
       clickable: true,
       renderBullet: (index: number, className: string) => `<span class='${className}'></span>`
     };
-
     const fractionPagination: PaginationOptions = {
       type: 'fraction',
       renderFraction: (currentClass: string, totalClass: string) => {
         return `<span class='${currentClass}'></span><span>/</span><span class='${totalClass}'></span>`;
       }
     };
-
     const isLoop = !coverflow || children.length >= 4;
-
     return (
       <Swiper
         onSwiper={(swiper) => (sliderRef.current = swiper)}
@@ -87,7 +77,5 @@ const SwiperWrapper = forwardRef<HTMLElement, SwiperWrapperProps>(
     );
   }
 );
-
 SwiperWrapper.displayName = 'SwiperWrapper';
-
 export default SwiperWrapper;

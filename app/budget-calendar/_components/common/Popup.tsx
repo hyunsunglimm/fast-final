@@ -5,14 +5,15 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import SwiperWrapper from '@/components/SwiperWrapper';
 import Icon from '@/components/Icon';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Popup = () => {
   const [index, setIndex] = useState(0);
   const [openPopUp, setOpenPopup] = useState(true);
-  const ref = useRef(null);
+  const ref = useRef<{ next: () => void } | null>(null);
+
   const handleNextClick = () => {
-    if (index === 0) {
+    if (index === 0 && ref.current) {
       ref.current.next();
     } else if (index === 1) {
       setOpenPopup(false);
@@ -28,14 +29,14 @@ const Popup = () => {
   }, [openPopUp]);
 
   return (
-    <>
+    <AnimatePresence>
       {openPopUp && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className='absolute inset-0 z-30 h-dvh  bg-black/60'
+          className='absolute inset-0 z-30 h-dvh bg-black/60'
         >
           <motion.div
             initial={{ y: '100%' }}
@@ -59,7 +60,7 @@ const Popup = () => {
           </motion.div>
         </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 export default Popup;

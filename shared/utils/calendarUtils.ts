@@ -1,4 +1,4 @@
-import { CalendarProps, DateInfo } from '@/service/types/budgetCalendarType';
+import { CalendarProps, DateInfo } from '../types/budgetCalendarType';
 
 const dailyData = [
   { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
@@ -21,7 +21,7 @@ export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
   const lastDayOfMonth = new Date(year, month, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
   const dates = [];
-
+  console.log(firstDayOfMonth.toLocaleDateString());
   for (let i = 0; i < firstDayOfWeek; i++) {
     dates.push({ date: null });
   }
@@ -29,6 +29,7 @@ export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
     const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
     const dailyDataItem = dailyData.find((item) => item.date === dateStr);
+
     dates.push({
       date: i,
       imgSrc: dailyDataItem
