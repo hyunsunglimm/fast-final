@@ -7,6 +7,22 @@ import Button from '@/components/ui/Button';
 import Calendar from '../shared/Calendar';
 import YearMonthDropdown from '../shared/YearMonthDropdown';
 
+const dailyData = [
+  { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
+  { date: '2024-06-17', income: 23000, expense: 0, weatherId: 3, reaction: false },
+  { date: '2024-06-18', income: 50000, expense: 20000, weatherId: 4, reaction: false },
+  { date: '2024-06-20', income: 2600000, expense: 70000, weatherId: 1, reaction: false }
+  // 추가적인 날짜 데이터 추가
+];
+
+const weeklyData = [
+  { month: 6, week: 3, income: 0, expense: 1310003 },
+  { month: 6, week: 2, income: 1230002, expense: 0 },
+  { month: 6, week: 1, income: 1130001, expense: 12000 },
+  { month: 5, week: 5, income: 0, expense: 1520000 },
+  { month: 5, week: 4, income: 1720000, expense: 0 }
+];
+
 const ExpensCalendarBox = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
@@ -36,6 +52,7 @@ const ExpensCalendarBox = () => {
           </Link>
         </Button>
       </FlexBox>
+      <Calendar year={selectedYear} month={selectedMonth} weeklyData={weeklyData} />
       <Calendar year={selectedYear} month={selectedMonth} />
     </section>
   );

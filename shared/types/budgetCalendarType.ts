@@ -33,6 +33,8 @@ export type SharedMembersProps = {
 export type CalendarProps = {
   year: number;
   month: number;
+  dailyData?: DateInfo[];
+  weeklyData?: WeeklyDataItem[];
 };
 
 export type DateInfo = {
@@ -41,4 +43,18 @@ export type DateInfo = {
   income?: number | null;
   expense?: number | null;
   today?: boolean;
+};
+
+export type WeeklyDataItem = {
+  month: number;
+  week: number;
+  income: number;
+  expense: number;
+};
+
+// 날짜 dropdown
+export type YearMonthDropdownProps = {
+  selectedYear: number;
+  selectedMonth: number;
+  onSelect: (year: number, month: number) => void;
 };
