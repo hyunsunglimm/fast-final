@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Icon from '../Icon';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { HTMLAttributes } from 'react';
+import { cn } from '@/shared/utils/twMerge';
 
 type DefaultHeaderProps = {
   isHome?: boolean;
@@ -27,15 +28,17 @@ export const DefaultHeader = ({
     [0, 1],
     [`${defaultColor || 'transparent'}`, '#ffffff96']
   );
-
+  const fixedClass = isFixed ? 'sticky top-0 z-20' : '';
   return (
     <motion.header
       style={{ backgroundColor: headerColor }}
-      className={flexBoxVariants({
-        justifyContent: 'between',
-        alignItems: 'center',
-        className: `${isFixed && 'sticky top-0 z-20'} h-[5.6rem] border-b border-b-gray-100 px-20 backdrop-blur-lg`
-      })}
+      className={cn(
+        flexBoxVariants({
+          justifyContent: 'between',
+          alignItems: 'center'
+        }),
+        `${fixedClass} h-[5.6rem] px-20 backdrop-blur-lg`
+      )}
     >
       {isHome ? (
         <div
