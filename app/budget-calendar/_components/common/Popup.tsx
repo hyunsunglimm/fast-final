@@ -6,22 +6,17 @@ import FlexBox from '@/components/ui/FlexBox';
 import SwiperWrapper from '@/components/SwiperWrapper';
 import Icon from '@/components/Icon';
 import { motion } from 'framer-motion';
-import { useSwiper } from 'swiper/react';
 
 const Popup = () => {
   const [index, setIndex] = useState(0);
   const [openPopUp, setOpenPopup] = useState(true);
   const ref = useRef(null);
-  const swiper = useSwiper();
   const handleNextClick = () => {
-    setIndex((prev) => {
-      if (prev === 0) {
-        return prev + 1;
-      } else {
-        setOpenPopup(false);
-        return prev;
-      }
-    });
+    if (index === 0) {
+      ref.current.next();
+    } else if (index === 1) {
+      setOpenPopup(false);
+    }
   };
 
   useEffect(() => {
@@ -49,7 +44,7 @@ const Popup = () => {
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className='absolute bottom-0 w-full self-end rounded-lg bg-white p-24 text-center'
           >
-            <SwiperWrapper dots={true} setIndex={setIndex}>
+            <SwiperWrapper dots={true} setIndex={setIndex} ref={ref}>
               <StepOne />
               <StepTwo />
             </SwiperWrapper>
@@ -57,7 +52,7 @@ const Popup = () => {
               size='sm'
               styled='fill_black'
               className='mt-32 w-full'
-              // onClick={() => ref.slideNext()}
+              onClick={handleNextClick}
             >
               {index === 0 ? '다음' : '모두 확인했어요'}
             </Button>
