@@ -3,9 +3,9 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { getCurrentMonthDates, getWeeklyData } from '@/shared/utils/calendarUtils';
-import { CalendarProps, WeeklyDataItem } from '@/shared/types/budgetCalendarType';
+import { CalendarProps } from '@/shared/types/budgetCalendarType';
 
-const Calendar = ({ year, month, weeklyData }: CalendarProps) => {
+const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
   const weeks = getWeeklyData({ year, month }, dates);
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -51,6 +51,10 @@ const Calendar = ({ year, month, weeklyData }: CalendarProps) => {
             )}
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
+                const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(item.date).padStart(2, '0')}`;
+                const dailyItem = dailyData?.find((data) => data.date === formattedDate);
+                const shareDataItem = shareData?.daily.find((item) => item.date === formattedDate);
+
                 return (
                   <div key={idx}>
                     <div className='py-4'>
@@ -62,25 +66,27 @@ const Calendar = ({ year, month, weeklyData }: CalendarProps) => {
                       </Text>
                       {item.date && (
                         <Icon
-                          src={item.imgSrc || '/icons/weather/weather-none.svg'}
-                          alt={item.imgSrc ? '날씨 이미지' : '날씨 없음'}
+                          src={`/icons/weather/weather-${dailyItem?.weatherId || shareDataItem?.weatherId || 'none'}.svg`}
+                          alt={dailyItem || shareDataItem ? '날씨 이미지' : '날씨 없음'}
                           size='44'
                           className='m-auto block rounded-none'
                         />
                       )}
                     </div>
-                    <>
-                      {item.expense ? (
-                        <Text variant='p' sizes='10' className='text-gray-700'>
-                          -{item.expense}
-                        </Text>
-                      ) : null}
-                      {item.income ? (
-                        <Text variant='p' sizes='10' className='text-primary'>
-                          +{item.income}
-                        </Text>
-                      ) : null}
-                    </>
+                    {dailyItem && (
+                      <>
+                        {dailyItem.expense ? (
+                          <Text variant='p' sizes='10' className='text-gray-700'>
+                            -{dailyItem.expense}
+                          </Text>
+                        ) : null}
+                        {dailyItem.income ? (
+                          <Text variant='p' sizes='10' className='text-primary'>
+                            +{dailyItem.income}
+                          </Text>
+                        ) : null}
+                      </>
+                    )}
                   </div>
                 );
               })}

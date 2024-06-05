@@ -35,11 +35,12 @@ export type CalendarProps = {
   month: number;
   dailyData?: DateInfo[];
   weeklyData?: WeeklyDataItem[];
+  shareData?: ShareData;
 };
 
 export type DateInfo = {
-  date: number | null;
-  imgSrc?: string;
+  date: string | null;
+  weatherId?: number;
   income?: number | null;
   expense?: number | null;
   today?: boolean;
@@ -51,6 +52,20 @@ export type WeeklyDataItem = {
   income: number;
   expense: number;
 };
+
+export interface ShareData {
+  count: number;
+  daily: ShareDataItem[];
+}
+
+export interface ShareDataItem {
+  date: string;
+  weatherId: number;
+  reactions: {
+    memberId: number;
+    stickerOrEmoticonID: number;
+  }[];
+}
 
 // 날짜 dropdown
 export type YearMonthDropdownProps = {

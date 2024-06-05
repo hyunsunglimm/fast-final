@@ -12,7 +12,7 @@ export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
 
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
     dates.push({
-      date: i,
+      date: String(i),
       today:
         year === new Date().getFullYear() &&
         month === new Date().getMonth() + 1 &&
