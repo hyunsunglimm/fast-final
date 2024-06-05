@@ -1,24 +1,35 @@
-import { mySignIn } from '@/service/api/auth';
 import { type NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-
-interface CredentialsType {
-  username?: string;
-  email: string;
-  password: string;
-}
+import { loginSchema } from '@/app/auth/schema/loginSchema';
+import { login } from '@/service/api/auth';
 
 export default {
   providers: [
     Credentials({
       authorize: async (credentials) => {
-        const userInfo = credentials as unknown as CredentialsType;
-        // 회원가입
-        if (userInfo.username) {
-          return await mySignIn('signup', userInfo);
+        const validatedFields = loginSchema.safeParse(credentials);
+
+        if (validatedFields.success) {
+          const { email, password } = validatedFields.data;
+
+          try {
+            const user = await login({ email, password });
+
+            if (user) {
+              return {
+                id: user.email,
+                name: '',
+                email: user.email,
+                accessToken: user.accessToken
+              };
+            }
+          } catch (error) {
+            console.error('Authorization error:', error);
+            return null;
+          }
         }
-        // 로그인
-        return await mySignIn('login', userInfo);
+
+        return null;
       }
     })
   ],

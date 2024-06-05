@@ -13,6 +13,7 @@ import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/f
 import { CardContent } from '@/components/ui/card';
 import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
+import { CheckEmailDuplicateResponse } from '@/shared/types/response/auth';
 import { SignupInputsValues } from '../../schema/signupSchema';
 import { useSignupStore } from '@/store/signup';
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
@@ -37,27 +38,21 @@ const StepOne = () => {
 
   const { setStorage } = useSignupStore();
 
-  type Tdata = {
-    userId: string;
-    message: string;
-  };
-
-  const { mutate, isPending } = useMutation<Tdata, Error, string>({
+  const { mutate, isPending } = useMutation<CheckEmailDuplicateResponse, Error, string>({
     mutationFn: (id) => checkEmailDuplicate(id),
     onSuccess: (data) => {
-      if (data) {
+      if (!data.isDuplicated) {
         setError('email', {
           type: 'manual',
-          message: data.message || ''
+          message: '가입 가능한 이메일입니다.'
         });
         setValue('checkEmail', true);
+      } else {
+        setError('email', {
+          type: 'manual',
+          message: '이미 가입된 이메일입니다.'
+        });
       }
-    },
-    onError: (err) => {
-      setError('email', {
-        type: 'manual',
-        message: err.message || ''
-      });
     }
   });
 

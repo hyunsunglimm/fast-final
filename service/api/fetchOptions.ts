@@ -18,12 +18,13 @@ const createOptions = (token?: string): RequestInit => {
 export const requestFetch = async <T>(
   endPoint: string,
   config: RequestInit = {},
+  baseUrl?: string,
   token?: string
 ): Promise<T> => {
   const options = createOptions(token);
-
+  const URL = baseUrl ? baseUrl : BASE_URL;
   try {
-    const res = await fetch(BASE_URL + endPoint, {
+    const res = await fetch(URL + endPoint, {
       ...config,
       headers: {
         ...options.headers,

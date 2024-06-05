@@ -15,10 +15,6 @@ import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
 import { signInWithCredentials } from '@/shared/actions/auth';
 
-type SigninResponse = {
-  message: string;
-};
-
 const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
   ssr: false
@@ -28,7 +24,8 @@ const LoginForm = () => {
   const [autoLoginCheck, setAutoLoginCheck] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const [signinResponse, setSigninResponse] = useState<SigninResponse | undefined>();
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
 
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
@@ -44,9 +41,16 @@ const LoginForm = () => {
   } = form;
 
   const onSubmit = handleSubmit(async (data) => {
+    setError('');
+    setSuccess('');
     startTransition(async () => {
       const result = await signInWithCredentials(data);
-      setSigninResponse(result);
+      if (result.success) {
+        setSuccess(result.success);
+      }
+      if (result.error) {
+        setSuccess(result.error);
+      }
     });
   });
 
@@ -135,10 +139,11 @@ const LoginForm = () => {
           <Footer />
 
           {/* API에서 반환하는 에러메시지 */}
-          {signinResponse && (
-            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>
-              {JSON.stringify(signinResponse.message)}
-            </p>
+          {success && (
+            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>{success}</p>
+          )}
+          {error && (
+            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>{error}</p>
           )}
         </CardContent>
         <Button type='submit' className='w-full self-end' disabled={isPending}>
