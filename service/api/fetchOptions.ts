@@ -33,7 +33,12 @@ export const requestFetch = async <T>(
     });
 
     if (res.ok) {
-      return (await res.json()) as T;
+      const textResponse = await res.text();
+      if (!textResponse) {
+        return {} as T;
+      }
+      const jsonResponse = JSON.parse(textResponse);
+      return jsonResponse as T;
     }
 
     let errorMessage = 'Something went wrong';
