@@ -8,6 +8,9 @@ import Calendar from '../shared/Calendar';
 import YearMonthDropdown from '../shared/YearMonthDropdown';
 
 const dailyData = [
+  { date: '2024-05-01', income: 100, expense: 2000, weatherId: 3, reaction: false },
+  { date: '2024-05-02', income: 100, expense: 2000, weatherId: 3, reaction: false },
+  { date: '2024-06-01', income: 100, expense: 2000, weatherId: 3, reaction: false },
   { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
   { date: '2024-06-17', income: 23000, expense: 0, weatherId: 3, reaction: false },
   { date: '2024-06-18', income: 50000, expense: 20000, weatherId: 4, reaction: false },
@@ -58,10 +61,9 @@ const ExpensCalendarBox = () => {
       <Calendar
         year={selectedYear}
         month={selectedMonth}
-        weeklyData={weeklyData}
         dailyData={dailyData}
+        weeklyData={weeklyData}
       />
-      {/* <Calendar year={selectedYear} month={selectedMonth} /> */}
     </section>
   );
 };

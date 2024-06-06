@@ -3,7 +3,7 @@ export type BudgetBannerProps = {
   icon?: boolean;
   text: string;
   showArrow?: boolean;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 // 소비내역 리스트 아이템
 export type ExpenseItemProps = {
@@ -35,6 +35,7 @@ export type CalendarProps = {
   month: number;
   dailyData?: DailyDataItemType[];
   weeklyData?: WeeklyDataItem[];
+  shareData?: ShareData;
 };
 
 export type DateInfo = {
@@ -60,6 +61,20 @@ export type WeeklyDataItem = {
   income: number;
   expense: number;
 };
+
+export interface ShareData {
+  count: number;
+  daily: ShareDataItem[];
+}
+
+export interface ShareDataItem {
+  date: string;
+  weatherId: number;
+  reactions: {
+    memberId: number;
+    stickerOrEmoticonID: number;
+  }[];
+}
 
 // 날짜 dropdown
 export type YearMonthDropdownProps = {

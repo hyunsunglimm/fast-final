@@ -66,6 +66,7 @@ const config: Config = {
         '48': ['4.8rem', { lineHeight: '7.2rem' }]
       },
       padding: {
+        '2': '0.2rem',
         '4': '0.4rem',
         '6': '0.6rem',
         '8': '0.8rem',
@@ -80,6 +81,7 @@ const config: Config = {
         '40': '4rem'
       },
       margin: {
+        '2': '0.2rem',
         '4': '0.4rem',
         '6': '0.6rem',
         '8': '0.8rem',
