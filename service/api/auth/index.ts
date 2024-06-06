@@ -42,7 +42,6 @@ export const signup = async (formValues: z.infer<typeof signupSchema>) => {
       { method: 'post', body: JSON.stringify(requestBody) },
       process.env.NEXT_PUBLIC_DEV_URL
     );
-    return { success: '회원가입에 성공했습니다 !' };
   } catch (error) {
     if (error instanceof Error) {
       return { error: error.message };
