@@ -72,8 +72,12 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
             반응 {shareData.count}개
           </TextButton>
         </FlexBox>
-        <BudgetBanner icon={true} text='목표 예산 중 50%를 썼어요' showArrow={false} />
-
+        <BudgetBanner
+          icon={true}
+          text='목표 예산 중 50%를 썼어요'
+          showArrow={false}
+          className='mb-24'
+        />
         <Calendar year={selectedYear} month={selectedMonth} shareData={shareData} />
       </section>
 
