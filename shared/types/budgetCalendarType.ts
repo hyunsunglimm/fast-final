@@ -3,7 +3,7 @@ export type BudgetBannerProps = {
   icon?: boolean;
   text: string;
   showArrow?: boolean;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 // 소비내역 리스트 아이템
 export type ExpenseItemProps = {
