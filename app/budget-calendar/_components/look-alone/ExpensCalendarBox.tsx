@@ -5,41 +5,34 @@ import FlexBox from '@/components/ui/FlexBox';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Calendar from '../shared/Calendar';
+import YearMonthDropdown from '../shared/YearMonthDropdown';
+
+const dailyData = [
+  { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
+  { date: '2024-06-17', income: 23000, expense: 0, weatherId: 3, reaction: false },
+  { date: '2024-06-18', income: 50000, expense: 20000, weatherId: 4, reaction: false },
+  { date: '2024-06-1', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
+  { date: '2024-06-10', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
+  { date: '2024-06-21', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
+  { date: '2024-06-30', income: 2600000, expense: 70000, weatherId: 1, reaction: false }
+  // 추가적인 날짜 데이터 추가
+];
+
+const weeklyData = [
+  { month: 6, week: 3, income: 0, expense: 1310003 },
+  { month: 6, week: 2, income: 1230002, expense: 0 },
+  { month: 6, week: 1, income: 1130001, expense: 12000 },
+  { month: 5, week: 5, income: 0, expense: 1520000 },
+  { month: 5, week: 4, income: 1720000, expense: 0 }
+];
 
 const ExpensCalendarBox = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   const handleYearMonthSelect = (year: number, month: number) => {
     setSelectedYear(year);
     setSelectedMonth(month);
-    setIsOpen(false);
-  };
-
-  const renderOptions = () => {
-    const options = [];
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-    for (let i = 0; i < 12; i++) {
-      const year = currentYear - Math.floor((i + currentMonth - 1) / 12);
-      let month = (currentMonth + 12 - i) % 12;
-      if (month === 0) {
-        month = 12;
-      }
-      options.push({ year, month });
-    }
-    return options.map(({ year, month }) => {
-      return (
-        <li key={`${year}-${month}`} onClick={() => handleYearMonthSelect(year, month)}>
-          {year}년 {month}월
-        </li>
-      );
-    });
   };
 
   return (
@@ -48,15 +41,11 @@ const ExpensCalendarBox = () => {
         <Icon src='/icons/system-icon/info.svg' alt='정보' size='16' />
       </Title>
       <FlexBox justifyContent='between' alignItems='center' className='relative mb-24'>
-        <div>
-          <div onClick={handleToggleDropdown}>
-            {selectedYear !== new Date().getFullYear()
-              ? `${String(selectedYear).slice(2)}년 `
-              : null}
-            {selectedMonth}월
-          </div>
-          {isOpen && <ul>{renderOptions()}</ul>}
-        </div>
+        <YearMonthDropdown
+          selectedYear={selectedYear}
+          selectedMonth={selectedMonth}
+          onSelect={handleYearMonthSelect}
+        />
         <Button asChild size='xs' styled='outline'>
           <Link
             href='/budget-calendar/consumption?daily=월별&viewType=금액'
@@ -66,7 +55,13 @@ const ExpensCalendarBox = () => {
           </Link>
         </Button>
       </FlexBox>
-      <Calendar year={selectedYear} month={selectedMonth} />
+      <Calendar
+        year={selectedYear}
+        month={selectedMonth}
+        weeklyData={weeklyData}
+        dailyData={dailyData}
+      />
+      {/* <Calendar year={selectedYear} month={selectedMonth} /> */}
     </section>
   );
 };

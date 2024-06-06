@@ -38,11 +38,7 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
         </FlexBox>
         <BudgetBanner icon={true} text='목표 예산 중 50%를 썼어요' showArrow={false} />
 
-        <Calendar
-          year={new Date().getFullYear()}
-          month={new Date().getMonth() + 1}
-          isAlone={false}
-        />
+        <Calendar year={new Date().getFullYear()} month={new Date().getMonth() + 1} />
       </section>
 
       {/* 반응 보기 바텀 시트 */}

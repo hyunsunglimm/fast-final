@@ -28,17 +28,42 @@ export type SharedMembersProps = {
   selectedProfile: string;
   setSelectedProfile: (name: string) => void;
 };
+
 // 달력
 export type CalendarProps = {
   year: number;
   month: number;
-  isAlone?: boolean;
+  dailyData?: DailyDataItemType[];
+  weeklyData?: WeeklyDataItem[];
 };
 
 export type DateInfo = {
-  date: number | null;
+  date: Date | null;
   imgSrc?: string;
   income?: number | null;
   expense?: number | null;
   today?: boolean;
+  reaction?: boolean;
+};
+
+export type DailyDataItemType = {
+  date: string;
+  income: number;
+  expense: number;
+  weatherId: number;
+  reaction: boolean;
+};
+
+export type WeeklyDataItem = {
+  month: number;
+  week: number;
+  income: number;
+  expense: number;
+};
+
+// 날짜 dropdown
+export type YearMonthDropdownProps = {
+  selectedYear: number;
+  selectedMonth: number;
+  onSelect: (year: number, month: number) => void;
 };
