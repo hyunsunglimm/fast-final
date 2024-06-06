@@ -9,9 +9,9 @@ import {
   useSensors
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { SetShowWidgetType } from '../types';
+import { Element } from '@/shared/types/response/widgetResponse';
 
-const useDrag = (setShowWidget: SetShowWidgetType) => {
+const useDrag = (setShowWidget: React.Dispatch<React.SetStateAction<Element[]>>) => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
   const pointerSensor = useSensor(PointerSensor, {
@@ -40,7 +40,6 @@ const useDrag = (setShowWidget: SetShowWidgetType) => {
       setShowWidget((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
-
         return arrayMove(items, oldIndex, newIndex);
       });
     }

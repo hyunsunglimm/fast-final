@@ -16,19 +16,24 @@ import {
   WidgetUpcomingExpenses,
   WidgetSpentEveryMonth
 } from './_components';
+import { currentUserSession } from '@/shared/actions/auth';
 
 const WidgeSectionPage = async () => {
-  const data = await getWidgetItem();
+  const session = await currentUserSession();
+  if (!session) {
+    return null;
+  }
+  const { elements } = await getWidgetItem();
 
   const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
-    a: WidgetBudget,
-    b: WidgetUpcomingExpenses,
-    c: WidgetLastMonth,
-    d: WidgetCurrentMonth,
-    e: WidgetCardPerformance,
-    f: WidgetMyChallenge,
-    g: WidgetMyCredit,
-    h: WidgetSpentEveryMonth
+    1: WidgetBudget,
+    2: WidgetUpcomingExpenses,
+    3: WidgetLastMonth,
+    4: WidgetCurrentMonth,
+    5: WidgetCardPerformance,
+    6: WidgetMyChallenge,
+    7: WidgetMyCredit,
+    8: WidgetSpentEveryMonth
   };
   return (
     <>
@@ -53,8 +58,8 @@ const WidgeSectionPage = async () => {
 
       {/* 위젯 영역 */}
       <div className='grid grid-cols-2 justify-items-center gap-[1.6rem]'>
-        {data[0].showWidget.map((item) => {
-          const WidgetComponent = widgetMap[item.id];
+        {elements.map((item) => {
+          const WidgetComponent = widgetMap[item.sequence];
           return WidgetComponent ? <WidgetComponent key={item.id} /> : null;
         })}
       </div>
