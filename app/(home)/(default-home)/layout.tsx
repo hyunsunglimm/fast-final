@@ -3,9 +3,13 @@ import { DefaultHeader } from '@/components/header';
 import MyWalletButton from './_components/MyWalletButton';
 import OpenWalletProvider from './context/OpenWalletProvider';
 import { CardSkeleton } from '@/components/ui/skeleton';
-import HomeBucketBannerCard from './_components/HomeBucketBannerCard';
 import Text from '@/components/ui/Text';
 import { currentUserSession } from '@/shared/actions/auth';
+
+const HomeBucketBannerCard = dynamic(() => import('./_components/HomeBucketBannerCard'), {
+  ssr: false,
+  loading: () => <CardSkeleton />
+});
 const HomeAiBannerCard = dynamic(() => import('./_components/HomeAiBannerCard'), {
   ssr: false,
   loading: () => <CardSkeleton />

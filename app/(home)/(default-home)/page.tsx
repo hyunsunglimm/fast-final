@@ -2,8 +2,10 @@ import dynamic from 'next/dynamic';
 import HomeTopBannerCard from './_components/HomeTopBannerCard';
 import BucketListCard from './_components/BucketListCard';
 import DefaultBucketListCard from './_components/DefaultBucketListCard';
+import { SqureSkeleton } from '@/components/ui/skeleton';
 const SwiperWrapper = dynamic(() => import('@/components/SwiperWrapper'), {
-  ssr: false
+  ssr: false,
+  loading: () => <SqureSkeleton />
 });
 const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), {
   ssr: false
