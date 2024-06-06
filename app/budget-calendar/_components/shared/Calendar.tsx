@@ -9,7 +9,7 @@ import { mergeData } from '../../utils/mergeData';
 const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
   const weeks = getWeeklyData({ year, month }, dates);
-  const data = mergeData(weeks, dailyData);
+  const data = mergeData(weeks, dailyData, shareData);
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
@@ -68,7 +68,7 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
                       </Text>
                       {item.date && (
                         <Icon
-                          src={item.imgSrc ? item.imgSrc : ''}
+                          src={item.imgSrc ? item.imgSrc : '/icons/weather/weather-none.svg'}
                           alt={item.imgSrc ? '날씨 이미지' : '날씨 없음'}
                           size='44'
                           className='m-auto block rounded-none'

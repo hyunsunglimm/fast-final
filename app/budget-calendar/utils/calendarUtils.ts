@@ -21,11 +21,7 @@ export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
       today:
         year === new Date().getFullYear() &&
         month === new Date().getMonth() + 1 &&
-        i === new Date().getDate(),
-      imgSrc: '/icons/weather/weather-none.svg',
-      income: null,
-      expense: null,
-      reaction: false
+        i === new Date().getDate()
     });
   }
   return dates;
