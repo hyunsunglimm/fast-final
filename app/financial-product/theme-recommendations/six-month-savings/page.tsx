@@ -2,8 +2,14 @@ import Text from '@/components/ui/Text';
 import SavingCard from '../../_components/SavingCard';
 import { IsBackHeader } from '@/components/header';
 import { getSavings } from '@/service/api/financial-product/savings';
+import { Metadata } from 'next';
 
-const page = async () => {
+export const metadata: Metadata = {
+  title: 'PORKO | 6개월 적금 추천',
+  description: 'PORKO 6개월 적금 추천 페이지'
+};
+
+const SixMonthSavingsPage = async () => {
   const savings = await getSavings();
   return (
     <>
@@ -29,4 +35,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default SixMonthSavingsPage;

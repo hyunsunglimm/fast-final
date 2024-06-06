@@ -31,7 +31,7 @@ export const signInWithCredentials = async (data: z.infer<typeof loginSchema>) =
       }
       switch (error.type) {
         case 'CredentialsSignin':
-          return { error: '아이디를 확인해 주세요.' };
+          return { error: '아이디 혹은 패스워드를 확인해 주세요.' };
 
         default:
           return { error: 'Something went wrong!' };

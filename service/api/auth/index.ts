@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { requestFetch } from '../fetchOptions';
 import { loginSchema } from '@/app/auth/schema/loginSchema';
 import { LoginResponse, CheckEmailDuplicateResponse } from '@/shared/types/response/auth';
+import { signupSchema } from '@/app/auth/schema/signupSchema';
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
 export const checkEmailDuplicate = (id: string): Promise<CheckEmailDuplicateResponse> => {
@@ -23,4 +24,29 @@ export const login = async (value: z.infer<typeof loginSchema>): Promise<LoginRe
     },
     BASE_URL
   );
+};
+
+export const signup = async (formValues: z.infer<typeof signupSchema>) => {
+  const requestBody = {
+    email: formValues.email,
+    password: formValues.password,
+    name: formValues.name,
+    phoneNumber: formValues.phoneNumber,
+    address: formValues.address,
+    gender: formValues.gender.toUpperCase()
+  };
+
+  try {
+    await requestFetch(
+      '/member/sign-up',
+      { method: 'post', body: JSON.stringify(requestBody) },
+      process.env.NEXT_PUBLIC_DEV_URL
+    );
+  } catch (error) {
+    if (error instanceof Error) {
+      return { error: error.message };
+    } else {
+      return { error: '회원가입에 실패했습니다.' };
+    }
+  }
 };
