@@ -35,7 +35,11 @@ export const requestFetch = async <T>(
     });
 
     if (res.ok) {
-      const jsonResponse = await res.json();
+      const textResponse = await res.text();
+      if (!textResponse) {
+        return {} as T;
+      }
+      const jsonResponse = JSON.parse(textResponse);
       return jsonResponse as T;
     }
 

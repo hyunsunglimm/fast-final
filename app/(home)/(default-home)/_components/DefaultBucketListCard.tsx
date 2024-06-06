@@ -26,7 +26,7 @@ const DefaultBucketListCard = () => {
           height={175}
           alt='버킷리스트'
           title='버킷리스트 이미지'
-          loading='lazy'
+          priority
           onLoad={onLoadImage}
           quality={onload ? '100' : '10'}
           className='pointer-events-none absolute bottom-8 right-0 h-[17.5rem] w-[17.4rem]'

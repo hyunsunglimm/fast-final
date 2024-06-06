@@ -29,7 +29,8 @@ const DragContainer = () => {
 
   const { data, isLoading } = useQuery<MemberWidgetReponseType>({
     queryKey: ['fetchWidget'],
-    queryFn: getWidgetItem
+    queryFn: getWidgetItem,
+    refetchOnMount: 'always'
   });
 
   useEffect(() => {
@@ -123,7 +124,7 @@ const DragContainer = () => {
           })}
         </FlexBox>
       </section>
-      <FixedBottom />
+      <FixedBottom showWidget={showWidget} />
     </>
   );
 };
