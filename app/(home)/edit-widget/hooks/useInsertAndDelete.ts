@@ -1,11 +1,11 @@
 import { MouseEvent } from 'react';
-import { ExtendsWidgetType } from '@/shared/types/response/widgetResponse';
+import { WidgetElementType } from '@/shared/types/response/widgetResponse';
 
 const useInsertAndDelete = (
-  setShowWidget: React.Dispatch<React.SetStateAction<ExtendsWidgetType[]>>,
-  setHideWidget: React.Dispatch<React.SetStateAction<ExtendsWidgetType[]>>,
-  showWidget: ExtendsWidgetType[],
-  hideWidget: ExtendsWidgetType[]
+  setShowWidget: React.Dispatch<React.SetStateAction<WidgetElementType[]>>,
+  setHideWidget: React.Dispatch<React.SetStateAction<WidgetElementType[]>>,
+  showWidget: WidgetElementType[],
+  hideWidget: WidgetElementType[]
 ) => {
   const handleDeleteWidgetItem = (e: MouseEvent<HTMLButtonElement>) => {
     const currentClickItem = Number(e.currentTarget.id);

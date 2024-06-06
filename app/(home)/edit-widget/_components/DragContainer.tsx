@@ -4,7 +4,7 @@ import { getWidgetItem } from '@/service/api/home';
 import { useQuery } from '@tanstack/react-query';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { MemberWidgetReponseType, ExtendsWidgetType } from '@/shared/types/response/widgetResponse';
+import { MemberWidgetReponseType, WidgetElementType } from '@/shared/types/response/widgetResponse';
 import { Card } from '@/components/ui/card';
 import DragOverWidget from './DragOverWidget';
 import IsEditWidgetItem from './IsEditWidgetItem';
@@ -14,12 +14,11 @@ import useDrag from '../hooks/useDrag';
 import useInsertAndDelete from '../hooks/useInsertAndDelete';
 import LoadingGrid from './LoadingGrid';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
-import { WidgetElementsArr, widgetReducer } from '../utils/widgetReduce';
 import FixedBottom from './FixedBottom';
 
 const DragContainer = () => {
-  const [showWidget, setShowWidget] = useState<ExtendsWidgetType[]>([]);
-  const [hideWidget, setHideWidget] = useState<ExtendsWidgetType[]>([]);
+  const [showWidget, setShowWidget] = useState<WidgetElementType[]>([]);
+  const [hideWidget, setHideWidget] = useState<WidgetElementType[]>([]);
   const { activeId, sensors, handleDragStart, handleDragEnd } = useDrag(setShowWidget);
   const { handleDeleteWidgetItem, handleInsertWidgetItem } = useInsertAndDelete(
     setShowWidget,
@@ -36,8 +35,8 @@ const DragContainer = () => {
   useEffect(() => {
     if (data) {
       const { orderedMemberWidgets, unorderedMemberWidgets } = data;
-      setShowWidget(widgetReducer(orderedMemberWidgets, WidgetElementsArr));
-      setHideWidget(widgetReducer(unorderedMemberWidgets, WidgetElementsArr));
+      setShowWidget(orderedMemberWidgets);
+      setHideWidget(unorderedMemberWidgets);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -99,7 +98,7 @@ const DragContainer = () => {
         <FlexBox flexDirection='col' className='gap-y-[3.2rem]'>
           {hideWidget.map((item) => {
             return (
-              <FlexBox key={item.id} justifyContent='between' className='w-full'>
+              <FlexBox key={item.widgetId} justifyContent='between' className='w-full'>
                 <Text sizes='18' weight='500' className='text-gray-700'>
                   {item.description}
                 </Text>

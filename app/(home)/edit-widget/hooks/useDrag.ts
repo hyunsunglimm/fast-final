@@ -9,9 +9,9 @@ import {
   useSensors
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { ExtendsWidgetType } from '@/shared/types/response/widgetResponse';
+import { WidgetElementType } from '@/shared/types/response/widgetResponse';
 
-const useDrag = (setShowWidget: React.Dispatch<React.SetStateAction<ExtendsWidgetType[]>>) => {
+const useDrag = (setShowWidget: React.Dispatch<React.SetStateAction<WidgetElementType[]>>) => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
   const pointerSensor = useSensor(PointerSensor, {
