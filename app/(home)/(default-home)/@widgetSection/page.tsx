@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import ConsumeWeatherCard from '../_components/ConsumeWeatherCard';
 import { getWidgetItem } from '@/service/api/home';
-import { UniqueIdentifier } from '@dnd-kit/core/dist/types';
+
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -23,17 +23,17 @@ const WidgeSectionPage = async () => {
   if (!session) {
     return null;
   }
-  const { elements } = await getWidgetItem();
+  const { orderedMemberWidgets } = await getWidgetItem();
 
-  const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
-    1: WidgetBudget,
-    2: WidgetUpcomingExpenses,
-    3: WidgetLastMonth,
-    4: WidgetCurrentMonth,
-    5: WidgetCardPerformance,
-    6: WidgetMyChallenge,
-    7: WidgetMyCredit,
-    8: WidgetSpentEveryMonth
+  const widgetMap: { [key: string]: React.ComponentType } = {
+    REMAINING_BUDGET: WidgetBudget,
+    UPCOMING_EXPENSES: WidgetUpcomingExpenses,
+    LAST_MONTH_EXPENSES: WidgetLastMonth,
+    CURRENT_MONTH_EXPENSES: WidgetCurrentMonth,
+    CURRENT_MONTH_CARD_USAGE: WidgetCardPerformance,
+    MY_CHALLENGE: WidgetMyChallenge,
+    CREDIT_SCORE: WidgetMyCredit,
+    DAILY_EXPENSES: WidgetSpentEveryMonth
   };
   return (
     <>
@@ -58,9 +58,9 @@ const WidgeSectionPage = async () => {
 
       {/* 위젯 영역 */}
       <div className='grid grid-cols-2 justify-items-center gap-[1.6rem]'>
-        {elements.map((item) => {
-          const WidgetComponent = widgetMap[item.sequence];
-          return WidgetComponent ? <WidgetComponent key={item.id} /> : null;
+        {orderedMemberWidgets.map((item) => {
+          const WidgetComponent = widgetMap[item.code];
+          return WidgetComponent ? <WidgetComponent key={item.code} /> : null;
         })}
       </div>
     </>

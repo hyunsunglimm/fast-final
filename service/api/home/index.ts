@@ -1,10 +1,17 @@
 import { requestFetch } from '../fetchOptions';
-import { WidgetReponseType } from '@/shared/types/response/widgetResponse';
+import {
+  MemberWidgetReponseType,
+  EidtWidgetBodyType
+} from '@/shared/types/response/widgetResponse';
 
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
-export const getWidgetItem = (): Promise<WidgetReponseType> => {
+export const getWidgetItem = (): Promise<MemberWidgetReponseType> => {
   return requestFetch('/member/widget', {}, BASE_URL);
+};
+
+export const putEidtWidgetItem = (body: EidtWidgetBodyType) => {
+  return requestFetch('/member/widget', { method: 'put', body: JSON.stringify(body) }, BASE_URL);
 };
 
 type WalletDataType = {

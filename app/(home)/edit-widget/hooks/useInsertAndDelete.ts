@@ -1,18 +1,20 @@
 import { MouseEvent } from 'react';
-import { Element } from '@/shared/types/response/widgetResponse';
+import { ExtendsWidgetType } from '@/shared/types/response/widgetResponse';
 
 const useInsertAndDelete = (
-  setShowWidget: React.Dispatch<React.SetStateAction<Element[]>>,
-  setHideWidget: React.Dispatch<React.SetStateAction<Element[]>>,
-  showWidget: Element[],
-  hideWidget: Element[]
+  setShowWidget: React.Dispatch<React.SetStateAction<ExtendsWidgetType[]>>,
+  setHideWidget: React.Dispatch<React.SetStateAction<ExtendsWidgetType[]>>,
+  showWidget: ExtendsWidgetType[],
+  hideWidget: ExtendsWidgetType[]
 ) => {
   const handleDeleteWidgetItem = (e: MouseEvent<HTMLButtonElement>) => {
-    const currentClickItem = e.currentTarget.id;
+    const currentClickItem = Number(e.currentTarget.id);
+
     setShowWidget((prevShowWidget) =>
-      prevShowWidget.filter((item) => item.id !== currentClickItem)
+      prevShowWidget.filter((item) => item.widgetId !== currentClickItem)
     );
-    const deletedItem = showWidget.find((item) => item.id === currentClickItem);
+
+    const deletedItem = showWidget.find((item) => item.widgetId === currentClickItem);
     if (deletedItem) {
       setHideWidget((prevHideWidget) => [...prevHideWidget, deletedItem]);
     }
@@ -20,11 +22,12 @@ const useInsertAndDelete = (
 
   const handleInsertWidgetItem = (e: MouseEvent<HTMLButtonElement>) => {
     if (showWidget.length >= 6) return;
-    const currentClickItem = e.currentTarget.id;
-    const insertItem = hideWidget.find((item) => item.id === currentClickItem);
+    const currentClickItem = Number(e.currentTarget.id);
+
+    const insertItem = hideWidget.find((item) => item.widgetId === currentClickItem);
     if (insertItem) {
       setHideWidget((prevHideWidget) =>
-        prevHideWidget.filter((item) => item.id !== currentClickItem)
+        prevHideWidget.filter((item) => item.widgetId !== currentClickItem)
       );
       setShowWidget((prevShowWidget) => [...prevShowWidget, insertItem]);
     }

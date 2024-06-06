@@ -4,7 +4,7 @@ import { getWidgetItem } from '@/service/api/home';
 import { useQuery } from '@tanstack/react-query';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { WidgetReponseType, Element } from '@/shared/types/response/widgetResponse';
+import { MemberWidgetReponseType, ExtendsWidgetType } from '@/shared/types/response/widgetResponse';
 import { Card } from '@/components/ui/card';
 import DragOverWidget from './DragOverWidget';
 import IsEditWidgetItem from './IsEditWidgetItem';
@@ -14,10 +14,12 @@ import useDrag from '../hooks/useDrag';
 import useInsertAndDelete from '../hooks/useInsertAndDelete';
 import LoadingGrid from './LoadingGrid';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
+import { WidgetElementsArr, widgetReducer } from '../utils/widgetReduce';
+import FixedBottom from './FixedBottom';
 
 const DragContainer = () => {
-  const [showWidget, setShowWidget] = useState<Element[]>([]);
-  const [hideWidget, setHideWidget] = useState<Element[]>([]);
+  const [showWidget, setShowWidget] = useState<ExtendsWidgetType[]>([]);
+  const [hideWidget, setHideWidget] = useState<ExtendsWidgetType[]>([]);
   const { activeId, sensors, handleDragStart, handleDragEnd } = useDrag(setShowWidget);
   const { handleDeleteWidgetItem, handleInsertWidgetItem } = useInsertAndDelete(
     setShowWidget,
@@ -25,22 +27,23 @@ const DragContainer = () => {
     showWidget,
     hideWidget
   );
-  const { data, isLoading } = useQuery<WidgetReponseType>({
+
+  const { data, isLoading } = useQuery<MemberWidgetReponseType>({
     queryKey: ['fetchWidget'],
     queryFn: getWidgetItem
   });
 
   useEffect(() => {
     if (data) {
-      const { elements } = data;
-      setShowWidget(elements.filter((item) => item.sequence > 0));
-      setHideWidget(elements.filter((item) => item.sequence === -1));
+      const { orderedMemberWidgets, unorderedMemberWidgets } = data;
+      setShowWidget(widgetReducer(orderedMemberWidgets, WidgetElementsArr));
+      setHideWidget(widgetReducer(unorderedMemberWidgets, WidgetElementsArr));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const findItemTitle = (id: UniqueIdentifier | undefined) => {
-    const item = showWidget.find((item) => item.id === id);
+  const findItemTitle = (id: UniqueIdentifier) => {
+    const item = showWidget.find((item) => item.widgetId === id);
     if (!item) return '';
     return item.description;
   };
@@ -48,7 +51,6 @@ const DragContainer = () => {
   if (isLoading) {
     return <LoadingGrid />;
   }
-
   return (
     <>
       <section className='grid grid-cols-2 gap-20 px-20'>
@@ -60,12 +62,12 @@ const DragContainer = () => {
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <SortableContext items={showWidget}>
+          <SortableContext items={showWidget.map((item) => item.widgetId)}>
             {showWidget.map((item) => {
               return (
                 <IsEditWidgetItem
-                  key={item.id}
-                  id={item.id}
+                  key={item.widgetId}
+                  id={item.widgetId}
                   title={item.description}
                   onClick={handleDeleteWidgetItem}
                 />
@@ -102,7 +104,7 @@ const DragContainer = () => {
                   {item.description}
                 </Text>
                 <button
-                  id={String(item.id)}
+                  id={String(item.widgetId)}
                   onClick={handleInsertWidgetItem}
                   aria-label={`${item.description} 항목 추가`}
                   disabled={showWidget.length >= 6}
@@ -122,6 +124,7 @@ const DragContainer = () => {
           })}
         </FlexBox>
       </section>
+      <FixedBottom />
     </>
   );
 };
