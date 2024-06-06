@@ -8,6 +8,8 @@ import Calendar from '../shared/Calendar';
 import YearMonthDropdown from '../shared/YearMonthDropdown';
 
 const dailyData = [
+  { date: '2024-05-01', income: 100, expense: 2000, weatherId: 3, reaction: false },
+  { date: '2024-05-02', income: 100, expense: 2000, weatherId: 3, reaction: false },
   { date: '2024-06-01', income: 100, expense: 2000, weatherId: 3, reaction: false },
   { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
   { date: '2024-06-17', income: 23000, expense: 0, weatherId: 3, reaction: false },
@@ -26,29 +28,6 @@ const weeklyData = [
   { month: 5, week: 5, income: 0, expense: 1520000 },
   { month: 5, week: 4, income: 1720000, expense: 0 }
 ];
-
-const shareData = {
-  count: 12,
-  daily: [
-    {
-      date: '2024-06-01',
-      weatherId: 1,
-      reactions: [
-        { memberId: 2, stickerOrEmoticonID: 4 },
-        { memberId: 4, stickerOrEmoticonID: 5 }
-      ]
-    },
-    {
-      date: '2024-06-02',
-      weatherId: 3,
-      reactions: [
-        { memberId: 3, stickerOrEmoticonID: 11 },
-        { memberId: 4, stickerOrEmoticonID: 3 }
-      ]
-    }
-    // 나머지 데이터도 추가해주세요
-  ]
-};
 
 const ExpensCalendarBox = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -85,7 +64,6 @@ const ExpensCalendarBox = () => {
         dailyData={dailyData}
         weeklyData={weeklyData}
       />
-      <Calendar year={selectedYear} month={selectedMonth} shareData={shareData} />
     </section>
   );
 };
