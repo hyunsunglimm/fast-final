@@ -62,9 +62,13 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
                     <div className='py-4'>
                       <Text
                         variant='p'
-                        className={`mb-4 text-14 text-gray-600 ${item.today ? 'font-700 text-black' : ''}`}
+                        className={`mb-4 flex justify-center text-14 text-gray-600 ${item.today ? 'font-700 text-black' : ''}`}
                       >
                         {item.date && item.date.getDate()}
+                        {shareData && item.imgSrc && (
+                          // 반응체크 보여주는 부분 api 확인 후 수정 필요
+                          <span className='ml-2 h-[0.4rem] w-[0.4rem] rounded-full bg-primary'></span>
+                        )}
                       </Text>
                       {item.date && (
                         <Icon
