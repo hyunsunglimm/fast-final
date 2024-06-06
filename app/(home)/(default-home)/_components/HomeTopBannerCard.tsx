@@ -3,8 +3,10 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
+import { CardSkeleton } from '@/components/ui/skeleton';
 const SwiperWrapper = dynamic(() => import('@/components/SwiperWrapper'), {
-  ssr: false
+  ssr: false,
+  loading: () => <CardSkeleton />
 });
 
 const HomeTopBannerCard = () => {
