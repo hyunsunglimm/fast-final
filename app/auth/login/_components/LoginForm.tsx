@@ -49,7 +49,7 @@ const LoginForm = () => {
         setSuccess(result.success);
       }
       if (result.error) {
-        setSuccess(result.error);
+        setError(result.error);
       }
     });
   });
@@ -140,7 +140,7 @@ const LoginForm = () => {
 
           {/* API에서 반환하는 에러메시지 */}
           {success && (
-            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>{success}</p>
+            <p className='mt-20 rounded-xs bg-blue-200 p-2 text-2xl text-active'>{success}</p>
           )}
           {error && (
             <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>{error}</p>
@@ -172,7 +172,7 @@ const Footer = () => {
       </TextButton>
       <div className='h-6 w-[1px] bg-gray-300' aria-hidden></div>
       <TextButton type='button' className='text-gray-700' asChild>
-        <Link href='#' aria-label='회원가입으로 가기'>
+        <Link href='/auth/signup' aria-label='회원가입으로 가기'>
           회원가입
         </Link>
       </TextButton>

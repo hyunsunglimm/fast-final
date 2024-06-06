@@ -6,6 +6,7 @@ import Icon from '@/components/Icon';
 import Checkbox from '@/components/ui/CheckBox';
 import Button from '@/components/ui/Button';
 import AuthHeader from '../../_components/AuthHeader';
+import { useFormContext } from 'react-hook-form';
 
 const policyList = [
   {
@@ -26,6 +27,10 @@ const StepFourPage = () => {
   const [allChecked, setAllChecked] = useState(false);
   const [optionChecked, setOptionChecked] = useState(false);
   const [checkItems, setCheckItems] = useState<number[]>([]);
+
+  const {
+    formState: { isSubmitting }
+  } = useFormContext();
 
   const handleCheckAll = (e: ChangeEvent<HTMLInputElement>) => {
     setAllChecked((prev) => !prev);
@@ -106,7 +111,7 @@ const StepFourPage = () => {
         </Checkbox>
       </FlexBox>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
-        <Button type='submit' className='w-full' disabled={!allChecked}>
+        <Button type='submit' className='w-full' disabled={!allChecked || isSubmitting}>
           완료
         </Button>
       </div>
