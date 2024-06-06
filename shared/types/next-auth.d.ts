@@ -8,6 +8,7 @@ export declare module 'next-auth' {
 }
 export declare module '@auth/core/jwt' {
   interface JWT {
+    userId: string;
     accessToken: string;
   }
 }

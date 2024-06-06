@@ -1,52 +1,52 @@
-import { authApi } from '@/service/constants';
+import * as z from 'zod';
 import { requestFetch } from '../fetchOptions';
-import { CredentialsSignin } from 'next-auth';
+import { loginSchema } from '@/app/auth/schema/loginSchema';
+import { LoginResponse, CheckEmailDuplicateResponse } from '@/shared/types/response/auth';
+import { signupSchema } from '@/app/auth/schema/signupSchema';
+const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
-type Tdata = {
-  userId: string;
-  message: string;
+export const checkEmailDuplicate = (id: string): Promise<CheckEmailDuplicateResponse> => {
+  const params = {
+    type: 'EMAIL',
+    value: id
+  };
+  const queryString = new URLSearchParams(params).toString();
+  return requestFetch(`/member/validate?${queryString}`, { method: 'get' }, BASE_URL);
 };
 
-export const checkEmailDuplicate = (id: string): Promise<Tdata> => {
-  const body = { id };
-
-  return requestFetch(authApi.SIGN_UP, { method: 'post', body: JSON.stringify(body) });
-};
-
-export async function mySignIn(
-  type: 'signup' | 'login',
-  userInfo: { username?: string; email: string; password: string }
-) {
-  const { username: displayName, email, password } = userInfo;
-  const res = await fetch(
-    `https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/${type}`,
+export const login = async (value: z.infer<typeof loginSchema>): Promise<LoginResponse> => {
+  const body = { ...value };
+  return requestFetch(
+    '/login',
     {
-      cache: 'no-store',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: 'KDT7_bcAmPe9B',
-        username: 'LimHyunSung'
-      },
-      body: JSON.stringify({
-        displayName,
-        email,
-        password
-      })
-    }
+      method: 'post',
+      body: JSON.stringify(body)
+    },
+    BASE_URL
   );
-  const data = await res.json();
-  if (res.ok) {
-    const { user, accessToken } = data;
-    return {
-      id: user.email,
-      email: user.email,
-      name: user.displayName,
-      image: user.profileImg,
-      accessToken
-    };
+};
+
+export const signup = async (formValues: z.infer<typeof signupSchema>) => {
+  const requestBody = {
+    email: formValues.email,
+    password: formValues.password,
+    name: formValues.name,
+    phoneNumber: formValues.phoneNumber,
+    address: formValues.address,
+    gender: formValues.gender.toUpperCase()
+  };
+
+  try {
+    await requestFetch(
+      '/member/sign-up',
+      { method: 'post', body: JSON.stringify(requestBody) },
+      process.env.NEXT_PUBLIC_DEV_URL
+    );
+  } catch (error) {
+    if (error instanceof Error) {
+      return { error: error.message };
+    } else {
+      return { error: '회원가입에 실패했습니다.' };
+    }
   }
-  throw new CredentialsSignin({
-    cause: data || '문제가 발생했습니다!'
-  });
-}
+};

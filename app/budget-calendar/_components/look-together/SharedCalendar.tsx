@@ -6,6 +6,7 @@ import Icon from '@/components/Icon';
 import SubmitEmojiBottomSheet from './_components/SubmitEmojiBottomSheet';
 import ReactionBottomSheet from './_components/ReactionBottomSheet';
 import BudgetBanner from '../common/BudgetBanner';
+import Calendar from '../shared/Calendar';
 
 type SharedCalendarProps = {
   selectedProfile: string;
@@ -36,9 +37,8 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
           </TextButton>
         </FlexBox>
         <BudgetBanner icon={true} text='목표 예산 중 50%를 썼어요' showArrow={false} />
-        <div className='mt-16 h-[30rem]' onClick={() => setOpenEmojiSheet(true)}>
-          캘린더 넣을 예정
-        </div>
+
+        <Calendar year={new Date().getFullYear()} month={new Date().getMonth() + 1} />
       </section>
 
       {/* 반응 보기 바텀 시트 */}

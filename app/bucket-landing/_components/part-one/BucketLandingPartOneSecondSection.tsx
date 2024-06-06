@@ -23,7 +23,6 @@ const BucketLandingPartOneSecondSection = () => {
         </Text>
       </FlexBox>
 
-      {/* 명로님과 상의 (가운데 정렬) */}
       <SwiperWrapper dots>
         <Image
           src='/images/bucket-landing/part1-slide-1.webp'

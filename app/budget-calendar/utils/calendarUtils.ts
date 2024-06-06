@@ -4,19 +4,28 @@ export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
   const firstDayOfMonth = new Date(year, month - 1, 1);
   const lastDayOfMonth = new Date(year, month, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
-  const dates = [];
+  const dates: DateInfo[] = [];
 
   for (let i = 0; i < firstDayOfWeek; i++) {
-    dates.push({ date: null });
+    dates.push({
+      date: null,
+      today: false
+    });
   }
 
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+    const currentDate = new Date(year, month - 1, i);
+
     dates.push({
-      date: String(i),
+      date: currentDate,
       today:
         year === new Date().getFullYear() &&
         month === new Date().getMonth() + 1 &&
-        i === new Date().getDate()
+        i === new Date().getDate(),
+      imgSrc: '/icons/weather/weather-none.svg',
+      income: null,
+      expense: null,
+      reaction: false
     });
   }
   return dates;

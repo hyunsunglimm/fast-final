@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import ConsumeWeatherCard from '../_components/ConsumeWeatherCard';
 import { getWidgetItem } from '@/service/api/home';
-import { UniqueIdentifier } from '@dnd-kit/core/dist/types';
+
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -16,19 +16,24 @@ import {
   WidgetUpcomingExpenses,
   WidgetSpentEveryMonth
 } from './_components';
+import { currentUserSession } from '@/shared/actions/auth';
 
 const WidgeSectionPage = async () => {
-  const data = await getWidgetItem();
+  const session = await currentUserSession();
+  if (!session) {
+    return null;
+  }
+  const { orderedMemberWidgets } = await getWidgetItem();
 
-  const widgetMap: { [key: UniqueIdentifier]: React.ComponentType } = {
-    a: WidgetBudget,
-    b: WidgetUpcomingExpenses,
-    c: WidgetLastMonth,
-    d: WidgetCurrentMonth,
-    e: WidgetCardPerformance,
-    f: WidgetMyChallenge,
-    g: WidgetMyCredit,
-    h: WidgetSpentEveryMonth
+  const widgetMap: { [key: string]: React.ComponentType } = {
+    REMAINING_BUDGET: WidgetBudget,
+    UPCOMING_EXPENSES: WidgetUpcomingExpenses,
+    LAST_MONTH_EXPENSES: WidgetLastMonth,
+    CURRENT_MONTH_EXPENSES: WidgetCurrentMonth,
+    CURRENT_MONTH_CARD_USAGE: WidgetCardPerformance,
+    MY_CHALLENGE: WidgetMyChallenge,
+    CREDIT_SCORE: WidgetMyCredit,
+    DAILY_EXPENSES: WidgetSpentEveryMonth
   };
   return (
     <>
@@ -53,9 +58,9 @@ const WidgeSectionPage = async () => {
 
       {/* 위젯 영역 */}
       <div className='grid grid-cols-2 justify-items-center gap-[1.6rem]'>
-        {data[0].showWidget.map((item) => {
-          const WidgetComponent = widgetMap[item.id];
-          return WidgetComponent ? <WidgetComponent key={item.id} /> : null;
+        {orderedMemberWidgets.map((item) => {
+          const WidgetComponent = widgetMap[item.code];
+          return WidgetComponent ? <WidgetComponent key={item.code} /> : null;
         })}
       </div>
     </>

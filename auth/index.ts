@@ -7,6 +7,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     jwt: async ({ token, user, trigger, session }) => {
       if (user) {
         token.accessToken = user.accessToken;
+        token.userId = user.id || '';
       }
       if (trigger === 'update' && session) {
         token = { ...token, ...session.user };
@@ -16,6 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     session: async ({ session, token }) => {
       if (token?.accessToken) {
         session.accessToken = token.accessToken;
+        session.user.id = token.userId;
       }
       return session;
     }

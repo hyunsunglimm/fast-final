@@ -13,8 +13,13 @@ import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/f
 import { CardContent } from '@/components/ui/card';
 import { useMutation } from '@tanstack/react-query';
 import { checkEmailDuplicate } from '@/service/api/auth';
+import { CheckEmailDuplicateResponse } from '@/shared/types/response/auth';
 import { SignupInputsValues } from '../../schema/signupSchema';
 import { useSignupStore } from '@/store/signup';
+import TextButton from '@/components/ui/TextButton';
+import Link from 'next/link';
+import Text from '@/components/ui/Text';
+
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
   ssr: false
 });
@@ -37,27 +42,21 @@ const StepOne = () => {
 
   const { setStorage } = useSignupStore();
 
-  type Tdata = {
-    userId: string;
-    message: string;
-  };
-
-  const { mutate, isPending } = useMutation<Tdata, Error, string>({
+  const { mutate, isPending } = useMutation<CheckEmailDuplicateResponse, Error, string>({
     mutationFn: (id) => checkEmailDuplicate(id),
     onSuccess: (data) => {
-      if (data) {
+      if (!data.isDuplicated) {
         setError('email', {
           type: 'manual',
-          message: data.message || ''
+          message: '가입 가능한 이메일입니다.'
         });
         setValue('checkEmail', true);
+      } else {
+        setError('email', {
+          type: 'manual',
+          message: '이미 가입된 이메일입니다.'
+        });
       }
-    },
-    onError: (err) => {
-      setError('email', {
-        type: 'manual',
-        message: err.message || ''
-      });
     }
   });
 
@@ -229,6 +228,16 @@ const StepOne = () => {
           }}
         />
       </CardContent>
+      <div className='mt-32 text-center'>
+        <Text sizes='12' className='text-gray-500'>
+          이미 회원이신가요? &nbsp;
+          <TextButton asChild className='text-12 underline'>
+            <Link href='/auth/login' aria-label='로그인 페이지로 이동'>
+              로그인하러 가기
+            </Link>
+          </TextButton>
+        </Text>
+      </div>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
         <Button disabled={!isValid} type='button' className='w-full' onClick={onClickNext}>
           다음

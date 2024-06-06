@@ -1,26 +1,43 @@
 'use server';
+import * as z from 'zod';
+import { loginSchema } from '@/app/auth/schema/loginSchema';
+import { signIn, auth } from '@/auth';
+import { AuthError } from 'next-auth';
 
-import { LoginInputsValues } from '@/app/auth/schema/loginSchema';
-import { signIn, signOut } from '@/auth';
-import { CredentialsSignin } from 'next-auth';
-import { redirect } from 'next/navigation';
-
-export const signInWithCredentials = async (data: LoginInputsValues) => {
-  try {
-    await signIn('credentials', {
-      email: data.email,
-      password: data.password
-    });
-  } catch (error) {
-    if (error instanceof CredentialsSignin) {
-      return { message: error.cause as unknown as string };
-    }
-  }
-  // 로그인 성공 후 금융상품 페이지로 이동합니다.
-  // 테스트 용도이므로 추후 홈페이지로 이동 예정입니다.
-  redirect('/financial-product');
+// 서버 세션 호출
+export const currentUserSession = async () => {
+  const session = await auth();
+  return session;
 };
 
-export const signOutWithForm = async (formData: FormData) => {
-  return await signOut();
+export const signInWithCredentials = async (data: z.infer<typeof loginSchema>) => {
+  const validatedFields = loginSchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return { error: 'Invalid fields!' };
+  }
+  const { email, password } = validatedFields.data;
+  try {
+    await signIn('credentials', {
+      email,
+      password,
+      redirectTo: '/'
+    });
+    return { success: 'Login successful!' };
+  } catch (error) {
+    if (error instanceof AuthError) {
+      if (error.cause?.err instanceof Error) {
+        return { error: error.cause.err.message }; // return "custom error"
+      }
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return { error: '아이디 혹은 패스워드를 확인해 주세요.' };
+
+        default:
+          return { error: 'Something went wrong!' };
+      }
+    }
+
+    throw error;
+  }
 };

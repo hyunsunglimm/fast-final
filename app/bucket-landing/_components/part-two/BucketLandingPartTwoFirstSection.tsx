@@ -30,7 +30,7 @@ const BucketLandingPartTwoFirstSection = () => {
         <Text weight='500'>스스로 저축하고 싶은 규칙과</Text>
         <Text weight='500'>금액을 만들고 돈을 모아봐요</Text>
 
-        <FlexBox className='hide-scrollbar mt-[4.4rem] overflow-x-scroll px-20'>
+        <FlexBox className='hide-scrollbar mt-[4.4rem] gap-20 overflow-x-scroll px-20'>
           <Image
             src='/images/bucket-landing/want-to-place.webp'
             alt='가고 싶은 곳을 발견 했을 때'

@@ -33,17 +33,26 @@ export type SharedMembersProps = {
 export type CalendarProps = {
   year: number;
   month: number;
-  dailyData?: DateInfo[];
+  dailyData?: DailyDataItemType[];
   weeklyData?: WeeklyDataItem[];
   shareData?: ShareData;
 };
 
 export type DateInfo = {
-  date: string | null;
-  weatherId?: number;
+  date: Date | null;
+  imgSrc?: string;
   income?: number | null;
   expense?: number | null;
   today?: boolean;
+  reaction?: boolean;
+};
+
+export type DailyDataItemType = {
+  date: string;
+  income: number;
+  expense: number;
+  weatherId: number;
+  reaction: boolean;
 };
 
 export type WeeklyDataItem = {

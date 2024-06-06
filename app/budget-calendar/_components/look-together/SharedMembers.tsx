@@ -50,7 +50,7 @@ const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: Shared
           멤버 편집
         </Button>
       </FlexBox>
-      <div className='mx-20 w-full overflow-hidden' ref={containerRef}>
+      <div className='w-full scroll-px-20 overflow-hidden px-20' ref={containerRef}>
         <motion.ul
           className='flex gap-16 text-center'
           drag='x'
@@ -79,6 +79,7 @@ const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: Shared
               </li>
             );
           })}
+          <li className='h-[4rem] w-[4rem]'></li>
         </motion.ul>
       </div>
     </section>

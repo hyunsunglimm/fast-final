@@ -15,10 +15,6 @@ import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
 import { signInWithCredentials } from '@/shared/actions/auth';
 
-type SigninResponse = {
-  message: string;
-};
-
 const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
   ssr: false
@@ -28,7 +24,8 @@ const LoginForm = () => {
   const [autoLoginCheck, setAutoLoginCheck] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const [signinResponse, setSigninResponse] = useState<SigninResponse | undefined>();
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
 
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
@@ -44,9 +41,16 @@ const LoginForm = () => {
   } = form;
 
   const onSubmit = handleSubmit(async (data) => {
+    setError('');
+    setSuccess('');
     startTransition(async () => {
       const result = await signInWithCredentials(data);
-      setSigninResponse(result);
+      if (result.success) {
+        setSuccess(result.success);
+      }
+      if (result.error) {
+        setError(result.error);
+      }
     });
   });
 
@@ -135,9 +139,12 @@ const LoginForm = () => {
           <Footer />
 
           {/* API에서 반환하는 에러메시지 */}
-          {signinResponse && (
-            <p className='mt-20 rounded-xs bg-red-200 p-2 text-2xl text-warning'>
-              {JSON.stringify(signinResponse.message)}
+          {success && (
+            <p className='mt-20 rounded-xs bg-blue-200 p-2 text-2xl text-active'>{success}</p>
+          )}
+          {error && (
+            <p className='mt-20 rounded-xs bg-warning/40 px-20 py-10 text-14 text-warning'>
+              {error}
             </p>
           )}
         </CardContent>
@@ -154,20 +161,20 @@ export default LoginForm;
 const Footer = () => {
   return (
     <FlexBox className='mt-[4.8rem] gap-x-22' alignItems='center'>
-      <TextButton type='button' className='text-gray-700' asChild>
+      <TextButton type='button' className='text-12 text-gray-500' asChild>
         <Link href='#' aria-label='포코계정 찾기로 가기'>
           포코계정 찾기
         </Link>
       </TextButton>
       <div className='h-6 w-[1px] bg-gray-300' aria-hidden></div>
-      <TextButton type='button' className='text-gray-700' asChild>
+      <TextButton type='button' className='text-12 text-gray-500' asChild>
         <Link href='#' aria-label='비밀번호 찾기로 가기'>
           비밀번호 찾기
         </Link>
       </TextButton>
       <div className='h-6 w-[1px] bg-gray-300' aria-hidden></div>
-      <TextButton type='button' className='text-gray-700' asChild>
-        <Link href='#' aria-label='회원가입으로 가기'>
+      <TextButton type='button' className='text-12 text-gray-500' asChild>
+        <Link href='/auth/signup' aria-label='회원가입으로 가기'>
           회원가입
         </Link>
       </TextButton>

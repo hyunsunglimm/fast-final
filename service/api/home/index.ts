@@ -1,9 +1,6 @@
+import { MemberWidgetReponseType } from '@/shared/types/response/widgetResponse';
 import { requestFetch } from '../fetchOptions';
-import { EditWidgetDataType } from '@/shared/types/widgetDataType';
-
-export const getWidgetItem = (): Promise<EditWidgetDataType> => {
-  return requestFetch('/api/widget');
-};
+const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
 type WalletDataType = {
   bank: string;
@@ -15,4 +12,8 @@ type WalletDataType = {
 }[];
 export const getMyWalletData = (): Promise<WalletDataType> => {
   return requestFetch('/api/wallet');
+};
+
+export const getWidgetItem = (): Promise<MemberWidgetReponseType> => {
+  return requestFetch('/member/widget', {}, BASE_URL);
 };

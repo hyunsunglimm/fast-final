@@ -5,7 +5,7 @@ import React from 'react';
 
 const BucketLandingPartOneFirstSection = () => {
   return (
-    <section className='bg-white'>
+    <section className='bg-white pb-40'>
       <Image
         src='/images/bucket-landing/part1-main.webp'
         alt='버킷리스트 랜딩페이지 저축생활 1편 메인 이미지'

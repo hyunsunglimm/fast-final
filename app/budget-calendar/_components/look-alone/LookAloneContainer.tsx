@@ -7,7 +7,7 @@ import ExpensListBox from './ExpensListBox';
 
 const LookAloneContainer = () => {
   return (
-    <div>
+    <>
       <div className='px-20 pb-24 pt-16'>
         <Tab array={['캘린더 보기', '내역 보기']} type='box' tabKey='displayMode' />
       </div>
@@ -17,7 +17,7 @@ const LookAloneContainer = () => {
       </div>
       <Line />
       <ExpensListBox />
-    </div>
+    </>
   );
 };
 

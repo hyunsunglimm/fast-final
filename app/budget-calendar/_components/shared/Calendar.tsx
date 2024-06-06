@@ -2,12 +2,14 @@ import React from 'react';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { getCurrentMonthDates, getWeeklyData } from '@/shared/utils/calendarUtils';
+import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
 import { CalendarProps } from '@/shared/types/budgetCalendarType';
+import { mergeData } from '../../utils/mergeData';
 
 const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
   const weeks = getWeeklyData({ year, month }, dates);
+  const data = mergeData(weeks, dailyData);
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
@@ -17,12 +19,15 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
           <div key={day}>{day}</div>
         ))}
       </div>
-      {weeks.map((week, index) => {
+
+      {data.map((week, index) => {
         const weeklyDataItem = weeklyData?.find(
           (item) => item.month === month && item.week === index + 1
         );
+
         return (
-          <div key={index}>
+          <React.Fragment key={index}>
+            {/* 주차 데이터 */}
             {weeklyData && (
               <FlexBox
                 className={`mb-10 rounded-xxs px-12 py-6 ${week.isCurrentWeek ? 'bg-select' : 'bg-gray-10'}`}
@@ -49,12 +54,9 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
                 )}
               </FlexBox>
             )}
+            {/* 달력 */}
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
-                const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(item.date).padStart(2, '0')}`;
-                const dailyItem = dailyData?.find((data) => data.date === formattedDate);
-                const shareDataItem = shareData?.daily.find((item) => item.date === formattedDate);
-
                 return (
                   <div key={idx}>
                     <div className='py-4'>
@@ -62,36 +64,34 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
                         variant='p'
                         className={`mb-4 text-14 text-gray-600 ${item.today ? 'font-700 text-black' : ''}`}
                       >
-                        {item.date}
+                        {item.date && item.date.getDate()}
                       </Text>
                       {item.date && (
                         <Icon
-                          src={`/icons/weather/weather-${dailyItem?.weatherId || shareDataItem?.weatherId || 'none'}.svg`}
-                          alt={dailyItem || shareDataItem ? '날씨 이미지' : '날씨 없음'}
+                          src={item.imgSrc ? item.imgSrc : ''}
+                          alt={item.imgSrc ? '날씨 이미지' : '날씨 없음'}
                           size='44'
                           className='m-auto block rounded-none'
                         />
                       )}
                     </div>
-                    {dailyItem && (
-                      <>
-                        {dailyItem.expense ? (
-                          <Text variant='p' sizes='10' className='text-gray-700'>
-                            -{dailyItem.expense}
-                          </Text>
-                        ) : null}
-                        {dailyItem.income ? (
-                          <Text variant='p' sizes='10' className='text-primary'>
-                            +{dailyItem.income}
-                          </Text>
-                        ) : null}
-                      </>
-                    )}
+                    <>
+                      {item.expense ? (
+                        <Text variant='p' sizes='10' className='text-gray-700'>
+                          -{item.expense}
+                        </Text>
+                      ) : null}
+                      {item.income ? (
+                        <Text variant='p' sizes='10' className='text-primary'>
+                          +{item.income}
+                        </Text>
+                      ) : null}
+                    </>
                   </div>
                 );
               })}
             </div>
-          </div>
+          </React.Fragment>
         );
       })}
     </div>

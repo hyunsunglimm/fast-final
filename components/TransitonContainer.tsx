@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type TransitonContainerProps = {
   children: React.ReactNode;
@@ -12,15 +12,17 @@ const variants = {
 };
 const TransitonContainer = ({ children }: TransitonContainerProps) => {
   return (
-    <motion.div
-      variants={variants}
-      initial='initial'
-      animate='animate'
-      exit='exit'
-      transition={{ duration: 0.125, ease: 'easeIn' }}
-    >
-      {children}
-    </motion.div>
+    <AnimatePresence>
+      <motion.div
+        variants={variants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        transition={{ duration: 0.125, ease: 'easeIn' }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 export default TransitonContainer;
