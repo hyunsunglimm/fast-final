@@ -120,7 +120,7 @@ const StepOne = () => {
           name='email'
           render={({ field }) => {
             return (
-              <FormItem className='w-full '>
+              <FormItem className='w-full'>
                 <FormControl>
                   <FlexBox className='w-full gap-x-8'>
                     <div className='relative w-full'>
