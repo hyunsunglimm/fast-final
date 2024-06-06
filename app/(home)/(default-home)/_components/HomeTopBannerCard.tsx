@@ -1,8 +1,11 @@
+import dynamic from 'next/dynamic';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
-import SwiperWrapper from '@/components/SwiperWrapper';
+const SwiperWrapper = dynamic(() => import('@/components/SwiperWrapper'), {
+  ssr: false
+});
 
 const HomeTopBannerCard = () => {
   return (

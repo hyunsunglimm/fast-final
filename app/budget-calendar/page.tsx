@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Tab from '@/components/ui/Tab';
 import LookAloneContainer from './_components/look-alone/LookAloneContainer';
 import LookTogetherContainer from './_components/look-together/LookTogetherContainer';
+import { DefaultHeader } from '@/components/header';
 
 const BudgetCalendarPage = () => {
   const router = useRouter();
@@ -48,14 +49,17 @@ const BudgetCalendarPage = () => {
 
   return (
     <>
-      <Tab
-        array={['혼자봐요', '함께봐요']}
-        type='underline'
-        tabKey='viewMode'
-        onTabChange={handleViewModeChange}
-      />
-      {viewMode === '혼자봐요' && <LookAloneContainer />}
-      {viewMode === '함께봐요' && <LookTogetherContainer viewMode={viewMode} />}
+      <DefaultHeader title='가계부' defaultColor='#fff' />
+      <main className='min-h-full bg-white pb-[13.2rem]'>
+        <Tab
+          array={['혼자봐요', '함께봐요']}
+          type='underline'
+          tabKey='viewMode'
+          onTabChange={handleViewModeChange}
+        />
+        {viewMode === '혼자봐요' && <LookAloneContainer />}
+        {viewMode === '함께봐요' && <LookTogetherContainer viewMode={viewMode} />}
+      </main>
     </>
   );
 };
