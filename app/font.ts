@@ -26,5 +26,6 @@ export const suit = localFont({
       weight: '800',
       style: 'normal'
     }
-  ]
+  ],
+  preload: false
 });

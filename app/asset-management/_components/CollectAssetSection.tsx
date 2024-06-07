@@ -16,9 +16,9 @@ const CollectAssetSection = () => {
       <FlexBox justifyContent='between'>
         {AssetData.map((item) => {
           return (
-            <Card key={item.title} className='aspect-square w-[16.2rem] p-24'>
+            <Card key={item.title} className='h-[16.2rem] w-[16.2rem] p-24'>
               <CardContent className='h-full p-0' flexDirection='col' justifyContent='between'>
-                <FlexBox alignItems='center' className='mb-24 gap-x-[0.4rem]'>
+                <FlexBox alignItems='center' className='gap-x-[0.4rem]'>
                   <Text sizes='16' weight='500'>
                     {item.title}
                   </Text>

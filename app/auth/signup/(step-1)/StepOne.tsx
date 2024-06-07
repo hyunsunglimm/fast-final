@@ -16,6 +16,10 @@ import { checkEmailDuplicate } from '@/service/api/auth';
 import { CheckEmailDuplicateResponse } from '@/shared/types/response/auth';
 import { SignupInputsValues } from '../../schema/signupSchema';
 import { useSignupStore } from '@/store/signup';
+import TextButton from '@/components/ui/TextButton';
+import Link from 'next/link';
+import Text from '@/components/ui/Text';
+
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
   ssr: false
 });
@@ -224,6 +228,16 @@ const StepOne = () => {
           }}
         />
       </CardContent>
+      <div className='mt-32 text-center'>
+        <Text sizes='12' className='text-gray-500'>
+          이미 회원이신가요? &nbsp;
+          <TextButton asChild className='text-12 underline'>
+            <Link href='/auth/login' aria-label='로그인 페이지로 이동'>
+              로그인하러 가기
+            </Link>
+          </TextButton>
+        </Text>
+      </div>
       <div className='absolute bottom-[3rem] left-0 right-0 mx-auto w-full px-20 pb-32 pt-24 xs:w-[520px]'>
         <Button disabled={!isValid} type='button' className='w-full' onClick={onClickNext}>
           다음

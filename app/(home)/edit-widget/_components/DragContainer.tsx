@@ -4,7 +4,7 @@ import { getWidgetItem } from '@/service/api/home';
 import { useQuery } from '@tanstack/react-query';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { EditWidgetDataType } from '@/shared/types/widgetDataType';
+import { MemberWidgetReponseType, WidgetElementType } from '@/shared/types/response/widgetResponse';
 import { Card } from '@/components/ui/card';
 import DragOverWidget from './DragOverWidget';
 import IsEditWidgetItem from './IsEditWidgetItem';
@@ -14,10 +14,11 @@ import useDrag from '../hooks/useDrag';
 import useInsertAndDelete from '../hooks/useInsertAndDelete';
 import LoadingGrid from './LoadingGrid';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
+import FixedBottom from './FixedBottom';
 
 const DragContainer = () => {
-  const [showWidget, setShowWidget] = useState<EditWidgetDataType[0]['showWidget']>([]);
-  const [hideWidget, setHideWidget] = useState<EditWidgetDataType[0]['hideWidget']>([]);
+  const [showWidget, setShowWidget] = useState<WidgetElementType[]>([]);
+  const [hideWidget, setHideWidget] = useState<WidgetElementType[]>([]);
   const { activeId, sensors, handleDragStart, handleDragEnd } = useDrag(setShowWidget);
   const { handleDeleteWidgetItem, handleInsertWidgetItem } = useInsertAndDelete(
     setShowWidget,
@@ -25,29 +26,31 @@ const DragContainer = () => {
     showWidget,
     hideWidget
   );
-  const { data, isLoading } = useQuery<EditWidgetDataType>({
+
+  const { data, isLoading } = useQuery<MemberWidgetReponseType>({
     queryKey: ['fetchWidget'],
-    queryFn: getWidgetItem
+    queryFn: getWidgetItem,
+    refetchOnMount: 'always'
   });
 
   useEffect(() => {
     if (data) {
-      setShowWidget(data[0]?.showWidget || []);
-      setHideWidget(data[0]?.hideWidget || []);
+      const { orderedMemberWidgets, unorderedMemberWidgets } = data;
+      setShowWidget(orderedMemberWidgets);
+      setHideWidget(unorderedMemberWidgets);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const findItemTitle = (id: UniqueIdentifier | undefined) => {
-    const item = showWidget.find((item) => item.id === id);
+  const findItemTitle = (id: UniqueIdentifier) => {
+    const item = showWidget.find((item) => item.widgetId === id);
     if (!item) return '';
-    return item.title;
+    return item.description;
   };
 
   if (isLoading) {
     return <LoadingGrid />;
   }
-
   return (
     <>
       <section className='grid grid-cols-2 gap-20 px-20'>
@@ -59,13 +62,13 @@ const DragContainer = () => {
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <SortableContext items={showWidget}>
+          <SortableContext items={showWidget.map((item) => item.widgetId)}>
             {showWidget.map((item) => {
               return (
                 <IsEditWidgetItem
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
+                  key={item.widgetId}
+                  id={item.widgetId}
+                  title={item.description}
                   onClick={handleDeleteWidgetItem}
                 />
               );
@@ -96,14 +99,14 @@ const DragContainer = () => {
         <FlexBox flexDirection='col' className='gap-y-[3.2rem]'>
           {hideWidget.map((item) => {
             return (
-              <FlexBox key={item.id} justifyContent='between' className='w-full'>
+              <FlexBox key={item.widgetId} justifyContent='between' className='w-full'>
                 <Text sizes='18' weight='500' className='text-gray-700'>
-                  {item.title}
+                  {item.description}
                 </Text>
                 <button
-                  id={String(item.id)}
+                  id={String(item.widgetId)}
                   onClick={handleInsertWidgetItem}
-                  aria-label={`${item.title} 항목 추가`}
+                  aria-label={`${item.description} 항목 추가`}
                   disabled={showWidget.length >= 6}
                   className='group relative flex aspect-square w-[2.8rem] items-center justify-center rounded-full bg-primary disabled:cursor-not-allowed disabled:bg-gray-200'
                 >
@@ -121,6 +124,7 @@ const DragContainer = () => {
           })}
         </FlexBox>
       </section>
+      <FixedBottom showWidget={showWidget} />
     </>
   );
 };
