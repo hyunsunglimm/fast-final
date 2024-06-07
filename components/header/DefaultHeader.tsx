@@ -7,6 +7,7 @@ import Icon from '../Icon';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { HTMLAttributes } from 'react';
 import { cn } from '@/shared/utils/twMerge';
+import { useUserSession } from '@/shared/hooks/useUserSession';
 
 type DefaultHeaderProps = {
   isHome?: boolean;
@@ -22,6 +23,7 @@ export const DefaultHeader = ({
   isFixed = true
 }: DefaultHeaderProps) => {
   const { scrollY } = useScroll();
+  const userData = useUserSession();
 
   const headerColor = useTransform(
     scrollY,
@@ -60,8 +62,8 @@ export const DefaultHeader = ({
           className='cursor-pointer'
         />
         <Icon
-          src='/icons/profile/profile.svg'
-          alt='프로필 아이콘'
+          src={userData?.image ?? '/icons/profile/profile.svg'}
+          alt='프로필 이미지'
           size='24'
           className='cursor-pointer'
         />

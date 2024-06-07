@@ -6,14 +6,17 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import useOnloadImage from '@/shared/hooks/useOnloadImage';
+import { useUserSession } from '@/shared/hooks/useUserSession';
+
 const DefaultBucketListCard = () => {
   const { onload, onLoadImage } = useOnloadImage();
+  const userData = useUserSession();
 
   return (
     <Card className='flex aspect-square flex-col justify-between p-20'>
       <CardHeader>
         <Text sizes='16' weight='600' className='text-primary'>
-          반가워요, 도아름 님
+          반가워요, {userData?.name} 님
         </Text>
         <Text sizes='20' weight='700'>
           버킷리스트를 만들고 <br /> 목돈을 모으세요!

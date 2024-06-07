@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { match } from 'path-to-regexp';
-import { publicRoutes } from '@/routes';
+import { navBarRoutes } from '@/routes';
 import Text from './ui/Text';
 
 import {
@@ -59,4 +59,4 @@ const Navbar = () => {
   );
 };
 export default Navbar;
-const isMatchPath = (path: string) => publicRoutes.some((nav) => Boolean(match(nav)(path)));
+const isMatchPath = (path: string) => navBarRoutes.some((nav) => Boolean(match(nav)(path)));
