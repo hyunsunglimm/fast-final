@@ -18,7 +18,8 @@ export type IconProps = {
     | '44'
     | '48'
     | '52'
-    | '56';
+    | '56'
+    | '60';
   imgClass?: HTMLAttributes<HTMLImageElement>['className'];
 } & HTMLAttributes<HTMLDivElement> &
   ImageProps;
@@ -37,7 +38,8 @@ const sizeClass: { [key: string]: string } = {
   '44': 'w-[4.4rem] h-[4.4rem]',
   '48': 'w-[4.8rem] h-[4.8rem]',
   '52': 'w-[5.2rem] h-[5.2rem]',
-  '56': 'w-[5.6rem] h-[5.6rem]'
+  '56': 'w-[5.6rem] h-[5.6rem]',
+  '60': 'w-[6rem] h-[6rem]'
 };
 
 /**
