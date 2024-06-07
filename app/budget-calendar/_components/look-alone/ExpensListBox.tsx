@@ -1,15 +1,12 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
-import { ExpenseItemProps, ExpenseSummaryProps } from '@/shared/types/budgetCalendarType';
+import { ExpenseItemProps } from '@/shared/types/budgetCalendarType';
 import { formatDate, groupByDate } from '@/shared/utils/dateUtils';
 import Title from '../common/Title';
 import ExpenseSummary from './ExpensSummary';
 import ExpenseItem from './ExpenseItem';
-
-const summaryData: ExpenseSummaryProps[] = [
-  { label: '지출', amount: '- 1,000,000' },
-  { label: '수입', amount: '+ 1,000,000' }
-];
+import { useQuery } from '@tanstack/react-query';
+import { getCalendarHistroy } from '@/service/api/calendar';
 
 const dummyExpensesList: ExpenseItemProps[] = [
   {
@@ -40,7 +37,12 @@ const dummyExpensesList: ExpenseItemProps[] = [
 ];
 
 const ExpensListBox = () => {
-  const groupedExpenses = groupByDate(dummyExpensesList);
+  const { data: historyData } = useQuery({
+    queryKey: ['calendarHistory'],
+    queryFn: getCalendarHistroy
+  });
+
+  const groupedExpenses = groupByDate(historyData?.historyList);
 
   return (
     <section className='px-20 py-24 text-16'>
@@ -51,16 +53,15 @@ const ExpensListBox = () => {
         </FlexBox>
       </Title>
       <FlexBox justifyContent='between' className='gap-[1.6rem]'>
-        {summaryData.map((data, index) => (
-          <ExpenseSummary key={index} label={data.label} amount={data.amount} />
-        ))}
+        <ExpenseSummary label='지출' amount={String(historyData?.totalSpent.toLocaleString())} />
+        <ExpenseSummary label='수입' amount={String(historyData?.totalEarned.toLocaleString())} />
       </FlexBox>
       {Object.entries(groupedExpenses).map(([date, expenses]) => {
         return (
           <div key={date} className='mt-32'>
             <div className='flex items-center gap-[0.8rem]'>
               <span className='text-14 text-gray-500'>{formatDate(date)}</span>
-              <p className='text-12 text-warning'>이번 달 예산 초과</p>
+              {/* <p className='text-12 text-warning'>이번 달 예산 초과</p> */}
             </div>
             <ul>
               {expenses.map((data, index) => (
