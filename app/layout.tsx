@@ -7,7 +7,6 @@ import { suit } from './font';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { auth } from '@/auth';
 export const metadata: Metadata = {
-  // FIXME -> 추후 메타데이터 수정
   title: 'PORKO',
   description: 'MZ특화 금융앱 PORKO !!!'
 };
@@ -27,12 +26,6 @@ const RootLayout = async ({
       >
         <AuthProvider>
           <QueryProviders>
-            {/* XXX 
-              바디 구분 위해 의도적으로 색상 넣어놨습니다.
-             */}
-            {session && (
-              <p className='bg-blue-200 p-2 text-xl text-active'>{JSON.stringify(session.user)}</p>
-            )}
             {children}
             <Navbar />
             <ReactQueryDevtools />
