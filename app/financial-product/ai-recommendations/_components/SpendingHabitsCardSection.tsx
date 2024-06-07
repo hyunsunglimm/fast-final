@@ -56,7 +56,7 @@ const SpendingHabitsCardSection = () => {
                   key={title}
                   src={`/images/financial-product/${image}.webp`}
                   alt={title}
-                  width={400}
+                  width={500}
                   height={160}
                   className='w-full'
                   priority

@@ -15,7 +15,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getComparedCards } from '@/service/api/financial-product/cards';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import Spinner from '@/components/Spinner';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
+import { CardSkeleton, SqureSkeleton } from '@/components/ui/skeleton';
 
 const comparedResultA = [
   {
@@ -102,7 +103,14 @@ const ComparisonResult = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   if (isPending) {
-    return <Spinner />;
+    return (
+      <div className='relative flex h-dvh flex-col justify-between px-20 py-16'>
+        <LoadingBackdrop />
+        <CardSkeleton />
+        <SqureSkeleton />
+        <CardSkeleton />
+      </div>
+    );
   }
 
   const currentCard = comparedCards![currentCardIndex];
