@@ -47,15 +47,6 @@ const middleware = async (request: NextRequest) => {
     return NextResponse.next();
   }
 
-  // 사용자 검증
-  // const allowedPaths = ['/auth/login', '/auth/signup'];
-  // const session = await auth();
-  // const { pathname } = request.nextUrl;
-
-  // if (!session && !allowedPaths.includes(pathname)) {
-  //   const loginUrl = new URL('/auth/login', request.url);
-  //   return NextResponse.redirect(loginUrl);
-  // }
   // 비교결과 페이지에 선택한 카드나 항목에 대한 쿼리스트링이 없다면 카드 선택 페이지로 이동
   if (
     request.nextUrl.pathname === '/financial-product/comparison/select-category/result' &&
