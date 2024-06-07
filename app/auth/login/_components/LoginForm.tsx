@@ -25,7 +25,6 @@ const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
 
   const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
 
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
@@ -42,15 +41,14 @@ const LoginForm = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     setError('');
-    setSuccess('');
     startTransition(async () => {
       const result = await signInWithCredentials(data);
-      if (result.success) {
-        setSuccess(result.success);
-      }
-      if (result.error) {
+
+      if (result?.error) {
         setError(result.error);
+        return;
       }
+      window.location.href = '/';
     });
   });
 
@@ -139,9 +137,6 @@ const LoginForm = () => {
           <Footer />
 
           {/* API에서 반환하는 에러메시지 */}
-          {success && (
-            <p className='mt-20 rounded-xs bg-blue-200 p-2 text-2xl text-active'>{success}</p>
-          )}
           {error && (
             <p className='mt-20 rounded-xs bg-warning/40 px-20 py-10 text-14 text-warning'>
               {error}

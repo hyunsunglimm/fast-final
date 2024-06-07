@@ -27,13 +27,19 @@ export const login = async (value: z.infer<typeof loginSchema>): Promise<LoginRe
 };
 
 export const signup = async (formValues: z.infer<typeof signupSchema>) => {
+  // 프로필 랜덤 선택
+  const profiles = ['profile_1', 'profile_2', 'profile_3'];
+  const randomIndex = Math.floor(Math.random() * profiles.length);
+  const profileImageUrl = `/images/default-profile/${profiles[randomIndex]}.jpg`;
+
   const requestBody = {
     email: formValues.email,
     password: formValues.password,
     name: formValues.name,
     phoneNumber: formValues.phoneNumber,
     address: formValues.address,
-    gender: formValues.gender.toUpperCase()
+    gender: formValues.gender.toUpperCase(),
+    profileImageUrl
   };
 
   try {

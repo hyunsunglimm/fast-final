@@ -27,7 +27,7 @@ const SignUpFormProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (result?.error) {
       setError(result.error);
-      setTimeout(() => setError(''), 1000);
+      setTimeout(() => setError(''), 2000);
       return;
     }
     router.push('/auth/login');
