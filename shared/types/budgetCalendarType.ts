@@ -36,6 +36,7 @@ export type CalendarProps = {
   dailyData?: DailyDataItemType[];
   weeklyData?: WeeklyDataItem[];
   shareData?: ShareData;
+  onClick?: () => void;
 };
 
 export type DateInfo = {
@@ -72,7 +73,8 @@ export interface ShareDataItem {
   weatherId: number;
   reactions: {
     memberId: number;
-    stickerOrEmoticonID: number;
+    stickerOrEmoticonID: string;
+    count: number;
   }[];
 }
 

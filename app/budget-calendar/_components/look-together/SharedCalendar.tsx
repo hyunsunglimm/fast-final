@@ -16,16 +16,42 @@ const shareData = {
       date: '2024-06-01',
       weatherId: 1,
       reactions: [
-        { memberId: 2, stickerOrEmoticonID: 4 },
-        { memberId: 4, stickerOrEmoticonID: 5 }
+        { stickerOrEmoticonID: '😆', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '🤘', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '😍', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '😙', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '💙', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '🥰', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '🤩', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '💩', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '💕', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '🫰', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '❤️‍🔥', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '🤞', memberId: 4, count: 4 }
       ]
     },
     {
       date: '2024-06-02',
       weatherId: 3,
       reactions: [
-        { memberId: 3, stickerOrEmoticonID: 11 },
-        { memberId: 4, stickerOrEmoticonID: 3 }
+        { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
+        { stickerOrEmoticonID: '🥲', memberId: 4, count: 8 }
+      ]
+    },
+    {
+      date: '2024-06-03',
+      weatherId: 4,
+      reactions: [
+        { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
+        { stickerOrEmoticonID: '😇', memberId: 4, count: 8 }
+      ]
+    },
+    {
+      date: '2024-06-04',
+      weatherId: 5,
+      reactions: [
+        { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
+        { stickerOrEmoticonID: '😏', memberId: 4, count: 8 }
       ]
     }
     // 나머지 데이터도 추가해주세요
@@ -46,6 +72,10 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
   const handleYearMonthSelect = (year: number, month: number) => {
     setSelectedYear(year);
     setSelectedMonth(month);
+  };
+
+  const handleReactionSheet = () => {
+    setOpenEmojiSheet((prev) => !prev);
   };
 
   return (
@@ -78,13 +108,19 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
           showArrow={false}
           className='mb-24'
         />
-        <Calendar year={selectedYear} month={selectedMonth} shareData={shareData} />
+        <Calendar
+          year={selectedYear}
+          month={selectedMonth}
+          shareData={shareData}
+          onClick={handleReactionSheet}
+        />
       </section>
 
       {/* 반응 보기 바텀 시트 */}
       <ReactionBottomSheet
         openReactionSheet={openReactionSheet}
         setOpenReactionSheet={setOpenReactionSheet}
+        shareData={shareData}
       />
 
       {/* 이모지 바텀 시트 */}

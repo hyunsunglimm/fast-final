@@ -5,12 +5,14 @@ import Text from '@/components/ui/Text';
 import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
 import { CalendarProps } from '@/shared/types/budgetCalendarType';
 import { mergeData } from '../../utils/mergeData';
+import { returnDate } from '@/shared/utils/dateUtils';
 
-const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarProps) => {
+const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
   const weeks = getWeeklyData({ year, month }, dates);
   const data = mergeData(weeks, dailyData, shareData);
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+  const { day } = returnDate();
 
   return (
     <div className='text-center text-12'>
@@ -57,8 +59,11 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
             {/* 달력 */}
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
+                const handleDateClick =
+                  item.date && day >= item.date?.getDate() ? onClick : () => {};
+
                 return (
-                  <div key={idx}>
+                  <div role={onClick ? 'button' : 'none'} key={idx} onClick={handleDateClick}>
                     <div className='py-4'>
                       <Text
                         variant='p'
@@ -67,7 +72,7 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarPro
                         {item.date && item.date.getDate()}
                         {shareData && item.imgSrc && (
                           // 반응체크 보여주는 부분 api 확인 후 수정 필요
-                          <span className='ml-2 h-[0.4rem] w-[0.4rem] rounded-full bg-primary'></span>
+                          <span className='ml-2 h-[0.4rem] w-[0.4rem] animate-ping rounded-full bg-primary'></span>
                         )}
                       </Text>
                       {item.date && (
