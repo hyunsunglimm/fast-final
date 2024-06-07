@@ -8,9 +8,9 @@ const RegretSpending = () => {
       <Title title='나의 후회 소비는?' />
       <div className='mt-40 text-center'>
         <Icon
-          src='/icons/budget-calendar/pencil.svg'
+          src='/icons/budget-calendar/pencil.webp'
           alt='맥북'
-          className='mb-40 h-[16rem] w-[16rem] rounded-none'
+          className='mb-40 h-[12rem] w-[12rem] rounded-none'
         />
 
         <h4 className='mb-4 text-18 font-700'>총 122,000원</h4>
