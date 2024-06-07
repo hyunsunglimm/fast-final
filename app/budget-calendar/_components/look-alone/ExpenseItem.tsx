@@ -1,33 +1,60 @@
 import React, { MouseEvent } from 'react';
-import { HistoryListType } from '@/shared/types/response/calendarHistroy';
+import {
+  HistoryListItemType,
+  CalendarHistroyResponse
+} from '@/shared/types/response/calendarHistroy';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import TextButton from '@/components/ui/TextButton';
-
-const categoryImgConfig: Record<number, string> = {
-  1: '/icons/categories/background/categories-1.svg',
-  2: '/icons/categories/background/categories-2.svg',
-  3: '/icons/categories/background/categories-3.svg',
-  4: '/icons/categories/background/categories-4.svg',
-  5: '/icons/categories/background/categories-5.svg',
-  6: '/icons/categories/background/categories-6.svg',
-  7: '/icons/categories/background/categories-7.svg',
-  8: '/icons/categories/background/categories-8.svg',
-  9: '/icons/categories/background/categories-9.svg',
-  10: '/icons/categories/background/categories-10.svg',
-  11: '/icons/categories/background/categories-11.svg',
-  12: '/icons/categories/background/categories-12.svg',
-  13: '/icons/categories/background/categories-13.svg',
-  14: '/icons/categories/background/categories-14.svg'
-};
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { patchRegret } from '@/service/api/calendar';
+import { categoryImgConfig } from '../../utils/categoryImgConfig';
 
 type ExpenseItemProps = {
-  data: HistoryListType;
+  data: HistoryListItemType;
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
+type PatchParamsType = {
+  id: number;
+  regret: boolean;
+};
+type ContextType = {
+  previousRegret: CalendarHistroyResponse | undefined;
+};
+
 const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
+  const queryClient = useQueryClient();
   const { id, cost, payType, place, isRegret, historyCategoryId } = data;
+
+  const { mutate } = useMutation<HistoryListItemType, Error, PatchParamsType, ContextType>({
+    mutationKey: ['patch_regret'],
+    mutationFn: ({ id, regret }) => patchRegret(id, regret),
+    onMutate: async ({ id, regret }) => {
+      await queryClient.cancelQueries({ queryKey: ['calendarHistory'] });
+      const previousRegret = queryClient.getQueryData<CalendarHistroyResponse>(['calendarHistory']);
+
+      if (previousRegret) {
+        const updatedHistoryList = previousRegret.historyList.map((item) =>
+          item.id === id ? { ...item, isRegret: regret } : item
+        );
+        const updatedData = {
+          ...previousRegret,
+          historyList: updatedHistoryList
+        };
+
+        queryClient.setQueryData(['calendarHistory'], updatedData);
+      }
+
+      return { previousRegret };
+    },
+    onError: (err, data, context) => {
+      if (context?.previousRegret) {
+        queryClient.setQueryData(['calendarHistory'], context.previousRegret);
+      }
+    },
+    onSettled: async () => await queryClient.invalidateQueries({ queryKey: ['calendarHistory'] })
+  });
 
   const regretImgSrc = isRegret
     ? '/icons/categories/background/categories-regret.svg'
@@ -36,7 +63,7 @@ const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
   const categoryImgSrc = categoryImgConfig[historyCategoryId.imageUrlTypeNo];
 
   return (
-    <li className='mt-24 flex items-center justify-between gap-[1.6rem]'>
+    <li className='mt-24 flex min-h-[5.2rem] items-center justify-between gap-[1.6rem]'>
       <Icon src={categoryImgSrc} alt={place} size='40' className='shrink-0' />
       <div className='w-full'>
         <TextButton
@@ -55,7 +82,13 @@ const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
         </div>
       </div>
       <div className='shrink-0'>
-        <FlexBox role='button' flexDirection='col' className='min-w-[5rem]' alignItems='center'>
+        <FlexBox
+          onClick={() => mutate({ id, regret: !isRegret })}
+          role='button'
+          flexDirection='col'
+          className='min-w-[5rem]'
+          alignItems='center'
+        >
           <Icon src={regretImgSrc} alt='후회' className='m-auto mb-6 block' size='28' />
           {isRegret && <p className='text-12 text-active'>후회 소비</p>}
         </FlexBox>

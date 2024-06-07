@@ -15,6 +15,7 @@ const ExpensListBox = () => {
     queryKey: ['calendarHistory'],
     queryFn: getCalendarHistroy
   });
+
   const [historyId, setHistoryId] = useState('');
   const [openDetailBottomSheet, setOpenDetailBottomSheet] = useState(false);
 
@@ -31,7 +32,6 @@ const ExpensListBox = () => {
 
   return (
     <>
-      <ExpensListSkeleton />
       <section className='px-20 py-24 text-16'>
         <Title title='소비 내역' className='mb-32'>
           <FlexBox alignItems='center' className='cursor-pointer text-14 text-gray-500'>

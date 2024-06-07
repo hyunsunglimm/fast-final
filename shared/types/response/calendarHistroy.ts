@@ -2,10 +2,10 @@
 export type CalendarHistroyResponse = {
   totalSpent: number;
   totalEarned: number;
-  historyList: HistoryListType[];
+  historyList: HistoryListItemType[];
 };
 
-export type HistoryListType = {
+export type HistoryListItemType = {
   id: number;
   usedAt: string;
   cost: number;
