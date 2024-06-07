@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import BottomSheet from '@/components/BottomSheet';
 import * as unicodeEmoji from 'unicode-emoji';
 import Text from '@/components/ui/Text';
@@ -64,12 +64,12 @@ const SubmitEmojiBottomSheet = ({
         <div className='mt-16 grid w-full grid-cols-5 gap-8'>
           {daily.map((item) => {
             const currentDate = new Date(item.date).getDate() === day;
+
             return item.reactions.map((emoji) => {
               return (
-                <>
+                <React.Fragment key={emoji.stickerOrEmoticonID}>
                   {currentDate && (
                     <TextButton
-                      key={emoji.stickerOrEmoticonID}
                       role='button'
                       className='flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 hover:bg-gray-200 hover:no-underline active:scale-95'
                     >
@@ -79,7 +79,7 @@ const SubmitEmojiBottomSheet = ({
                       <span className='truncate'>{emoji.count}</span>
                     </TextButton>
                   )}
-                </>
+                </React.Fragment>
               );
             });
           })}

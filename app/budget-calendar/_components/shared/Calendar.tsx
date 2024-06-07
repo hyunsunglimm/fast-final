@@ -6,6 +6,7 @@ import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
 import { CalendarProps } from '@/shared/types/budgetCalendarType';
 import { mergeData } from '../../utils/mergeData';
 import { returnDate } from '@/shared/utils/dateUtils';
+import { cn } from '@/shared/utils/twMerge';
 
 const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
@@ -66,13 +67,16 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: Ca
                   <div
                     role={onClick ? 'button' : 'none'}
                     key={idx}
-                    id={item.date?.toString()}
+                    id={item.date?.toISOString()}
                     onClick={handleDateClick}
                   >
                     <div className='py-4'>
                       <Text
                         variant='p'
-                        className={`mb-4 flex justify-center text-14 text-gray-600 ${item.today ? 'font-700 text-black' : ''}`}
+                        className={cn(
+                          'mb-4 flex justify-center text-14 text-gray-600',
+                          item.today ? 'font-700 text-black' : ''
+                        )}
                       >
                         {item.date && item.date.getDate()}
                         {shareData && item.imgSrc && (
