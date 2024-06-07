@@ -6,10 +6,10 @@ import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
 import { CalendarProps } from '@/shared/types/budgetCalendarType';
 import { mergeData } from '../../utils/mergeData';
 
-const Calendar = ({ year, month, dailyData, weeklyData }: CalendarProps) => {
+const Calendar = ({ year, month, dailyData, weeklyData, shareData }: CalendarProps) => {
   const dates = getCurrentMonthDates({ year, month });
   const weeks = getWeeklyData({ year, month }, dates);
-  const data = mergeData(weeks, dailyData);
+  const data = mergeData(weeks, dailyData, shareData);
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
@@ -62,13 +62,17 @@ const Calendar = ({ year, month, dailyData, weeklyData }: CalendarProps) => {
                     <div className='py-4'>
                       <Text
                         variant='p'
-                        className={`mb-4 text-14 text-gray-600 ${item.today ? 'font-700 text-black' : ''}`}
+                        className={`mb-4 flex justify-center text-14 text-gray-600 ${item.today ? 'font-700 text-black' : ''}`}
                       >
                         {item.date && item.date.getDate()}
+                        {shareData && item.imgSrc && (
+                          // 반응체크 보여주는 부분 api 확인 후 수정 필요
+                          <span className='ml-2 h-[0.4rem] w-[0.4rem] rounded-full bg-primary'></span>
+                        )}
                       </Text>
                       {item.date && (
                         <Icon
-                          src={item.imgSrc ? item.imgSrc : ''}
+                          src={item.imgSrc ? item.imgSrc : '/icons/weather/weather-none.svg'}
                           alt={item.imgSrc ? '날씨 이미지' : '날씨 없음'}
                           size='44'
                           className='m-auto block rounded-none'
