@@ -13,6 +13,7 @@ export const buttonVariants = cva('flex items-center justify-center active:opaci
     styled: {
       fill: 'bg-primary text-white',
       fill_black: 'bg-black text-white',
+      fill_blue: 'bg-[#5A7EFF] text-white',
       outline: 'bg-white border-[1px] border-gray-200'
     },
     disabled: {
@@ -28,6 +29,7 @@ export const buttonVariants = cva('flex items-center justify-center active:opaci
   compoundVariants: [
     { styled: 'fill', disabled: true, className: 'bg-gray-200 text-gray-400' },
     { styled: 'fill_black', disabled: true, className: 'bg-gray-200 text-gray-400' },
+    { styled: 'fill_blue', disabled: true, className: 'bg-gray-200 text-gray-400' },
     {
       styled: 'outline',
       disabled: true,
