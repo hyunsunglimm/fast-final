@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { HistoryListType } from '@/shared/types/response/calendarHistroy';
 import Icon from '@/components/Icon';
-import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
+import TextButton from '@/components/ui/TextButton';
 
 const categoryImgConfig: Record<number, string> = {
   1: '/icons/categories/background/categories-1.svg',
@@ -21,27 +21,33 @@ const categoryImgConfig: Record<number, string> = {
   14: '/icons/categories/background/categories-14.svg'
 };
 
-const ExpenseItem: React.FC<HistoryListType> = ({
-  cost,
-  payType,
-  place,
-  regret,
-  spendingCategoryId
-}) => {
-  const regretImgSrc = regret
+type ExpenseItemProps = {
+  data: HistoryListType;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+};
+
+const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
+  const { id, cost, payType, place, isRegret, historyCategoryId } = data;
+
+  const regretImgSrc = isRegret
     ? '/icons/categories/background/categories-regret.svg'
     : '/icons/weather/consumption/weather-none.svg';
 
-  const categoryImgSrc = categoryImgConfig[spendingCategoryId.categoryId];
+  const categoryImgSrc = categoryImgConfig[historyCategoryId.imageUrlTypeNo];
 
   return (
     <li className='mt-24 flex items-center justify-between gap-[1.6rem]'>
       <Icon src={categoryImgSrc} alt={place} size='40' className='shrink-0' />
       <div className='w-full'>
-        <Text sizes='16' weight='700' className='mb-4'>
+        <TextButton
+          id={String(id)}
+          onClick={onClick}
+          className='mb-4 text-16 font-700'
+          aria-label='소비 상세 내역 열기'
+        >
           {cost > 0 && '+'}
           {cost.toLocaleString()} 원
-        </Text>
+        </TextButton>
         <div className='flex gap-[0.2rem] text-12 text-gray-500'>
           <span>{place}</span>
           <span>|</span>
@@ -49,9 +55,9 @@ const ExpenseItem: React.FC<HistoryListType> = ({
         </div>
       </div>
       <div className='shrink-0'>
-        <FlexBox flexDirection='col' className='min-w-[5rem]' alignItems='center'>
+        <FlexBox role='button' flexDirection='col' className='min-w-[5rem]' alignItems='center'>
           <Icon src={regretImgSrc} alt='후회' className='m-auto mb-6 block' size='28' />
-          {regret && <p className='text-12 text-[#7191F3]'>후회 소비</p>}
+          {isRegret && <p className='text-12 text-active'>후회 소비</p>}
         </FlexBox>
       </div>
     </li>

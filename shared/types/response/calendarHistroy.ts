@@ -1,3 +1,4 @@
+// 소비 내역 리스트
 export type CalendarHistroyResponse = {
   totalSpent: number;
   totalEarned: number;
@@ -5,16 +6,28 @@ export type CalendarHistroyResponse = {
 };
 
 export type HistoryListType = {
+  id: number;
   usedAt: string;
   cost: number;
   place: string;
-  spendingCategoryId: SpendingCategoryIdType;
+  historyCategoryId: SpendingCategoryIdType;
   payType: string;
-  regret: boolean;
+  isRegret: boolean;
 };
 
 export type SpendingCategoryIdType = {
-  categoryId: number;
-  name: null | string;
-  url: null | string;
+  imageUrlTypeNo: number;
+  name: string;
+  type: string;
 };
+
+// 소비 상세 내역
+export interface SpendingDetailResponse {
+  usedAt: string;
+  cost: number;
+  place: string;
+  historyCategoryId: SpendingCategoryIdType;
+  payType: string;
+  isRegret: boolean;
+  memo: string;
+}

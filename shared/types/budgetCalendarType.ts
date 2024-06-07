@@ -20,7 +20,7 @@ export type ExpenseItemProps = {
 // 소비내역 지출 수입
 export type ExpenseSummaryProps = {
   label: string;
-  amount: string;
+  amount: number | undefined;
 };
 
 // 공유멤버
