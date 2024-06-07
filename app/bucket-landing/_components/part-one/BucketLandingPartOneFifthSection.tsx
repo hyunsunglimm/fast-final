@@ -1,12 +1,13 @@
+import BottomButton from '@/app/financial-product/comparison/_components/BottomButton';
+import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Image from 'next/image';
 import React from 'react';
-import NextButton from '../NextButton';
 
 const BucketLandingPartOneFifthSection = () => {
   return (
-    <section className='bg-white pb-[6.4rem]'>
+    <section className='bg-white pb-[13.9rem]'>
       <FlexBox flexDirection='col' alignItems='center' className='pt-[6.4rem]'>
         <Image
           src='/images/bucket-landing/part1-last-speech-bubble.webp'
@@ -30,13 +31,20 @@ const BucketLandingPartOneFifthSection = () => {
           height={242}
           className='mb-[4.8rem] mt-40 w-[26.5rem]'
         />
-        <FlexBox flexDirection='col' className='w-full gap-12 px-24'>
-          <NextButton href='/create-bucket' backgroundColor='#5A7EFF'>
-            버킷리스트 시작하기
-          </NextButton>
-          <NextButton href='/not-found'>친구에게 알려주기</NextButton>
+        <Text sizes='16' weight='600'>
+          친구에게 알려주기
+        </Text>
+        <FlexBox className='mt-20 gap-[2.2rem]'>
+          <Icon src='/icons/bucket-landing/facebook.svg' alt='페이스북 공유' size='60' />
+          <Icon src='/icons/bucket-landing/kakao-talk.svg' alt='카카오톡 공유' size='60' />
+          <Icon src='/icons/bucket-landing/url.svg' alt='링크 공유' size='60' />
         </FlexBox>
       </FlexBox>
+      <BottomButton styled='fill_blue' path='/create-bucket'>
+        <Text sizes='16' weight='600'>
+          버킷리스트 생성하기
+        </Text>
+      </BottomButton>
     </section>
   );
 };
