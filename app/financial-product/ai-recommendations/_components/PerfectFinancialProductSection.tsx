@@ -8,13 +8,17 @@ import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
 import { getSavings } from '@/service/api/financial-product/savings';
 import { useQuery } from '@tanstack/react-query';
-import Spinner from '@/components/Spinner';
+import LoadingPage from '../../loading';
 
 const PerfectFinancialProductSection = () => {
   const { data: savings, isPending } = useQuery({
     queryKey: ['savings'],
     queryFn: getSavings
   });
+
+  if (isPending) {
+    return <LoadingPage />;
+  }
 
   return (
     <section className='px-20 py-40'>
@@ -30,21 +34,15 @@ const PerfectFinancialProductSection = () => {
       <div className='mb-16 mt-20'>
         <Tab type='box' array={['예적금', '카드', '대출', '청약']} tabKey='tab' />
       </div>
-      {isPending ? (
-        <FlexBox justifyContent='center'>
-          <Spinner />
-        </FlexBox>
-      ) : (
-        <ul className='mb-24 flex flex-col gap-[1.2rem]'>
-          {savings?.map((saving) => {
-            return (
-              <li key={saving.title}>
-                <SavingCard saving={saving} />
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      <ul className='mb-24 flex flex-col gap-[1.2rem]'>
+        {savings?.map((saving) => {
+          return (
+            <li key={saving.title}>
+              <SavingCard saving={saving} />
+            </li>
+          );
+        })}
+      </ul>
       {savings && (
         <Button size='md' styled='outline'>
           더보기

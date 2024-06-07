@@ -1,6 +1,6 @@
 import { SqureSkeleton, CardSkeleton } from '@/components/ui/skeleton';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-const loading = () => {
+const LoadingPage = () => {
   return (
     <div className='relative space-y-10 px-20'>
       <LoadingBackdrop />
@@ -10,4 +10,4 @@ const loading = () => {
     </div>
   );
 };
-export default loading;
+export default LoadingPage;
