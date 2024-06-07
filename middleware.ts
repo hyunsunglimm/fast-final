@@ -12,6 +12,19 @@ const middleware = (request: NextRequest) => {
   if (request.nextUrl.pathname === '/bucket-landing' && !request.nextUrl.searchParams.get('tab')) {
     return NextResponse.redirect(new URL('/bucket-landing?tab=저축생활+1편', request.url));
   }
+
+  // 비교결과 페이지에 선택한 카드나 항목에 대한 쿼리스트링이 없다면 카드 선택 페이지로 이동
+  if (
+    request.nextUrl.pathname === '/financial-product/comparison/select-category/result' &&
+    (request.nextUrl.searchParams.getAll('card').length < 2 ||
+      request.nextUrl.searchParams.getAll('card').includes('') ||
+      request.nextUrl.searchParams.getAll('category').length < 2 ||
+      request.nextUrl.searchParams.getAll('category').includes(''))
+  ) {
+    return NextResponse.redirect(
+      new URL('/financial-product/comparison?tab1=카드&tab2=신용카드', request.url)
+    );
+  }
 };
 export default middleware;
 export const config = {
