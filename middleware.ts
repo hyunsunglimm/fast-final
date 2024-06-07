@@ -21,6 +21,21 @@ const middleware = async (request: NextRequest) => {
     if (!isLoggedIn) {
       return NextResponse.redirect(new URL('/auth/login', nextUrl));
     }
+
+    // /create-bucket으로 접속할 경우 step=1로 주소 바꿈
+    if (nextUrl.pathname === '/create-bucket') {
+      if (!nextUrl.searchParams.get('step')) {
+        return NextResponse.redirect(new URL('/create-bucket?step=1', nextUrl));
+      }
+    }
+
+    // /bucket-landing으로 접속할 경우 tab=저축생활+1편으로 주소 바꿈
+    if (nextUrl.pathname === '/bucket-landing') {
+      if (!nextUrl.searchParams.get('tab')) {
+        return NextResponse.redirect(new URL('/bucket-landing?tab=저축생활+1편', nextUrl));
+      }
+    }
+
     return NextResponse.next();
   }
 
@@ -28,22 +43,6 @@ const middleware = async (request: NextRequest) => {
   if (isMatch(nextUrl.pathname, authRedirectRoutes)) {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL('/', nextUrl));
-    }
-    return NextResponse.next();
-  }
-
-  // /create-bucket으로 접속할 경우 step=1로 주소 바꿈
-  if (nextUrl.pathname === '/create-bucket') {
-    if (!nextUrl.searchParams.get('step')) {
-      return NextResponse.redirect(new URL('/create-bucket?step=1', nextUrl));
-    }
-    return NextResponse.next();
-  }
-
-  // /bucket-landing으로 접속할 경우 tab=저축생활+1편으로 주소 바꿈
-  if (nextUrl.pathname === '/bucket-landing') {
-    if (!nextUrl.searchParams.get('tab')) {
-      return NextResponse.redirect(new URL('/bucket-landing?tab=저축생활+1편', nextUrl));
     }
     return NextResponse.next();
   }
