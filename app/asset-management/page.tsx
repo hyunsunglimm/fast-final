@@ -1,6 +1,7 @@
 import NetWorthSection from './_components/NetWorthSection';
 import MyCreditSection from './_components/MyCreditSection';
 import CollectAssetSection from './_components/CollectAssetSection';
+
 const AssetManagementPage = () => {
   return (
     <>

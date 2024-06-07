@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className='relative h-full bg-white'>
+    <section className='relative h-dvh bg-white'>
       <AuthHeader currentStep='1' title='로그인' isSignup={false} />
       {children}
     </section>

@@ -25,7 +25,9 @@ export default {
             }
           } catch (error) {
             console.error('Authorization error:', error);
-            return null;
+            if (error instanceof Error) {
+              throw new Error(error.message);
+            }
           }
         }
 

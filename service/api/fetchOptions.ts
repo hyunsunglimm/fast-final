@@ -1,5 +1,4 @@
-import { RequestInit } from 'next/dist/server/web/spec-extension/request';
-
+import { currentUserSession } from '@/shared/actions/auth';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || '';
 
 const createOptions = (token?: string): RequestInit => {
@@ -18,11 +17,14 @@ const createOptions = (token?: string): RequestInit => {
 export const requestFetch = async <T>(
   endPoint: string,
   config: RequestInit = {},
-  baseUrl?: string,
-  token?: string
+  baseUrl?: string
 ): Promise<T> => {
-  const options = createOptions(token);
+  const session = await currentUserSession();
+  const accessToken = session?.accessToken || '';
+  const options = createOptions(accessToken);
+
   const URL = baseUrl ? baseUrl : BASE_URL;
+
   try {
     const res = await fetch(URL + endPoint, {
       ...config,
@@ -45,6 +47,7 @@ export const requestFetch = async <T>(
     try {
       const errorData = await res.json();
       errorMessage = errorData.message || errorMessage;
+      console.error('Error response JSON:', errorData);
     } catch (parseError) {
       console.error('Error parsing JSON response:', parseError);
     }
@@ -66,5 +69,5 @@ const getErrorMessage = (error: unknown): string => {
   if (typeof error === 'string') {
     return error;
   }
-  return 'Something went wrong';
+  return 'An unknown error occurred';
 };
