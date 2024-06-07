@@ -63,7 +63,12 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: Ca
                   item.date && day >= item.date?.getDate() ? onClick : () => {};
 
                 return (
-                  <div role={onClick ? 'button' : 'none'} key={idx} onClick={handleDateClick}>
+                  <div
+                    role={onClick ? 'button' : 'none'}
+                    key={idx}
+                    id={item.date?.toString()}
+                    onClick={handleDateClick}
+                  >
                     <div className='py-4'>
                       <Text
                         variant='p'

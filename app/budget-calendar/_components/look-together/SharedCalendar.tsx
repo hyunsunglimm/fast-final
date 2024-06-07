@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
 import TextButton from '@/components/ui/TextButton';
@@ -35,7 +35,10 @@ const shareData = {
       weatherId: 3,
       reactions: [
         { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
-        { stickerOrEmoticonID: '🥲', memberId: 4, count: 8 }
+        { stickerOrEmoticonID: '🥲', memberId: 4, count: 8 },
+        { stickerOrEmoticonID: '🫰', memberId: 4, count: 4 },
+        { stickerOrEmoticonID: '❤️‍🔥', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '🤞', memberId: 4, count: 4 }
       ]
     },
     {
@@ -43,7 +46,9 @@ const shareData = {
       weatherId: 4,
       reactions: [
         { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
-        { stickerOrEmoticonID: '😇', memberId: 4, count: 8 }
+        { stickerOrEmoticonID: '😇', memberId: 4, count: 8 },
+        { stickerOrEmoticonID: '💙', memberId: 2, count: 5 },
+        { stickerOrEmoticonID: '🥰', memberId: 4, count: 4 }
       ]
     },
     {
@@ -51,7 +56,8 @@ const shareData = {
       weatherId: 5,
       reactions: [
         { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
-        { stickerOrEmoticonID: '😏', memberId: 4, count: 8 }
+        { stickerOrEmoticonID: '😏', memberId: 4, count: 8 },
+        { stickerOrEmoticonID: '🥰', memberId: 4, count: 4 }
       ]
     }
     // 나머지 데이터도 추가해주세요
@@ -65,6 +71,7 @@ type SharedCalendarProps = {
 const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
   const [openReactionSheet, setOpenReactionSheet] = useState(false);
   const [openEmojiSheet, setOpenEmojiSheet] = useState(false);
+  const [reactionDate, setReactionData] = useState('');
 
   // 달력 날짜
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -74,7 +81,8 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
     setSelectedMonth(month);
   };
 
-  const handleReactionSheet = () => {
+  const handleReactionSheet = (e: MouseEvent<HTMLDivElement>) => {
+    setReactionData(e.currentTarget.id);
     setOpenEmojiSheet((prev) => !prev);
   };
 
@@ -123,10 +131,12 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
         shareData={shareData}
       />
 
-      {/* 이모지 바텀 시트 */}
+      {/* 이모지 남기기 바텀 시트 */}
       <SubmitEmojiBottomSheet
         openEmojiSheet={openEmojiSheet}
         setOpenEmojiSheet={setOpenEmojiSheet}
+        reactionDate={reactionDate}
+        shareData={shareData}
       />
     </>
   );
