@@ -72,7 +72,7 @@ const SubmitEmojiBottomSheet = ({
           <Button size='xs' styled='fill_black' className='rounded-full font-500'>
             이모지
           </Button>
-          <Button size='xs' styled='fill_black' className='rounded-full font-500'>
+          <Button size='xs' styled='outline' className='rounded-full font-500 text-gray-500'>
             스티커
           </Button>
         </FlexBox>
