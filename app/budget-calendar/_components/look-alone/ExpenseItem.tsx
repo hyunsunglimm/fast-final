@@ -60,7 +60,7 @@ const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
     ? '/icons/categories/background/categories-regret.svg'
     : '/icons/weather/consumption/weather-none.svg';
 
-  const categoryImgSrc = categoryImgConfig[historyCategoryId.imageUrlTypeNo];
+  const categoryImgSrc = categoryImgConfig[historyCategoryId.imageUrlTypeNo]['imgSrc'];
 
   return (
     <li className='mt-24 flex min-h-[5.2rem] items-center justify-between gap-[1.6rem]'>
@@ -89,7 +89,12 @@ const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
           className='min-w-[5rem]'
           alignItems='center'
         >
-          <Icon src={regretImgSrc} alt='후회' className='m-auto mb-6 block' size='28' />
+          <Icon
+            src={regretImgSrc}
+            alt='후회'
+            className='m-auto mb-6 block active:scale-95'
+            size='28'
+          />
           {isRegret && <p className='text-12 text-active'>후회 소비</p>}
         </FlexBox>
       </div>
