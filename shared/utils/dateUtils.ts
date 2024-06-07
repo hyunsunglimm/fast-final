@@ -33,13 +33,21 @@ export const returnDate = (dateString?: string | number | Date) => {
   const date = dateString ? new Date(dateString) : new Date();
 
   if (!isNaN(date.getTime())) {
-    return { day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear() };
+    return {
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      hour: date.getHours(),
+      minute: date.getMinutes()
+    };
   }
 
   return {
     day: date.getDate(),
     month: date.getMonth() + 1,
-    year: date.getFullYear()
+    year: date.getFullYear(),
+    hour: date.getHours(),
+    minute: date.getMinutes()
   };
 };
 
