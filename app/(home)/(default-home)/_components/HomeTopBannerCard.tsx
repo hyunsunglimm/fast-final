@@ -3,15 +3,20 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
+import { CardSkeleton } from '@/components/ui/skeleton';
+import { returnDate } from '@/shared/utils/dateUtils';
 const SwiperWrapper = dynamic(() => import('@/components/SwiperWrapper'), {
-  ssr: false
+  ssr: false,
+  loading: () => <CardSkeleton />
 });
 
 const HomeTopBannerCard = () => {
+  const { month } = returnDate();
+
   return (
     <SwiperWrapper fraction>
       <Banner
-        headText='4월 카드 이벤트'
+        headText={`${month}월 카드 이벤트`}
         content={`나에게 맞는 카드 추천받고 <br/>
         최대 14만원 혜택받아요`}
         icon='/images/home/banner/banner-card-event.svg'

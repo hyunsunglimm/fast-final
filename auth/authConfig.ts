@@ -18,7 +18,8 @@ export default {
             if (user) {
               return {
                 id: user.id.toString(),
-                name: user.email.split('@')[0],
+                name: user.name,
+                image: user.profileImageUrl,
                 email: user.email,
                 accessToken: user.accessToken
               };

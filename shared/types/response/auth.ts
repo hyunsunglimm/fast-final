@@ -3,6 +3,8 @@ export type LoginResponse = {
   email: string;
   accessToken: string;
   loggedInAt: Date;
+  profileImageUrl: string;
+  name: string;
 };
 export type CheckEmailDuplicateResponse = {
   requestType: string;

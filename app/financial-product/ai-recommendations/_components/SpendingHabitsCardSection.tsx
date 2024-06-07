@@ -1,7 +1,6 @@
 'use client';
 
 import Icon from '@/components/Icon';
-import Spinner from '@/components/Spinner';
 import SwiperWrapper from '@/components/SwiperWrapper';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
@@ -10,6 +9,7 @@ import { getSpendingHabitsCards } from '@/service/api/financial-product/cards';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useState } from 'react';
+import LoadingPage from '../../loading';
 
 const SpendingHabitsCardSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -21,6 +21,10 @@ const SpendingHabitsCardSection = () => {
     queryKey: ['spendingHabitsCards'],
     queryFn: getSpendingHabitsCards
   });
+
+  if (isPending) {
+    return <LoadingPage />;
+  }
 
   const currentCard = isSuccess ? spendingHabitsCards[currentCardIndex] : null;
 
@@ -43,12 +47,8 @@ const SpendingHabitsCardSection = () => {
           가 높았어요!
         </Text>
       </div>
-      {isPending || !isSuccess ? (
-        <FlexBox justifyContent='center'>
-          <Spinner />
-        </FlexBox>
-      ) : (
-        <>
+      <>
+        {isSuccess && (
           <SwiperWrapper dots coverflow setIndex={setCurrentCardIndex}>
             {spendingHabitsCards.map(({ title, image }) => {
               return (
@@ -56,7 +56,7 @@ const SpendingHabitsCardSection = () => {
                   key={title}
                   src={`/images/financial-product/${image}.webp`}
                   alt={title}
-                  width={400}
+                  width={500}
                   height={160}
                   className='w-full'
                   priority
@@ -64,49 +64,49 @@ const SpendingHabitsCardSection = () => {
               );
             })}
           </SwiperWrapper>
-          <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
-            <Text sizes='12' className='mb-[0.2rem]'>
-              {currentCard?.title}
-            </Text>
-            <Text sizes='18' weight='600' className='mb-16'>
-              {currentCard?.cardName}
-            </Text>
+        )}
+        <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
+          <Text sizes='12' className='mb-[0.2rem]'>
+            {currentCard?.title}
+          </Text>
+          <Text sizes='18' weight='600' className='mb-16'>
+            {currentCard?.cardName}
+          </Text>
 
-            <ul className='mb-20 flex gap-8'>
-              {currentCard?.conditions.map((condition) => {
-                return (
-                  <li key={condition} className='rounded-[10rem] bg-gray-50 px-12 py-8'>
-                    <Text sizes='12' weight='500' className='text-gray-700'>
-                      {condition}
-                    </Text>
-                  </li>
-                );
-              })}
-            </ul>
+          <ul className='mb-20 flex gap-8'>
+            {currentCard?.conditions.map((condition) => {
+              return (
+                <li key={condition} className='rounded-[10rem] bg-gray-50 px-12 py-8'>
+                  <Text sizes='12' weight='500' className='text-gray-700'>
+                    {condition}
+                  </Text>
+                </li>
+              );
+            })}
+          </ul>
 
-            <ul className='flex w-full flex-col gap-[0.6rem]'>
-              {currentCard?.benefits.map(({ title, iconPath, detail }) => {
-                const content = detail.split(' ');
+          <ul className='flex w-full flex-col gap-[0.6rem]'>
+            {currentCard?.benefits.map(({ title, iconPath, detail }) => {
+              const content = detail.split(' ');
 
-                return (
-                  <li key={title}>
-                    <Card className='flex w-full items-center gap-[1.2rem] border border-gray-100 px-24 py-16'>
-                      <Icon src={iconPath} alt={title} size='20' className='rounded-none' />
-                      <Text>
-                        {content[0]}{' '}
-                        <Text weight='700' className='text-primary'>
-                          {content[1]}{' '}
-                        </Text>
-                        {content[2]}
+              return (
+                <li key={title}>
+                  <Card className='flex w-full items-center gap-[1.2rem] border border-gray-100 px-24 py-16'>
+                    <Icon src={iconPath} alt={title} size='20' className='rounded-none' />
+                    <Text>
+                      {content[0]}{' '}
+                      <Text weight='700' className='text-primary'>
+                        {content[1]}{' '}
                       </Text>
-                    </Card>
-                  </li>
-                );
-              })}
-            </ul>
-          </FlexBox>
-        </>
-      )}
+                      {content[2]}
+                    </Text>
+                  </Card>
+                </li>
+              );
+            })}
+          </ul>
+        </FlexBox>
+      </>
     </section>
   );
 };

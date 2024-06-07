@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 // 가계부 배너
 export type BudgetBannerProps = {
   icon?: boolean;
@@ -36,6 +37,7 @@ export type CalendarProps = {
   dailyData?: DailyDataItemType[];
   weeklyData?: WeeklyDataItem[];
   shareData?: ShareData;
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 };
 
 export type DateInfo = {
@@ -72,7 +74,8 @@ export interface ShareDataItem {
   weatherId: number;
   reactions: {
     memberId: number;
-    stickerOrEmoticonID: number;
+    stickerOrEmoticonID: string;
+    count: number;
   }[];
 }
 

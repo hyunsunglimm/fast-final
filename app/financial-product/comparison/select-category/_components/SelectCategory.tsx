@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { getComparedCards } from '@/service/api/financial-product/cards';
 import BottomButton from '../../_components/BottomButton';
 import CategoryCard from './CategoryCard';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 
 const QUERY_KEY = 'category';
 
@@ -51,6 +52,7 @@ const SelectCategory = () => {
 
   return (
     <>
+      {isPending && <LoadingBackdrop />}
       <IsBackHeader href={`./?${searchParams.toString()}`} defaultColor='#f2f4f6' />
       <main className='bg-gray-50 px-20 pb-[13.2rem]'>
         <FlexBox flexDirection='col' className='gap-8'>
