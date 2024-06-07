@@ -7,10 +7,11 @@ import ExpenseSummary from './ExpensSummary';
 import ExpenseItem from './ExpenseItem';
 import { useQuery } from '@tanstack/react-query';
 import { getCalendarHistroy } from '@/service/api/calendar';
-import ExpensDetailBottomSheet from './ExpensDetailBottomSheet';
+import ExpensDetailBottomSheet from './_components/ExpensDetailBottomSheet';
+import ExpensListSkeleton from './_components/ExpensListSkeleton';
 
 const ExpensListBox = () => {
-  const { data: historyData } = useQuery({
+  const { data: historyData, isLoading } = useQuery({
     queryKey: ['calendarHistory'],
     queryFn: getCalendarHistroy
   });
@@ -24,8 +25,13 @@ const ExpensListBox = () => {
     setOpenDetailBottomSheet(true);
   };
 
+  if (isLoading) {
+    return <ExpensListSkeleton />;
+  }
+
   return (
     <>
+      <ExpensListSkeleton />
       <section className='px-20 py-24 text-16'>
         <Title title='소비 내역' className='mb-32'>
           <FlexBox alignItems='center' className='cursor-pointer text-14 text-gray-500'>

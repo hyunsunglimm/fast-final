@@ -1,9 +1,10 @@
+import dynamic from 'next/dynamic';
 import Tab from '@/components/ui/Tab';
 
 import Line from '../common/Line';
 import BudgetBanner from '../common/BudgetBanner';
 import ExpensCalendarBox from './ExpensCalendarBox';
-import ExpensListBox from './ExpensListBox';
+const ExpensListBox = dynamic(() => import('./ExpensListBox'));
 
 const LookAloneContainer = () => {
   return (
