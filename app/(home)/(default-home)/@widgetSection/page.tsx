@@ -5,7 +5,6 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import ConsumeWeatherCard from '../_components/ConsumeWeatherCard';
 import { getWidgetItem } from '@/service/api/home';
-
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -25,7 +24,7 @@ const WidgeSectionPage = async () => {
   }
   const { orderedMemberWidgets } = await getWidgetItem();
 
-  const widgetMap: { [key: string]: React.ComponentType } = {
+  const widgetMap: Record<string, React.ComponentType> = {
     REMAINING_BUDGET: WidgetBudget,
     UPCOMING_EXPENSES: WidgetUpcomingExpenses,
     LAST_MONTH_EXPENSES: WidgetLastMonth,
