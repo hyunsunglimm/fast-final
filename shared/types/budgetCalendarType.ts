@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react';
 // 가계부 배너
 export type BudgetBannerProps = {
   icon?: boolean;
@@ -30,16 +29,6 @@ export type SharedMembersProps = {
   setSelectedProfile: (name: string) => void;
 };
 
-// 달력
-export type CalendarProps = {
-  year: number;
-  month: number;
-  dailyData?: DailyDataItemType[];
-  weeklyData?: WeeklyDataItem[];
-  shareData?: ShareData;
-  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
-};
-
 export type DateInfo = {
   date: Date | null;
   imgSrc?: string;
@@ -64,7 +53,7 @@ export type WeeklyDataItem = {
   expense: number;
 };
 
-export interface ShareData {
+export interface ShareDataType {
   count: number;
   daily: ShareDataItem[];
 }
@@ -85,3 +74,8 @@ export type YearMonthDropdownProps = {
   selectedMonth: number;
   onSelect: (year: number, month: number) => void;
 };
+
+export type GenerateWeeks = {
+  weekDates: DateInfo[];
+  isCurrentWeek: boolean;
+}[];

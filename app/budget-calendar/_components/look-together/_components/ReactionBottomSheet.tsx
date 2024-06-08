@@ -3,11 +3,11 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import TextButton from '@/components/ui/TextButton';
-import { ShareData } from '@/shared/types/budgetCalendarType';
+import { ShareDataType } from '@/shared/types/budgetCalendarType';
 type ReactionBottomSheetProps = {
   openReactionSheet: boolean;
   setOpenReactionSheet: React.Dispatch<React.SetStateAction<boolean>>;
-  shareData: ShareData;
+  shareData: ShareDataType;
 };
 
 const ReactionBottomSheet = ({

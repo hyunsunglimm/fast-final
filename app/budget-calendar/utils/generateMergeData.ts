@@ -1,12 +1,12 @@
-import { DateInfo, DailyDataItemType, ShareData } from '@/shared/types/budgetCalendarType';
+import { DateInfo, DailyDataItemType, ShareDataType } from '@/shared/types/budgetCalendarType';
 
-export const mergeData = (
+export const generateMergeData = (
   weeks: {
     weekDates: DateInfo[];
     isCurrentWeek: boolean;
   }[],
   dailyData: DailyDataItemType[] | undefined,
-  shareData: ShareData | undefined
+  shareData: ShareDataType | undefined
 ) => {
   return weeks.map((week) => {
     const weekDates = week.weekDates.map((dateInfo) => {

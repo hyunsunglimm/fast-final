@@ -6,13 +6,13 @@ import TextButton from '@/components/ui/TextButton';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import { returnDate } from '@/shared/utils/dateUtils';
-import { ShareData } from '@/shared/types/budgetCalendarType';
+import { ShareDataType } from '@/shared/types/budgetCalendarType';
 
 type SubmitEmojiBottomSheetProps = {
   openEmojiSheet: boolean;
   setOpenEmojiSheet: React.Dispatch<React.SetStateAction<boolean>>;
   reactionDate: string;
-  shareData: ShareData;
+  shareData: ShareDataType;
 };
 
 const SubmitEmojiBottomSheet = ({
