@@ -4,10 +4,22 @@ import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 const CreateBucketListResult = async () => {
-  const res = await fetch('http://localhost:3000/api/bucket');
+  const session = await auth();
+
+  if (!session) {
+    return redirect('/');
+  }
+
+  const res = await fetch(`http://localhost:3000/api/bucket?user-email=${session?.user?.email}`);
   const createdBucket = await res.json();
+
+  if (!createdBucket) {
+    return redirect('/');
+  }
 
   return (
     <section className='mt-[5.2rem] flex w-full flex-col items-center justify-center px-20'>

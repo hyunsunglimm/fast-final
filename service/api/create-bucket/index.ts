@@ -10,11 +10,9 @@ export const savingBookQueryFn = () => {
   return requestFetch('/api/bucket/savingbook');
 };
 
-export const getRecentBuckets = () => {
+export const getRecentBuckets = (userEmail: string) => {
   return client.fetch(`
-    *[_type == "bucket"] | order(_createdAt desc)[0]{
-      ...,
-    }
+    *[_type == "bucket" && author == "${userEmail}"][0]
   `);
 };
 

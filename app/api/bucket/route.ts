@@ -3,8 +3,14 @@ import { client } from '@/sanity/lib/client';
 import { getRecentBuckets } from '@/service/api/create-bucket';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const GET = async () => {
-  const recentBucket = await getRecentBuckets();
+export const GET = async (req: NextRequest) => {
+  const userEmail = req.nextUrl.searchParams.get('user-email');
+
+  if (!userEmail) {
+    return new Response('Authentication Error', { status: 401 });
+  }
+
+  const recentBucket = await getRecentBuckets(userEmail);
   return NextResponse.json(recentBucket);
 };
 

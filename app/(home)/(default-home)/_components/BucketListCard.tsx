@@ -4,8 +4,10 @@ import { ListCard, ListHeader, ListFooter, ListContent } from './bucket-challeng
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useOnloadImage from '@/shared/hooks/useOnloadImage';
+import { BucketResponseType } from '@/shared/types/response/bucket';
+import { localeStringToNumber } from '@/shared/utils/conversion';
 
-const BucketListCard = () => {
+const BucketListCard = ({ bucket }: { bucket: BucketResponseType }) => {
   const router = useRouter();
   const { onLoadImage, onload } = useOnloadImage();
 
@@ -14,9 +16,10 @@ const BucketListCard = () => {
     if (id === 'three-dot') return;
     router.push('/bucket-detail', { scroll: false });
   };
+
   return (
     <ListCard bgColor='bucket' onClick={goBucketDetail}>
-      <ListHeader badgeText='버킷리스트' headerText='유럽 여행가기' />
+      <ListHeader badgeText='버킷리스트' headerText={bucket.bucket_name} />
       <ListContent textColor='bucket'>
         <Image
           src='/images/home/bucket_img_step1.webp'
@@ -30,7 +33,10 @@ const BucketListCard = () => {
           className='pointer-events-none h-[15.5rem] w-[15.5rem]'
         />
       </ListContent>
-      <ListFooter targetAmount={2000000} currentAmount={350000} />
+      <ListFooter
+        targetAmount={localeStringToNumber(bucket.target_amount)}
+        currentAmount={350000}
+      />
     </ListCard>
   );
 };
