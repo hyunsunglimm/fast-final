@@ -44,5 +44,11 @@ export const bucket = {
       name: 'target_amount',
       type: 'string'
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'bucket_name',
+      subtitle: 'author'
+    }
+  }
 };
