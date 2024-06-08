@@ -2,6 +2,7 @@ import BottomSheet from '@/components/BottomSheet';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
+import BottomSheetTitle from '../common/BottomSheetTitle';
 
 type ManagementBottomSheetProps = {
   showPopup: boolean;
@@ -26,13 +27,10 @@ const ManagementBottomSheet = ({
       onClose={() => setShowPopup(false)}
       onClick={handleButtonClick}
     >
-      <Text variant='h3' sizes='20' weight='700' className='mb-8'>
-        목표 예산까지 <br />
-        400,000원 남았어요
-      </Text>
-      <Text variant='p' className='text-gray-700'>
-        하루에 10,000원씩 써야 해요
-      </Text>
+      <BottomSheetTitle
+        title='목표 예산까지 && 400,000원 남았어요'
+        description='하루에 10,000원씩 써야 해요'
+      />
       <FlexBox className='mt-48 gap-16 text-center' justifyContent='around'>
         <div>
           <Icon

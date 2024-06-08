@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import BottomSheet from '@/components/BottomSheet';
 import Text from '@/components/ui/Text';
+import BottomSheetTitle from '../common/BottomSheetTitle';
 import TargetManagementInput from '../common/TargetManagementInput';
 import { FormValues, TargetModifyBottomSheetProps } from '@/shared/types/budgetCalendarType';
 
@@ -40,12 +41,10 @@ const TargetModifyBottomSheet = ({
           setModifyPopup(false);
         }}
       >
-        <Text variant='h3' sizes='20' weight='700' className='mb-8'>
-          목표 예산을 얼마로 세울까요?
-        </Text>
-        <Text variant='p' className='text-gray-700'>
-          저번 달에 1,000,000원 썼어요
-        </Text>
+        <BottomSheetTitle
+          title='목표 예산을 얼마로 세울까요?'
+          description='저번 달에 1,000,000원 썼어요'
+        />
         <TargetManagementInput
           inputValue={inputValue}
           setInputValue={setInputValue}
