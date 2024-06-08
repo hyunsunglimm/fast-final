@@ -3,13 +3,12 @@ import Text from '@/components/ui/Text';
 import Image from 'next/image';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
-import { QueryType } from '../_components/BucketStepForm';
+import Link from 'next/link';
 
-type CreateBucketListResultProps = {
-  searchParams: Record<Partial<QueryType>, string | undefined>;
-};
+const CreateBucketListResult = async () => {
+  const res = await fetch('http://localhost:3000/api/bucket');
+  const createdBucket = await res.json();
 
-const CreateBucketListResult = ({ searchParams }: CreateBucketListResultProps) => {
   return (
     <section className='mt-[5.2rem] flex w-full flex-col items-center justify-center px-20'>
       <Text variant='h1' sizes='24' weight='700' className='text-center'>
@@ -30,7 +29,7 @@ const CreateBucketListResult = ({ searchParams }: CreateBucketListResultProps) =
             weight='500'
             className=' inline-block rounded-full bg-white px-16 py-8'
           >
-            {searchParams['bucket-name']}
+            {createdBucket.bucket_name}
           </Text>
         </FlexBox>
         <FlexBox alignItems='center' justifyContent='between' className='w-full py-8'>
@@ -40,7 +39,7 @@ const CreateBucketListResult = ({ searchParams }: CreateBucketListResultProps) =
             weight='500'
             className=' inline-block rounded-full bg-white px-16 py-8'
           >
-            매주 {searchParams['day-of-week']} {searchParams['savings-amount']}원씩
+            매주 {createdBucket.day_of_week} {createdBucket.savings_amount}원씩
           </Text>
         </FlexBox>
         <FlexBox alignItems='center' justifyContent='between' className='w-full py-8'>
@@ -50,7 +49,7 @@ const CreateBucketListResult = ({ searchParams }: CreateBucketListResultProps) =
             weight='500'
             className=' inline-block rounded-full bg-white px-16 py-8'
           >
-            {decodeURIComponent(searchParams['my-saving-product'] || '')
+            {decodeURIComponent(createdBucket.my_saving_product || '')
               .split('|')
               .filter((item) => item.trim() !== '').length + '개' || '0개'}
           </Text>
@@ -62,12 +61,12 @@ const CreateBucketListResult = ({ searchParams }: CreateBucketListResultProps) =
             weight='500'
             className=' inline-block rounded-full bg-white px-16 py-8'
           >
-            {searchParams['target-amount']} 원
+            {createdBucket.target_amount} 원
           </Text>
         </FlexBox>
       </FlexBox>
-      <Button styled='fill_black' size='md'>
-        확인
+      <Button asChild styled='fill_black' size='md'>
+        <Link href='/'>확인</Link>
       </Button>
     </section>
   );

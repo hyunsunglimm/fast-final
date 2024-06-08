@@ -1,6 +1,12 @@
 import { auth } from '@/auth';
 import { client } from '@/sanity/lib/client';
-import { NextRequest } from 'next/server';
+import { getRecentBuckets } from '@/service/api/create-bucket';
+import { NextRequest, NextResponse } from 'next/server';
+
+export const GET = async () => {
+  const recentBucket = await getRecentBuckets();
+  return NextResponse.json(recentBucket);
+};
 
 export const POST = async (req: NextRequest) => {
   const session = await auth();
