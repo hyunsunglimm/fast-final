@@ -16,6 +16,7 @@ type BottomSheetProps = {
   onClick?: () => void;
   children: React.ReactNode;
   isButtonShow?: boolean;
+  isBack?: (() => void) | boolean;
 };
 
 const BottomSheet = ({
@@ -27,7 +28,8 @@ const BottomSheet = ({
   onClose,
   onClick,
   isButtonShow = true,
-  children
+  children,
+  isBack = false
 }: BottomSheetProps) => {
   const { size, styled, disabled } = buttonOptions || {};
 
@@ -54,7 +56,19 @@ const BottomSheet = ({
             className='relative flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
           >
             <FlexBox alignItems='center' justifyContent='between' className='w-full'>
-              <div className='w-[1.6rem]' />
+              <div className='w-[1.6rem]'>
+                {isBack && (
+                  <Icon
+                    src='/icons/system-icon/arrow/arrow-left.svg'
+                    alt='뒤로가기'
+                    onClick={() => {
+                      if (typeof isBack === 'function') {
+                        isBack();
+                      }
+                    }}
+                  />
+                )}
+              </div>
               <Text sizes='16' weight='700'>
                 {title}
               </Text>
