@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import React from 'react';
 import BottomSheet from '@/components/BottomSheet';
 import * as unicodeEmoji from 'unicode-emoji';
 import Text from '@/components/ui/Text';
@@ -6,22 +6,9 @@ import TextButton from '@/components/ui/TextButton';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import { returnDate } from '@/shared/utils/dateUtils';
-import { ShareDataType } from '@/shared/types/budgetCalendarType';
+import { useSubmitEmojiContext } from '@/app/budget-calendar/context/SubmitEmojiProvider';
 
-type SubmitEmojiBottomSheetProps = {
-  openEmojiSheet: boolean;
-  setOpenEmojiSheet: React.Dispatch<React.SetStateAction<boolean>>;
-  reactionDate: string;
-  shareData: ShareDataType;
-};
-
-const SubmitEmojiBottomSheet = ({
-  openEmojiSheet,
-  setOpenEmojiSheet,
-  reactionDate,
-  shareData
-}: SubmitEmojiBottomSheetProps) => {
-  const [selectEmoji, setSelectEmoji] = useState('');
+const SubmitEmojiBottomSheet = () => {
   const groupBy = 'category';
   const omitWhere: unicodeEmoji.OmitEmojiWhere = {
     version: ['15.1'],
@@ -37,40 +24,45 @@ const SubmitEmojiBottomSheet = ({
     ]
   };
   const emojiObject = unicodeEmoji.getEmojisGroupedBy(groupBy, omitWhere);
-
-  const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
-    // setSelectEmoji(e.currentTarget.name);
-  };
-
-  const { day, month } = returnDate(reactionDate);
+  const {
+    openAddEmojiSheet,
+    setOpenAddEmojiSheet,
+    reactionDate,
+    shareData,
+    handleAddEmojiClick,
+    handleRemoveEmojiClick
+  } = useSubmitEmojiContext();
+  const { day: reactionDay, month } = returnDate(reactionDate);
   const { daily } = shareData;
+
   return (
     <BottomSheet
       title='반응남기기'
       buttonLabel=''
       isButtonShow={false}
-      isOpen={openEmojiSheet}
-      onClose={() => setOpenEmojiSheet(false)}
+      isOpen={openAddEmojiSheet}
+      onClose={() => setOpenAddEmojiSheet(false)}
     >
       <FlexBox
         flexDirection='col'
         className='absolute left-0 top-[8.5rem] w-full touch-none bg-white px-24 pb-24'
       >
         <Text className='text-gray-700'>
-          {month}월 {day}일
+          {month}월 {reactionDay}일
         </Text>
 
         {/* 남긴 반응 이모지 */}
         <div className='mt-16 grid w-full grid-cols-5 gap-8'>
           {daily.map((item) => {
-            const currentDate = new Date(item.date).getDate() === day;
+            const currentDate = new Date(item.date).getDate() === reactionDay;
 
             return item.reactions.map((emoji) => {
               return (
                 <React.Fragment key={emoji.stickerOrEmoticonID}>
                   {currentDate && (
                     <TextButton
-                      role='button'
+                      name={emoji.stickerOrEmoticonID}
+                      onClick={handleRemoveEmojiClick}
                       className='flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 hover:bg-gray-200 hover:no-underline active:scale-95'
                     >
                       <span role='img' className='mr-4 font-sans'>
@@ -102,7 +94,7 @@ const SubmitEmojiBottomSheet = ({
           return (
             <TextButton
               name={item.emoji}
-              onClick={handleEmojiClick}
+              onClick={handleAddEmojiClick}
               role='button'
               aria-label={`${item.description} 버튼`}
               key={item.emoji}

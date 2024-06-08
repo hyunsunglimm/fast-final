@@ -75,7 +75,7 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: Ca
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
                 const handleDateClick =
-                  item.date && day >= item.date?.getDate() ? onClick : undefined;
+                  item.date && item.imgSrc && day >= item.date?.getDate() ? onClick : undefined;
 
                 return (
                   <div

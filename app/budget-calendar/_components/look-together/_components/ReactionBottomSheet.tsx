@@ -3,28 +3,20 @@ import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import TextButton from '@/components/ui/TextButton';
-import { ShareDataType } from '@/shared/types/budgetCalendarType';
-type ReactionBottomSheetProps = {
-  openReactionSheet: boolean;
-  setOpenReactionSheet: React.Dispatch<React.SetStateAction<boolean>>;
-  shareData: ShareDataType;
-};
+import { useSubmitEmojiContext } from '@/app/budget-calendar/context/SubmitEmojiProvider';
 
-const ReactionBottomSheet = ({
-  openReactionSheet,
-  setOpenReactionSheet,
-  shareData
-}: ReactionBottomSheetProps) => {
+const ReactionBottomSheet = () => {
+  const { openTotalReactionSheet, setOpenTotalReactionSheet, shareData } = useSubmitEmojiContext();
   return (
     <BottomSheet
       title='반응 보기'
       buttonLabel=''
       isButtonShow={false}
-      isOpen={openReactionSheet}
-      onClose={() => setOpenReactionSheet(false)}
+      isOpen={openTotalReactionSheet}
+      onClose={() => setOpenTotalReactionSheet(false)}
     >
       <Text sizes='18' weight='700'>
-        총 {shareData.count}개
+        총 {shareData.totalCount}개
       </Text>
       {shareData.daily.map((item, idx) => {
         const month = new Date(item.date).getMonth() + 1;
