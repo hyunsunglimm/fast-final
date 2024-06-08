@@ -1,10 +1,12 @@
-import React from 'react';
+type LoadingBackdropProps = {
+  isFullScreen?: boolean;
+};
 
-const LoadingBackdrop = () => {
+const LoadingBackdrop = ({ isFullScreen = false }: LoadingBackdropProps) => {
   return (
     <div
       role='status'
-      className='hide-scrollbar absolute inset-0 z-40 flex h-dvh w-full flex-col items-center justify-center bg-white/50 px-20 backdrop-blur-sm'
+      className={`${isFullScreen ? 'fixed' : 'absolute'} hide-scrollbar inset-0 z-40 flex h-dvh w-full flex-col items-center justify-center bg-white/50 px-20 backdrop-blur-sm`}
     >
       <JumpingDots />
     </div>

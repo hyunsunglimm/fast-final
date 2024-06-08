@@ -7,11 +7,25 @@ import { ProgressBar } from '@/components/ProgressBar';
 import BucketBottomSheet from './_components/BucketBottomSheet';
 import { useWindowResize } from '@/shared/hooks/useWindowResize';
 import useOnloadImage from '@/shared/hooks/useOnloadImage';
+import { useQuery } from '@tanstack/react-query';
+import { useUserSession } from '@/shared/hooks/useUserSession';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
+import { BucketResponseType } from '@/shared/types/response/bucket';
 const DetailBucketPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [totalHeight, setTotalHeight] = useState(0);
   const { windowHeight, windowWidth } = useWindowResize();
   const { onload, onLoadImage } = useOnloadImage();
+  const user = useUserSession();
+  const { data: bucket, isPending } = useQuery<BucketResponseType>({
+    queryKey: ['bucket', user?.email],
+    queryFn: async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/bucket?user-email=${user?.email}`
+      );
+      return await res.json();
+    }
+  });
   useEffect(() => {
     const updateHeight = () => {
       if (sectionRef.current) {
@@ -31,14 +45,17 @@ const DetailBucketPage = () => {
 
   return (
     <>
+      {isPending && <LoadingBackdrop isFullScreen />}
       <section className='mt-20 px-20' ref={sectionRef}>
         <FlexBox justifyContent='between'>
           <FlexBox flexDirection='col' className='text-white'>
             <Text sizes='20' weight='600' className='mb-8'>
-              친구랑 유럽여행 가기
+              {bucket?.bucket_name}
             </Text>
-            <Text>금요일마다 50,000원씩</Text>
-            <Text>8,000,000원 모으기</Text>
+            <Text>
+              {bucket?.day_of_week}마다 {bucket?.savings_amount}원씩
+            </Text>
+            <Text>{bucket?.target_amount}원 모으기</Text>
           </FlexBox>
           <Image
             src='/images/home/bucket_img_step1.webp'
@@ -60,7 +77,7 @@ const DetailBucketPage = () => {
             sizes='12'
             className='inline-block rounded-l-full rounded-r-3xl bg-white px-8 py-[0.4rem]'
           >
-            상품 4개 연결
+            상품 {bucket?.my_saving_product.length}개 연결
           </Text>
         </FlexBox>
         <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>

@@ -1,10 +1,25 @@
+'use client';
+
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Image from 'next/image';
-import React from 'react';
-import NextButton from '../NextButton';
+import React, { useState } from 'react';
+import BucketLandingNextButton from '../BucketLandingNextButton';
+import BucketLandingPopup from '../BucketLandingPopup';
+import { useRouter } from 'next/navigation';
 
 const BucketLandingPartTwoThirdSection = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  const createMyRuleHandler = () => {
+    // 버킷리스트가 있으면 router.push('/create-bucket')
+    // 버킷리스트가 없으면 setIsOpen(true);
+    setIsOpen(true);
+  };
   return (
     <section className='bg-white pb-[6.4rem]'>
       <FlexBox flexDirection='col' alignItems='center' className='pt-[6.4rem]'>
@@ -29,12 +44,15 @@ const BucketLandingPartTwoThirdSection = () => {
           className='mb-32 mt-40 w-[13.1rem]'
         />
         <FlexBox flexDirection='col' className='w-full gap-12 px-24'>
-          <NextButton href='/not-found' backgroundColor='#FF7822'>
+          <BucketLandingNextButton onClick={createMyRuleHandler} backgroundColor='#FF7822'>
             나만의 규칙 생성하기
-          </NextButton>
-          <NextButton href='/not-found'>친구에게 알려주기</NextButton>
+          </BucketLandingNextButton>
+          <BucketLandingNextButton onClick={() => router.push('/not-found')}>
+            친구에게 알려주기
+          </BucketLandingNextButton>
         </FlexBox>
       </FlexBox>
+      <BucketLandingPopup isOpen={isOpen} onClose={onClose} />
     </section>
   );
 };
