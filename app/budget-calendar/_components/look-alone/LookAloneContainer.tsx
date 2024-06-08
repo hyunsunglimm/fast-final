@@ -6,6 +6,8 @@ import Line from '../common/Line';
 import BudgetBanner from '../common/BudgetBanner';
 import ExpensCalendarBox from './ExpensCalendarBox';
 import ExpensListBox from './ExpensListBox';
+import ManagementBottomSheet from './ManagementBottomSheet';
+import TargetModifyBottomSheet from './TargetModifyBottomSheet';
 const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'));
 
 const LookAloneContainer = () => {
@@ -13,6 +15,7 @@ const LookAloneContainer = () => {
   const [budgetSet, setBudgetSet] = useState(false); // 예산 목표가 설정되었는지 여부
   const [budgetUsed, setBudgetUsed] = useState(0.5); // 예산 사용 비율 (0.5는 50%를 의미)
   const [showPopup, setShowPopup] = useState(false);
+  const [modifyPopup, setModifyPopup] = useState(false);
   return (
     <>
       <div className='px-20 pb-24 pt-16'>
@@ -24,6 +27,7 @@ const LookAloneContainer = () => {
             icon={true}
             text={`목표 예산 중 ${budgetUsed * 100}%를 썼어요`}
             showArrow={true}
+            onClick={() => setShowPopup(true)}
           />
         ) : (
           <BudgetBanner
@@ -37,15 +41,26 @@ const LookAloneContainer = () => {
       </div>
       <Line />
       <ExpensListBox />
-
-      {/* 목표 설정 바텀시트 */}
-      <TargetBudgetBottomSheet
-        showPopup={showPopup}
-        setShowPopup={setShowPopup}
-        setBudgetSet={setBudgetSet}
-      />
-
-      {/* 목표 관리 바텀시트 */}
+      {budgetSet ? (
+        <ManagementBottomSheet
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+          setModifyPopup={setModifyPopup}
+        />
+      ) : (
+        <TargetBudgetBottomSheet
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+          setBudgetSet={setBudgetSet}
+        />
+      )}
+      {modifyPopup && (
+        <TargetModifyBottomSheet
+          modifyPopup={modifyPopup}
+          setModifyPopup={setModifyPopup}
+          setShowPopup={setShowPopup}
+        />
+      )}
     </>
   );
 };
