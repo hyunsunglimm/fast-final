@@ -54,7 +54,7 @@ export type WeeklyDataItem = {
 };
 
 export interface ShareDataType {
-  count: number;
+  totalCount: number;
   daily: ShareDataItem[];
 }
 

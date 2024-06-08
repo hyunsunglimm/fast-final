@@ -1,5 +1,5 @@
 import { DateInfo, DailyDataItemType, ShareDataType } from '@/shared/types/budgetCalendarType';
-
+import { returnDate } from '@/shared/utils/dateUtils';
 export const generateMergeData = (
   weeks: {
     weekDates: DateInfo[];
@@ -11,9 +11,19 @@ export const generateMergeData = (
   return weeks.map((week) => {
     const weekDates = week.weekDates.map((dateInfo) => {
       if (dateInfo.date) {
-        const dateString = new Date(dateInfo.date).toISOString().split('T')[0];
-        const dailyInfo = dailyData && dailyData.find((data) => data.date === dateString);
-        const shareInfo = shareData && shareData.daily.find((data) => data.date === dateString);
+        const { day: infoDay } = returnDate(dateInfo.date);
+        const dailyInfo =
+          dailyData &&
+          dailyData.find((data) => {
+            const { day: dailyInfoDay } = returnDate(data.date);
+            return dailyInfoDay === infoDay;
+          });
+        const shareInfo =
+          shareData &&
+          shareData.daily.find((data) => {
+            const { day: shareInfoDay } = returnDate(data.date);
+            return shareInfoDay === infoDay;
+          });
         if (dailyInfo) {
           return {
             ...dateInfo,
