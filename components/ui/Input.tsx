@@ -35,6 +35,8 @@ const inputVariants = cva(
 
 type InputProps = {
   trailingText?: string;
+  trailingTextClass?: string;
+  labelClass?: string;
   isTranslate?: boolean;
 } & VariantProps<typeof inputVariants> &
   React.InputHTMLAttributes<HTMLInputElement>;
@@ -51,6 +53,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       border,
       className,
       trailingText,
+      trailingTextClass,
+      labelClass,
       ...props
     }: InputProps,
     ref
@@ -78,7 +82,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             'absolute top-5 z-10 origin-[0] -translate-y-12 scale-75 transform cursor-pointer text-14 text-gray-600 duration-300 will-change-transform',
             validation === 'success' && 'peer-focus:text-active',
             validation === 'error' && 'peer-focus:text-warning',
-            'peer-placeholder-shown:-translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-12 peer-focus:scale-75 peer-disabled:text-gray-300 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4'
+            'peer-placeholder-shown:-translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-12 peer-focus:scale-75 peer-disabled:text-gray-300 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4',
+            labelClass
           )}
         >
           {placeholder}
@@ -86,7 +91,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         {trailingText && (
           <FlexBox className='absolute right-3 h-full' alignItems='center'>
-            <Text sizes='14' className=' text-gray-600'>
+            <Text sizes='14' className={cn('text-gray-600', trailingTextClass)}>
               {trailingText}
             </Text>
           </FlexBox>

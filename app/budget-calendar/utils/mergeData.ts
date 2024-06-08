@@ -11,7 +11,10 @@ export const mergeData = (
   return weeks.map((week) => {
     const weekDates = week.weekDates.map((dateInfo) => {
       if (dateInfo.date) {
-        const dateString = new Date(dateInfo.date).toISOString().split('T')[0];
+        const year = dateInfo.date.getFullYear();
+        const month = (dateInfo.date.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateInfo.date.getDate().toString().padStart(2, '0');
+        const dateString = `${year}-${month}-${day}`;
         const dailyInfo = dailyData && dailyData.find((data) => data.date === dateString);
         const shareInfo = shareData && shareData.daily.find((data) => data.date === dateString);
         if (dailyInfo) {
