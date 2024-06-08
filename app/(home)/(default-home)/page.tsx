@@ -14,7 +14,9 @@ const ChallengeCard = dynamic(() => import('./_components/ChallengeCard'), {
 
 const HomePage = async () => {
   const session = await auth();
-  const res = await fetch(`http://localhost:3000/api/bucket?user-email=${session?.user?.email}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/bucket?user-email=${session?.user?.email}`
+  );
   const bucket = await res.json();
 
   return (

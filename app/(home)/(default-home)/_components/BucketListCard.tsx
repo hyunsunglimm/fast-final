@@ -35,7 +35,7 @@ const BucketListCard = ({ bucket }: { bucket: BucketResponseType }) => {
       </ListContent>
       <ListFooter
         targetAmount={localeStringToNumber(bucket.target_amount)}
-        currentAmount={350000}
+        currentAmount={localeStringToNumber(bucket.savings_amount)} // 요일마다 입금하는 것은 미구현
       />
     </ListCard>
   );

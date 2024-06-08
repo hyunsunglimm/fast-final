@@ -14,7 +14,9 @@ const CreateBucketListResult = async () => {
     return redirect('/');
   }
 
-  const res = await fetch(`http://localhost:3000/api/bucket?user-email=${session?.user?.email}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/bucket?user-email=${session?.user?.email}`
+  );
   const createdBucket = await res.json();
 
   if (!createdBucket) {

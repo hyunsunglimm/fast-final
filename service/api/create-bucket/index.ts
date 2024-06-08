@@ -17,7 +17,7 @@ export const getRecentBuckets = (userEmail: string) => {
 };
 
 export const createBucket = async (state: StateType) => {
-  await fetch('http://localhost:3000/api/bucket', {
+  await fetch(`${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/bucket`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

@@ -20,7 +20,9 @@ const DetailBucketPage = () => {
   const { data: bucket, isPending } = useQuery<BucketResponseType>({
     queryKey: ['bucket', user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3000/api/bucket?user-email=${user?.email}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/bucket?user-email=${user?.email}`
+      );
       return await res.json();
     }
   });
