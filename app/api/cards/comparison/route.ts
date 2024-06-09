@@ -39,6 +39,5 @@ const cardsToCompare = [
 ];
 
 export const GET = async () => {
-  await new Promise((res) => setTimeout(res, 2000));
   return NextResponse.json(cardsToCompare);
 };

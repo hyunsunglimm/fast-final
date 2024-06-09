@@ -42,7 +42,6 @@ const checkCards = [
 ];
 
 export const GET = async (request: Request) => {
-  await new Promise((res) => setTimeout(res, 2000));
   const { searchParams } = new URL(request.url);
   const type = searchParams.get('type');
 
