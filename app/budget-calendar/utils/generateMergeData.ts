@@ -27,9 +27,10 @@ export const generateMergeData = (
         if (dailyInfo) {
           return {
             ...dateInfo,
-            income: dailyInfo.income,
-            expense: dailyInfo.expense,
-            imgSrc: dailyInfo.weatherId && `/icons/weather/weather-${dailyInfo.weatherId}.svg`
+            income: dailyInfo.earnedCost,
+            expense: dailyInfo.usedCost,
+            imgSrc:
+              dailyInfo.weatherImageNo && `/icons/weather/weather-${dailyInfo.weatherImageNo}.svg`
           };
         }
         if (shareInfo) {
