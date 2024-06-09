@@ -2,26 +2,23 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
+import { CardResponseType } from '@/shared/types/response/card';
 import Image from 'next/image';
 
 type SpotlightCardProps = {
-  card: {
-    title: string;
-    annualBenefits: number;
-    annualFee: string;
-    image: string;
-    isEvent: boolean;
-  };
+  card: CardResponseType;
   count: number;
 };
 
 const SpotlightCard = ({
-  card: { title, annualBenefits, annualFee, image, isEvent },
+  card: { name, card_image, discount_limit, annual_fee },
   count
 }: SpotlightCardProps) => {
+  const isEvent = annual_fee <= 5000;
+
   return (
     <Card className='flex items-center p-16'>
-      <FlexBox flexDirection='col' alignItems='center' className='mr-20'>
+      <FlexBox flexDirection='col' alignItems='center'>
         {count === 1 ? (
           <Icon src='/icons/financial-product/gold-crown.svg' alt='gold-crown' size='16' />
         ) : count === 2 ? (
@@ -36,24 +33,24 @@ const SpotlightCard = ({
         </Text>
       </FlexBox>
       <Image
-        src={`/images/financial-product/${image}.webp`}
-        alt={title}
-        width={100}
-        height={82}
-        className='mr-[1.6rem] w-[5.2rem]'
+        src={card_image}
+        alt={`${name}의 카드 이미지`}
+        width={400}
+        height={52}
+        className='w-[8.2rem] rotate-90'
       />
       <FlexBox flexDirection='col'>
         <Text weight='500' className='mb-[0.2rem]'>
-          {title}
+          {name}
         </Text>
         <Text sizes='16' weight='700' className='mb-[1rem]'>
-          연 혜택 {annualBenefits.toLocaleString()}원
+          월 최대 혜택 {discount_limit.toLocaleString()}원
         </Text>
         <Text
           sizes='12'
           className={`rounded-xs px-[0.8rem] py-[0.4rem] ${isEvent ? 'border border-primary bg-[#FAF7F5] text-primary' : 'bg-gray-50'}`}
         >
-          {annualFee}
+          {isEvent ? '연회비 이벤트' : `연회비 ${annual_fee.toLocaleString()}원`}
         </Text>
       </FlexBox>
     </Card>
