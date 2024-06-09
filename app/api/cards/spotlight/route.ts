@@ -3,15 +3,19 @@ import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
-  const type = searchParams.get('type');
 
-  const convertedType = type === '신용카드' ? 'credit' : type === '체크카드' ? 'check' : '';
+  const type =
+    searchParams.get('type') === '신용카드'
+      ? 'credit'
+      : searchParams.get('type') === '체크카드'
+        ? 'check'
+        : '';
 
-  if (convertedType !== 'credit' && convertedType !== 'check') {
+  if (!type) {
     return new Response('bad request', { status: 400 });
   }
 
-  const spotlightCards = await getSpotlightCards(convertedType);
+  const spotlightCards = await getSpotlightCards(type);
 
   return NextResponse.json(spotlightCards);
 };

@@ -4,20 +4,30 @@ import Text from '@/components/ui/Text';
 import { useEffect } from 'react';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
-import { getCardsToCompare } from '@/service/api/financial-product/cards';
 import Spinner from '@/components/Spinner';
 import FlexBox from '@/components/ui/FlexBox';
 import CardsToCompare from './CardsToCompare';
 import BottomButton from './BottomButton';
+import { CardResponseType } from '@/shared/types/response/card';
 
 const QUERY_KEY = 'card';
 
 const ComparisonSection = () => {
-  const { data: cardsToCompare, isPending } = useQuery({
-    queryKey: ['cardsToCompare'],
-    queryFn: getCardsToCompare
+  const { pathname, router, params, queryValues, queryValue } = useQueryString();
+
+  const cardType = queryValue('tab2');
+  const cardCompanies = queryValues('card-company');
+  const benefitCategories = queryValues('filtering');
+
+  const { data: cardsToCompare, isPending } = useQuery<CardResponseType[]>({
+    queryKey: ['cardsToCompare', cardType, cardCompanies, benefitCategories],
+    queryFn: async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/comparison?type=${cardType}&company=${cardCompanies}&category=${benefitCategories}`
+      );
+      return await res.json();
+    }
   });
-  const { pathname, router, params, queryValues } = useQueryString();
 
   const selectedCards = queryValues(QUERY_KEY);
 

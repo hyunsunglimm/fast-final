@@ -153,3 +153,16 @@ export const CARD_BENEFIT_CATEGORIES = [
     iconPath: '/icons/product/product-subscribe.svg'
   }
 ];
+
+export const CARD_COMPANIES = [
+  'KB국민카드',
+  'BC카드',
+  'IBK기업은행',
+  '신한카드',
+  'NH농협카드',
+  '현대카드',
+  '우리카드',
+  '삼성카드',
+  '하나카드',
+  '롯데카드'
+];

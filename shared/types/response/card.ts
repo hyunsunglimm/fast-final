@@ -10,11 +10,7 @@ export type BenefitCategories =
   | 'oiling'
   | 'travel'
   | 'online'
-  | 'food'
-  | 'subscribe'
-  | 'monthly_payment'
-  | 'health'
-  | 'easy_payment';
+  | 'subscribe';
 
 export type CardCompany =
   | 'KB국민카드'

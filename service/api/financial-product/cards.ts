@@ -17,14 +17,11 @@ const CardResponseFilde = `{
 import { CardsToCompare, ComparedCards } from '@/shared/types/card';
 import { requestFetch } from '../fetchOptions';
 import { client } from '@/sanity/lib/client';
+import { BenefitCategories, CardCompany } from '@/shared/types/response/card';
 
-// export const getSpendingHabitsCards = (): Promise<SpendingHabitsCard[]> => {
-//   return requestFetch('/api/cards/spending-habits');
+// export const getCardsToCompare = (): Promise<CardsToCompare[]> => {
+//   return requestFetch('/api/cards/comparison');
 // };
-
-export const getCardsToCompare = (): Promise<CardsToCompare[]> => {
-  return requestFetch('/api/cards/comparison');
-};
 
 export const getComparedCards = (): Promise<ComparedCards[]> => {
   return requestFetch('/api/cards/comparison/result');
@@ -44,4 +41,14 @@ export const getSpendingHabitsCards = async () => {
   const selected = shuffled.slice(0, 5);
 
   return selected;
+};
+
+export const getFilteredCards = async (
+  type: 'credit' | 'check',
+  company?: CardCompany[],
+  category?: BenefitCategories[]
+) => {
+  return await client.fetch(`
+  *[_type == "card" && type == "${type}"]${CardResponseFilde}
+`);
 };
