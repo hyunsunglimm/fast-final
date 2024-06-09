@@ -23,6 +23,17 @@ export type ExpenseSummaryProps = {
 };
 
 // 공유멤버
+export type Friend = {
+  memberId: number;
+  name: string;
+  profileImageUrl: string;
+};
+
+export type FriendData = {
+  friendCount: number;
+  friendList: Friend[];
+};
+
 export type SharedMembersProps = {
   viewMode: string;
   selectedProfile: string;
