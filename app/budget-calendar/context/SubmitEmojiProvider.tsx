@@ -13,7 +13,6 @@ type ValueType = {
   setOpenAddEmojiSheet: React.Dispatch<React.SetStateAction<boolean>>;
   setReactionDate: React.Dispatch<React.SetStateAction<string>>;
   handleAddEmojiClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleRemoveEmojiClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 const SubmitEmojiContext = createContext<ValueType>({
   openTotalReactionSheet: false,
@@ -26,15 +25,14 @@ const SubmitEmojiContext = createContext<ValueType>({
     daily: []
   },
   setReactionDate: () => {},
-  handleAddEmojiClick: () => {},
-  handleRemoveEmojiClick: () => {}
+  handleAddEmojiClick: () => {}
 });
 
 const SubmitEmojiProvider = ({ children }: { children: React.ReactNode }) => {
   const [openTotalReactionSheet, setOpenTotalReactionSheet] = useState(false);
   const [openAddEmojiSheet, setOpenAddEmojiSheet] = useState(false);
   const [reactionDate, setReactionDate] = useState('');
-  const { shareData, handleAddEmojiClick, handleRemoveEmojiClick } = useAddOrRemoveEmojiHooks(
+  const { shareData, handleAddEmojiClick } = useAddOrRemoveEmojiHooks(
     reactionDate,
     initialTogetherData
   );
@@ -47,8 +45,7 @@ const SubmitEmojiProvider = ({ children }: { children: React.ReactNode }) => {
     shareData,
     reactionDate,
     setReactionDate,
-    handleAddEmojiClick,
-    handleRemoveEmojiClick
+    handleAddEmojiClick
   };
 
   return <SubmitEmojiContext.Provider value={value}>{children}</SubmitEmojiContext.Provider>;

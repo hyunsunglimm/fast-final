@@ -7,6 +7,7 @@ import { useSubmitEmojiContext } from '@/app/budget-calendar/context/SubmitEmoji
 
 const ReactionBottomSheet = () => {
   const { openTotalReactionSheet, setOpenTotalReactionSheet, shareData } = useSubmitEmojiContext();
+
   return (
     <BottomSheet
       title='반응 보기'
@@ -45,7 +46,7 @@ const ReactionBottomSheet = () => {
                       <span role='img' className='mr-4 font-sans'>
                         {item.stickerOrEmoticonID}
                       </span>
-                      {item.count}
+                      {item.memberIds.length}
                     </TextButton>
                   );
                 })}

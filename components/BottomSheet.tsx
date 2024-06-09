@@ -5,6 +5,7 @@ import Button, { buttonVariants } from './ui/Button';
 import FlexBox from './ui/FlexBox';
 import Text from './ui/Text';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 
 type BottomSheetProps = {
   title: string;
@@ -15,6 +16,7 @@ type BottomSheetProps = {
   onClose: () => void;
   onClick?: () => void;
   children: React.ReactNode;
+  noScrollContents?: React.ReactNode;
   isButtonShow?: boolean;
   isBack?: boolean;
   onIsBackHandler?: () => void;
@@ -28,13 +30,20 @@ const BottomSheet = ({
   buttonOptions,
   onClose,
   onClick,
+  noScrollContents,
   isButtonShow = true,
   children,
   isBack = false,
   onIsBackHandler
 }: BottomSheetProps) => {
   const { size, styled, disabled } = buttonOptions || {};
-
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -57,7 +66,7 @@ const BottomSheet = ({
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className='relative flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
           >
-            <FlexBox alignItems='center' justifyContent='between' className='w-full'>
+            <FlexBox alignItems='center' justifyContent='between' className='h-full w-full'>
               {isBack ? (
                 <Icon
                   onClick={onIsBackHandler}
@@ -80,7 +89,10 @@ const BottomSheet = ({
                 className='cursor-pointer'
               />
             </FlexBox>
-            <div className='hide-scrollbar overflow-y-scroll overscroll-contain'>{children}</div>
+            {noScrollContents && <div className=''>{noScrollContents}</div>}
+            <div className='hide-scrollbar h-full overflow-y-scroll overscroll-contain'>
+              {children}
+            </div>
             {isButtonShow && (
               <Button
                 type={buttonType}

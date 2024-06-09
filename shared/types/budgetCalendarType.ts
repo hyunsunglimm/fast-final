@@ -53,20 +53,19 @@ export type WeeklyDataItem = {
   expense: number;
 };
 
-export interface ShareDataType {
+export type ShareDataType = {
   totalCount: number;
   daily: ShareDataItem[];
-}
+};
 
-export interface ShareDataItem {
+export type ShareDataItem = {
   date: string;
   weatherId: number;
   reactions: {
-    memberId: number;
     stickerOrEmoticonID: string;
-    count: number;
+    memberIds: number[];
   }[];
-}
+};
 
 // 날짜 dropdown
 export type YearMonthDropdownProps = {
