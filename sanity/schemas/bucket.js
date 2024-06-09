@@ -9,38 +9,38 @@ export const bucket = {
       type: 'string'
     },
     {
-      title: 'BucketName',
+      title: 'Bucket Name',
       name: 'bucket_name',
       type: 'string'
     },
     {
-      title: 'DayOfWeek',
+      title: 'Day Of Week',
       name: 'day_of_week',
       type: 'string'
     },
     {
-      title: 'MySavingProduct',
+      title: 'My Saving Product',
       name: 'my_saving_product',
       type: 'array',
       of: [{ type: 'string' }]
     },
     {
-      title: 'SavingBook',
+      title: 'Saving Book',
       name: 'saving_book',
       type: 'string'
     },
     {
-      title: 'SavingsAmount',
+      title: 'Savings Amount',
       name: 'savings_amount',
       type: 'string'
     },
     {
-      title: 'SpendBook',
+      title: 'Spend Book',
       name: 'spend_book',
       type: 'string'
     },
     {
-      title: 'TargetAmount',
+      title: 'Target Amount',
       name: 'target_amount',
       type: 'string'
     }
