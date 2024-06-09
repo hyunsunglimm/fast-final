@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import BottomSheet from '@/components/BottomSheet';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
@@ -12,6 +13,16 @@ const ReactionBottomSheet = () => {
   const { openTotalReactionSheet, setOpenTotalReactionSheet, shareData, handleAddEmojiClick } =
     useSubmitEmojiContext();
 
+  const totalCount = useMemo(() => {
+    return shareData.daily.reduce((total, item) => {
+      const itemCount = item.reactions.reduce(
+        (sum, reaction) => sum + reaction.memberIds.length,
+        0
+      );
+      return total + itemCount;
+    }, 0);
+  }, [shareData]);
+
   return (
     <BottomSheet
       title='반응 보기'
@@ -21,7 +32,7 @@ const ReactionBottomSheet = () => {
       onClose={() => setOpenTotalReactionSheet(false)}
     >
       <Text sizes='18' weight='700'>
-        총 {shareData.totalCount}개
+        총 {totalCount}개
       </Text>
       {shareData.daily.map((item) => {
         const { day, month } = returnDate(item.date);

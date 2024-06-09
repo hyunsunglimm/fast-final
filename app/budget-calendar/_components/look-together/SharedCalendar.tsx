@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useMemo } from 'react';
 import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
 import TextButton from '@/components/ui/TextButton';
@@ -15,6 +15,16 @@ type SharedCalendarProps = {
 const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
   const { setOpenAddEmojiSheet, setOpenTotalReactionSheet, shareData, setReactionDate } =
     useSubmitEmojiContext();
+
+  const totalCount = useMemo(() => {
+    return shareData.daily.reduce((total, item) => {
+      const itemCount = item.reactions.reduce(
+        (sum, reaction) => sum + reaction.memberIds.length,
+        0
+      );
+      return total + itemCount;
+    }, 0);
+  }, [shareData]);
 
   // 달력 날짜
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -50,7 +60,7 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
             >
               <Icon src='/icons/profile/reaction-profile.svg' alt='프로필 아이콘' size='16' />
             </FlexBox>
-            반응 {shareData.totalCount}개
+            반응 {totalCount}개
           </TextButton>
         </FlexBox>
         <BudgetBanner

@@ -54,7 +54,6 @@ export type WeeklyDataItem = {
 };
 
 export type ShareDataType = {
-  totalCount: number;
   daily: ShareDataItem[];
 };
 

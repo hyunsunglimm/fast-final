@@ -21,7 +21,6 @@ const SubmitEmojiContext = createContext<ValueType>({
   setOpenAddEmojiSheet: () => {},
   reactionDate: '',
   shareData: {
-    totalCount: 0,
     daily: []
   },
   setReactionDate: () => {},
