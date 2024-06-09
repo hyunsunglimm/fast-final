@@ -45,30 +45,32 @@ const Calendar = ({ year, month, dailyData, shareData, onClick }: CalendarProps)
         return (
           <React.Fragment key={index}>
             {/* 주차 데이터 */}
-            <FlexBox
-              className={`mb-10 rounded-xxs px-12 py-6 ${week.isCurrentWeek ? 'bg-select' : 'bg-gray-10'}`}
-              justifyContent='between'
-            >
-              {hasIncomeOrExpense ? (
-                <>
-                  <div>{index + 1}주차</div>
-                  <div>
-                    {totalExpense < 0 && <Text>{formatNumber(totalExpense)}원</Text>}
-                    {totalIncome > 0 && (
-                      <Text className='ml-8 text-primary'>+{formatNumber(totalIncome)}원</Text>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div>{index + 1}주차</div>
-                  <div>
-                    <Text>?원</Text>
-                    <Text className='ml-8'>?원</Text>
-                  </div>
-                </>
-              )}
-            </FlexBox>
+            {dailyData && (
+              <FlexBox
+                className={`mb-10 rounded-xxs px-12 py-6 ${week.isCurrentWeek ? 'bg-select' : 'bg-gray-10'}`}
+                justifyContent='between'
+              >
+                {hasIncomeOrExpense ? (
+                  <>
+                    <div>{index + 1}주차</div>
+                    <div>
+                      {totalExpense < 0 && <Text>{formatNumber(totalExpense)}원</Text>}
+                      {totalIncome > 0 && (
+                        <Text className='ml-8 text-primary'>+{formatNumber(totalIncome)}원</Text>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>{index + 1}주차</div>
+                    <div>
+                      <Text>?원</Text>
+                      <Text className='ml-8'>?원</Text>
+                    </div>
+                  </>
+                )}
+              </FlexBox>
+            )}
             {/* 달력 */}
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
