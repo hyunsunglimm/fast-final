@@ -18,7 +18,6 @@ type BottomSheetProps = {
   children: React.ReactNode;
   noScrollContents?: React.ReactNode;
   isButtonShow?: boolean;
-  onIsBackHandler?: () => void;
   isBack?: (() => void) | boolean;
 };
 
@@ -66,7 +65,7 @@ const BottomSheet = ({
             className='relative flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
           >
             <FlexBox alignItems='center' justifyContent='between' className='w-full'>
-              <div className='w-[1.6rem]'>
+              <div className='w-[1.6rem] cursor-pointer'>
                 {isBack && (
                   <Icon
                     src='/icons/system-icon/arrow/arrow-left.svg'

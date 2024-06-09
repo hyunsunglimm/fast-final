@@ -52,7 +52,7 @@ const SubmitEmojiBottomSheet = () => {
                     name={reaction.stickerOrEmoticonID}
                     onClick={handleAddEmojiClick}
                     className={cn(
-                      'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 hover:no-underline active:scale-95 xs:hover:bg-gray-200',
+                      'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
                       myReactionBtnClass
                     )}
                   >
@@ -99,7 +99,7 @@ const SubmitEmojiBottomSheet = () => {
               role='button'
               aria-label={`${item.description} 버튼`}
               key={item.emoji}
-              className='h-[3.6rem] w-[3.6rem] rounded-full bg-gray-50 text-20 hover:no-underline active:scale-95 xs:hover:bg-gray-200'
+              className='h-[3.6rem] w-[3.6rem] rounded-full bg-gray-50 text-20 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline'
             >
               <span role='img' aria-label={item.description} className='font-sans'>
                 {item.emoji}

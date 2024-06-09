@@ -59,7 +59,7 @@ const ReactionBottomSheet = () => {
                       key={reaction.stickerOrEmoticonID}
                       onClick={(e) => handleAddEmojiClick(e, item.date)}
                       className={cn(
-                        'h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 hover:no-underline active:scale-95 xs:hover:bg-gray-200',
+                        'h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
                         myReactionBtnClass
                       )}
                     >
