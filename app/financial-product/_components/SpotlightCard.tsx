@@ -18,7 +18,7 @@ const SpotlightCard = ({
 
   return (
     <Card className='flex items-center p-16'>
-      <FlexBox flexDirection='col' alignItems='center'>
+      <FlexBox flexDirection='col' alignItems='center' className='mr-20'>
         {count === 1 ? (
           <Icon src='/icons/financial-product/gold-crown.svg' alt='gold-crown' size='16' />
         ) : count === 2 ? (
@@ -36,8 +36,8 @@ const SpotlightCard = ({
         src={card_image}
         alt={`${name}의 카드 이미지`}
         width={400}
-        height={52}
-        className='w-[8.2rem] rotate-90'
+        height={82}
+        className='mr-16 w-[5.2rem]'
       />
       <FlexBox flexDirection='col'>
         <Text weight='500' className='mb-[0.2rem]'>
