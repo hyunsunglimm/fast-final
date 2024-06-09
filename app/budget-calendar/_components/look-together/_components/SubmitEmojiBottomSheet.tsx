@@ -41,15 +41,15 @@ const SubmitEmojiBottomSheet = () => {
       <div className='mt-16 grid w-full grid-cols-5 gap-8'>
         {daily.map((item) => {
           const currentDate = new Date(item.date).getDate() === reactionDay;
-          return item.reactions.map((emoji) => {
-            const myReactionBtnClass = emoji.memberIds.includes(MY_MEMBER_ID)
+          return item.reactions.map((reaction) => {
+            const myReactionBtnClass = reaction.memberIds.includes(MY_MEMBER_ID)
               ? 'border border-primary bg-select xs:hover:bg-primary/30'
               : '';
             return (
-              <React.Fragment key={emoji.stickerOrEmoticonID}>
+              <React.Fragment key={reaction.stickerOrEmoticonID}>
                 {currentDate && (
                   <TextButton
-                    name={emoji.stickerOrEmoticonID}
+                    name={reaction.stickerOrEmoticonID}
                     onClick={handleAddEmojiClick}
                     className={cn(
                       'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 hover:no-underline active:scale-95 xs:hover:bg-gray-200',
@@ -57,9 +57,9 @@ const SubmitEmojiBottomSheet = () => {
                     )}
                   >
                     <span role='img' className='mr-4 font-sans'>
-                      {emoji.stickerOrEmoticonID}
+                      {reaction.stickerOrEmoticonID}
                     </span>
-                    <span className='truncate'>{emoji.memberIds.length}</span>
+                    <span className='truncate'>{reaction.memberIds.length}</span>
                   </TextButton>
                 )}
               </React.Fragment>

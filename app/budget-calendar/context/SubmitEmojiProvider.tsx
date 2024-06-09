@@ -12,7 +12,7 @@ type ValueType = {
   setOpenTotalReactionSheet: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenAddEmojiSheet: React.Dispatch<React.SetStateAction<boolean>>;
   setReactionDate: React.Dispatch<React.SetStateAction<string>>;
-  handleAddEmojiClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleAddEmojiClick: (e: React.MouseEvent<HTMLButtonElement>, date?: string) => void;
 };
 const SubmitEmojiContext = createContext<ValueType>({
   openTotalReactionSheet: false,

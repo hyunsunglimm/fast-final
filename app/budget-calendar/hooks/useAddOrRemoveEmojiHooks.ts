@@ -6,19 +6,21 @@ export const MY_MEMBER_ID = 1;
 
 const useAddOrRemoveEmojiHooks = (reactionDate: string, initialTogetherData: ShareDataType) => {
   const [shareData, setShareData] = useState(initialTogetherData);
-  const { day: reactionDay } = returnDate(reactionDate);
+  const { day: addEmojiDate } = returnDate(reactionDate);
 
-  const handleAddEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleAddEmojiClick = (e: MouseEvent<HTMLButtonElement>, date?: string) => {
     const selectEmoji = e.currentTarget.name;
+    const { day: viewEmojiDate } = returnDate(date);
+
+    const curretnClickDate = date ? viewEmojiDate : addEmojiDate;
 
     setShareData((prev) => {
       const copyShareData = structuredClone(prev);
       // 데이터에서 현재 날짜 찾기
       const findCurrentDailyItem = copyShareData.daily.find((item) => {
         const { day: findItemDay } = returnDate(item.date);
-        return findItemDay === reactionDay;
+        return findItemDay === curretnClickDate;
       });
-
       if (!findCurrentDailyItem) {
         return copyShareData; // 현재 날짜 데이터가 없으면 복사된 데이터 반환
       }

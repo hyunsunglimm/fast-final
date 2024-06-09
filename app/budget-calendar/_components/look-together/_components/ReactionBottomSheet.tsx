@@ -4,9 +4,13 @@ import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import TextButton from '@/components/ui/TextButton';
 import { useSubmitEmojiContext } from '@/app/budget-calendar/context/SubmitEmojiProvider';
+import { returnDate } from '@/shared/utils/dateUtils';
+import { MY_MEMBER_ID } from '@/app/budget-calendar/hooks/useAddOrRemoveEmojiHooks';
+import { cn } from '@/shared/utils/twMerge';
 
 const ReactionBottomSheet = () => {
-  const { openTotalReactionSheet, setOpenTotalReactionSheet, shareData } = useSubmitEmojiContext();
+  const { openTotalReactionSheet, setOpenTotalReactionSheet, shareData, handleAddEmojiClick } =
+    useSubmitEmojiContext();
 
   return (
     <BottomSheet
@@ -19,12 +23,10 @@ const ReactionBottomSheet = () => {
       <Text sizes='18' weight='700'>
         총 {shareData.totalCount}개
       </Text>
-      {shareData.daily.map((item, idx) => {
-        const month = new Date(item.date).getMonth() + 1;
-        const day = new Date(item.date).getDate();
-
+      {shareData.daily.map((item) => {
+        const { day, month } = returnDate(item.date);
         return (
-          <FlexBox key={idx} className='my-24 w-full gap-x-16'>
+          <FlexBox key={item.date} className='my-24 w-full gap-x-16'>
             <Icon
               src={`/icons/weather/weather-${item.weatherId}.svg`}
               alt='날씨 아이콘'
@@ -36,17 +38,24 @@ const ReactionBottomSheet = () => {
                 {month}월 {day}일
               </Text>
               <div className='grid grid-cols-5 gap-8'>
-                {item.reactions.map((item) => {
+                {item.reactions.map((reaction) => {
+                  const myReactionBtnClass = reaction.memberIds.includes(MY_MEMBER_ID)
+                    ? 'border border-primary bg-select xs:hover:bg-primary/30'
+                    : '';
                   return (
                     <TextButton
-                      key={item.stickerOrEmoticonID}
-                      role='button'
-                      className='h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 hover:bg-gray-200 hover:no-underline active:scale-95'
+                      name={reaction.stickerOrEmoticonID}
+                      key={reaction.stickerOrEmoticonID}
+                      onClick={(e) => handleAddEmojiClick(e, item.date)}
+                      className={cn(
+                        'h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 hover:no-underline active:scale-95 xs:hover:bg-gray-200',
+                        myReactionBtnClass
+                      )}
                     >
                       <span role='img' className='mr-4 font-sans'>
-                        {item.stickerOrEmoticonID}
+                        {reaction.stickerOrEmoticonID}
                       </span>
-                      {item.memberIds.length}
+                      {reaction.memberIds.length}
                     </TextButton>
                   );
                 })}
