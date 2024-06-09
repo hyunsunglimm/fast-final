@@ -1,7 +1,6 @@
 import { ShareDataType } from '@/shared/types/budgetCalendarType';
 
 export const initialTogetherData: ShareDataType = {
-  totalCount: 53,
   daily: [
     {
       date: '2024-06-01',
