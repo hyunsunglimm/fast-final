@@ -56,13 +56,6 @@ export type DailyDataItemType = {
   weatherImageNo: number;
 };
 
-export type WeeklyDataItem = {
-  month: number;
-  week: number;
-  income: number;
-  expense: number;
-};
-
 export type ShareDataType = {
   daily: ShareDataItem[];
 };

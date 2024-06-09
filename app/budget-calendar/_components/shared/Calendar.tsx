@@ -3,11 +3,7 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
-import {
-  ShareDataType,
-  DailyDataItemType,
-  WeeklyDataItem
-} from '@/shared/types/budgetCalendarType';
+import { ShareDataType, DailyDataItemType } from '@/shared/types/budgetCalendarType';
 
 import { returnDate } from '@/shared/utils/dateUtils';
 import { cn } from '@/shared/utils/twMerge';
@@ -17,12 +13,11 @@ type CalendarProps = {
   year: number;
   month: number;
   dailyData?: DailyDataItemType[];
-  weeklyData?: WeeklyDataItem[];
   shareData?: ShareDataType;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: CalendarProps) => {
+const Calendar = ({ year, month, dailyData, shareData, onClick }: CalendarProps) => {
   const dates = getCurrentMonthDates(year, month);
   const weeks = getWeeklyData(year, month, dates);
   const data = generateMergeData(weeks, dailyData, shareData);
@@ -38,39 +33,39 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: Ca
       </div>
 
       {data.map((week, index) => {
-        const weeklyDataItem = weeklyData?.find(
-          (item) => item.month === month && item.week === index + 1
+        const totalIncome = week.weekDates.reduce((acc, curr) => acc + (curr.income ?? 0), 0);
+        const totalExpense = week.weekDates.reduce((acc, curr) => acc + (curr.expense ?? 0), 0);
+
+        // 수입과 지출이 있는지 확인
+        const hasIncomeOrExpense = week.weekDates.some(
+          (item) => item.income !== undefined || item.expense !== undefined
         );
 
         return (
           <React.Fragment key={index}>
             {/* 주차 데이터 */}
-            {weeklyData && (
-              <FlexBox
-                className={`mb-10 rounded-xxs px-12 py-6 ${week.isCurrentWeek ? 'bg-select' : 'bg-gray-10'}`}
-                justifyContent='between'
-              >
-                {weeklyDataItem ? (
-                  <>
-                    <div>{weeklyDataItem.week}주차</div>
-                    <div>
-                      {weeklyDataItem.expense > 0 && <Text>-{weeklyDataItem.expense}원</Text>}
-                      {weeklyDataItem.income > 0 && (
-                        <Text className='ml-8 text-primary'>+{weeklyDataItem.income}원</Text>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div>{index + 1}주차</div>
-                    <div>
-                      <Text>?원</Text>
-                      <Text className='ml-8'>?원</Text>
-                    </div>
-                  </>
-                )}
-              </FlexBox>
-            )}
+            <FlexBox
+              className={`mb-10 rounded-xxs px-12 py-6 ${week.isCurrentWeek ? 'bg-select' : 'bg-gray-10'}`}
+              justifyContent='between'
+            >
+              {hasIncomeOrExpense ? (
+                <>
+                  <div>{index + 1}주차</div>
+                  <div>
+                    {totalExpense < 0 && <Text>{totalExpense}원</Text>}
+                    {totalIncome > 0 && <Text className='ml-8 text-primary'>+{totalIncome}원</Text>}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>{index + 1}주차</div>
+                  <div>
+                    <Text>?원</Text>
+                    <Text className='ml-8'>?원</Text>
+                  </div>
+                </>
+              )}
+            </FlexBox>
             {/* 달력 */}
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
