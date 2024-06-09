@@ -31,12 +31,12 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
             {card.name}
           </Text>
           <Text className='mb-[1rem]'>{card.description}</Text>
-          <ul className='hide-scrollbar flex gap-20 overflow-x-scroll'>
+          <ul className='hide-scrollbar flex gap-8 overflow-x-scroll'>
             {card.benefits.map(({ category }) => {
               const categoryInfo = CARD_BENEFIT_CATEGORIES.find((c) => c.title_en === category);
 
               return (
-                <li key={category} className=' flex items-center gap-[0.2rem] '>
+                <li key={category} className='flex shrink-0 items-center gap-2'>
                   <Icon
                     src={categoryInfo?.iconPath || ''}
                     alt={`${categoryInfo?.title_kr} icon`}

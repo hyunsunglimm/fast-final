@@ -14,14 +14,10 @@ const CardResponseFilde = `{
   "type": type,
 }`;
 
-import { CardsToCompare, ComparedCards } from '@/shared/types/card';
+import { ComparedCards } from '@/shared/types/card';
 import { requestFetch } from '../fetchOptions';
 import { client } from '@/sanity/lib/client';
 import { BenefitCategories, CardCompany } from '@/shared/types/response/card';
-
-// export const getCardsToCompare = (): Promise<CardsToCompare[]> => {
-//   return requestFetch('/api/cards/comparison');
-// };
 
 export const getComparedCards = (): Promise<ComparedCards[]> => {
   return requestFetch('/api/cards/comparison/result');
@@ -48,7 +44,14 @@ export const getFilteredCards = async (
   company?: CardCompany[],
   category?: BenefitCategories[]
 ) => {
-  return await client.fetch(`
-  *[_type == "card" && type == "${type}"]${CardResponseFilde}
-`);
+  const companyFilter =
+    company && company.length > 0
+      ? `&& company in [${company.map((comp) => `"${comp}"`).join(', ')}]`
+      : '';
+
+  const query = `
+      *[_type == "card" && type == "${type}" ${companyFilter}]${CardResponseFilde}
+    `;
+
+  return await client.fetch(query);
 };
