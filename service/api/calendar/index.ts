@@ -1,3 +1,4 @@
+import { DailyDataItemType } from '@/shared/types/budgetCalendarType';
 import { requestFetch } from '../fetchOptions';
 import type {
   CalendarHistroyResponse,
@@ -34,4 +35,19 @@ export const patchRegret = (historyId: number, regret: boolean): Promise<History
     { method: 'PATCH' },
     BASE_URL
   );
+};
+
+/**
+ * @returns 캘린더 조회
+ */
+export const getCalendar = (
+  year: number,
+  month: number,
+  memberId?: number
+): Promise<DailyDataItemType[]> => {
+  const url = memberId
+    ? `/history/calendar?year=${year}&month=${month}&memberId=${memberId}`
+    : `/history/calendar?year=${year}&month=${month}`;
+
+  return requestFetch(url, {}, BASE_URL);
 };
