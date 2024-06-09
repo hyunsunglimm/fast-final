@@ -18,8 +18,8 @@ type BottomSheetProps = {
   children: React.ReactNode;
   noScrollContents?: React.ReactNode;
   isButtonShow?: boolean;
-  isBack?: boolean;
   onIsBackHandler?: () => void;
+  isBack?: (() => void) | boolean;
 };
 
 const BottomSheet = ({
@@ -33,8 +33,7 @@ const BottomSheet = ({
   noScrollContents,
   isButtonShow = true,
   children,
-  isBack = false,
-  onIsBackHandler
+  isBack = false
 }: BottomSheetProps) => {
   const { size, styled, disabled } = buttonOptions || {};
   useEffect(() => {
@@ -66,18 +65,20 @@ const BottomSheet = ({
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className='relative flex max-h-[80%] w-full flex-col gap-[4rem] rounded-t-lg bg-white p-24 xs:w-[520px]'
           >
-            <FlexBox alignItems='center' justifyContent='between' className='h-full w-full'>
-              {isBack ? (
-                <Icon
-                  onClick={onIsBackHandler}
-                  src='/icons/system-icon/arrow/arrow-left.svg'
-                  alt='뒤로가기 아이콘'
-                  size='20'
-                  className='cursor-pointer'
-                />
-              ) : (
-                <div className='w-[2rem]' />
-              )}
+            <FlexBox alignItems='center' justifyContent='between' className='w-full'>
+              <div className='w-[1.6rem]'>
+                {isBack && (
+                  <Icon
+                    src='/icons/system-icon/arrow/arrow-left.svg'
+                    alt='뒤로가기'
+                    onClick={() => {
+                      if (typeof isBack === 'function') {
+                        isBack();
+                      }
+                    }}
+                  />
+                )}
+              </div>
               <Text sizes='16' weight='700'>
                 {title}
               </Text>
@@ -89,7 +90,7 @@ const BottomSheet = ({
                 className='cursor-pointer'
               />
             </FlexBox>
-            {noScrollContents && <div className=''>{noScrollContents}</div>}
+            {noScrollContents && <div>{noScrollContents}</div>}
             <div className='hide-scrollbar h-full overflow-y-scroll overscroll-contain'>
               {children}
             </div>

@@ -9,7 +9,7 @@ type ListFooterProps = {
 };
 
 export const ListFooter = ({ currentAmount, targetAmount }: ListFooterProps) => {
-  const progressPercent = (currentAmount / targetAmount) * 100;
+  const progressPercent = Math.round((currentAmount / targetAmount) * 100 * 10) / 10;
   return (
     <CardFooter className='flex-col px-24 pb-24'>
       <FlexBox justifyContent='between' alignItems='end' className='mb-[1rem] w-full'>

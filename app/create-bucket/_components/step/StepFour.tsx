@@ -7,14 +7,17 @@ import Icon from '@/components/Icon';
 import Text from '@/components/ui/Text';
 import { cn } from '@/shared/utils/twMerge';
 import { QueryType } from '../BucketStepForm';
-import NextButton from '../NextButton';
 import { myProductData } from '../../data';
 import Checkbox from '@/components/ui/CheckBox';
-import { usePathname } from 'next/navigation';
 import TextButton from '@/components/ui/TextButton';
 import Link from 'next/link';
 import useGetHref from '../../hooks/useGetHref';
 import { useCreateBucket } from '../../hooks/useCreateBucket';
+import Button from '@/components/ui/Button';
+import { useMutation } from '@tanstack/react-query';
+import { createBucket } from '@/service/api/create-bucket';
+import { useQueryString } from '@/shared/hooks/useQueryString';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: false });
 
 type StepFourProps = {
@@ -22,13 +25,18 @@ type StepFourProps = {
 };
 
 const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
-  const pathname = usePathname();
+  const { pathname, router } = useQueryString();
   const { getSkipHref } = useGetHref();
   const skipHref = getSkipHref();
   const { state, dispatch } = useCreateBucket();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [allCheck, setAllCheck] = useState(false);
   const { 'my-saving-product': mySavingProduct } = state;
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: createBucket,
+    onSuccess: () => router.push('/create-bucket/result')
+  });
 
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +82,7 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
 
   return (
     <>
+      {isPending && <LoadingBackdrop isFullScreen />}
       <InputCard>
         <Input
           readOnly
@@ -93,7 +102,6 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
           className='absolute right-[2rem]'
         />
       </InputCard>
-
       <FlexBox alignItems='end' justifyContent='center' className='h-[19.7rem] w-full'>
         <TextButton className='mb-16 underline' asChild>
           <Link href={`${pathname}/result${skipHref}`} aria-label='저축 상품 연결 건너뛰기'>
@@ -101,7 +109,6 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
           </Link>
         </TextButton>
       </FlexBox>
-
       {/* 요일 선택 바텀 시트 */}
       <BottomSheet
         title='상품선택'
@@ -139,8 +146,16 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
           })}
         </div>
       </BottomSheet>
-
-      <NextButton buttonLabel='시작하기' currentStep='4' type='button' asChild />
+      <Button
+        disabled={isPending}
+        styled='fill_black'
+        onClick={async (e) => {
+          e.preventDefault();
+          mutate(state);
+        }}
+      >
+        제출
+      </Button>
     </>
   );
 };

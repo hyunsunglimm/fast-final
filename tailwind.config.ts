@@ -78,7 +78,8 @@ const config: Config = {
         '28': '2.8rem',
         '32': '3.2rem',
         '36': '3.6rem',
-        '40': '4rem'
+        '40': '4rem',
+        '48': '4.8rem'
       },
       margin: {
         '2': '0.2rem',
@@ -93,7 +94,8 @@ const config: Config = {
         '28': '2.8rem',
         '32': '3.2rem',
         '36': '3.6rem',
-        '40': '4rem'
+        '40': '4rem',
+        '48': '4.8rem'
       },
       borderRadius: {
         xxs: '0.4rem',

@@ -77,3 +77,25 @@ export type GenerateWeeks = {
   weekDates: DateInfo[];
   isCurrentWeek: boolean;
 }[];
+// 가계부 목표 설정
+export type FormValues = {
+  amount: string;
+};
+
+export type TargetManagementInputProps = {
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  onEnterKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+};
+
+export type TargetModifyBottomSheetProps = {
+  modifyPopup: boolean;
+  setModifyPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type TargetBudgetBottomSheetProps = {
+  showPopup: boolean;
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setBudgetSet: React.Dispatch<React.SetStateAction<boolean>>;
+};
