@@ -51,10 +51,9 @@ export type DateInfo = {
 
 export type DailyDataItemType = {
   date: string;
-  income: number;
-  expense: number;
-  weatherId: number;
-  reaction: boolean;
+  usedCost: number;
+  earnedCost: number;
+  weatherImageNo: number;
 };
 
 export type WeeklyDataItem = {
