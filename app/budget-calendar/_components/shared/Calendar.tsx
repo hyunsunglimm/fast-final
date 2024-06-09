@@ -8,6 +8,7 @@ import { ShareDataType, DailyDataItemType } from '@/shared/types/budgetCalendarT
 import { returnDate } from '@/shared/utils/dateUtils';
 import { cn } from '@/shared/utils/twMerge';
 import { generateMergeData } from '../../utils/generateMergeData';
+import { formatNumber } from '@/shared/utils/formatNumber';
 
 type CalendarProps = {
   year: number;
@@ -52,8 +53,10 @@ const Calendar = ({ year, month, dailyData, shareData, onClick }: CalendarProps)
                 <>
                   <div>{index + 1}주차</div>
                   <div>
-                    {totalExpense < 0 && <Text>{totalExpense}원</Text>}
-                    {totalIncome > 0 && <Text className='ml-8 text-primary'>+{totalIncome}원</Text>}
+                    {totalExpense < 0 && <Text>{formatNumber(totalExpense)}원</Text>}
+                    {totalIncome > 0 && (
+                      <Text className='ml-8 text-primary'>+{formatNumber(totalIncome)}원</Text>
+                    )}
                   </div>
                 </>
               ) : (
@@ -105,12 +108,12 @@ const Calendar = ({ year, month, dailyData, shareData, onClick }: CalendarProps)
                     <>
                       {item.expense ? (
                         <Text variant='p' sizes='10' className='text-gray-700'>
-                          -{item.expense}
+                          {formatNumber(item.expense)}
                         </Text>
                       ) : null}
                       {item.income ? (
                         <Text variant='p' sizes='10' className='text-primary'>
-                          +{item.income}
+                          +{formatNumber(item.income)}
                         </Text>
                       ) : null}
                     </>
