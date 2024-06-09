@@ -5,9 +5,9 @@ import Tab from '@/components/ui/Tab';
 import Line from '../common/Line';
 import BudgetBanner from '../common/BudgetBanner';
 import ExpensCalendarBox from './ExpensCalendarBox';
-import ExpensListBox from './ExpensListBox';
 import ManagementBottomSheet from './ManagementBottomSheet';
 import TargetModifyBottomSheet from './TargetModifyBottomSheet';
+const ExpensListBox = dynamic(() => import('./ExpensListBox'));
 const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'));
 
 const LookAloneContainer = () => {

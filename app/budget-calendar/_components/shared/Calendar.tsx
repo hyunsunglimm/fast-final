@@ -3,15 +3,29 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
-import { CalendarProps } from '@/shared/types/budgetCalendarType';
-import { mergeData } from '../../utils/mergeData';
+import {
+  ShareDataType,
+  DailyDataItemType,
+  WeeklyDataItem
+} from '@/shared/types/budgetCalendarType';
+
 import { returnDate } from '@/shared/utils/dateUtils';
 import { cn } from '@/shared/utils/twMerge';
+import { generateMergeData } from '../../utils/generateMergeData';
+
+type CalendarProps = {
+  year: number;
+  month: number;
+  dailyData?: DailyDataItemType[];
+  weeklyData?: WeeklyDataItem[];
+  shareData?: ShareDataType;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+};
 
 const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: CalendarProps) => {
-  const dates = getCurrentMonthDates({ year, month });
-  const weeks = getWeeklyData({ year, month }, dates);
-  const data = mergeData(weeks, dailyData, shareData);
+  const dates = getCurrentMonthDates(year, month);
+  const weeks = getWeeklyData(year, month, dates);
+  const data = generateMergeData(weeks, dailyData, shareData);
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
   const { day } = returnDate();
 
@@ -61,11 +75,11 @@ const Calendar = ({ year, month, dailyData, weeklyData, shareData, onClick }: Ca
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
                 const handleDateClick =
-                  item.date && day >= item.date?.getDate() ? onClick : () => {};
+                  item.date && item.imgSrc && day >= item.date?.getDate() ? onClick : undefined;
 
                 return (
                   <div
-                    role={onClick ? 'button' : 'none'}
+                    role={handleDateClick ? 'button' : 'none'}
                     key={idx}
                     id={item.date?.toISOString()}
                     onClick={handleDateClick}

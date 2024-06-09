@@ -1,4 +1,4 @@
-import { ExpenseItemProps } from '@/shared/types/budgetCalendarType';
+import { HistoryListItemType } from '../types/response/calendarHistroy';
 
 // 날짜 형식 변환 (몇일 몇요일)
 export const formatDate = (dateString: string): string => {
@@ -10,16 +10,17 @@ export const formatDate = (dateString: string): string => {
 };
 
 // 소비내역 날짜 별로 데이터 정리
-export const groupByDate = (expenses: ExpenseItemProps[]) => {
-  const grouped: { [date: string]: ExpenseItemProps[] } = {};
-
-  expenses.forEach((expense) => {
-    const date = new Date(expense.used_at).toLocaleDateString();
-    if (!grouped[date]) {
-      grouped[date] = [];
-    }
-    grouped[date].push(expense);
-  });
+export const groupByDate = (expenses: HistoryListItemType[] | undefined) => {
+  const grouped: { [date: string]: HistoryListItemType[] } = {};
+  if (expenses) {
+    expenses.forEach((expense) => {
+      const date = new Date(expense.usedAt).toLocaleDateString();
+      if (!grouped[date]) {
+        grouped[date] = [];
+      }
+      grouped[date].push(expense);
+    });
+  }
 
   return grouped;
 };
@@ -32,13 +33,21 @@ export const returnDate = (dateString?: string | number | Date) => {
   const date = dateString ? new Date(dateString) : new Date();
 
   if (!isNaN(date.getTime())) {
-    return { day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear() };
+    return {
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      hour: date.getHours(),
+      minute: date.getMinutes()
+    };
   }
 
   return {
     day: date.getDate(),
     month: date.getMonth() + 1,
-    year: date.getFullYear()
+    year: date.getFullYear(),
+    hour: date.getHours(),
+    minute: date.getMinutes()
   };
 };
 

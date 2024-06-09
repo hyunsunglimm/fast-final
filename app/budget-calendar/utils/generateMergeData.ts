@@ -1,22 +1,29 @@
-import { DateInfo, DailyDataItemType, ShareData } from '@/shared/types/budgetCalendarType';
-
-export const mergeData = (
+import { DateInfo, DailyDataItemType, ShareDataType } from '@/shared/types/budgetCalendarType';
+import { returnDate } from '@/shared/utils/dateUtils';
+export const generateMergeData = (
   weeks: {
     weekDates: DateInfo[];
     isCurrentWeek: boolean;
   }[],
   dailyData: DailyDataItemType[] | undefined,
-  shareData: ShareData | undefined
+  shareData: ShareDataType | undefined
 ) => {
   return weeks.map((week) => {
     const weekDates = week.weekDates.map((dateInfo) => {
       if (dateInfo.date) {
-        const year = dateInfo.date.getFullYear();
-        const month = (dateInfo.date.getMonth() + 1).toString().padStart(2, '0');
-        const day = dateInfo.date.getDate().toString().padStart(2, '0');
-        const dateString = `${year}-${month}-${day}`;
-        const dailyInfo = dailyData && dailyData.find((data) => data.date === dateString);
-        const shareInfo = shareData && shareData.daily.find((data) => data.date === dateString);
+        const { day: infoDay } = returnDate(dateInfo.date);
+        const dailyInfo =
+          dailyData &&
+          dailyData.find((data) => {
+            const { day: dailyInfoDay } = returnDate(data.date);
+            return dailyInfoDay === infoDay;
+          });
+        const shareInfo =
+          shareData &&
+          shareData.daily.find((data) => {
+            const { day: shareInfoDay } = returnDate(data.date);
+            return shareInfoDay === infoDay;
+          });
         if (dailyInfo) {
           return {
             ...dateInfo,

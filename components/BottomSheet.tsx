@@ -5,6 +5,7 @@ import Button, { buttonVariants } from './ui/Button';
 import FlexBox from './ui/FlexBox';
 import Text from './ui/Text';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 
 type BottomSheetProps = {
   title: string;
@@ -15,7 +16,9 @@ type BottomSheetProps = {
   onClose: () => void;
   onClick?: () => void;
   children: React.ReactNode;
+  noScrollContents?: React.ReactNode;
   isButtonShow?: boolean;
+  onIsBackHandler?: () => void;
   isBack?: (() => void) | boolean;
 };
 
@@ -27,12 +30,19 @@ const BottomSheet = ({
   buttonOptions,
   onClose,
   onClick,
+  noScrollContents,
   isButtonShow = true,
   children,
   isBack = false
 }: BottomSheetProps) => {
   const { size, styled, disabled } = buttonOptions || {};
-
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -80,7 +90,10 @@ const BottomSheet = ({
                 className='cursor-pointer'
               />
             </FlexBox>
-            <div className='hide-scrollbar overflow-y-scroll overscroll-contain'>{children}</div>
+            {noScrollContents && <div>{noScrollContents}</div>}
+            <div className='hide-scrollbar h-full overflow-y-scroll overscroll-contain'>
+              {children}
+            </div>
             {isButtonShow && (
               <Button
                 type={buttonType}

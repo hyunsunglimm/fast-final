@@ -1,7 +1,16 @@
 import React from 'react';
 
-const WidgetSectionLayout = ({ children }: { children: React.ReactNode }) => (
-  <section className='mb-24 px-20'>{children}</section>
-);
+type WidgetSectionLayoutProps = {
+  children: React.ReactNode;
+  widgetBudget: React.ReactNode;
+};
 
+const WidgetSectionLayout = ({ children, widgetBudget }: WidgetSectionLayoutProps) => {
+  return (
+    <section className='mb-24 px-20'>
+      {children}
+      {/* {widgetBudget} */}
+    </section>
+  );
+};
 export default WidgetSectionLayout;

@@ -1,77 +1,30 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useMemo } from 'react';
 import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
 import TextButton from '@/components/ui/TextButton';
 import Icon from '@/components/Icon';
-import SubmitEmojiBottomSheet from './_components/SubmitEmojiBottomSheet';
-import ReactionBottomSheet from './_components/ReactionBottomSheet';
 import BudgetBanner from '../common/BudgetBanner';
 import Calendar from '../shared/Calendar';
 import YearMonthDropdown from '../shared/YearMonthDropdown';
-
-const shareData = {
-  count: 12,
-  daily: [
-    {
-      date: '2024-06-01',
-      weatherId: 1,
-      reactions: [
-        { stickerOrEmoticonID: '😆', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '🤘', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '😍', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '😙', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '💙', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '🥰', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '🤩', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '💩', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '💕', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '🫰', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '❤️‍🔥', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '🤞', memberId: 4, count: 4 }
-      ]
-    },
-    {
-      date: '2024-06-02',
-      weatherId: 3,
-      reactions: [
-        { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
-        { stickerOrEmoticonID: '🥲', memberId: 4, count: 8 },
-        { stickerOrEmoticonID: '🫰', memberId: 4, count: 4 },
-        { stickerOrEmoticonID: '❤️‍🔥', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '🤞', memberId: 4, count: 4 }
-      ]
-    },
-    {
-      date: '2024-06-03',
-      weatherId: 4,
-      reactions: [
-        { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
-        { stickerOrEmoticonID: '😇', memberId: 4, count: 8 },
-        { stickerOrEmoticonID: '💙', memberId: 2, count: 5 },
-        { stickerOrEmoticonID: '🥰', memberId: 4, count: 4 }
-      ]
-    },
-    {
-      date: '2024-06-04',
-      weatherId: 5,
-      reactions: [
-        { stickerOrEmoticonID: '😆', memberId: 3, count: 5 },
-        { stickerOrEmoticonID: '😏', memberId: 4, count: 8 },
-        { stickerOrEmoticonID: '🥰', memberId: 4, count: 4 }
-      ]
-    }
-    // 나머지 데이터도 추가해주세요
-  ]
-};
+import { useSubmitEmojiContext } from '../../context/SubmitEmojiProvider';
 
 type SharedCalendarProps = {
   selectedProfile: string;
 };
 
 const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
-  const [openReactionSheet, setOpenReactionSheet] = useState(false);
-  const [openEmojiSheet, setOpenEmojiSheet] = useState(false);
-  const [reactionDate, setReactionData] = useState('');
+  const { setOpenAddEmojiSheet, setOpenTotalReactionSheet, shareData, setReactionDate } =
+    useSubmitEmojiContext();
+
+  const totalCount = useMemo(() => {
+    return shareData.daily.reduce((total, item) => {
+      const itemCount = item.reactions.reduce(
+        (sum, reaction) => sum + reaction.memberIds.length,
+        0
+      );
+      return total + itemCount;
+    }, 0);
+  }, [shareData]);
 
   // 달력 날짜
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -82,8 +35,8 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
   };
 
   const handleReactionSheet = (e: MouseEvent<HTMLDivElement>) => {
-    setReactionData(e.currentTarget.id);
-    setOpenEmojiSheet((prev) => !prev);
+    setReactionDate(e.currentTarget.id);
+    setOpenAddEmojiSheet((prev) => !prev);
   };
 
   return (
@@ -98,7 +51,7 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
           />
           <TextButton
             className='flex items-center justify-center gap-8 text-12'
-            onClick={() => setOpenReactionSheet(true)}
+            onClick={() => setOpenTotalReactionSheet(true)}
           >
             <FlexBox
               alignItems='center'
@@ -107,7 +60,7 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
             >
               <Icon src='/icons/profile/reaction-profile.svg' alt='프로필 아이콘' size='16' />
             </FlexBox>
-            반응 {shareData.count}개
+            반응 {totalCount}개
           </TextButton>
         </FlexBox>
         <BudgetBanner
@@ -123,21 +76,6 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
           onClick={handleReactionSheet}
         />
       </section>
-
-      {/* 반응 보기 바텀 시트 */}
-      <ReactionBottomSheet
-        openReactionSheet={openReactionSheet}
-        setOpenReactionSheet={setOpenReactionSheet}
-        shareData={shareData}
-      />
-
-      {/* 이모지 남기기 바텀 시트 */}
-      <SubmitEmojiBottomSheet
-        openEmojiSheet={openEmojiSheet}
-        setOpenEmojiSheet={setOpenEmojiSheet}
-        reactionDate={reactionDate}
-        shareData={shareData}
-      />
     </>
   );
 };

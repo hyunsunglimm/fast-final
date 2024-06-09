@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react';
 // 가계부 배너
 export type BudgetBannerProps = {
   icon?: boolean;
@@ -20,7 +19,7 @@ export type ExpenseItemProps = {
 // 소비내역 지출 수입
 export type ExpenseSummaryProps = {
   label: string;
-  amount: string;
+  amount: number | undefined;
 };
 
 // 공유멤버
@@ -28,16 +27,6 @@ export type SharedMembersProps = {
   viewMode: string;
   selectedProfile: string;
   setSelectedProfile: (name: string) => void;
-};
-
-// 달력
-export type CalendarProps = {
-  year: number;
-  month: number;
-  dailyData?: DailyDataItemType[];
-  weeklyData?: WeeklyDataItem[];
-  shareData?: ShareData;
-  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 };
 
 export type DateInfo = {
@@ -64,20 +53,18 @@ export type WeeklyDataItem = {
   expense: number;
 };
 
-export interface ShareData {
-  count: number;
+export type ShareDataType = {
   daily: ShareDataItem[];
-}
+};
 
-export interface ShareDataItem {
+export type ShareDataItem = {
   date: string;
   weatherId: number;
   reactions: {
-    memberId: number;
     stickerOrEmoticonID: string;
-    count: number;
+    memberIds: number[];
   }[];
-}
+};
 
 // 날짜 dropdown
 export type YearMonthDropdownProps = {
@@ -86,6 +73,10 @@ export type YearMonthDropdownProps = {
   onSelect: (year: number, month: number) => void;
 };
 
+export type GenerateWeeks = {
+  weekDates: DateInfo[];
+  isCurrentWeek: boolean;
+}[];
 // 가계부 목표 설정
 export type FormValues = {
   amount: string;
