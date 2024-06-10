@@ -8,10 +8,11 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import IconButton from '../ui/IconButton';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import { cn } from '@/shared/utils/twMerge';
+import { useRouter } from 'next/navigation';
 
 type HeaderProps = {
   title?: string;
-  href: string;
+  href?: string;
   defaultColor?: string;
   isFixed?: boolean;
   isClose?: boolean;
@@ -35,6 +36,7 @@ export const IsBackHeader = ({
     [`${defaultColor || 'transparent'}`, '#ffffffd0']
   );
   const fixedClass = isFixed ? 'sticky top-0 z-20' : '';
+  const router = useRouter();
   return (
     <motion.header
       style={{ backgroundColor: headerColor }}
@@ -43,18 +45,19 @@ export const IsBackHeader = ({
           justifyContent: 'between',
           alignItems: 'center'
         }),
-        `${fixedClass} backdrop-filterur-lg h-[5.6rem] px-20`
+        `${fixedClass} h-[5.6rem] px-20 backdrop-filter`
       )}
     >
       {!isClose ? (
-        <Link href={linkUrl} aria-label='뒤로 가기 링크' scroll={false}>
-          <Icon
-            aria-hidden
-            size='24'
-            alt='뒤로가기'
-            src='/icons/system-icon/arrow/arrow-prev.svg'
-          />
-        </Link>
+        <Icon
+          className='cursor-pointer'
+          role='link'
+          onClick={() => router.back()}
+          aria-label='뒤로 가기 링크'
+          size='24'
+          alt='뒤로가기'
+          src='/icons/system-icon/arrow/arrow-prev.svg'
+        />
       ) : (
         <div className='w-[2.4rem]' aria-hidden></div>
       )}
@@ -65,7 +68,7 @@ export const IsBackHeader = ({
       </FlexBox>
       {isClose ? (
         <IconButton asChild>
-          <Link href={linkUrl} aria-label={`${linkUrl}로 이동`}>
+          <Link href={linkUrl || '/'} aria-label={`${linkUrl}로 이동`}>
             <Icon src='/icons/system-icon/x.svg' alt='취소 아이콘' size='20' aria-hidden />
           </Link>
         </IconButton>

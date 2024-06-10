@@ -8,6 +8,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { HTMLAttributes } from 'react';
 import { cn } from '@/shared/utils/twMerge';
 import { useUserSession } from '@/shared/hooks/useUserSession';
+import Link from 'next/link';
 
 type DefaultHeaderProps = {
   isHome?: boolean;
@@ -55,12 +56,15 @@ export const DefaultHeader = ({
         </Text>
       )}
       <FlexBox className='gap-x-12'>
-        <Icon
-          src='/icons/system-icon/header/header-alarm.svg'
-          alt='알람 아이콘'
-          size='24'
-          className='cursor-pointer'
-        />
+        <Link href='/notification' aria-label='알림 페이지로 이동'>
+          <Icon
+            src='/icons/system-icon/header/header-alarm-on.svg'
+            alt='알람 아이콘'
+            size='24'
+            className='cursor-pointer'
+            aria-hidden
+          />
+        </Link>
         <Icon
           src={userData?.image ?? '/icons/profile/profile.svg'}
           alt='프로필 이미지'
