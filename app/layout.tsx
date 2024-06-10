@@ -5,7 +5,7 @@ import AuthProvider from '@/shared/context/authProvider';
 import Navbar from '@/components/Navbar';
 import { suit } from './font';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { auth } from '@/auth';
+
 export const metadata: Metadata = {
   title: 'PORKO',
   description: 'MZ특화 금융앱 PORKO !!!'
@@ -16,9 +16,6 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  // 임시 로그인 유무 판단
-  const session = await auth();
-
   return (
     <html lang='ko' className='hide-scrollbar bg-gray-200'>
       <body

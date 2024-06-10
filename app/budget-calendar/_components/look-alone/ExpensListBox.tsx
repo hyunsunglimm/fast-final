@@ -19,16 +19,15 @@ const ExpensListBox = () => {
   const [historyId, setHistoryId] = useState('');
   const [openDetailBottomSheet, setOpenDetailBottomSheet] = useState(false);
 
-  const groupedExpenses = groupByDate(historyData?.historyList);
+  if (isLoading) {
+    return <ExpensListSkeleton />;
+  }
 
+  const groupedExpenses = groupByDate(historyData?.historyList);
   const handleOpenBottomSheet = (e: MouseEvent<HTMLButtonElement>) => {
     setHistoryId(e.currentTarget.id);
     setOpenDetailBottomSheet(true);
   };
-
-  if (isLoading) {
-    return <ExpensListSkeleton />;
-  }
 
   return (
     <>
