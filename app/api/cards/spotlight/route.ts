@@ -14,6 +14,7 @@ export const GET = async (request: Request) => {
   if (!type) {
     return new Response('bad request', { status: 400 });
   }
+  console.log('type: ', type);
 
   const spotlightCards = await getSpotlightCards(type);
 

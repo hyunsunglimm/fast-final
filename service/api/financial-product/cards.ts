@@ -28,8 +28,11 @@ export const getComparedCards = (): Promise<CardResponseType[]> => {
 };
 
 export const getSpotlightCards = async (type: 'credit' | 'check') => {
+  const optionQuery =
+    type === 'credit' ? '&& (discount_limit >= 25000 || count(benefit) >= 3)' : '';
+
   return await client.fetch(`
-  *[_type == "card" && type == "${type}" && (discount_limit >= 25000 || count(benefit) >= 3)]${CardResponseFilde}
+  *[_type == "card" && type == "${type}" ${optionQuery}]${CardResponseFilde}
 `);
 };
 
