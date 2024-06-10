@@ -26,8 +26,10 @@ const config: Config = {
         '53': '53rem'
       },
       backgroundImage: {
-        'create-bucket': "url('/images/create-bucket/bg.webp')",
-        'bucket-bubble': "url('/images/create-bucket/bubble.webp')"
+        'create-bucket':
+          "url('https://d1i4t0v3ws2guw.cloudfront.net/images/create-bucket/bg.webp')",
+        'bucket-bubble':
+          "url('https://d1i4t0v3ws2guw.cloudfront.net/images/create-bucket/bubble.webp')"
       },
       boxShadow: {
         sm: '0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 1px 0px rgba(0, 0, 0, 0.06)',
@@ -78,7 +80,8 @@ const config: Config = {
         '28': '2.8rem',
         '32': '3.2rem',
         '36': '3.6rem',
-        '40': '4rem'
+        '40': '4rem',
+        '48': '4.8rem'
       },
       margin: {
         '2': '0.2rem',
@@ -93,7 +96,8 @@ const config: Config = {
         '28': '2.8rem',
         '32': '3.2rem',
         '36': '3.6rem',
-        '40': '4rem'
+        '40': '4rem',
+        '48': '4.8rem'
       },
       borderRadius: {
         xxs: '0.4rem',

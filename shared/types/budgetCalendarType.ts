@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react';
 // 가계부 배너
 export type BudgetBannerProps = {
   icon?: boolean;
@@ -20,24 +19,25 @@ export type ExpenseItemProps = {
 // 소비내역 지출 수입
 export type ExpenseSummaryProps = {
   label: string;
-  amount: string;
+  amount: number | undefined;
 };
 
 // 공유멤버
-export type SharedMembersProps = {
-  viewMode: string;
-  selectedProfile: string;
-  setSelectedProfile: (name: string) => void;
+export type Friend = {
+  memberId: number;
+  name: string;
+  profileImageUrl: string;
 };
 
-// 달력
-export type CalendarProps = {
-  year: number;
-  month: number;
-  dailyData?: DailyDataItemType[];
-  weeklyData?: WeeklyDataItem[];
-  shareData?: ShareData;
-  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+export type FriendData = {
+  friendCount: number;
+  friendList: Friend[];
+};
+
+export type SharedMembersProps = {
+  viewMode: string;
+  selectedProfile: Friend;
+  setSelectedProfile: (item: Friend) => void;
 };
 
 export type DateInfo = {
@@ -51,37 +51,54 @@ export type DateInfo = {
 
 export type DailyDataItemType = {
   date: string;
-  income: number;
-  expense: number;
-  weatherId: number;
-  reaction: boolean;
+  usedCost: number;
+  earnedCost: number;
+  weatherImageNo: number;
 };
 
-export type WeeklyDataItem = {
-  month: number;
-  week: number;
-  income: number;
-  expense: number;
-};
-
-export interface ShareData {
-  count: number;
+export type ShareDataType = {
   daily: ShareDataItem[];
-}
+};
 
-export interface ShareDataItem {
+export type ShareDataItem = {
   date: string;
   weatherId: number;
   reactions: {
-    memberId: number;
     stickerOrEmoticonID: string;
-    count: number;
+    memberIds: number[];
   }[];
-}
+};
 
 // 날짜 dropdown
 export type YearMonthDropdownProps = {
   selectedYear: number;
   selectedMonth: number;
   onSelect: (year: number, month: number) => void;
+};
+
+export type GenerateWeeks = {
+  weekDates: DateInfo[];
+  isCurrentWeek: boolean;
+}[];
+// 가계부 목표 설정
+export type FormValues = {
+  amount: string;
+};
+
+export type TargetManagementInputProps = {
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  onEnterKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+};
+
+export type TargetModifyBottomSheetProps = {
+  modifyPopup: boolean;
+  setModifyPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type TargetBudgetBottomSheetProps = {
+  showPopup: boolean;
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setBudgetSet: React.Dispatch<React.SetStateAction<boolean>>;
 };

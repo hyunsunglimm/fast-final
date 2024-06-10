@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Title from '../common/Title';
 import Icon from '@/components/Icon';
+import { Friend } from '@/shared/types/budgetCalendarType';
 const WeatherInfoBottomSheet = dynamic(() => import('./WeatherInfoBottomSheet'));
 // 소비 날씨
 const weatherData = [
@@ -13,12 +14,16 @@ const weatherData = [
   { src: '/icons/weather/weather-1.svg', alt: '무지개', days: '2일' }
 ];
 
-const ConsumptionWeather: React.FC<{ selectedProfile: string }> = ({ selectedProfile }) => {
+type SharedCalendarProps = {
+  selectedProfile: Friend;
+};
+
+const ConsumptionWeather = ({ selectedProfile }: SharedCalendarProps) => {
   const [openWeatherInfo, setOpenWeatherInfo] = useState(false);
   return (
     <>
       <section className='px-20 py-32 text-12'>
-        <Title title={`${selectedProfile}님의 소비 날씨는?`}>
+        <Title title={`${selectedProfile.name}님의 소비 날씨는?`}>
           <Icon
             role='button'
             size='16'

@@ -10,37 +10,27 @@ const middleware = async (request: NextRequest) => {
   const { nextUrl } = request;
   const session = await currentUserSession();
   const isLoggedIn = !!session;
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
 
-  if (isApiAuthRoute) {
+  if (isApiAuthRequest(nextUrl.pathname)) {
     return NextResponse.next();
   }
 
   // 로그인이 필요한 경로에 대한 처리
-  if (isMatch(nextUrl.pathname, protectedRoutes)) {
+  if (isProtectedRoute(nextUrl.pathname)) {
     if (!isLoggedIn) {
       return NextResponse.redirect(new URL('/auth/login', nextUrl));
     }
 
-    // /create-bucket으로 접속할 경우 step=1로 주소 바꿈
-    if (nextUrl.pathname === '/create-bucket') {
-      if (!nextUrl.searchParams.get('step')) {
-        return NextResponse.redirect(new URL('/create-bucket?step=1', nextUrl));
-      }
-    }
-
     // /bucket-landing으로 접속할 경우 tab=저축생활+1편으로 주소 바꿈
-    if (nextUrl.pathname === '/bucket-landing') {
-      if (!nextUrl.searchParams.get('tab')) {
-        return NextResponse.redirect(new URL('/bucket-landing?tab=저축생활+1편', nextUrl));
-      }
+    if (nextUrl.pathname === '/bucket-landing' && !nextUrl.searchParams.get('tab')) {
+      return NextResponse.redirect(new URL('/bucket-landing?tab=저축생활+1편', nextUrl));
     }
 
     return NextResponse.next();
   }
 
   // 로그인 한 사용자가 접근하면 홈으로 리디렉션
-  if (isMatch(nextUrl.pathname, authRedirectRoutes)) {
+  if (isAuthRedirectRoute(nextUrl.pathname)) {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL('/', nextUrl));
     }
@@ -66,5 +56,10 @@ export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)']
 };
 
-const isMatch = (pathname: string, urls: string[]) =>
-  urls.some((url) => Boolean(match(url)(pathname)));
+const isApiAuthRequest = (pathname: string) => pathname.startsWith(apiAuthPrefix);
+
+const isProtectedRoute = (pathname: string) =>
+  protectedRoutes.some((url) => Boolean(match(url)(pathname)));
+
+const isAuthRedirectRoute = (pathname: string) =>
+  authRedirectRoutes.some((url) => Boolean(match(url)(pathname)));

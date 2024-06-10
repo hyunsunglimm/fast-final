@@ -139,7 +139,7 @@ const StepTwo = ({ handleChangeQueryString }: StepTwoProps) => {
         onClick={() => handleSelectDoneSpendBook()}
       >
         <div className='mt-0 space-y-[0.8rem]'>
-          {spendBookResult.isFetching
+          {spendBookResult.isLoading
             ? [...Array(6)].map((_, index) => <RoundedSkeleton key={index} />)
             : spendBookResult.data?.map((item) => {
                 return (

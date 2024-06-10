@@ -9,7 +9,7 @@ type CreateBucketPageProps = {
 };
 
 const CreateBucketPage = ({ searchParams }: CreateBucketPageProps) => {
-  const currentStep = searchParams.step;
+  const currentStep = searchParams.step ?? '1';
 
   return (
     <div className='relative min-h-dvh bg-bucket-bubble bg-53 bg-[center_top_-10rem] bg-no-repeat px-20 pb-20'>

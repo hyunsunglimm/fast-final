@@ -1,6 +1,6 @@
-import { CalendarProps, DateInfo } from '@/shared/types/budgetCalendarType';
+import { DateInfo } from '@/shared/types/budgetCalendarType';
 
-export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
+export const getCurrentMonthDates = (year: number, month: number) => {
   const firstDayOfMonth = new Date(year, month - 1, 1);
   const lastDayOfMonth = new Date(year, month, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
@@ -27,7 +27,7 @@ export const getCurrentMonthDates = ({ year, month }: CalendarProps) => {
   return dates;
 };
 
-export const getWeeklyData = ({ year, month }: CalendarProps, dates: DateInfo[]) => {
+export const getWeeklyData = (year: number, month: number, dates: DateInfo[]) => {
   const weeks = [];
   const today = new Date();
 

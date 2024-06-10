@@ -1,5 +1,4 @@
 // 매월 나가는 돈
-import React from 'react';
 import { WidgetItemCardContainer } from './_components/WidgetItemCardContainer';
 import Icon from '@/components/Icon';
 import { CardContent } from '@/components/ui/card';
