@@ -26,8 +26,10 @@ const config: Config = {
         '53': '53rem'
       },
       backgroundImage: {
-        'create-bucket': "url('/images/create-bucket/bg.webp')",
-        'bucket-bubble': "url('/images/create-bucket/bubble.webp')"
+        'create-bucket':
+          "url('https://d1i4t0v3ws2guw.cloudfront.net/images/create-bucket/bg.webp')",
+        'bucket-bubble':
+          "url('https://d1i4t0v3ws2guw.cloudfront.net/images/create-bucket/bubble.webp')"
       },
       boxShadow: {
         sm: '0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 1px 0px rgba(0, 0, 0, 0.06)',

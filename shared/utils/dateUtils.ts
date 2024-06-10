@@ -1,8 +1,11 @@
 import { HistoryListItemType } from '../types/response/calendarHistroy';
 
 // 날짜 형식 변환 (몇일 몇요일)
-export const formatDate = (dateString: string): string => {
+export const formatDate = (dateString: string | number | Date): string => {
   const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    return '유효하지 않은 날짜';
+  }
   const day = date.getDate();
   const weekDayNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
   const weekDay = weekDayNames[date.getDay()];
@@ -14,7 +17,8 @@ export const groupByDate = (expenses: HistoryListItemType[] | undefined) => {
   const grouped: { [date: string]: HistoryListItemType[] } = {};
   if (expenses) {
     expenses.forEach((expense) => {
-      const date = new Date(expense.usedAt).toLocaleDateString();
+      const date = new Date(expense.usedAt).toString();
+
       if (!grouped[date]) {
         grouped[date] = [];
       }

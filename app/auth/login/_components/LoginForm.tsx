@@ -15,6 +15,8 @@ import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
 import { signInWithCredentials } from '@/shared/actions/auth';
 import Spinner from '@/components/Spinner';
+import Image from 'next/image';
+import useOnloadImage from '@/shared/hooks/useOnloadImage';
 const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
   ssr: false
@@ -23,9 +25,8 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [autoLoginCheck, setAutoLoginCheck] = useState(false);
   const [isPending, startTransition] = useTransition();
-
   const [error, setError] = useState<string | undefined>('');
-
+  const { onload, onLoadImage } = useOnloadImage();
   const form = useForm<LoginInputsValues>({
     resolver: zodResolver(loginSchema),
     defaultValues
@@ -59,9 +60,18 @@ const LoginForm = () => {
         className='flex h-[59.6rem] flex-col items-center justify-between bg-white px-20 pb-24'
       >
         <CardContent flexDirection='col' alignItems='center' className='w-full'>
-          <FlexBox className='mb-[4.8rem] h-[12rem] w-[12rem] bg-gray-50'></FlexBox>
+          <Image
+            src='/login-logo.webp'
+            alt='로고 이미지'
+            width={120}
+            height={120}
+            priority
+            quality={onload ? 100 : 10}
+            onLoad={onLoadImage}
+            className='h-[12rem] w-[12rem]'
+          />
           {/* 이메일 */}
-          <FlexBox className='w-full space-y-20' flexDirection='col'>
+          <FlexBox className='mt-[4.8rem] w-full space-y-20' flexDirection='col'>
             <FormField
               control={control}
               name='email'
