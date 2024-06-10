@@ -1,4 +1,5 @@
 import { useState, MouseEvent, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
 import TextButton from '@/components/ui/TextButton';
@@ -7,9 +8,12 @@ import BudgetBanner from '../common/BudgetBanner';
 import Calendar from '../shared/Calendar';
 import YearMonthDropdown from '../shared/YearMonthDropdown';
 import { useSubmitEmojiContext } from '../../context/SubmitEmojiProvider';
+import { getBudgetInquiry } from '@/service/api/budget';
+import { BudgetInquiryResponse } from '@/shared/types/response/targetBudget';
+import { Friend } from '@/shared/types/budgetCalendarType';
 
 type SharedCalendarProps = {
-  selectedProfile: string;
+  selectedProfile: Friend;
 };
 
 const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
@@ -39,10 +43,15 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
     setOpenAddEmojiSheet((prev) => !prev);
   };
 
+  const { data: cost } = useQuery<BudgetInquiryResponse>({
+    queryKey: ['getBudgetInquiry', selectedYear, selectedMonth],
+    queryFn: () => getBudgetInquiry(selectedYear, selectedMonth)
+  });
+
   return (
     <>
       <section className='px-20 pb-24'>
-        <Title title={`${selectedProfile}의 공유 가계부`} />
+        <Title title={`${selectedProfile.name}의 공유 가계부`} />
         <FlexBox className='mb-24 mt-16 w-full' alignItems='center' justifyContent='between'>
           <YearMonthDropdown
             selectedYear={selectedYear}
@@ -65,7 +74,7 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
         </FlexBox>
         <BudgetBanner
           icon={true}
-          text='목표 예산 중 50%를 썼어요'
+          text={`목표 예산 중 ${cost ? cost.used : '?'}%를 썼어요`}
           showArrow={false}
           className='mb-24'
         />

@@ -6,7 +6,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import Title from '../common/Title';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-import { SharedMembersProps, FriendData } from '@/shared/types/budgetCalendarType';
+import { SharedMembersProps, FriendData, Friend } from '@/shared/types/budgetCalendarType';
 import { useWindowResize } from '@/shared/hooks/useWindowResize';
 import { getFriend } from '@/service/api/calendar/share';
 
@@ -30,8 +30,8 @@ const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: Shared
   }, [windowWidth, viewMode]);
 
   // 공유한 멤버 select
-  const handleProfileClick = (name: string) => {
-    setSelectedProfile(name);
+  const handleProfileClick = (item: Friend) => {
+    setSelectedProfile(item);
   };
 
   if (isLoading) {
@@ -56,12 +56,8 @@ const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: Shared
         >
           {items?.friendList.map((item, index) => {
             return (
-              <li
-                key={index}
-                className='relative p-4'
-                onClick={() => handleProfileClick(item.name)}
-              >
-                {selectedProfile === item.name && (
+              <li key={index} className='relative p-4' onClick={() => handleProfileClick(item)}>
+                {selectedProfile?.name === item.name && (
                   <div className='absolute z-[2] h-[4rem] w-[4rem] rounded-full border-[0.3rem] border-primary'></div>
                 )}
                 <Icon
@@ -70,7 +66,7 @@ const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: Shared
                   size='40'
                   className={'pointer-events-none mb-8'}
                 />
-                <p className={`${selectedProfile === item.name ? 'text-primary' : ''}`}>
+                <p className={`${selectedProfile?.name === item.name ? 'text-primary' : ''}`}>
                   {item.name}
                 </p>
               </li>
