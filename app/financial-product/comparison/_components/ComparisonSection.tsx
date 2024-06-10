@@ -28,9 +28,13 @@ const ComparisonSection = () => {
   } = useQuery<CardResponseType[]>({
     queryKey: ['cardsToCompare', cardType, cardCompanies, benefitCategories],
     queryFn: async () => {
+      params.delete(QUERY_KEY);
+      router.push(pathname + '?' + params.toString(), { scroll: false });
+
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/comparison?type=${cardType}&company=${cardCompanies}&category=${benefitCategories}`
       );
+
       return await res.json();
     },
     enabled: isFilterSelected
