@@ -44,8 +44,8 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
   };
 
   const { data: cost } = useQuery<BudgetInquiryResponse>({
-    queryKey: ['getBudgetInquiry', selectedYear, selectedMonth],
-    queryFn: () => getBudgetInquiry(selectedYear, selectedMonth)
+    queryKey: ['getBudgetInquiry', selectedYear, selectedMonth, selectedProfile.memberId],
+    queryFn: () => getBudgetInquiry(selectedYear, selectedMonth, selectedProfile.memberId)
   });
 
   return (
