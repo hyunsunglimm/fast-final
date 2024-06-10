@@ -14,7 +14,7 @@ const BottomSheet = dynamic(() => import('@/components/BottomSheet'), { ssr: fal
 const MyWallteBottomSheet = () => {
   const { openWallet, setOpenWallet } = useOpenWallet();
 
-  const { data: MyWalletData, isFetching } = useQuery({
+  const { data: MyWalletData, isLoading } = useQuery({
     queryKey: ['myWallet'],
     queryFn: getMyWalletData,
     enabled: openWallet
@@ -31,7 +31,7 @@ const MyWallteBottomSheet = () => {
       onClose={() => setOpenWallet(false)}
       isButtonShow={false}
     >
-      {isFetching ? (
+      {isLoading ? (
         <MyWalletSkeleton />
       ) : (
         <>

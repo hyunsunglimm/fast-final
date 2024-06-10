@@ -11,12 +11,12 @@ import { useQuery } from '@tanstack/react-query';
 import LoadingPage from '../../loading';
 
 const PerfectFinancialProductSection = () => {
-  const { data: savings, isPending } = useQuery({
+  const { data: savings, isLoading } = useQuery({
     queryKey: ['savings'],
     queryFn: getSavings
   });
 
-  if (isPending) {
+  if (isLoading) {
     return <LoadingPage />;
   }
 

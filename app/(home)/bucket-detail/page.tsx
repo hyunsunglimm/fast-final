@@ -11,13 +11,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useUserSession } from '@/shared/hooks/useUserSession';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 import { BucketResponseType } from '@/shared/types/response/bucket';
+import { deleteCommaReturnNumber } from '@/shared/utils/deleteComma';
+
 const DetailBucketPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [totalHeight, setTotalHeight] = useState(0);
   const { windowHeight, windowWidth } = useWindowResize();
   const { onload, onLoadImage } = useOnloadImage();
   const user = useUserSession();
-  const { data: bucket, isPending } = useQuery<BucketResponseType>({
+  const { data: bucket, isLoading } = useQuery<BucketResponseType>({
     queryKey: ['bucket', user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -43,9 +45,13 @@ const DetailBucketPage = () => {
     return () => clearTimeout(timeoutId);
   }, [windowHeight, windowWidth]);
 
+  const targetAmount = deleteCommaReturnNumber(bucket?.target_amount || '');
+  const currentAmount = deleteCommaReturnNumber(bucket?.savings_amount || '');
+  const progressPercent = Math.round((currentAmount / targetAmount) * 100 * 10) / 10;
+
   return (
     <>
-      {isPending && <LoadingBackdrop isFullScreen />}
+      {isLoading && <LoadingBackdrop isFullScreen />}
       <section className='mt-20 px-20' ref={sectionRef}>
         <FlexBox justifyContent='between'>
           <FlexBox flexDirection='col' className='text-white'>
@@ -71,7 +77,7 @@ const DetailBucketPage = () => {
         </FlexBox>
         <FlexBox className='mb-16 gap-x-8'>
           <Text sizes='18' weight='600' className='text-white'>
-            500000원
+            {bucket?.target_amount}원
           </Text>
           <Text
             sizes='12'
@@ -81,10 +87,10 @@ const DetailBucketPage = () => {
           </Text>
         </FlexBox>
         <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>
-          <ProgressBar barColor='white' progressPercent={35} />
+          <ProgressBar barColor='white' progressPercent={progressPercent} />
         </div>
         <Text className='mt-4 inline-block w-full self-end text-end text-white' weight='500'>
-          35%
+          {progressPercent}%
         </Text>
       </section>
       <BucketBottomSheet totalHeight={totalHeight} windowWidth={windowWidth} />
