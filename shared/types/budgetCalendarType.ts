@@ -36,8 +36,8 @@ export type FriendData = {
 
 export type SharedMembersProps = {
   viewMode: string;
-  selectedProfile: string;
-  setSelectedProfile: (name: string) => void;
+  selectedProfile: Friend;
+  setSelectedProfile: (item: Friend) => void;
 };
 
 export type DateInfo = {

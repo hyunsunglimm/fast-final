@@ -1,11 +1,16 @@
 import React from 'react';
 import Title from '../common/Title';
 import Icon from '@/components/Icon';
+import { Friend } from '@/shared/types/budgetCalendarType';
 
-const RegretSpending = () => {
+type SharedCalendarProps = {
+  selectedProfile: Friend;
+};
+
+const RegretSpending = ({ selectedProfile }: SharedCalendarProps) => {
   return (
     <section className='px-20 pt-32 text-14'>
-      <Title title='나의 후회 소비는?' />
+      <Title title={`${selectedProfile.name}의 후회 소비는?`} />
       <div className='mt-40 text-center'>
         <Icon
           src='/icons/budget-calendar/pencil.webp'
