@@ -4,7 +4,9 @@ const nextConfig = {
     loader: 'custom',
     minimumCacheTTL: 86400,
     path: '',
-    loaderFile: './shared/utils/imageLoader.ts',
+    loaderFile: './shared/utils/imageLoader.ts'
+  },
+  images: {
     remotePatterns: [
       {
         protocol: 'https',
