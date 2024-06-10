@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import BottomSheet from '@/components/BottomSheet';
-import Text from '@/components/ui/Text';
 import BottomSheetTitle from '../common/BottomSheetTitle';
 import TargetManagementInput from '../common/TargetManagementInput';
 import { FormValues, TargetModifyBottomSheetProps } from '@/shared/types/budgetCalendarType';

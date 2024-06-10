@@ -23,6 +23,17 @@ export type ExpenseSummaryProps = {
 };
 
 // 공유멤버
+export type Friend = {
+  memberId: number;
+  name: string;
+  profileImageUrl: string;
+};
+
+export type FriendData = {
+  friendCount: number;
+  friendList: Friend[];
+};
+
 export type SharedMembersProps = {
   viewMode: string;
   selectedProfile: string;
@@ -40,17 +51,9 @@ export type DateInfo = {
 
 export type DailyDataItemType = {
   date: string;
-  income: number;
-  expense: number;
-  weatherId: number;
-  reaction: boolean;
-};
-
-export type WeeklyDataItem = {
-  month: number;
-  week: number;
-  income: number;
-  expense: number;
+  usedCost: number;
+  earnedCost: number;
+  weatherImageNo: number;
 };
 
 export type ShareDataType = {

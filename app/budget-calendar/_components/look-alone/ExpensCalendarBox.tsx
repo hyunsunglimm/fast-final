@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Title from '../common/Title';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
@@ -6,28 +7,8 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Calendar from '../shared/Calendar';
 import YearMonthDropdown from '../shared/YearMonthDropdown';
-
-const dailyData = [
-  { date: '2024-05-01', income: 100, expense: 2000, weatherId: 3, reaction: false },
-  { date: '2024-05-02', income: 100, expense: 2000, weatherId: 3, reaction: false },
-  { date: '2024-06-01', income: 100, expense: 2000, weatherId: 3, reaction: false },
-  { date: '2024-06-10', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
-  { date: '2024-06-11', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
-  { date: '2024-06-16', income: 0, expense: 2000, weatherId: 3, reaction: false },
-  { date: '2024-06-17', income: 23000, expense: 0, weatherId: 3, reaction: false },
-  { date: '2024-06-18', income: 50000, expense: 20000, weatherId: 4, reaction: false },
-  { date: '2024-06-21', income: 2600000, expense: 70000, weatherId: 1, reaction: false },
-  { date: '2024-06-30', income: 2600000, expense: 70000, weatherId: 1, reaction: false }
-  // 추가적인 날짜 데이터 추가
-];
-
-const weeklyData = [
-  { month: 6, week: 3, income: 0, expense: 1310003 },
-  { month: 6, week: 2, income: 1230002, expense: 0 },
-  { month: 6, week: 1, income: 1130001, expense: 12000 },
-  { month: 5, week: 5, income: 0, expense: 1520000 },
-  { month: 5, week: 4, income: 1720000, expense: 0 }
-];
+import { getCalendar } from '@/service/api/calendar';
+import { DailyDataItemType } from '@/shared/types/budgetCalendarType';
 
 const ExpensCalendarBox = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -37,6 +18,11 @@ const ExpensCalendarBox = () => {
     setSelectedYear(year);
     setSelectedMonth(month);
   };
+
+  const { data: dailyData = [] } = useQuery<DailyDataItemType[]>({
+    queryKey: ['getCalendar', selectedYear, selectedMonth],
+    queryFn: () => getCalendar(selectedYear, selectedMonth)
+  });
 
   return (
     <section className='mb-40 mt-24'>
@@ -58,12 +44,7 @@ const ExpensCalendarBox = () => {
           </Link>
         </Button>
       </FlexBox>
-      <Calendar
-        year={selectedYear}
-        month={selectedMonth}
-        dailyData={dailyData}
-        weeklyData={weeklyData}
-      />
+      <Calendar year={selectedYear} month={selectedMonth} dailyData={dailyData} />
     </section>
   );
 };
