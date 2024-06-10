@@ -22,7 +22,8 @@ export const protectedRoutes: string[] = [
   '/asset-management/:path*',
   '/budget-calendar/:path*',
   '/bucket-landing',
-  '/create-bucket/:path*'
+  '/create-bucket/:path*',
+  '/financial-product/ai-recommendations'
 ];
 
 /**
