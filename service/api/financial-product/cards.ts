@@ -46,7 +46,7 @@ export const getFilteredCards = async (
   type: 'credit' | 'check',
   company?: CardCompany[],
   category?: BenefitCategories[]
-): Promise<CardResponseType> => {
+): Promise<CardResponseType[]> => {
   const isValidCompany =
     company && company.every((c) => CARD_COMPANIES.map((comp) => comp.title).includes(c));
 
@@ -56,13 +56,25 @@ export const getFilteredCards = async (
 
   const companyQuery = isValidCompany ? `&& company in ${JSON.stringify(company)}` : '';
 
-  const categoryQuery = isValidCategory
-    ? `&& benefits[].category in ${JSON.stringify(category)}`
-    : '';
+  // 추후에 쿼리문 작성, 현재는 시간 상 js코드로 필터링
+  // const categoryQuery = isValidCategory
+  //   ? `&& benefits[].category in ${JSON.stringify(category)}`
+  //   : '';
 
   const query = `
       *[_type == "card" && type == "${type}" ${companyQuery}]${CardResponseFilde}
     `;
 
-  return await client.fetch(query);
+  const cards = await client.fetch(query);
+  let result;
+
+  if (isValidCategory) {
+    result = cards.filter((card: CardResponseType) =>
+      card.benefits.some((benefit) => category.includes(benefit.category))
+    );
+  } else {
+    result = cards;
+  }
+
+  return result;
 };
