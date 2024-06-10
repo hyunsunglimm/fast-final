@@ -19,14 +19,21 @@ const ComparisonSection = () => {
   const cardCompanies = queryValues('card-company');
   const benefitCategories = queryValues('filtering');
 
-  const { data: cardsToCompare, isPending } = useQuery<CardResponseType[]>({
+  const isFilterSelected = cardCompanies.length > 0 || benefitCategories.length > 0;
+
+  const {
+    data: cardsToCompare,
+    isLoading,
+    isSuccess
+  } = useQuery<CardResponseType[]>({
     queryKey: ['cardsToCompare', cardType, cardCompanies, benefitCategories],
     queryFn: async () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/comparison?type=${cardType}&company=${cardCompanies}&category=${benefitCategories}`
       );
       return await res.json();
-    }
+    },
+    enabled: isFilterSelected
   });
 
   const selectedCards = queryValues(QUERY_KEY);
@@ -56,14 +63,27 @@ const ComparisonSection = () => {
         <Text variant='h2' sizes='20' weight='700' className='mb-4'>
           비교할 카드 선택하기
         </Text>
-        <Text variant='p'>
-          최대 <Text weight='700'>2개</Text>까지만 선택할 수 있어요
-        </Text>
-        {isPending ? (
+        {!isFilterSelected && (
+          <Text weight='700' className='mt-20 text-primary'>
+            검색하실 카드의 정보를 선택해주세요.
+          </Text>
+        )}
+        {isLoading && (
           <FlexBox justifyContent='center' className='mt-20'>
             <Spinner />
           </FlexBox>
-        ) : (
+        )}
+        {isSuccess && cardsToCompare?.length === 0 && (
+          <Text weight='700' className='mt-20 text-primary'>
+            선택하신 정보에 해당하는 카드가 없습니다.
+          </Text>
+        )}
+        {isSuccess && cardsToCompare?.length > 0 && (
+          <Text variant='p'>
+            최대 <Text weight='700'>2개</Text>까지만 선택할 수 있어요
+          </Text>
+        )}
+        {isSuccess && cardsToCompare?.length > 0 && (
           <ul className='mt-20 flex flex-col gap-[1.2rem]'>
             {cardsToCompare?.map((card) => {
               const isSelected = selectedCards.some((c) => c === card.id);

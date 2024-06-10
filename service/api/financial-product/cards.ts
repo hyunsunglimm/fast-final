@@ -15,18 +15,21 @@ const CardResponseFilde = `{
   "type": type,
 }`;
 
-import { ComparedCards } from '@/shared/types/card';
 import { requestFetch } from '../fetchOptions';
 import { client } from '@/sanity/lib/client';
-import { BenefitCategories, CardCompany } from '@/shared/types/response/card';
+import { BenefitCategories, CardCompany, CardResponseType } from '@/shared/types/response/card';
+import {
+  CARD_BENEFIT_CATEGORIES,
+  CARD_COMPANIES
+} from '@/shared/utils/financial-product/staticData';
 
-export const getComparedCards = (): Promise<ComparedCards[]> => {
+export const getComparedCards = (): Promise<CardResponseType[]> => {
   return requestFetch('/api/cards/comparison/result');
 };
 
 export const getSpotlightCards = async (type: 'credit' | 'check') => {
   return await client.fetch(`
-  *[_type == "card" && discount_limit > 25000 && type == "${type}"]${CardResponseFilde}
+  *[_type == "card" && type == "${type}" && (discount_limit >= 25000 || count(benefit) >= 3)]${CardResponseFilde}
 `);
 };
 
@@ -43,14 +46,22 @@ export const getFilteredCards = async (
   type: 'credit' | 'check',
   company?: CardCompany[],
   category?: BenefitCategories[]
-) => {
-  const companyFilter =
-    company && company.length > 0
-      ? `&& company in [${company.map((comp) => `"${comp}"`).join(', ')}]`
-      : '';
+): Promise<CardResponseType> => {
+  const isValidCompany =
+    company && company.every((c) => CARD_COMPANIES.map((comp) => comp.title).includes(c));
+
+  const isValidCategory =
+    category &&
+    category.every((c) => CARD_BENEFIT_CATEGORIES.map((cate) => cate.title_en).includes(c));
+
+  const companyQuery = isValidCompany ? `&& company in ${JSON.stringify(company)}` : '';
+
+  const categoryQuery = isValidCategory
+    ? `&& benefits[].category in ${JSON.stringify(category)}`
+    : '';
 
   const query = `
-      *[_type == "card" && type == "${type}" ${companyFilter}]${CardResponseFilde}
+      *[_type == "card" && type == "${type}" ${companyQuery}]${CardResponseFilde}
     `;
 
   return await client.fetch(query);
