@@ -94,7 +94,7 @@ const cafeBenefitInfo = [
 ];
 
 const ComparisonResult = () => {
-  const { data: comparedCards, isPending } = useQuery({
+  const { data: comparedCards, isLoading } = useQuery({
     queryKey: ['comparedCards'],
     queryFn: getComparedCards
   });
@@ -102,7 +102,7 @@ const ComparisonResult = () => {
   const searchParams = useSearchParams();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
-  if (isPending) {
+  if (isLoading) {
     return (
       <div className='relative flex h-dvh flex-col justify-between px-20 py-16'>
         <LoadingBackdrop />

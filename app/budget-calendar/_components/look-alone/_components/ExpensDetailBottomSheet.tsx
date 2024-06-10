@@ -19,16 +19,24 @@ const ExpenseDetailBottomSheet = ({
 }: ExpenseDetailBottomSheetProps) => {
   const [isChangingCategory, setIsChangingCategory] = useState(false);
 
-  const { data: expenseDetailData, isFetching } = useQuery({
+  const {
+    data: expenseDetailData,
+    isFetching,
+    isLoading
+  } = useQuery({
     queryKey: ['expensDetail', historyId],
     queryFn: () => getSpendingDetail(historyId),
     enabled: openDetailBottomSheet
   });
 
   const renderContent = () => {
+    if (isLoading) {
+      return <MyWalletSkeleton />;
+    }
     if (isFetching) {
       return <MyWalletSkeleton />;
     }
+
     if (isChangingCategory) {
       return <ChangeCategoryList />;
     }
@@ -52,7 +60,7 @@ const ExpenseDetailBottomSheet = ({
       buttonLabel='변경하기'
       isOpen={openDetailBottomSheet}
       onClose={handleCloseBottomSheet}
-      onIsBackHandler={() => setIsChangingCategory(false)}
+      isBackHandler={() => setIsChangingCategory(false)}
     >
       {renderContent()}
     </BottomSheet>

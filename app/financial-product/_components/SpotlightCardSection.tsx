@@ -15,7 +15,7 @@ const SpotlightCardSection = () => {
   const { queryValue } = useQueryString();
   const type = queryValue('tab');
 
-  const { data: spotlightCards, isPending } = useQuery({
+  const { data: spotlightCards, isLoading } = useQuery({
     queryKey: ['spotlightCard', type],
     queryFn: () => getSpotlightCards(type)
   });
@@ -38,7 +38,7 @@ const SpotlightCardSection = () => {
       <div className='mb-24 mt-16'>
         <Tab array={['신용카드', '체크카드']} type='box' tabKey='tab' />
       </div>
-      {isPending ? (
+      {isLoading ? (
         <FlexBox justifyContent='center'>
           <Spinner />
         </FlexBox>

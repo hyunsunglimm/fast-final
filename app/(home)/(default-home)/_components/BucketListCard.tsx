@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useOnloadImage from '@/shared/hooks/useOnloadImage';
 import { BucketResponseType } from '@/shared/types/response/bucket';
-import { localeStringToNumber } from '@/shared/utils/conversion';
+import { deleteCommaReturnNumber } from '@/shared/utils/deleteComma';
 
 const BucketListCard = ({ bucket }: { bucket: BucketResponseType }) => {
   const router = useRouter();
@@ -27,15 +27,15 @@ const BucketListCard = ({ bucket }: { bucket: BucketResponseType }) => {
           height={155}
           alt='버킷리스트'
           title='버킷리스트 이미지'
-          loading='lazy'
+          priority
           onLoad={onLoadImage}
           quality={onload ? '100' : '10'}
           className='pointer-events-none h-[15.5rem] w-[15.5rem]'
         />
       </ListContent>
       <ListFooter
-        targetAmount={localeStringToNumber(bucket.target_amount)}
-        currentAmount={localeStringToNumber(bucket.savings_amount)} // 요일마다 입금하는 것은 미구현
+        targetAmount={deleteCommaReturnNumber(bucket.target_amount)}
+        currentAmount={deleteCommaReturnNumber(bucket.savings_amount)} // 요일마다 입금하는 것은 미구현
       />
     </ListCard>
   );

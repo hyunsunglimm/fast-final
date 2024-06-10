@@ -13,7 +13,7 @@ import BottomButton from './BottomButton';
 const QUERY_KEY = 'card';
 
 const ComparisonSection = () => {
-  const { data: cardsToCompare, isPending } = useQuery({
+  const { data: cardsToCompare, isLoading } = useQuery({
     queryKey: ['cardsToCompare'],
     queryFn: getCardsToCompare
   });
@@ -49,7 +49,7 @@ const ComparisonSection = () => {
         <Text variant='p'>
           최대 <Text weight='700'>2개</Text>까지만 선택할 수 있어요
         </Text>
-        {isPending ? (
+        {isLoading ? (
           <FlexBox justifyContent='center' className='mt-20'>
             <Spinner />
           </FlexBox>

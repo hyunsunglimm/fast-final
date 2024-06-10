@@ -118,3 +118,8 @@ input[type='number'] {
     transform: translateY(-10px);
   }
 }
+
+.backdrop-filter {
+  -webkit-backdrop-filter: blur(5px); /* Add this line first, it fixes blur for Safari*/
+  backdrop-filter: blur(5px);
+}

@@ -10,7 +10,7 @@ type CheckedGenderProps = {
 };
 
 const genderChoiceBtnClass =
-  'flex h-[4.8rem] w-full cursor-pointer items-center justify-center rounded-sm bg-gray-200 text-center text-gray-400 transition duration-200 hover:bg-gray-400 hover:text-white';
+  'flex h-[4.8rem] w-full cursor-pointer items-center justify-center rounded-sm bg-gray-200 text-center text-gray-400 transition duration-200 xs:hover:bg-gray-400 xs:hover:text-white';
 
 const CheckedGender = ({ register, errors }: CheckedGenderProps) => {
   return (

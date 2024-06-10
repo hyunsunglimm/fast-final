@@ -15,7 +15,7 @@ const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
         ref={ref}
         {...props}
         className={cn(
-          'text-14 underline-offset-4 hover:underline disabled:cursor-not-allowed disabled:text-gray-300',
+          'text-14 underline-offset-4 disabled:cursor-not-allowed disabled:text-gray-300 xs:hover:underline',
           className
         )}
       >

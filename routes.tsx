@@ -4,13 +4,14 @@
 export const publicRoutes: string[] = ['/', '/financial-product'];
 
 /**
- * 바텀 네비 라우트
+ * 바텀 네비가 보여야 할 주소
  */
 export const navBarRoutes: string[] = [
   '/',
   '/asset-management/:path*',
   '/budget-calendar/:path*',
-  '/financial-product'
+  '/financial-product',
+  '/notification'
 ];
 
 /**

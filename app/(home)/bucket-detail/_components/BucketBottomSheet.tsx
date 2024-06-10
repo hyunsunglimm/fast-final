@@ -5,6 +5,8 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
+import { savingHistoryData } from '../data';
+import { returnDate } from '@/shared/utils/dateUtils';
 
 type BucketBottomSheetProps = {
   totalHeight: number;
@@ -79,39 +81,43 @@ const BucketBottomSheet = ({ totalHeight, windowWidth }: BucketBottomSheetProps)
         {/* 내역 스크롤 영역 */}
         <FlexBox
           flexDirection='col'
-          justifyContent='between'
           className='hide-scrollbar h-full w-full gap-y-24 overflow-y-scroll overscroll-contain px-20 pb-[16rem]'
           onPointerDown={handleScrollAreaDrag}
         >
-          {[...Array(20)].map((_, index) => {
-            return (
-              <FlexBox
-                flexDirection='col'
-                justifyContent='between'
-                className='w-full gap-y-16'
-                key={index}
-              >
-                <Text sizes='12' className='text-gray-700'>
-                  {index} 5월 16일
-                </Text>
-                <FlexBox justifyContent='between' className='w-full '>
-                  <FlexBox alignItems='center' className='gap-x-16'>
-                    <Icon src='/icons/logos/bank/bank-bc.svg' alt='아이콘' size='40' />
-                    <FlexBox flexDirection='col'>
-                      <Text sizes='16'>포코</Text>
-                      <Text>18:40</Text>
+          {savingHistoryData
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .map((item, index) => {
+              const { month, day, hour, minute } = returnDate(item.date);
+              return (
+                <FlexBox
+                  flexDirection='col'
+                  justifyContent='between'
+                  className='w-full gap-y-16'
+                  key={index}
+                >
+                  <Text sizes='12' className='text-gray-700'>
+                    {month}월 {day}일
+                  </Text>
+                  <FlexBox justifyContent='between' className='w-full '>
+                    <FlexBox alignItems='center' className='gap-x-16'>
+                      <Icon src={item.imgSrc} alt={`${item.bank} 아이콘`} size='40' />
+                      <FlexBox flexDirection='col'>
+                        <Text sizes='16'>{item.bank}</Text>
+                        <Text>
+                          {hour}:{minute}
+                        </Text>
+                      </FlexBox>
+                    </FlexBox>
+                    <FlexBox flexDirection='col' alignItems='end'>
+                      <Text sizes='16' weight='700'>
+                        {item.amount.toLocaleString()}원
+                      </Text>
+                      <Text> {item.total.toLocaleString()}원</Text>
                     </FlexBox>
                   </FlexBox>
-                  <FlexBox flexDirection='col' alignItems='end'>
-                    <Text sizes='16' weight='700'>
-                      50000원
-                    </Text>
-                    <Text>50000원</Text>
-                  </FlexBox>
                 </FlexBox>
-              </FlexBox>
-            );
-          })}
+              );
+            })}
         </FlexBox>
         <div className='absolute bottom-[2rem] w-full bg-transparent px-20 xs:w-[520px]'>
           <Button size='md' className='w-full bg-black'>
