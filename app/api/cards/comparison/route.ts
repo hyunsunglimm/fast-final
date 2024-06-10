@@ -15,7 +15,7 @@ export const GET = async (request: Request) => {
   const company = searchParams.get('company')?.split(',');
   const category = searchParams.get('category')?.split(',');
 
-  const isValidCompany = company?.every((c) => CARD_COMPANIES.includes(c));
+  const isValidCompany = company?.every((c) => CARD_COMPANIES.map((c) => c.title).includes(c));
   const isValidCategory = category?.every((c) => FILTERINGS.includes(c));
 
   if (!type || !isValidCompany || !isValidCategory) {

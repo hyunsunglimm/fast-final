@@ -6,7 +6,21 @@ export const card = {
     {
       title: 'Company',
       name: 'company',
-      type: 'string'
+      type: 'string',
+      options: {
+        list: [
+          { title: 'KB국민카드', value: 'KB국민카드' },
+          { title: 'BC카드', value: 'BC카드' },
+          { title: 'IBK기업은행', value: 'IBK기업은행' },
+          { title: '신한카드', value: '신한카드' },
+          { title: 'NH농협카드', value: 'NH농협카드' },
+          { title: '현대카드', value: '현대카드' },
+          { title: '우리카드', value: '우리카드' },
+          { title: '삼성카드', value: '삼성카드' },
+          { title: '하나카드', value: '하나카드' },
+          { title: '롯데카드', value: '롯데카드' }
+        ]
+      }
     },
     {
       title: 'Name',
@@ -66,7 +80,7 @@ export const card = {
       card_name: 'name',
       company: 'company',
       max_benefit: 'discount_limit',
-      media: 'card_image'
+      media: 'image_horizontal'
     },
     prepare: (selection) => {
       const { card_name: cardName, company, max_benefit: maxBenefit, media } = selection;

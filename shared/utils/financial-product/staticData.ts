@@ -139,14 +139,14 @@ export const CARD_BENEFIT_CATEGORIES = [
 ];
 
 export const CARD_COMPANIES = [
-  'KB국민카드',
-  'BC카드',
-  'IBK기업은행',
-  '신한카드',
-  'NH농협카드',
-  '현대카드',
-  '우리카드',
-  '삼성카드',
-  '하나카드',
-  '롯데카드'
+  { title: 'KB국민카드', iconPath: '/icons/logos/bank/bank-kb.svg' },
+  { title: 'BC카드', iconPath: '/icons/logos/bank/bank-bc.svg' },
+  { title: 'IBK기업은행', iconPath: '/icons/logos/bank/bank-ibk.svg' },
+  { title: '신한카드', iconPath: '/icons/logos/bank/bank-shinhan.svg' },
+  { title: 'NH농협카드', iconPath: '/icons/logos/bank/bank-nh.svg' },
+  { title: '현대카드', iconPath: '/icons/logos/bank/bank-hyundai.svg' },
+  { title: '우리카드', iconPath: '/icons/logos/bank/bank-woori.svg' },
+  { title: '삼성카드', iconPath: '/icons/logos/bank/bank-samsung.svg' },
+  { title: '하나카드', iconPath: '/icons/logos/bank/bank-hana.svg' },
+  { title: '롯데카드', iconPath: '/icons/logos/bank/bank-lotte.svg' }
 ];

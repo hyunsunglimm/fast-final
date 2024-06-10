@@ -5,11 +5,12 @@ import Icon from '@/components/Icon';
 import Tab from '@/components/ui/Tab';
 import Text from '@/components/ui/Text';
 import { useState } from 'react';
-import SelectCardCompany, { cardCompanies } from './SelectCardCompany';
+import SelectCardCompany from './SelectCardCompany';
 import SelectFiltering from './SelectFiltering';
 import FlexBox from '@/components/ui/FlexBox';
 import FilteringPlace from './FilteringPlace';
 import { useQueryString } from '@/shared/hooks/useQueryString';
+import { CARD_COMPANIES } from '@/shared/utils/financial-product/staticData';
 
 export type CardCompany = { title: string; iconPath: string };
 
@@ -20,7 +21,7 @@ const FilteringSection = () => {
   const selectedCardCompaniesByQueryString = queryValues('card-company').map((title) => {
     return {
       title,
-      iconPath: cardCompanies.find((cardCompany) => cardCompany.title === title)!.iconPath
+      iconPath: CARD_COMPANIES.find((cardCompany) => cardCompany.title === title)!.iconPath
     };
   });
 
