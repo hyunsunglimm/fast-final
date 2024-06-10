@@ -14,7 +14,7 @@ import Checkbox from '@/components/ui/CheckBox';
 import Text from '@/components/ui/Text';
 import TextButton from '@/components/ui/TextButton';
 import { signInWithCredentials } from '@/shared/actions/auth';
-
+import Spinner from '@/components/Spinner';
 const EyeIcon = dynamic(() => import('../../_components/EyeIcon'), { ssr: false });
 const ClearInputValueIcon = dynamic(() => import('../../_components/ClearInputValueIcon'), {
   ssr: false
@@ -144,7 +144,7 @@ const LoginForm = () => {
           )}
         </CardContent>
         <Button type='submit' className='w-full self-end' disabled={isPending}>
-          로그인
+          {isPending ? <Spinner /> : '로그인'}
         </Button>
       </form>
     </Form>
