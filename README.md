@@ -50,14 +50,22 @@ chore: 빌드 업무, 패키지 매니저 수정, 잡다...
 ```
 - actions -> 서버 액션
 - app
-   └─ _components -> 해당 페이지에서만 사용하는 컴포넌트
+   └─ page
+        └─ _components -> 해당 페이지에서만 사용하는 컴포넌트
+        └─ context
+        └─ hooks
+        └─ utils
+- auth -> next-auth
 - components -> 재사용 가능한 컴포넌트
 - context
-- hooks
 - service -> 비즈니스 로직 (서버요청)
-- styles -> 스타일링 정의 (tailwind className이 길어질 경우)
-- types -> 타입 정의
-- utils -> 비즈니스 로직을 제외한 로직 (ex - formatter, 수학적 계산)
+- shared -> 전역으로 사용되는 디렉토리
+    └─ actions
+    └─ context
+    └─ hooks
+    └─ types
+    └─ utils
+
 ```
 
 ## 기술 스택
