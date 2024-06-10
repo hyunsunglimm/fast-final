@@ -7,10 +7,10 @@ import Text from '@/components/ui/Text';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useState } from 'react';
-import LoadingPage from '../../loading';
 import { CardResponseType } from '@/shared/types/response/card';
 import { Card } from '@/components/ui/card';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 
 const SpendingHabitsCardSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -47,7 +47,7 @@ const SpendingHabitsCardSection = () => {
   };
 
   if (isPending) {
-    return <LoadingPage />;
+    return <LoadingBackdrop isFullScreen />;
   }
 
   const currentCard = isSuccess ? spendingHabitsCards[currentCardIndex] : null;

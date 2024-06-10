@@ -34,10 +34,9 @@ export const getSpendingHabitsCards = async () => {
   const allCards = await client.fetch(`
   *[_type == "card"]${CardResponseFilde}
 `);
-  const shuffled = allCards.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, 5);
+  const randomSlicedCards = allCards.sort(() => 0.5 - Math.random()).slice(0, 5);
 
-  return selected;
+  return randomSlicedCards;
 };
 
 export const getFilteredCards = async (
