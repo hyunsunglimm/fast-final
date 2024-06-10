@@ -19,8 +19,13 @@ export const card = {
       type: 'text'
     },
     {
-      title: 'Card Image',
-      name: 'card_image',
+      title: 'Image Horizontal',
+      name: 'image_horizontal',
+      type: 'image'
+    },
+    {
+      title: 'Image Vertical',
+      name: 'image_vertical',
       type: 'image'
     },
     {

@@ -22,7 +22,7 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
     >
       <FlexBox>
         <Image
-          src={card.card_image}
+          src={card.image_vertical}
           alt={`${card.name} 카드 이미지`}
           width={100}
           height={70}

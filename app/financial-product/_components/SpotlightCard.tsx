@@ -11,7 +11,7 @@ type SpotlightCardProps = {
 };
 
 const SpotlightCard = ({
-  card: { name, card_image, discount_limit, annual_fee },
+  card: { name, image_vertical, discount_limit, annual_fee },
   count
 }: SpotlightCardProps) => {
   const isEvent = annual_fee <= 5000;
@@ -33,7 +33,7 @@ const SpotlightCard = ({
         </Text>
       </FlexBox>
       <Image
-        src={card_image}
+        src={image_vertical}
         alt={`${name}의 카드 이미지`}
         width={400}
         height={82}

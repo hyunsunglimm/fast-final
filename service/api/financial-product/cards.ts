@@ -9,7 +9,8 @@ const CardResponseFilde = `{
   "discount_limit": discount_limit,
   "prev_month_performance": prev_month_performance,
   "description": description,
-  "card_image": card_image.asset->url,
+  "image_horizontal": image_horizontal.asset->url,
+  "image_vertical": image_vertical.asset->url,
   "name": name,
   "type": type,
 }`;

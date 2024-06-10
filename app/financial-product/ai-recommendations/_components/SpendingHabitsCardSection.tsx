@@ -74,11 +74,11 @@ const SpendingHabitsCardSection = () => {
       <>
         {isSuccess && (
           <SwiperWrapper dots coverflow setIndex={setCurrentCardIndex}>
-            {spendingHabitsCards.map(({ id, card_image, name }) => {
+            {spendingHabitsCards.map(({ id, image_horizontal, name }) => {
               return (
                 <Image
                   key={id}
-                  src={card_image}
+                  src={image_horizontal}
                   alt={`${name} 카드 이미지`}
                   width={500}
                   height={160}

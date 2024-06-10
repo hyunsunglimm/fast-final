@@ -5,7 +5,7 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { useEffect, useTransition } from 'react';
 import { useQueryString } from '@/shared/hooks/useQueryString';
-import { COMPARISON_STANDARD } from '@/shared/utils/financial-product/staticData';
+import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import { useQueryClient } from '@tanstack/react-query';
 import { getComparedCards } from '@/service/api/financial-product/cards';
 import BottomButton from '../../_components/BottomButton';
@@ -64,13 +64,13 @@ const SelectCategory = () => {
           </Text>
         </FlexBox>
         <ul className='mt-28 grid grid-cols-3 gap-12'>
-          {COMPARISON_STANDARD.map(({ title, iconPath }) => {
-            const isSelected = selectedCategories.some((c) => c === title);
+          {CARD_BENEFIT_CATEGORIES.map(({ title_kr, iconPath }) => {
+            const isSelected = selectedCategories.some((c) => c === title_kr);
 
             return (
-              <li key={title}>
+              <li key={title_kr}>
                 <CategoryCard
-                  title={title}
+                  title={title_kr}
                   iconPath={iconPath}
                   isSelected={isSelected}
                   onSelect={onSelect}

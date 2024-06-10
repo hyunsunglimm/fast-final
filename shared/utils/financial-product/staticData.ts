@@ -87,22 +87,6 @@ export const THEMES = [
   }
 ];
 
-// /financial-product/comparison/select-category
-export const COMPARISON_STANDARD = [
-  { title: '쇼핑', iconPath: '/icons/product/product-shopping.svg' },
-  { title: '카페', iconPath: '/icons/product/product-cafe.svg' },
-  { title: '편의점', iconPath: '/icons/product/product-cvs.svg' },
-  { title: '대중교통', iconPath: '/icons/product/product-traffic.svg' },
-  { title: '마트', iconPath: '/icons/product/product-mart.svg' },
-  { title: '문화', iconPath: '/icons/product/product-culture.svg' },
-  { title: '백화점', iconPath: '/icons/product/product-stores.svg' },
-  { title: '통신비', iconPath: '/icons/product/product-communication.svg' },
-  { title: '주유', iconPath: '/icons/product/product-oiling.svg' },
-  { title: '여행', iconPath: '/icons/product/product-travel.svg' },
-  { title: '온라인', iconPath: '/icons/product/product-online.svg' },
-  { title: '구독', iconPath: '/icons/product/product-subscribe.svg' }
-];
-
 export const CARD_BENEFIT_CATEGORIES = [
   { title_kr: '쇼핑', title_en: 'shopping', iconPath: '/icons/product/product-shopping.svg' },
   { title_kr: '카페', title_en: 'cafe', iconPath: '/icons/product/product-cafe.svg' },

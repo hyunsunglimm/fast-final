@@ -37,7 +37,8 @@ export type CardResponseType = {
   discount_limit: number;
   prev_month_performance: number;
   description: string;
-  card_image: string;
+  image_horizontal: string;
+  image_vertical: string;
   name: string;
   type: string;
 };
