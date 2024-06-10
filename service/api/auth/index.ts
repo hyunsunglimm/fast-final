@@ -30,7 +30,7 @@ export const signup = async (formValues: z.infer<typeof signupSchema>) => {
   // 프로필 랜덤 선택
   const profiles = ['profile_1', 'profile_2', 'profile_3'];
   const randomIndex = Math.floor(Math.random() * profiles.length);
-  const profileImageUrl = `/images/default-profile/${profiles[randomIndex]}.jpg`;
+  const profileImageUrl = `/images/default-profile/${profiles[randomIndex]}.webp`;
 
   const requestBody = {
     email: formValues.email,
