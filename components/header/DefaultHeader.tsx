@@ -56,15 +56,18 @@ export const DefaultHeader = ({
         </Text>
       )}
       <FlexBox className='gap-x-12'>
-        <Link href='/notification' aria-label='알림 페이지로 이동'>
-          <Icon
-            src='/icons/system-icon/header/header-alarm-on.svg'
-            alt='알람 아이콘'
-            size='24'
-            className='cursor-pointer'
-            aria-hidden
-          />
-        </Link>
+        {userData ? (
+          <Link href='/notification' aria-label='알림 페이지로 이동'>
+            <Icon
+              src='/icons/system-icon/header/header-alarm-on.svg'
+              alt='알람 아이콘'
+              size='24'
+              className='cursor-pointer'
+              aria-hidden
+            />
+          </Link>
+        ) : null}
+
         <Icon
           src={userData?.image ?? '/icons/profile/profile.svg'}
           alt='프로필 이미지'

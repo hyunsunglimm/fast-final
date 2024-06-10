@@ -52,7 +52,7 @@ export const IsBackHeader = ({
         <Icon
           className='cursor-pointer'
           role='link'
-          onClick={() => router.back()}
+          onClick={() => (href ? router.push(href) : router.back())}
           aria-label='뒤로 가기 링크'
           size='24'
           alt='뒤로가기'
