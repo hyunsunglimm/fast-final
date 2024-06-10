@@ -47,11 +47,12 @@ const ExpenseDetailBottomSheet = ({
 
   return (
     <BottomSheet
-      isBack={() => setIsChangingCategory(false)}
+      isBack={isChangingCategory}
       title={isChangingCategory ? '카테고리 변경' : '상세 내역'}
       buttonLabel='변경하기'
       isOpen={openDetailBottomSheet}
       onClose={handleCloseBottomSheet}
+      isBackHandler={() => setIsChangingCategory(false)}
     >
       {renderContent()}
     </BottomSheet>

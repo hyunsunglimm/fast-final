@@ -19,6 +19,7 @@ type BottomSheetProps = {
   noScrollContents?: React.ReactNode;
   isButtonShow?: boolean;
   isBack?: (() => void) | boolean;
+  isBackHandler?: () => void;
 };
 
 const BottomSheet = ({
@@ -32,7 +33,8 @@ const BottomSheet = ({
   noScrollContents,
   isButtonShow = true,
   children,
-  isBack = false
+  isBack = false,
+  isBackHandler
 }: BottomSheetProps) => {
   const { size, styled, disabled } = buttonOptions || {};
   useEffect(() => {
@@ -70,11 +72,7 @@ const BottomSheet = ({
                   <Icon
                     src='/icons/system-icon/arrow/arrow-left.svg'
                     alt='뒤로가기'
-                    onClick={() => {
-                      if (typeof isBack === 'function') {
-                        isBack();
-                      }
-                    }}
+                    onClick={isBackHandler}
                   />
                 )}
               </div>

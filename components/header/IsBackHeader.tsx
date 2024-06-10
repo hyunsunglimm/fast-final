@@ -32,7 +32,7 @@ export const IsBackHeader = ({
   const headerColor = useTransform(
     scrollY,
     [0, 1],
-    [`${defaultColor || 'transparent'}`, '#ffffff96']
+    [`${defaultColor || 'transparent'}`, '#ffffffd0']
   );
   const fixedClass = isFixed ? 'sticky top-0 z-20' : '';
   return (
@@ -43,7 +43,7 @@ export const IsBackHeader = ({
           justifyContent: 'between',
           alignItems: 'center'
         }),
-        `${fixedClass} h-[5.6rem] px-20 backdrop-blur-lg`
+        `${fixedClass} backdrop-filterur-lg h-[5.6rem] px-20`
       )}
     >
       {!isClose ? (
