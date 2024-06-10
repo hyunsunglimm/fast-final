@@ -13,6 +13,8 @@ type CardsToCompareProps = {
 };
 
 const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => {
+  const benefits = card.benefits.length > 3 ? card.benefits.slice(0, 3) : card.benefits;
+
   return (
     <Card
       className={`p-24 ${isSelected && 'relative ring-1 ring-primary'}`}
@@ -30,9 +32,9 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
           <Text sizes='16' weight='600' className='mb-[0.2rem]'>
             {card.name}
           </Text>
-          <Text className='mb-[1rem]'>{card.description}</Text>
-          <ul className='hide-scrollbar flex gap-8 overflow-x-scroll'>
-            {card.benefits.map(({ category }) => {
+          <Text className='mb-[1rem] w-[20rem] truncate'>{card.description}</Text>
+          <ul className='flex gap-8'>
+            {benefits.map(({ category }) => {
               const categoryInfo = CARD_BENEFIT_CATEGORIES.find((c) => c.title_en === category);
 
               return (

@@ -113,6 +113,8 @@ const SpendingHabitsCardSection = () => {
           <ul className='flex w-full flex-col gap-[0.6rem]'>
             {currentCard?.benefits.map(({ category, benefitDetails }) => {
               const categoryInfo = CARD_BENEFIT_CATEGORIES.find((c) => c.title_en === category);
+              const benefits =
+                benefitDetails.length > 2 ? benefitDetails.slice(0, 2) : benefitDetails;
 
               return (
                 <li key={category}>
@@ -123,11 +125,11 @@ const SpendingHabitsCardSection = () => {
                       size='20'
                       className='shrink-0 rounded-none'
                     />
-                    <ul className='hide-scrollbar flex gap-12 overflow-x-scroll'>
-                      {benefitDetails.map((benefitDetail) => {
+                    <ul className='flex gap-12'>
+                      {benefits.map((benefit) => {
                         return (
-                          <li key={benefitDetail} className='shrink-0'>
-                            <Text weight='700'>{highlightText(benefitDetail)}</Text>
+                          <li key={benefit} className='shrink-0'>
+                            <Text weight='700'>{highlightText(benefit)}</Text>
                           </li>
                         );
                       })}
