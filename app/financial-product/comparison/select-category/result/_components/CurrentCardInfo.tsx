@@ -74,7 +74,7 @@ const CurrentCardInfo = ({ id, currentCard }: CurrentCardInfoProps) => {
             목록이에요!
           </Text>
         </FlexBox>
-        <ul className='scroll-hidden hide-scrollbar mb-40 flex flex-nowrap gap-8 overflow-x-scroll px-20'>
+        <ul className='hide-scrollbar mb-40 flex flex-nowrap gap-8 overflow-x-scroll px-20'>
           {currentCard.allBenefits.map((benefit) => {
             return (
               <li key={benefit} className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>

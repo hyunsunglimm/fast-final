@@ -24,26 +24,27 @@ const ResultCard = ({ cardInfo, index, standard }: ResultCardProps) => {
         height={82}
         className='mr-16 w-[5.3rem]'
       />
-      <FlexBox flexDirection='col'>
+      <FlexBox flexDirection='col' className='w-[23rem] shrink-0'>
         <Text weight='700' className={`mb-[1rem] ${index === 0 ? 'text-active' : 'text-warning'}`}>
           {cardInfo.name}
         </Text>
         <Text className='mb-[0.6rem]'>{standard}</Text>
-        <ul className='hide-scrollbar flex gap-6 overflow-x-scroll'>
-          {benefitsByStandard?.benefitDetails.map((benefit) => {
-            return (
-              <li key={benefit} className='shrink-0'>
-                <Text
-                  sizes='12'
-                  weight='700'
-                  className='rounded-[0.6rem] bg-gray-50 px-[0.8rem] py-[0.4rem]'
+        <div className='hide-scrollbar w-full overflow-x-scroll'>
+          <ul className='flex gap-6'>
+            {benefitsByStandard?.benefitDetails.map((benefit) => {
+              return (
+                <li
+                  key={benefit}
+                  className='shrink-0 rounded-[0.6rem] bg-gray-50 px-[0.8rem] py-[0.4rem]'
                 >
-                  {benefit}
-                </Text>
-              </li>
-            );
-          })}
-        </ul>
+                  <Text sizes='12' weight='700'>
+                    {benefit}
+                  </Text>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </FlexBox>
     </Card>
   );

@@ -6,9 +6,10 @@ export const GET = async (request: Request) => {
   const cardIds = searchParams.get('card')?.split(',');
 
   if (typeof cardIds !== 'object') {
-    return new Response('bad request', { status: 400 });
+    return new Response('bad request1', { status: 400 });
   }
 
   const comparisonCards = await getSelectedCardsById(cardIds);
+
   return NextResponse.json(comparisonCards);
 };
