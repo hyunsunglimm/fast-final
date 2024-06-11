@@ -43,22 +43,23 @@ const NotiPage = async () => {
 
       {/* 오늘 알림 */}
       <Text className='inline-block py-12 text-gray-500'>오늘</Text>
-      {today.map((item) => {
-        const { hour: currentTime } = returnDate();
-        const { hour: dataTime } = returnDate(item.datetime);
-        const timeText =
-          currentTime - dataTime <= 1 ? '방금 전' : `${currentTime - dataTime}시간 전`;
-        return (
-          <FlexBox flexDirection='col' className='gap-6 py-12' key={item.title}>
-            <Text sizes='16' weight='700'>
-              {item.title.replace(/{USER_NAME}/g, `${userName}`)}
-            </Text>
-            <Text sizes='12' className='text-gray-500'>
-              {timeText}
-            </Text>
-          </FlexBox>
-        );
-      })}
+      {today &&
+        today.map((item) => {
+          const { hour: currentTime } = returnDate();
+          const { hour: dataTime } = returnDate(item.datetime);
+          const timeText =
+            currentTime - dataTime <= 1 ? '방금 전' : `${currentTime - dataTime}시간 전`;
+          return (
+            <FlexBox flexDirection='col' className='gap-6 py-12' key={item.title}>
+              <Text sizes='16' weight='700'>
+                {item.title.replace(/{USER_NAME}/g, `${userName}`)}
+              </Text>
+              <Text sizes='12' className='text-gray-500'>
+                {timeText}
+              </Text>
+            </FlexBox>
+          );
+        })}
 
       <div className='my-12 h-[0.1rem] w-full bg-gray-100' aria-hidden />
 

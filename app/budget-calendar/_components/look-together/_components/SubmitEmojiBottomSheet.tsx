@@ -46,25 +46,23 @@ const SubmitEmojiBottomSheet = () => {
               ? 'border border-primary bg-select xs:hover:bg-primary/30'
               : '';
             return (
-              <>
+              <React.Fragment key={reaction.stickerOrEmoticonID}>
                 {currentDate && (
-                  <div key={reaction.stickerOrEmoticonID} className='h-[2.8rem]'>
-                    <TextButton
-                      name={reaction.stickerOrEmoticonID}
-                      onClick={handleAddEmojiClick}
-                      className={cn(
-                        'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
-                        myReactionBtnClass
-                      )}
-                    >
-                      <span role='img' className='mr-4 font-sans'>
-                        {reaction.stickerOrEmoticonID}
-                      </span>
-                      <span className='truncate'>{reaction.memberIds.length}</span>
-                    </TextButton>
-                  </div>
+                  <TextButton
+                    name={reaction.stickerOrEmoticonID}
+                    onClick={handleAddEmojiClick}
+                    className={cn(
+                      'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
+                      myReactionBtnClass
+                    )}
+                  >
+                    <span role='img' className='mr-4 font-sans'>
+                      {reaction.stickerOrEmoticonID}
+                    </span>
+                    <span className='truncate'>{reaction.memberIds.length}</span>
+                  </TextButton>
                 )}
-              </>
+              </React.Fragment>
             );
           });
         })}

@@ -154,7 +154,7 @@ const StepFour = ({ handleChangeQueryString }: StepFourProps) => {
           mutate(state);
         }}
       >
-        제출
+        시작하기
       </Button>
     </>
   );

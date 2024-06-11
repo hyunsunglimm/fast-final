@@ -60,6 +60,7 @@ const ExpenseDetailBottomSheet = ({
       buttonLabel='변경하기'
       isOpen={openDetailBottomSheet}
       onClose={handleCloseBottomSheet}
+      onClick={handleCloseBottomSheet}
       isBackHandler={() => setIsChangingCategory(false)}
     >
       {renderContent()}
