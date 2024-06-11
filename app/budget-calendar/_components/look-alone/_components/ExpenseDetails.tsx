@@ -27,7 +27,10 @@ const ExpenseDetails = ({ expenseDetailData, setIsChangingCategory }: ExpenseDet
         <Text>{expenseDetailData?.place}</Text>
       </FlexBox>
       <Text sizes='24' weight='700'>
-        {expenseDetailData?.cost.toLocaleString()} 원
+        {expenseDetailData && expenseDetailData?.cost > 0
+          ? `+${expenseDetailData?.cost.toLocaleString()}`
+          : expenseDetailData?.cost.toLocaleString()}
+        원
       </Text>
       <ul className='mt-40 flex w-full flex-col'>
         <ListElement
