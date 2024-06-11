@@ -33,6 +33,9 @@ const LookAloneContainer = () => {
 
   const handleTabChange = (newDisplayMode: string) => {
     setDisplayMode(newDisplayMode);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('displayMode', newDisplayMode);
+    router.prefetch(`${pathname}?${params.toString()}`);
     if (newDisplayMode === '캘린더 보기' && calendarRef.current) {
       window.scrollTo({ top: calendarRef.current.offsetTop - headerHeight, behavior: 'smooth' });
     } else if (newDisplayMode === '내역 보기' && listRef.current) {
@@ -51,8 +54,14 @@ const LookAloneContainer = () => {
         calendarTop >= -calendarRef.current.offsetHeight + tabHeight
       ) {
         setDisplayMode('캘린더 보기');
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('displayMode', '캘린더 보기');
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
       } else if (listTop <= tabHeight && listTop >= -listRef.current.offsetHeight + tabHeight) {
         setDisplayMode('내역 보기');
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('displayMode', '내역 보기');
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
       }
     }
   }, [headerHeight]);
