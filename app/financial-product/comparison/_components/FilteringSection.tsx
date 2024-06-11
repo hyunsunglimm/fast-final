@@ -100,7 +100,16 @@ const FilteringSection = () => {
               {selectedCardCompaniesByQueryString.map(({ title, iconPath }) => {
                 return (
                   <li key={title}>
-                    <Icon src={iconPath} alt={title} size='32' />
+                    <Icon
+                      src={iconPath}
+                      alt={title}
+                      size='32'
+                      onClick={() => {
+                        params.delete('card-company', title);
+                        router.push(pathname + '?' + params.toString());
+                        setSelectedCardCompanies((prev) => prev.filter((c) => c.title !== title));
+                      }}
+                    />
                   </li>
                 );
               })}
