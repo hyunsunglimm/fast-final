@@ -32,7 +32,6 @@ const SubmitEmojiBottomSheet = () => {
   const { openAddEmojiSheet, setOpenAddEmojiSheet, reactionDate, shareData, handleAddEmojiClick } =
     useSubmitEmojiContext();
   const { day: reactionDay, month } = returnDate(reactionDate);
-  // const { daily } = shareData;
 
   const noScrollContents = (
     <FlexBox flexDirection='col' className='w-full touch-none bg-white'>
@@ -58,7 +57,7 @@ const SubmitEmojiBottomSheet = () => {
                         name={reaction.stickerOrEmoticonID}
                         onClick={handleAddEmojiClick}
                         className={cn(
-                          'h-[2.8rem] min-w-fit flex-initial basis-[4.1rem] rounded-full bg-gray-50 px-8 text-12 leading-[2.8rem] active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
+                          'flex h-[2.8rem] min-w-fit flex-initial basis-[4.1rem] items-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
                           myReactionBtnClass
                         )}
                       >
