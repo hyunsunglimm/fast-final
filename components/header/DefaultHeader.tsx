@@ -1,5 +1,5 @@
 'use client';
-
+import { User } from 'next-auth';
 import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
 import Text from '../ui/Text';
 import Image from 'next/image';
@@ -7,10 +7,10 @@ import Icon from '../Icon';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { HTMLAttributes } from 'react';
 import { cn } from '@/shared/utils/twMerge';
-import { useUserSession } from '@/shared/hooks/useUserSession';
 import Link from 'next/link';
 
 type DefaultHeaderProps = {
+  userData?: User;
   isHome?: boolean;
   title?: string;
   defaultColor?: string;
@@ -21,11 +21,10 @@ export const DefaultHeader = ({
   isHome = false,
   title,
   defaultColor,
-  isFixed = true
+  isFixed = true,
+  userData
 }: DefaultHeaderProps) => {
   const { scrollY } = useScroll();
-  const userData = useUserSession();
-
   const headerColor = useTransform(
     scrollY,
     [0, 1],

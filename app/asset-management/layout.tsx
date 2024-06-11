@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultHeader } from '@/components/header';
+import ServerDefaultHeader from '@/components/header/ServerDefaultHeader';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ const MyAssetPageLayout = ({
 }: MyAssetPageLayoutProps) => {
   return (
     <>
-      <DefaultHeader title='자산' defaultColor='#f2f4f6' />
+      <ServerDefaultHeader title='자산' defaultColor='#f2f4f6' />
       <main className='bg-gray-50'>
         {children}
         <section className='px-20'>{UpcomingScheduleSection}</section>
