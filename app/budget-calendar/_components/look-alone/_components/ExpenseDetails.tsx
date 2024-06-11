@@ -12,7 +12,6 @@ type ExpenseDetailsProps = {
 
 const ExpenseDetails = ({ expenseDetailData, setIsChangingCategory }: ExpenseDetailsProps) => {
   const { year, month, day, hour, minute } = returnDate(expenseDetailData?.usedAt);
-
   const imgSrc = expenseDetailData?.historyCategoryId.imageUrlTypeNo
     ? `/icons/categories/background/categories-${expenseDetailData?.historyCategoryId.imageUrlTypeNo}.svg`
     : '/icons/categories/background/categories-14.svg';
