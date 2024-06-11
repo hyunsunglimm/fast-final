@@ -11,6 +11,7 @@ import { CardResponseType } from '@/shared/types/response/card';
 import { Card } from '@/components/ui/card';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
+import { formatCurrency } from '@/shared/utils/financial-product/unitConverter';
 
 const SpendingHabitsCardSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -100,12 +101,14 @@ const SpendingHabitsCardSection = () => {
           <ul className='mb-20 flex gap-8'>
             <li className='rounded-[10rem] bg-gray-50 px-12 py-8'>
               <Text sizes='12' weight='500' className='text-gray-700'>
-                전월실적 {currentCard?.prev_month_performance.toLocaleString()}원 이상
+                {currentCard?.prev_month_performance === 0
+                  ? '전월 실적 없음'
+                  : `전월실적 ${formatCurrency(currentCard?.prev_month_performance)} 이상`}
               </Text>
             </li>
             <li className='rounded-[10rem] bg-gray-50 px-12 py-8'>
               <Text sizes='12' weight='500' className='text-gray-700'>
-                연회비 {currentCard?.annual_fee.toLocaleString()}원
+                연회비 {formatCurrency(currentCard?.annual_fee)}
               </Text>
             </li>
           </ul>
