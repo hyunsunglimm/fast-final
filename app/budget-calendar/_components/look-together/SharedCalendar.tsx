@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useMemo } from 'react';
+import { MouseEvent, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
