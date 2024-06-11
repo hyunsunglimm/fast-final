@@ -2,7 +2,7 @@ import React from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Button from '@/components/ui/Button';
 import { WidgetElementType } from '@/shared/types/response/widgetResponse';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Spinner from '@/components/Spinner';
 import { useRouter } from 'next/navigation';
 import { putEidtWidgetItem } from '@/service/api/home/action';
@@ -13,10 +13,14 @@ type FixedBottomProps = {
 
 const FixedBottom = ({ showWidget }: FixedBottomProps) => {
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: putEidtWidgetItem,
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ['widget'] });
+    },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['widget'] });
       router.push('/');
     }
   });

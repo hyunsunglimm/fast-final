@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { DefaultHeader } from '@/components/header';
+import ServerDefaultHeader from '@/components/header/ServerDefaultHeader';
 import MyWalletButton from './_components/MyWalletButton';
 import OpenWalletProvider from './context/OpenWalletProvider';
 import { CardSkeleton } from '@/components/ui/skeleton';
@@ -29,7 +29,7 @@ const HomeLayout = async ({
 
   return (
     <>
-      <DefaultHeader title='Home' isHome={true} defaultColor='#f2f4f6' />
+      <ServerDefaultHeader title='Home' isHome={true} defaultColor='#f2f4f6' />
       <OpenWalletProvider>
         <main className='relative bg-gray-50 pb-[13.2rem]'>
           {children}
