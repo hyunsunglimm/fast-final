@@ -81,15 +81,14 @@ const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
             );
           })}
         </ul>
-        {selectedCategories.length >= 1 && (
-          <BottomButton
-            onClick={handleNavigateToResultPage}
-            path='/financial-product/comparison/select-category/result'
-          >
-            결과보기
-          </BottomButton>
-        )}
       </main>
+      <BottomButton
+        disabled={selectedCategories.length < 1}
+        onClick={handleNavigateToResultPage}
+        path='/financial-product/comparison/select-category/result'
+      >
+        결과보기
+      </BottomButton>
     </>
   );
 };

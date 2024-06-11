@@ -24,7 +24,7 @@ const BottomButton = ({
   const router = useRouter();
 
   return (
-    <div className='fixed bottom-0 w-full xs:w-[520px]'>
+    <div className='fixed bottom-0 z-10 w-full xs:w-[520px]'>
       <Image
         src='/images/financial-product/bottom-gradation.webp'
         alt='바텀 그라데이션'
