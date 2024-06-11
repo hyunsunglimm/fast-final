@@ -120,12 +120,12 @@ const SpendingHabitsCardSection = () => {
                 <li key={category}>
                   <Card className='flex w-full items-center gap-[1.2rem] border border-gray-100 px-24 py-16'>
                     <Icon
-                      src={categoryInfo?.iconPath || ''}
+                      src={categoryInfo?.lineIconPath || ''}
                       alt={`${categoryInfo?.title_kr} 아이콘`}
                       size='20'
                       className='shrink-0 rounded-none'
                     />
-                    <ul className='flex gap-12'>
+                    <ul className='hide-scrollbar flex gap-12 overflow-x-scroll'>
                       {benefits.map((benefit) => {
                         return (
                           <li key={benefit} className='shrink-0'>

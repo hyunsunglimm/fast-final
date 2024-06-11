@@ -84,7 +84,11 @@ const ComparisonSection = () => {
         )}
         {isSuccess && cardsToCompare?.length > 0 && (
           <Text variant='p'>
-            최대 <Text weight='700'>2개</Text>까지만 선택할 수 있어요
+            최대{' '}
+            <Text weight='700' className='text-primary'>
+              2개
+            </Text>
+            까지 선택가능해요!
           </Text>
         )}
         {isSuccess && cardsToCompare?.length > 0 && (
@@ -101,9 +105,12 @@ const ComparisonSection = () => {
           </ul>
         )}
       </section>
-      {selectedCards.length >= 2 && (
-        <BottomButton path='/financial-product/comparison/select-category'>비교하기</BottomButton>
-      )}
+      <BottomButton
+        disabled={selectedCards.length < 2}
+        path='/financial-product/comparison/select-category'
+      >
+        비교하기
+      </BottomButton>
     </>
   );
 };

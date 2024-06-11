@@ -28,7 +28,7 @@ const PerfectFinancialProductSection = () => {
         </FlexBox>
       </FlexBox>
       <div className='mb-16 mt-20'>
-        <Tab type='box' array={['예적금', '카드', '대출', '청약']} tabKey='tab' />
+        <Tab type='box' array={['예적금 4', '카드 8', '대출 1', '청약 2']} tabKey='tab' />
       </div>
       {isPending ? (
         <div className='flex justify-center py-20'>

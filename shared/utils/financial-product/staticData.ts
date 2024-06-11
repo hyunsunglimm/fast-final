@@ -3,7 +3,7 @@ export const FINANCIAL_PRODUCT_NAVIGATION = [
   {
     title: 'AI 맞춤 추천',
     subTitle: '꼭 맞는 상품 여기있어요',
-    href: 'ai-recommendations?tab=예적금',
+    href: 'ai-recommendations?tab=예적금+4',
     color: '#597BFF'
   },
   {
@@ -88,53 +88,77 @@ export const THEMES = [
 ];
 
 export const CARD_BENEFIT_CATEGORIES = [
-  { title_kr: '쇼핑', title_en: 'shopping', iconPath: '/icons/product/product-shopping.svg' },
-  { title_kr: '카페', title_en: 'cafe', iconPath: '/icons/product/product-cafe.svg' },
-  { title_kr: '편의점', title_en: 'convenience_store', iconPath: '/icons/product/product-cvs.svg' },
+  {
+    title_kr: '쇼핑',
+    title_en: 'shopping',
+    iconPath: '/icons/product/product-shopping.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/shopping.svg'
+  },
+  {
+    title_kr: '카페',
+    title_en: 'cafe',
+    iconPath: '/icons/product/product-cafe.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/cafe.svg'
+  },
+  {
+    title_kr: '편의점',
+    title_en: 'convenience_store',
+    iconPath: '/icons/product/product-cvs.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/convenience-store.svg'
+  },
   {
     title_kr: '대중교통',
     title_en: 'public_transport',
-    iconPath: '/icons/product/product-traffic.svg'
+    iconPath: '/icons/product/product-traffic.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/public-transport.svg'
   },
   {
     title_kr: '마트',
     title_en: 'mart',
-    iconPath: '/icons/product/product-mart.svg'
+    iconPath: '/icons/product/product-mart.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/mart.svg'
   },
   {
     title_kr: '문화',
     title_en: 'culture',
-    iconPath: '/icons/product/product-culture.svg'
+    iconPath: '/icons/product/product-culture.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/culture.svg'
   },
   {
     title_kr: '백화점',
     title_en: 'department_store',
-    iconPath: '/icons/product/product-stores.svg'
+    iconPath: '/icons/product/product-stores.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/department-store.svg'
   },
   {
     title_kr: '통신비',
     title_en: 'communication_cost',
-    iconPath: '/icons/product/product-communication.svg'
+    iconPath: '/icons/product/product-communication.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/communication-cost.svg'
   },
   {
     title_kr: '주유',
     title_en: 'oiling',
-    iconPath: '/icons/product/product-oiling.svg'
+    iconPath: '/icons/product/product-oiling.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/oiling.svg'
   },
   {
     title_kr: '여행',
     title_en: 'travel',
-    iconPath: '/icons/product/product-travel.svg'
+    iconPath: '/icons/product/product-travel.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/travel.svg'
   },
   {
     title_kr: '온라인',
     title_en: 'online',
-    iconPath: '/icons/product/product-online.svg'
+    iconPath: '/icons/product/product-online.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/online.svg'
   },
   {
     title_kr: '구독',
     title_en: 'subscribe',
-    iconPath: '/icons/product/product-subscribe.svg'
+    iconPath: '/icons/product/product-subscribe.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/subscribe.svg'
   }
 ];
 

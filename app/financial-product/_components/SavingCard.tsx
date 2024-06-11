@@ -2,8 +2,6 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
-import Image from 'next/image';
-import React from 'react';
 
 type SavingCardProps = {
   saving: {
@@ -25,13 +23,6 @@ const SavingCard = ({ saving }: SavingCardProps) => {
     <Card className='flex flex-col gap-[1.6rem] p-24'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-[0.4rem]'>
-          <Image
-            src='/images/financial-product/kakao-logo.png'
-            alt='카카오 이미지'
-            width={160}
-            height={16}
-            className='h-[1.6rem] w-[1.6rem]'
-          />
           <Icon src={iconPath} alt={`${bank} logo`} size='16' />
           <Text sizes='12' className='text-gray-600'>
             {bank}

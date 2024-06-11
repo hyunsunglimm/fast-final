@@ -28,7 +28,7 @@ const FilteringPlace = ({
         <Icon src='/icons/financial-product/filter-icon.svg' alt='filter icon' size='16' />
         <Text
           sizes='12'
-          weight='700'
+          weight={selectedItems.length > 0 ? '700' : '400'}
           className={`${selectedItems.length > 0 ? 'text-primary' : 'text-gray-500'}`}
         >
           {title}
