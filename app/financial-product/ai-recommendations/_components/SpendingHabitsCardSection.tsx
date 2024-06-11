@@ -12,6 +12,7 @@ import { Card } from '@/components/ui/card';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 import { formatCurrency } from '@/shared/utils/financial-product/unitConverter';
+import sanityLoader from '@/shared/utils/sanityLoader';
 
 const SpendingHabitsCardSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -77,6 +78,7 @@ const SpendingHabitsCardSection = () => {
             {spendingHabitsCards.map(({ id, image_horizontal, name }) => {
               return (
                 <Image
+                  loader={sanityLoader}
                   key={id}
                   src={image_horizontal}
                   alt={`${name} 카드 이미지`}

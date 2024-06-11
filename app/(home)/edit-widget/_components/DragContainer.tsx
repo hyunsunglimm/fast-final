@@ -28,9 +28,8 @@ const DragContainer = () => {
   );
 
   const { data, isLoading } = useQuery<MemberWidgetReponseType>({
-    queryKey: ['fetchWidget'],
-    queryFn: getWidgetItem,
-    refetchOnMount: 'always'
+    queryKey: ['widget'],
+    queryFn: getWidgetItem
   });
 
   useEffect(() => {

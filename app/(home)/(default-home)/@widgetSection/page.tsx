@@ -5,6 +5,7 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import ConsumeWeatherCard from '../_components/ConsumeWeatherCard';
 import { getWidgetItem } from '@/service/api/home';
+import { QueryClient } from '@tanstack/react-query';
 import {
   WidgetBudget,
   WidgetCardPerformance,
@@ -19,11 +20,15 @@ import { currentUserSession } from '@/shared/actions/auth';
 
 const WidgeSectionPage = async () => {
   const session = await currentUserSession();
+
   if (!session) {
     return null;
   }
-  const { orderedMemberWidgets } = await getWidgetItem();
-
+  const queryClient = new QueryClient();
+  const { orderedMemberWidgets } = await queryClient.fetchQuery({
+    queryKey: ['widget'],
+    queryFn: getWidgetItem
+  });
   const widgetMap: Record<string, React.ComponentType> = {
     REMAINING_BUDGET: WidgetBudget,
     UPCOMING_EXPENSES: WidgetUpcomingExpenses,

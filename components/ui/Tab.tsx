@@ -40,9 +40,8 @@ const Tab = ({ pageParams, array, type, tabKey, onTabChange }: TabProps) => {
             href={pathname + '?' + createQueryString(tabKey, label)}
             key={label}
             className={getStyle(type, label === selectedTab)}
-            onClick={(event) => {
+            onClick={() => {
               if (onTabChange) {
-                event.preventDefault();
                 onTabChange(label);
               }
             }}
