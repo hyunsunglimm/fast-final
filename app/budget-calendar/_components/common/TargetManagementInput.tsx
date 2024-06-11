@@ -4,6 +4,8 @@ import ClearInputValueIcon from '@/app/auth/_components/ClearInputValueIcon';
 import Text from '@/components/ui/Text';
 import { TargetManagementInputProps, FormValues } from '@/shared/types/budgetCalendarType';
 
+const MAX_AMOUNT = 50000000;
+
 const TargetManagementInput = ({
   inputValue,
   setInputValue,
@@ -20,9 +22,20 @@ const TargetManagementInput = ({
 
   const handleInputChange = (value: string) => {
     const numericValue = value.replace(/\D/g, '');
-    const formattedValue = formatNumberWithComma(numericValue);
-    setInputValue(formattedValue);
-    setValue('amount', formattedValue);
+    const numericValueInt = parseInt(numericValue, 10);
+
+    if (!isNaN(numericValueInt) && numericValueInt <= MAX_AMOUNT) {
+      const formattedValue = formatNumberWithComma(numericValue);
+      setInputValue(formattedValue);
+      setValue('amount', formattedValue);
+    } else if (numericValueInt > MAX_AMOUNT) {
+      const maxFormattedValue = formatNumberWithComma(MAX_AMOUNT.toString());
+      setInputValue(maxFormattedValue);
+      setValue('amount', maxFormattedValue);
+    } else {
+      setInputValue('');
+      setValue('amount', '');
+    }
   };
 
   return (
@@ -32,7 +45,16 @@ const TargetManagementInput = ({
         control={control}
         rules={{
           required: '금액을 입력해 주세요',
-          validate: (value) => /^\d+(,\d{3})*$/.test(value) || '숫자만 입력해 주세요'
+          validate: (value) => {
+            const numericValue = parseInt(value.replace(/,/g, ''), 10);
+            if (isNaN(numericValue)) {
+              return '숫자만 입력해 주세요';
+            }
+            if (numericValue > MAX_AMOUNT) {
+              return `최대 금액은 ${formatNumberWithComma(MAX_AMOUNT.toString())}원 입니다.`;
+            }
+            return true;
+          }
         }}
         render={({ field }) => {
           return (
