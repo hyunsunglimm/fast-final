@@ -30,18 +30,17 @@ const SpendingHabitsCardSection = () => {
   });
 
   const highlightText = (text: string) => {
-    const regex = /(\d+%|\d+[천만억]?원)/g;
+    const separatedText = text.split(' ');
 
-    const parts = text.split(regex);
-
-    return parts.map((part, index) => {
+    return separatedText.map((text, index) => {
+      const isHighlight = text.includes('%') || text.includes('원');
       return (
         <Text
           key={index}
           weight='700'
-          className={`${regex.test(part) ? 'text-primary' : 'text-gray-700'}`}
+          className={`${isHighlight ? 'text-primary' : 'text-gray-700'}`}
         >
-          {part}
+          {text}{' '}
         </Text>
       );
     });
