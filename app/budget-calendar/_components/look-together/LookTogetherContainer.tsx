@@ -8,16 +8,19 @@ import ConsumptionWeather from '../shared/ConsumptionWeather';
 import RegretSpending from '../shared/RegretSpending';
 import ReactionBottomSheet from './_components/ReactionBottomSheet';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-import { useUserSession } from '@/shared/hooks/useUserSession';
 import { Friend } from '@/shared/types/budgetCalendarType';
+import { User } from 'next-auth';
 
 const SubmitEmojiBottomSheet = dynamic(() => import('./_components/SubmitEmojiBottomSheet'), {
   ssr: false
 });
 
-const LookTogetherContainer: React.FC<{ viewMode: string }> = ({ viewMode }) => {
-  const userData = useUserSession();
+type LookTogetherContainerProps = {
+  viewMode: string;
+  userData: User | undefined;
+};
 
+const LookTogetherContainer = ({ viewMode, userData }: LookTogetherContainerProps) => {
   // 선택중인 프로필
   const [selectedProfile, setSelectedProfile] = useState<Friend | null>(null);
   useEffect(() => {
