@@ -101,7 +101,7 @@ const SpendingCategories = () => {
 
   return (
     <div className='px-20 py-32'>
-      <Title title='지출 비교' className='mb-16' />
+      <Title title='소비 항목' className='mb-16' />
       <Tab array={['금액', '건수']} type='box' tabKey='viewType' />
       <div className='relative my-40 min-h-[20.2rem]'>
         {spendingData.map((item, index) => {

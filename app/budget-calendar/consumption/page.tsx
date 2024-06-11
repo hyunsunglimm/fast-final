@@ -27,7 +27,7 @@ const ConsumptionPage = async () => {
       <main>
         <MonthlyOverview />
         <Line />
-        <MonthSpending />
+        <MonthSpending name={userData.user?.name || '???'} />
         <Line />
         <ExpenseComparison />
         <Line />
