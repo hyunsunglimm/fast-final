@@ -1,3 +1,4 @@
+'use client';
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
 import Line from '../common/Line';

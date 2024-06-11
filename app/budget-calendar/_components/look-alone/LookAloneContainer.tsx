@@ -19,7 +19,12 @@ const LookAloneContainer = () => {
   return (
     <>
       <div className='px-20 pb-24 pt-16'>
-        <Tab array={['캘린더 보기', '내역 보기']} type='box' tabKey='displayMode' />
+        <Tab
+          pageParams='캘린더 보기'
+          array={['캘린더 보기', '내역 보기']}
+          type='box'
+          tabKey='displayMode'
+        />
       </div>
       <div className='px-20 text-12'>
         {budgetSet ? (

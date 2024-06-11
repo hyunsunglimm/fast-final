@@ -1,6 +1,9 @@
 import React from 'react';
-import Popup from './_components/common/Popup';
-import SubmitEmojiProvider from './context/SubmitEmojiProvider';
+import Popup from '../_components/common/Popup';
+
+import { DefaultHeader } from '@/components/header';
+import SubmitEmojiProvider from '../context/SubmitEmojiProvider';
+
 type CalendarLayoutProps = {
   children: React.ReactNode;
 };
@@ -8,7 +11,8 @@ type CalendarLayoutProps = {
 const CalendarLayout = ({ children }: CalendarLayoutProps) => {
   return (
     <>
-      {/* <Popup /> */}
+      <Popup />
+      <DefaultHeader title='가계부' defaultColor='#fff' />
       <SubmitEmojiProvider>{children}</SubmitEmojiProvider>
     </>
   );
