@@ -19,18 +19,16 @@ import {
 import { currentUserSession } from '@/shared/actions/auth';
 
 const WidgeSectionPage = async () => {
-  const queryClient = new QueryClient();
-  const { orderedMemberWidgets } = await queryClient.fetchQuery({
-    queryKey: ['widget'],
-    queryFn: getWidgetItem
-  });
-
   const session = await currentUserSession();
 
   if (!session) {
     return null;
   }
-
+  const queryClient = new QueryClient();
+  const { orderedMemberWidgets } = await queryClient.fetchQuery({
+    queryKey: ['widget'],
+    queryFn: getWidgetItem
+  });
   const widgetMap: Record<string, React.ComponentType> = {
     REMAINING_BUDGET: WidgetBudget,
     UPCOMING_EXPENSES: WidgetUpcomingExpenses,
