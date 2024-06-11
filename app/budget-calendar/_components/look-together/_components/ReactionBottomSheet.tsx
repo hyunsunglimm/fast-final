@@ -48,7 +48,7 @@ const ReactionBottomSheet = () => {
               <Text sizes='12'>
                 {month}월 {day}일
               </Text>
-              <div className='grid grid-cols-5 gap-8'>
+              <div className='flex w-full max-w-[26rem] flex-wrap gap-8'>
                 {item.reactions.map((reaction) => {
                   const myReactionBtnClass = reaction.memberIds.includes(MY_MEMBER_ID)
                     ? 'border border-primary bg-select xs:hover:bg-primary/30'
@@ -59,14 +59,14 @@ const ReactionBottomSheet = () => {
                       key={reaction.stickerOrEmoticonID}
                       onClick={(e) => handleAddEmojiClick(e, item.date)}
                       className={cn(
-                        'h-[2.8rem] w-[4.1rem] rounded-full bg-gray-50 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
+                        'flex h-[2.8rem] min-w-fit basis-[4.1rem] items-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
                         myReactionBtnClass
                       )}
                     >
                       <span role='img' className='mr-4 font-sans'>
                         {reaction.stickerOrEmoticonID}
                       </span>
-                      {reaction.memberIds.length}
+                      {reaction.memberIds.length >= 999 ? '999+' : reaction.memberIds.length}
                     </TextButton>
                   );
                 })}
