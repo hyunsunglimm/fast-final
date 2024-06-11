@@ -1,4 +1,4 @@
-import { HistoryListItemType } from '../types/response/calendarHistroy';
+import { Element } from '../types/response/calendarHistroy';
 
 // 날짜 형식 변환 (몇일 몇요일)
 export const formatDate = (dateString: string | number | Date): string => {
@@ -13,11 +13,11 @@ export const formatDate = (dateString: string | number | Date): string => {
 };
 
 // 소비내역 날짜 별로 데이터 정리
-export const groupByDate = (expenses: HistoryListItemType[] | undefined) => {
-  const grouped: { [date: string]: HistoryListItemType[] } = {};
+export const groupByDate = (expenses: Element[] | undefined) => {
+  const grouped: { [date: string]: Element[] } = {};
   if (expenses) {
     expenses.forEach((expense) => {
-      const date = new Date(expense.usedAt).toString();
+      const date = new Date(expense.usedAt).toISOString().split('T')[0];
 
       if (!grouped[date]) {
         grouped[date] = [];

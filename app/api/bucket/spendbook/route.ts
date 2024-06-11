@@ -9,6 +9,6 @@ export const GET = async () => {
     { bank: '우리은행', amount: 36000, imgSrc: '/icons/logos/bank/bank-woori.svg' },
     { bank: '신한은행', amount: 2226000, imgSrc: '/icons/logos/bank/bank-shinhan.svg' }
   ];
-  await new Promise((res) => setTimeout(res, 2000));
+  await new Promise((res) => setTimeout(res, 1000));
   return NextResponse.json(data);
 };

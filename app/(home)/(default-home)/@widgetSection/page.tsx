@@ -36,15 +36,20 @@ const WidgeSectionPage = async () => {
   };
   return (
     <>
-      <FlexBox justifyContent='between' alignItems='center' className='mb-[1.6rem] mt-[4rem]'>
+      <FlexBox
+        justifyContent='between'
+        alignItems='center'
+        className='mb-[2rem] mt-[4rem] h-[3rem]'
+      >
         <Text sizes='20' weight='700' variant='h2'>
           한 눈에 보기
         </Text>
+
         <Button
           asChild
           styled='outline'
           size='xs'
-          className='focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
+          className='h-full focus:outline-none focus:ring focus:ring-gray-500/50 focus:ring-offset-1'
         >
           <Link aria-label='위젯 편집으로 이동' href='/edit-widget' scroll={false}>
             편집
@@ -56,7 +61,7 @@ const WidgeSectionPage = async () => {
       <ConsumeWeatherCard />
 
       {/* 위젯 영역 */}
-      <div className='grid grid-cols-2 justify-items-center gap-[1.6rem]'>
+      <div className='grid grid-cols-2 justify-items-center gap-12'>
         {orderedMemberWidgets.map((item) => {
           const WidgetComponent = widgetMap[item.code];
           return WidgetComponent ? <WidgetComponent key={item.code} /> : null;

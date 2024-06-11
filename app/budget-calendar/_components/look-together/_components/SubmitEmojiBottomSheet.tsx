@@ -38,7 +38,7 @@ const SubmitEmojiBottomSheet = () => {
       </Text>
 
       {/* 남긴 반응 이모지 */}
-      <div className='mt-16 grid w-full grid-cols-5 gap-8'>
+      <div className='hide-scrollbar mt-16 grid h-[10rem] w-full auto-rows-max grid-cols-5 gap-8 overflow-y-scroll'>
         {daily.map((item) => {
           const currentDate = new Date(item.date).getDate() === reactionDay;
           return item.reactions.map((reaction) => {
@@ -46,23 +46,25 @@ const SubmitEmojiBottomSheet = () => {
               ? 'border border-primary bg-select xs:hover:bg-primary/30'
               : '';
             return (
-              <React.Fragment key={reaction.stickerOrEmoticonID}>
+              <>
                 {currentDate && (
-                  <TextButton
-                    name={reaction.stickerOrEmoticonID}
-                    onClick={handleAddEmojiClick}
-                    className={cn(
-                      'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
-                      myReactionBtnClass
-                    )}
-                  >
-                    <span role='img' className='mr-4 font-sans'>
-                      {reaction.stickerOrEmoticonID}
-                    </span>
-                    <span className='truncate'>{reaction.memberIds.length}</span>
-                  </TextButton>
+                  <div key={reaction.stickerOrEmoticonID} className='h-[2.8rem]'>
+                    <TextButton
+                      name={reaction.stickerOrEmoticonID}
+                      onClick={handleAddEmojiClick}
+                      className={cn(
+                        'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
+                        myReactionBtnClass
+                      )}
+                    >
+                      <span role='img' className='mr-4 font-sans'>
+                        {reaction.stickerOrEmoticonID}
+                      </span>
+                      <span className='truncate'>{reaction.memberIds.length}</span>
+                    </TextButton>
+                  </div>
                 )}
-              </React.Fragment>
+              </>
             );
           });
         })}
@@ -70,10 +72,14 @@ const SubmitEmojiBottomSheet = () => {
 
       {/* 이모지 스티커 탭 */}
       <FlexBox className='mt-40 gap-x-8'>
-        <Button size='xs' styled='fill_black' className='rounded-full font-500'>
+        <Button size='sm' styled='fill_black' className='h-[3.6rem] rounded-full font-500'>
           이모지
         </Button>
-        <Button size='xs' styled='outline' className='rounded-full font-500 text-gray-500'>
+        <Button
+          size='sm'
+          styled='outline'
+          className='h-[3.6rem] rounded-full border-gray-400 font-500 text-gray-500'
+        >
           스티커
         </Button>
       </FlexBox>

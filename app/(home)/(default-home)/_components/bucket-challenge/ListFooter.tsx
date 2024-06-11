@@ -21,9 +21,9 @@ export const ListFooter = ({ currentAmount, targetAmount }: ListFooterProps) => 
             / {targetAmount.toLocaleString('ko')}원
           </Text>
         </p>
-        <Text weight='700'>{progressPercent}%</Text>
+        <Text weight='600'>{progressPercent}%</Text>
       </FlexBox>
-      <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>
+      <div className='h-[0.8rem] w-full overflow-hidden rounded-full bg-gray-300/50'>
         <ProgressBar barColor='white' progressPercent={progressPercent} />
       </div>
     </CardFooter>
