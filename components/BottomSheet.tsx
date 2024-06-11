@@ -18,7 +18,7 @@ type BottomSheetProps = {
   children: React.ReactNode;
   noScrollContents?: React.ReactNode;
   isButtonShow?: boolean;
-  isBack?: (() => void) | boolean;
+  isBack?: boolean;
   isBackHandler?: () => void;
 };
 
