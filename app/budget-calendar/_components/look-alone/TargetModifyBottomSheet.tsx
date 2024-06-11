@@ -35,6 +35,7 @@ const TargetModifyBottomSheet = ({
         onClose={() => setModifyPopup(false)}
         buttonOptions={{ disabled: !inputValue }}
         onClick={handleButtonClick}
+        isBack={true}
         isBackHandler={() => {
           setShowPopup(true);
           setModifyPopup(false);
