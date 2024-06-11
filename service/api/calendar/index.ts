@@ -3,7 +3,7 @@ import { requestFetch } from '../fetchOptions';
 import type {
   CalendarHistroyResponse,
   SpendingDetailResponse,
-  HistoryListItemType
+  Element
 } from '@/shared/types/response/calendarHistroy';
 
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
@@ -11,8 +11,12 @@ const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 /**
  * @returns 가계부 소비내역 리스트
  */
-export const getCalendarHistroy = (): Promise<CalendarHistroyResponse> => {
-  return requestFetch('/history', {}, BASE_URL);
+export const getCalendarHistroy = (page: number): Promise<CalendarHistroyResponse> => {
+  return requestFetch(
+    `/history?startDate=2024-01-01&endDate=2024-06-30&page=${page}&size=10`,
+    {},
+    BASE_URL
+  );
 };
 
 /**
@@ -28,7 +32,7 @@ export const getSpendingDetail = (historyId: string): Promise<SpendingDetailResp
  * @param regret 후회 여부
  * @returns
  */
-export const patchRegret = (historyId: number, regret: boolean): Promise<HistoryListItemType> => {
+export const patchRegret = (historyId: number, regret: boolean): Promise<Element> => {
   const param = regret ? 'true' : 'false';
   return requestFetch(
     `/history/${historyId}/regret?regret=${param}`,

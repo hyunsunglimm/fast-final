@@ -2,20 +2,33 @@
 export type CalendarHistroyResponse = {
   totalSpent: number;
   totalEarned: number;
-  historyList: HistoryListItemType[];
+  historyList: HistoryListItemType;
 };
 
 export type HistoryListItemType = {
+  totalPages: number;
+  totalElementCount: number;
+  currentPage: number;
+  currentElementCount: number;
+  perPageNumber: number;
+  firstPage: boolean;
+  lastPage: boolean;
+  hasNextPage: boolean;
+  hasPrevious: boolean;
+  elements: Element[];
+};
+
+export type Element = {
   id: number;
   usedAt: string;
   cost: number;
   place: string;
-  historyCategoryId: SpendingCategoryIdType;
+  historyCategoryId: HistoryCategoryId;
   payType: string;
   isRegret: boolean;
 };
 
-export type SpendingCategoryIdType = {
+export type HistoryCategoryId = {
   imageUrlTypeNo: number;
   name: string;
   type: string;
@@ -26,8 +39,13 @@ export interface SpendingDetailResponse {
   usedAt: string;
   cost: number;
   place: string;
-  historyCategoryId: SpendingCategoryIdType;
+  historyCategoryId: HistoryCategoryId;
   payType: string;
   isRegret: boolean;
   memo: string;
 }
+
+export type PreviousRegretType = {
+  pages: CalendarHistroyResponse[];
+  pageParams: number[];
+};
