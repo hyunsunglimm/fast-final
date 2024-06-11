@@ -5,7 +5,7 @@ import { getSavings } from '@/service/api/financial-product/savings';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PORKO | 6개월 적금 추천',
+  title: 'PORKO 6개월 적금 추천',
   description: 'PORKO 6개월 적금 추천 페이지'
 };
 

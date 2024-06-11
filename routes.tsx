@@ -24,6 +24,7 @@ export const protectedRoutes: string[] = [
   '/budget-calendar/:path*',
   '/bucket-landing',
   '/create-bucket/:path*',
+  '/financial-product/ai-recommendations',
   '/notification'
 ];
 

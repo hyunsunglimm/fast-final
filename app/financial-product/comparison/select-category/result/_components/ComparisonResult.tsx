@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import SpeechBubbleHeader from './SpeechBubbleHeader';
 import CurrentCardInfo from './CurrentCardInfo';
 import SwiperWrapper from '@/components/SwiperWrapper';
@@ -10,13 +9,11 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import BenefitCircle from './BenefitCircle';
 import { IsBackHeader } from '@/components/header';
-import { useSearchParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getComparedCards } from '@/service/api/financial-product/cards';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-import { CardSkeleton, SqureSkeleton } from '@/components/ui/skeleton';
+import { CardResponseType } from '@/shared/types/response/card';
+import { useQueryString } from '@/shared/hooks/useQueryString';
+import ResultCardImage from './ResultCardImage';
 
 const comparedResultA = [
   {
@@ -93,79 +90,37 @@ const cafeBenefitInfo = [
   }
 ];
 
-const ComparisonResult = () => {
-  const { data: comparedCards, isLoading } = useQuery({
-    queryKey: ['comparedCards'],
-    queryFn: getComparedCards
-  });
+const ComparisonResult = ({ comparedCards }: { comparedCards: CardResponseType[] }) => {
+  const { searchParams } = useQueryString();
 
-  const searchParams = useSearchParams();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
-  if (isLoading) {
-    return (
-      <div className='relative flex h-dvh flex-col justify-between px-20 py-16'>
-        <LoadingBackdrop />
-        <CardSkeleton />
-        <SqureSkeleton />
-        <CardSkeleton />
-      </div>
-    );
-  }
+  const currentCard = comparedCards[currentCardIndex];
 
-  const currentCard = comparedCards![currentCardIndex];
-
-  const {
-    id,
-    annualBenefit,
-    name,
-    monthlyBenefit,
-    discountLimit,
-    annualFee,
-    prevMonthPerformance,
-    benefits,
-    diffByStandardA,
-    diffByStandardB
-  } = currentCard;
+  const { discount_limit: discountLimit } = currentCard;
 
   return (
     <>
       <IsBackHeader href={`./?${searchParams.toString()}`} />
       <main className='bg-gray-50'>
-        <SpeechBubbleHeader id={id} annualBenefit={annualBenefit} />
+        <SpeechBubbleHeader id={currentCardIndex} annualBenefit={discountLimit * 12} />
         <section className='pt-[14.4rem]'>
           <SwiperWrapper arrow setIndex={setCurrentCardIndex}>
-            <Image
-              src='/images/financial-product/result-shinhan-card.webp'
+            <ResultCardImage
+              imageUrl={comparedCards![0].image_horizontal}
               alt='신한 카드 비교 결과 이미지'
-              width={400}
-              height={160}
-              className='pointer-events-none mx-auto w-[25.2rem]'
-              priority
             />
-            <Image
-              src='/images/financial-product/result-shinhan-mrlife-card.webp'
+            <ResultCardImage
+              imageUrl={comparedCards![1].image_horizontal}
               alt='신한 카드 비교 결과 이미지'
-              width={400}
-              height={160}
-              className='pointer-events-none mx-auto w-[25.2rem]'
-              priority
             />
           </SwiperWrapper>
         </section>
-        <CurrentCardInfo
-          id={id}
-          name={name}
-          monthlyBenefit={monthlyBenefit}
-          discountLimit={discountLimit}
-          annualFee={annualFee}
-          prevMonthPerformance={prevMonthPerformance}
-          benefits={benefits}
-        />
+        <CurrentCardInfo id={currentCardIndex} currentCard={currentCard} />
         <StandardComparison
-          difference={diffByStandardA}
+          difference='더 많은 가맹점'
           standard={0}
-          id={id}
+          id={currentCardIndex}
           comporisonResult={comparedResultA}
           content={
             <FlexBox justifyContent='center' className='my-28 gap-[4rem]' alignItems='end'>
@@ -185,9 +140,9 @@ const ComparisonResult = () => {
           }
         />
         <StandardComparison
-          difference={diffByStandardB}
+          difference='2개의 가맹점'
           standard={1}
-          id={id}
+          id={currentCardIndex}
           comporisonResult={comparedResultB}
           content={
             <div className='relative my-28 h-[24.5rem] w-full'>

@@ -4,12 +4,13 @@ import Icon from '@/components/Icon';
 import SwiperWrapper from '@/components/SwiperWrapper';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { Card } from '@/components/ui/card';
-import { getSpendingHabitsCards } from '@/service/api/financial-product/cards';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useState } from 'react';
-import LoadingPage from '../../loading';
+import { CardResponseType } from '@/shared/types/response/card';
+import { Card } from '@/components/ui/card';
+import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 
 const SpendingHabitsCardSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -17,13 +18,36 @@ const SpendingHabitsCardSection = () => {
     data: spendingHabitsCards,
     isPending,
     isSuccess
-  } = useQuery({
+  } = useQuery<CardResponseType[]>({
     queryKey: ['spendingHabitsCards'],
-    queryFn: getSpendingHabitsCards
+    queryFn: async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/spending-habits`
+      );
+      return await res.json();
+    }
   });
 
+  const highlightText = (text: string) => {
+    const regex = /(\d+%|\d+[천만억]?원)/g;
+
+    const parts = text.split(regex);
+
+    return parts.map((part, index) => {
+      return (
+        <Text
+          key={index}
+          weight='700'
+          className={`${regex.test(part) ? 'text-primary' : 'text-gray-700'}`}
+        >
+          {part}
+        </Text>
+      );
+    });
+  };
+
   if (isPending) {
-    return <LoadingPage />;
+    return <LoadingBackdrop isFullScreen />;
   }
 
   const currentCard = isSuccess ? spendingHabitsCards[currentCardIndex] : null;
@@ -50,12 +74,12 @@ const SpendingHabitsCardSection = () => {
       <>
         {isSuccess && (
           <SwiperWrapper dots coverflow setIndex={setCurrentCardIndex}>
-            {spendingHabitsCards.map(({ title, image }) => {
+            {spendingHabitsCards.map(({ id, image_horizontal, name }) => {
               return (
                 <Image
-                  key={title}
-                  src={`/images/financial-product/${image}.webp`}
-                  alt={title}
+                  key={id}
+                  src={image_horizontal}
+                  alt={`${name} 카드 이미지`}
                   width={500}
                   height={160}
                   className='w-full'
@@ -67,39 +91,49 @@ const SpendingHabitsCardSection = () => {
         )}
         <FlexBox flexDirection='col' alignItems='center' className='mt-32 px-20'>
           <Text sizes='12' className='mb-[0.2rem]'>
-            {currentCard?.title}
+            {currentCard?.company}
           </Text>
           <Text sizes='18' weight='600' className='mb-16'>
-            {currentCard?.cardName}
+            {currentCard?.name}
           </Text>
 
           <ul className='mb-20 flex gap-8'>
-            {currentCard?.conditions.map((condition) => {
-              return (
-                <li key={condition} className='rounded-[10rem] bg-gray-50 px-12 py-8'>
-                  <Text sizes='12' weight='500' className='text-gray-700'>
-                    {condition}
-                  </Text>
-                </li>
-              );
-            })}
+            <li className='rounded-[10rem] bg-gray-50 px-12 py-8'>
+              <Text sizes='12' weight='500' className='text-gray-700'>
+                전월실적 {currentCard?.prev_month_performance.toLocaleString()}원 이상
+              </Text>
+            </li>
+            <li className='rounded-[10rem] bg-gray-50 px-12 py-8'>
+              <Text sizes='12' weight='500' className='text-gray-700'>
+                연회비 {currentCard?.annual_fee.toLocaleString()}원
+              </Text>
+            </li>
           </ul>
 
           <ul className='flex w-full flex-col gap-[0.6rem]'>
-            {currentCard?.benefits.map(({ title, iconPath, detail }) => {
-              const content = detail.split(' ');
+            {currentCard?.benefits.map(({ category, benefitDetails }) => {
+              const categoryInfo = CARD_BENEFIT_CATEGORIES.find((c) => c.title_en === category);
+              const benefits =
+                benefitDetails.length > 2 ? benefitDetails.slice(0, 2) : benefitDetails;
 
               return (
-                <li key={title}>
+                <li key={category}>
                   <Card className='flex w-full items-center gap-[1.2rem] border border-gray-100 px-24 py-16'>
-                    <Icon src={iconPath} alt={title} size='20' className='rounded-none' />
-                    <Text>
-                      {content[0]}{' '}
-                      <Text weight='700' className='text-primary'>
-                        {content[1]}{' '}
-                      </Text>
-                      {content[2]}
-                    </Text>
+                    <Icon
+                      src={categoryInfo?.lineIconPath || ''}
+                      alt={`${categoryInfo?.title_kr} 아이콘`}
+                      size='20'
+                      className='shrink-0 rounded-none'
+                    />
+                    <ul className='hide-scrollbar flex gap-12 overflow-x-scroll'>
+                      {benefits.map((benefit) => {
+                        return (
+                          <li key={benefit} className='shrink-0'>
+                            <Text weight='700'>{highlightText(benefit)}</Text>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </Card>
                 </li>
               );

@@ -2,17 +2,19 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
-import { CardsToCompare as CardsToCompareType } from '@/shared/types/card';
-import { benefitCategoryIconPath } from '@/shared/utils/benefitCategoryIconPath';
+import { CardResponseType } from '@/shared/types/response/card';
+import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import Image from 'next/image';
 
-type ComparisonCardProps = {
+type CardsToCompareProps = {
   isSelected: boolean;
   onSelect: (cardId: string) => void;
-  card: CardsToCompareType;
+  card: CardResponseType;
 };
 
-const CardsToCompare = ({ isSelected, onSelect, card }: ComparisonCardProps) => {
+const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => {
+  const benefits = card.benefits.length > 3 ? card.benefits.slice(0, 3) : card.benefits;
+
   return (
     <Card
       className={`p-24 ${isSelected && 'relative ring-1 ring-primary'}`}
@@ -20,24 +22,31 @@ const CardsToCompare = ({ isSelected, onSelect, card }: ComparisonCardProps) => 
     >
       <FlexBox>
         <Image
-          src={`/images/financial-product/${card.fileName}.webp`}
-          alt={card.title}
+          src={card.image_vertical}
+          alt={`${card.name} 카드 이미지`}
           width={100}
           height={70}
           className='mr-16 w-[4.4rem]'
         />
         <FlexBox flexDirection='col'>
           <Text sizes='16' weight='600' className='mb-[0.2rem]'>
-            {card.title}
+            {card.name}
           </Text>
-          <Text className='mb-[1rem]'>{card.description}</Text>
-          <ul className='flex gap-[0.8rem]'>
-            {card.benefits.map((benefit) => {
+          <Text className='mb-[1rem] w-[20rem] truncate'>{card.description}</Text>
+          <ul className='flex gap-8'>
+            {benefits.map(({ category }) => {
+              const categoryInfo = CARD_BENEFIT_CATEGORIES.find((c) => c.title_en === category);
+
               return (
-                <li key={benefit} className='flex items-center gap-[0.2rem]'>
-                  <Icon src={benefitCategoryIconPath[benefit]} alt={`${benefit} icon`} size='12' />
-                  <Text sizes='12' className='text-gray-600'>
-                    {benefit}
+                <li key={category} className='flex shrink-0 items-center gap-2'>
+                  <Icon
+                    src={categoryInfo?.iconPath || ''}
+                    alt={`${categoryInfo?.title_kr} icon`}
+                    size='12'
+                    className='shrink-0'
+                  />
+                  <Text sizes='12' className='shrink-0 text-gray-600'>
+                    {categoryInfo?.title_kr}
                   </Text>
                 </li>
               );

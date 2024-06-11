@@ -7,13 +7,14 @@ type CategoryCardProps = {
   iconPath: string;
   onSelect: (arg: string) => void;
   isSelected: boolean;
+  disabled: boolean;
 };
 
-const CategoryCard = ({ title, iconPath, onSelect, isSelected }: CategoryCardProps) => {
+const CategoryCard = ({ title, iconPath, onSelect, isSelected, disabled }: CategoryCardProps) => {
   return (
     <Card
-      className={`flex flex-col items-center justify-center gap-6 px-24 pb-16 pt-28 ${isSelected && 'relative ring-1 ring-primary'}`}
-      onClick={() => onSelect(title)}
+      className={`flex flex-col items-center justify-center gap-6 px-24 pb-16 pt-28 ${isSelected && 'relative ring-1 ring-primary'} ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+      onClick={() => !disabled && onSelect(title)}
     >
       <Icon src={iconPath} alt='bus icon' size='40' />
       <Text>{title}</Text>
@@ -25,6 +26,7 @@ const CategoryCard = ({ title, iconPath, onSelect, isSelected }: CategoryCardPro
           className='absolute right-[0.8rem] top-[0.8rem]'
         />
       )}
+      {disabled && '선택불가능'}
     </Card>
   );
 };
