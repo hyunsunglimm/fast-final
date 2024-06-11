@@ -40,7 +40,7 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
               return (
                 <li key={category} className='flex shrink-0 items-center gap-2'>
                   <Icon
-                    src={categoryInfo?.iconPath || ''}
+                    src={categoryInfo?.lineIconPath || ''}
                     alt={`${categoryInfo?.title_kr} icon`}
                     size='12'
                     className='shrink-0'
