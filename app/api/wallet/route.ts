@@ -66,6 +66,6 @@ export const GET = async () => {
       iconSrc: '/icons/logos/bank/bank-lotte.svg'
     }
   ];
-  await new Promise((res) => setTimeout(res, 2000));
+  await new Promise((res) => setTimeout(res, 1000));
   return NextResponse.json(MyWalletData);
 };

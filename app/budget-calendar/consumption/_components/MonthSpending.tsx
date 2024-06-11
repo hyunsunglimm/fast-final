@@ -34,11 +34,11 @@ const spendingData = [
   }
 ];
 
-const MonthSpending = () => {
+const MonthSpending = ({ name }: { name: string }) => {
   return (
     <section className='px-20 py-32'>
       <Text variant='h2' sizes='18' weight='700' className='mb-24'>
-        ㅇㅇㅇ님의
+        {name}님의
         <br />
         이번 달 소비는?
       </Text>

@@ -7,7 +7,7 @@ type WidgetSectionLayoutProps = {
 
 const WidgetSectionLayout = ({ children, widgetBudget }: WidgetSectionLayoutProps) => {
   return (
-    <section className='mb-24 px-20'>
+    <section className='mb-40 px-20'>
       {children}
       {/* {widgetBudget} */}
     </section>

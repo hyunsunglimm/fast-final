@@ -38,7 +38,7 @@ const ExpenseDetailBottomSheet = ({
     }
 
     if (isChangingCategory) {
-      return <ChangeCategoryList />;
+      return <ChangeCategoryList expenseDetailData={expenseDetailData} />;
     }
     return (
       <ExpenseDetails
@@ -60,6 +60,7 @@ const ExpenseDetailBottomSheet = ({
       buttonLabel='변경하기'
       isOpen={openDetailBottomSheet}
       onClose={handleCloseBottomSheet}
+      onClick={handleCloseBottomSheet}
       isBackHandler={() => setIsChangingCategory(false)}
     >
       {renderContent()}

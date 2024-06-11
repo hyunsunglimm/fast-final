@@ -38,42 +38,50 @@ const SubmitEmojiBottomSheet = () => {
       </Text>
 
       {/* 남긴 반응 이모지 */}
-      <div className='mt-16 grid w-full grid-cols-5 gap-8'>
-        {daily.map((item) => {
-          const currentDate = new Date(item.date).getDate() === reactionDay;
-          return item.reactions.map((reaction) => {
-            const myReactionBtnClass = reaction.memberIds.includes(MY_MEMBER_ID)
-              ? 'border border-primary bg-select xs:hover:bg-primary/30'
-              : '';
-            return (
-              <React.Fragment key={reaction.stickerOrEmoticonID}>
-                {currentDate && (
-                  <TextButton
-                    name={reaction.stickerOrEmoticonID}
-                    onClick={handleAddEmojiClick}
-                    className={cn(
-                      'flex h-[2.8rem] w-full min-w-[4.1rem] items-center justify-center rounded-full bg-gray-50 px-8 text-12 active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
-                      myReactionBtnClass
-                    )}
-                  >
-                    <span role='img' className='mr-4 font-sans'>
-                      {reaction.stickerOrEmoticonID}
-                    </span>
-                    <span className='truncate'>{reaction.memberIds.length}</span>
-                  </TextButton>
-                )}
-              </React.Fragment>
-            );
-          });
-        })}
+      <div className='mt-16 h-[11rem] w-full overflow-hidden'>
+        <div className='hide-scrollbar flex h-full w-full flex-wrap content-start gap-8 overflow-y-scroll'>
+          {daily.map((item) => {
+            const currentDate = new Date(item.date).getDate() === reactionDay;
+            return item.reactions.map((reaction) => {
+              const myReactionBtnClass = reaction.memberIds.includes(MY_MEMBER_ID)
+                ? 'border border-primary bg-select xs:hover:bg-primary/30'
+                : '';
+              return (
+                <React.Fragment key={reaction.stickerOrEmoticonID}>
+                  {currentDate && (
+                    <TextButton
+                      name={reaction.stickerOrEmoticonID}
+                      onClick={handleAddEmojiClick}
+                      className={cn(
+                        'h-[2.8rem] min-w-fit flex-initial basis-[4.1rem] rounded-full bg-gray-50 px-8 text-12 leading-[2.8rem] active:scale-95 xs:hover:bg-gray-200 xs:hover:no-underline',
+                        myReactionBtnClass
+                      )}
+                    >
+                      <span role='img' className='mr-4 font-sans'>
+                        {reaction.stickerOrEmoticonID}
+                      </span>
+                      <span className='truncate'>
+                        {reaction.memberIds.length >= 999 ? '999+' : reaction.memberIds.length}
+                      </span>
+                    </TextButton>
+                  )}
+                </React.Fragment>
+              );
+            });
+          })}
+        </div>
       </div>
 
       {/* 이모지 스티커 탭 */}
       <FlexBox className='mt-40 gap-x-8'>
-        <Button size='xs' styled='fill_black' className='rounded-full font-500'>
+        <Button size='sm' styled='fill_black' className='h-[3.6rem] rounded-full font-500'>
           이모지
         </Button>
-        <Button size='xs' styled='outline' className='rounded-full font-500 text-gray-500'>
+        <Button
+          size='sm'
+          styled='outline'
+          className='h-[3.6rem] rounded-full border-gray-400 font-500 text-gray-500'
+        >
           스티커
         </Button>
       </FlexBox>
@@ -82,7 +90,7 @@ const SubmitEmojiBottomSheet = () => {
 
   return (
     <BottomSheet
-      title='반응남기기'
+      title='반응 남기기'
       buttonLabel=''
       isButtonShow={false}
       isOpen={openAddEmojiSheet}

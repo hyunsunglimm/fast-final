@@ -7,23 +7,39 @@ import ExpenseComparison from './_components/ExpenseComparison';
 import SpendingCategories from './_components/SpendingCategories';
 import ConsumptionWeather from '../_components/shared/ConsumptionWeather';
 import RegretSpending from '../_components/shared/RegretSpending';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
+import { auth } from '@/auth';
 
-const ConsumptionPage = () => {
+const ConsumptionPage = async () => {
+  const userData = await auth();
+  if (!userData) {
+    return <LoadingBackdrop />;
+  }
+
+  const transformedUser = {
+    memberId: Number(userData.user?.id),
+    name: userData.user?.name || '???',
+    profileImageUrl: userData.user?.image || '/icons/profile/profile.svg'
+  };
   return (
     <div className='min-h-full bg-white pb-[13.2rem]'>
       <IsBackHeader href='./'></IsBackHeader>
       <main>
         <MonthlyOverview />
         <Line />
-        <MonthSpending />
+        <MonthSpending name={userData.user?.name || '???'} />
         <Line />
         <ExpenseComparison />
         <Line />
         <SpendingCategories />
         <Line />
-        <ConsumptionWeather selectedProfile={'ㅇㅇㅇ'} />
-        <Line />
-        <RegretSpending />
+        {userData.user && (
+          <>
+            <ConsumptionWeather selectedProfile={transformedUser} />
+            <Line />
+            <RegretSpending selectedProfile={transformedUser} />
+          </>
+        )}
       </main>
     </div>
   );

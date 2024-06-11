@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useMemo } from 'react';
+import { MouseEvent, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Title from '../common/Title';
 import FlexBox from '@/components/ui/FlexBox';
@@ -11,6 +11,7 @@ import { useSubmitEmojiContext } from '../../context/SubmitEmojiProvider';
 import { getBudgetInquiry } from '@/service/api/budget';
 import { BudgetInquiryResponse } from '@/shared/types/response/targetBudget';
 import { Friend } from '@/shared/types/budgetCalendarType';
+import { useYearMonthStore } from '@/store/yearMonthStore';
 
 type SharedCalendarProps = {
   selectedProfile: Friend;
@@ -31,11 +32,15 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
   }, [shareData]);
 
   // 달력 날짜
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  const handleYearMonthSelect = (year: number, month: number) => {
-    setSelectedYear(year);
-    setSelectedMonth(month);
+  // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  // const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  // const handleYearMonthSelect = (year: number, month: number) => {
+  //   setSelectedYear(year);
+  //   setSelectedMonth(month);
+  // };
+  const { selectedYear, selectedMonth, setSelectedYearMonth } = useYearMonthStore();
+  const handleYearMonthSelect: (year: number, month: number) => void = (year, month) => {
+    setSelectedYearMonth(year, month);
   };
 
   const handleReactionSheet = (e: MouseEvent<HTMLDivElement>) => {

@@ -7,7 +7,7 @@ import Link from 'next/link';
 const HomeBucketBannerCard = () => {
   return (
     <Link href='/bucket-landing'>
-      <Card className='relative flex h-[13.4rem] justify-between overflow-hidden bg-[#34794D] p-24'>
+      <Card className='relative mb-12 flex h-[13.4rem] justify-between overflow-hidden bg-[#34794D] p-24'>
         <FlexBox flexDirection='col' justifyContent='center' className='h-full gap-y-10 text-white'>
           <Text sizes='12' weight='500'>
             저축생활

@@ -1,29 +1,66 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState, useRef } from 'react';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
-import { formatDate, groupByDate } from '@/shared/utils/dateUtils';
+import { formatDate, groupByDate, returnDate } from '@/shared/utils/dateUtils';
 import Title from '../common/Title';
 import ExpenseSummary from './ExpensSummary';
 import ExpenseItem from './ExpenseItem';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getCalendarHistroy } from '@/service/api/calendar';
 import ExpensDetailBottomSheet from './_components/ExpensDetailBottomSheet';
 import ExpensListSkeleton from './_components/ExpensListSkeleton';
+import RoundedSkeleton from '@/app/create-bucket/_components/RoundedSkeleton';
 
 const ExpensListBox = () => {
-  const { data: historyData, isLoading } = useQuery({
+  const {
+    data: historyData,
+    isFetching,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery({
     queryKey: ['calendarHistory'],
-    queryFn: getCalendarHistroy
+    queryFn: ({ pageParam }) => getCalendarHistroy(pageParam),
+    getNextPageParam: (lastPage) => {
+      const currentPage = lastPage.historyList.currentPage;
+      const totalPages = lastPage.historyList.totalPages;
+      return currentPage < totalPages ? currentPage + 1 : undefined;
+    },
+    initialPageParam: 1
   });
-
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const [historyId, setHistoryId] = useState('');
   const [openDetailBottomSheet, setOpenDetailBottomSheet] = useState(false);
 
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(async (entry) => {
+        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      });
+    });
+
+    const currentRef = loadMoreRef.current;
+    if (currentRef) {
+      io.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        io.unobserve(currentRef);
+      }
+      io.disconnect();
+    };
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
   if (isLoading) {
     return <ExpensListSkeleton />;
   }
+  const pageResults = historyData?.pages.flatMap((page) => page.historyList);
+  const elementsResults = pageResults?.flatMap((item) => item.elements);
+  const groupedExpenses = groupByDate(elementsResults);
 
-  const groupedExpenses = groupByDate(historyData?.historyList);
   const handleOpenBottomSheet = (e: MouseEvent<HTMLButtonElement>) => {
     setHistoryId(e.currentTarget.id);
     setOpenDetailBottomSheet(true);
@@ -39,23 +76,39 @@ const ExpensListBox = () => {
           </FlexBox>
         </Title>
         <FlexBox justifyContent='between' className='gap-[1.6rem]'>
-          <ExpenseSummary label='지출' amount={historyData?.totalSpent} />
-          <ExpenseSummary label='수입' amount={historyData?.totalEarned} />
+          <ExpenseSummary label='지출' amount={historyData?.pages[0].totalSpent} />
+          <ExpenseSummary label='수입' amount={historyData?.pages[0].totalEarned} />
         </FlexBox>
         {Object.entries(groupedExpenses).map(([date, expenses]) => {
+          const { month } = returnDate(date);
           return (
             <div key={date} className='mt-32'>
               <div className='flex items-center gap-[0.8rem]'>
-                <span className='text-14 text-gray-500'>{formatDate(date)}</span>
+                <span className='text-14 text-gray-500'>
+                  {month}월 {formatDate(date)}
+                </span>
               </div>
               <ul>
-                {expenses.map((data, index) => (
-                  <ExpenseItem key={index} data={data} onClick={handleOpenBottomSheet} />
+                {expenses.map((data) => (
+                  <ExpenseItem key={data.id} data={data} onClick={handleOpenBottomSheet} />
                 ))}
               </ul>
             </div>
           );
         })}
+        <div
+          ref={loadMoreRef}
+          style={{
+            display: hasNextPage ? 'block' : 'none'
+          }}
+        ></div>
+        {isFetching && (
+          <FlexBox className='mt-24 gap-24' flexDirection='col'>
+            {[...Array(6)].map((_, index) => (
+              <RoundedSkeleton key={index} />
+            ))}
+          </FlexBox>
+        )}
       </section>
       <ExpensDetailBottomSheet
         historyId={historyId}

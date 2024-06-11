@@ -35,13 +35,14 @@ const TargetModifyBottomSheet = ({
         onClose={() => setModifyPopup(false)}
         buttonOptions={{ disabled: !inputValue }}
         onClick={handleButtonClick}
+        isBack={true}
         isBackHandler={() => {
           setShowPopup(true);
           setModifyPopup(false);
         }}
       >
         <BottomSheetTitle
-          title='목표 예산을 얼마로 세울까요?'
+          title='목표 예산을 얼마로 바꿀까요?'
           description='저번 달에 1,000,000원 썼어요'
         />
         <TargetManagementInput

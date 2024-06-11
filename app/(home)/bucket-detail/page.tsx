@@ -75,16 +75,13 @@ const DetailBucketPage = () => {
             quality={onload ? '100' : '10'}
           />
         </FlexBox>
-        <FlexBox className='mb-16 gap-x-8'>
+        <FlexBox className='mb-16 w-full gap-x-8'>
           <Text sizes='18' weight='600' className='text-white'>
             {bucket?.target_amount}원
           </Text>
-          <Text
-            sizes='12'
-            className='inline-block rounded-l-full rounded-r-3xl bg-white px-8 py-[0.4rem]'
-          >
-            상품 {bucket?.my_saving_product.length}개 연결
-          </Text>
+          <div className='w-[7.8rem] rounded-bucketlist bg-white px-8 py-[0.4rem]'>
+            <Text sizes='12'>상품 {bucket?.my_saving_product.length}개 연결</Text>
+          </div>
         </FlexBox>
         <div className='h-[0.8rem] w-full rounded-full bg-gray-300/50'>
           <ProgressBar barColor='white' progressPercent={progressPercent} />

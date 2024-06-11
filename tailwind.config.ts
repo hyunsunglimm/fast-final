@@ -105,7 +105,8 @@ const config: Config = {
         sm: '1.2rem',
         md: '1.6rem',
         lg: '2.4rem',
-        consumption: '16rem 16rem 1.6rem 1.6rem'
+        consumption: '16rem 16rem 1.6rem 1.6rem',
+        bucketlist: '9999px 0.8rem 0.8rem 9999px'
       },
       colors: {
         bucket: '#53B7FF',
