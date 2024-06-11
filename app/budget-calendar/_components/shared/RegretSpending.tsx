@@ -27,7 +27,7 @@ const RegretSpending = ({ selectedProfile }: SharedCalendarProps) => {
       <Title title={`${selectedProfile.name}의 후회 소비는?`} />
       <div className='mt-40 text-center'>
         <Icon
-          src={regretItem ? regretItem.img : ''}
+          src={regretItem ? regretItem.img : '/icons/budget-calendar/smile.webp'}
           alt='후회'
           className='mb-40 h-[12rem] w-[12rem] rounded-none'
         />
