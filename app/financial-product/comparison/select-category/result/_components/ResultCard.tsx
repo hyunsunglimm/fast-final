@@ -29,10 +29,10 @@ const ResultCard = ({ cardInfo, index, standard }: ResultCardProps) => {
           {cardInfo.name}
         </Text>
         <Text className='mb-[0.6rem]'>{standard}</Text>
-        <ul className='flex gap-6'>
+        <ul className='hide-scrollbar flex gap-6 overflow-x-scroll'>
           {benefitsByStandard?.benefitDetails.map((benefit) => {
             return (
-              <li key={benefit}>
+              <li key={benefit} className='shrink-0'>
                 <Text
                   sizes='12'
                   weight='700'

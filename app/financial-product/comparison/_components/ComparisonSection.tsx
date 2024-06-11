@@ -20,8 +20,6 @@ const ComparisonSection = () => {
   const cardCompanies = queryValues('card-company');
   const benefitCategories = queryValues('filtering');
 
-  const isFilterSelected = cardCompanies.length > 0 || benefitCategories.length > 0;
-
   const {
     data: cardsToCompare,
     isLoading,
@@ -37,8 +35,7 @@ const ComparisonSection = () => {
       );
 
       return await res.json();
-    },
-    enabled: isFilterSelected
+    }
   });
 
   const selectedCards = queryValues(QUERY_KEY);
@@ -75,12 +72,12 @@ const ComparisonSection = () => {
 
   return (
     <>
-      {!isFilterSelected && <Warning />}
       {isLoading && (
         <FlexBox justifyContent='center' className='mt-20'>
           <Spinner />
         </FlexBox>
       )}
+      {isSuccess && cardsToCompare?.length === 0 && <Warning />}
       {isSuccess && cardsToCompare?.length > 0 && (
         <section className='px-20'>
           <Text variant='h2' sizes='20' weight='700' className='mb-4'>
@@ -133,11 +130,9 @@ const Warning = () => {
         className='mx-auto mb-20 w-[18.3rem]'
       />
       <Text sizes='20' weight='700'>
-        비교할 카드가 없어요!
+        조회된 카드가 없어요!
       </Text>
-      <Text className='mt-8 text-center text-gray-500'>
-        카드사와 필터링을 적용해서 비교할 <br /> 카드를 선택해 주세요
-      </Text>
+      <Text className='mt-8 text-center text-gray-500'>카드사와 필터링을 다시 선택해주세요</Text>
     </section>
   );
 };
