@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Tab from '@/components/ui/Tab';
 import Line from '../common/Line';
@@ -11,11 +12,58 @@ const ExpensListBox = dynamic(() => import('./ExpensListBox'));
 const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'));
 
 const LookAloneContainer = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialDisplayMode = searchParams.get('displayMode') || '캘린더 보기';
   // 상태 관리
   const [budgetSet, setBudgetSet] = useState(false); // 예산 목표가 설정되었는지 여부
   const [budgetUsed, setBudgetUsed] = useState(0.5); // 예산 사용 비율 (0.5는 50%를 의미)
   const [showPopup, setShowPopup] = useState(false);
   const [modifyPopup, setModifyPopup] = useState(false);
+
+  const [displayMode, setDisplayMode] = useState(initialDisplayMode); // 현재 표시 모드
+
+  const calendarRef = useRef<HTMLDivElement | null>(null);
+  const listRef = useRef<HTMLDivElement | null>(null);
+  const headerHeight =
+    typeof window !== 'undefined'
+      ? 11.8 * parseFloat(getComputedStyle(document.documentElement).fontSize)
+      : 0; // 8.8rem to px
+
+  const handleTabChange = (newDisplayMode: string) => {
+    setDisplayMode(newDisplayMode);
+    if (newDisplayMode === '캘린더 보기' && calendarRef.current) {
+      window.scrollTo({ top: calendarRef.current.offsetTop - headerHeight, behavior: 'smooth' });
+    } else if (newDisplayMode === '내역 보기' && listRef.current) {
+      window.scrollTo({ top: listRef.current.offsetTop - headerHeight, behavior: 'smooth' });
+    }
+  };
+
+  const handleScroll = useCallback(() => {
+    if (calendarRef.current && listRef.current) {
+      const calendarTop = calendarRef.current.getBoundingClientRect().top;
+      const listTop = listRef.current.getBoundingClientRect().top;
+      const tabHeight = headerHeight; // 헤더 높이
+
+      if (
+        calendarTop <= tabHeight &&
+        calendarTop >= -calendarRef.current.offsetHeight + tabHeight
+      ) {
+        setDisplayMode('캘린더 보기');
+      } else if (listTop <= tabHeight && listTop >= -listRef.current.offsetHeight + tabHeight) {
+        setDisplayMode('내역 보기');
+      }
+    }
+  }, [headerHeight]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
+
   return (
     <>
       <div className='sticky top-[4.4rem] z-20 bg-white px-20 pb-24 pt-16'>
@@ -24,9 +72,10 @@ const LookAloneContainer = () => {
           array={['캘린더 보기', '내역 보기']}
           type='box'
           tabKey='displayMode'
+          onTabChange={handleTabChange}
         />
       </div>
-      <div className='px-20 text-12'>
+      <div className='px-20 text-12' ref={calendarRef}>
         {budgetSet ? (
           <BudgetBanner
             icon={true}
@@ -45,7 +94,9 @@ const LookAloneContainer = () => {
         <ExpensCalendarBox />
       </div>
       <Line />
-      <ExpensListBox />
+      <div ref={listRef}>
+        <ExpensListBox />
+      </div>
       {budgetSet ? (
         <ManagementBottomSheet
           showPopup={showPopup}
