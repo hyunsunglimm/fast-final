@@ -7,16 +7,17 @@ import { useCallback } from 'react';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 
 type TabProps = {
+  pageParams?: string;
   array: string[];
   type: 'box' | 'underline';
   tabKey: string;
   onTabChange?: (newViewMode: string) => void;
 };
 
-const Tab = ({ array, type, tabKey, onTabChange }: TabProps) => {
+const Tab = ({ pageParams, array, type, tabKey, onTabChange }: TabProps) => {
   const { searchParams, pathname, queryValue } = useQueryString();
 
-  const selectedTab = queryValue(tabKey);
+  const selectedTab = queryValue(tabKey) || pageParams;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {

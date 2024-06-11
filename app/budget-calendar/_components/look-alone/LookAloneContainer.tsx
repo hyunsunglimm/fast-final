@@ -18,8 +18,13 @@ const LookAloneContainer = () => {
   const [modifyPopup, setModifyPopup] = useState(false);
   return (
     <>
-      <div className='sticky top-[4.4rem] z-20 bg-white px-20 pb-24 pt-16'>
-        <Tab array={['캘린더 보기', '내역 보기']} type='box' tabKey='displayMode' />
+      <div className='px-20 pb-24 pt-16'>
+        <Tab
+          pageParams='캘린더 보기'
+          array={['캘린더 보기', '내역 보기']}
+          type='box'
+          tabKey='displayMode'
+        />
       </div>
       <div className='px-20 text-12'>
         {budgetSet ? (
