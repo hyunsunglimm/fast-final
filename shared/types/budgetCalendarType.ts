@@ -46,7 +46,10 @@ export type DateInfo = {
   income?: number | null;
   expense?: number | null;
   today?: boolean;
-  reaction?: boolean;
+  reactions?: {
+    stickerOrEmoticonID: string;
+    memberIds: number[];
+  }[];
 };
 
 export type DailyDataItemType = {
@@ -54,6 +57,10 @@ export type DailyDataItemType = {
   usedCost: number;
   earnedCost: number;
   weatherImageNo: number;
+  reactions?: {
+    stickerOrEmoticonID: string;
+    memberIds: number[];
+  }[];
 };
 
 export type ShareDataType = {
@@ -62,7 +69,6 @@ export type ShareDataType = {
 
 export type ShareDataItem = {
   date: string;
-  weatherId: number;
   reactions: {
     stickerOrEmoticonID: string;
     memberIds: number[];

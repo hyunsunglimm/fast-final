@@ -3,7 +3,7 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { getCurrentMonthDates, getWeeklyData } from '../../utils/calendarUtils';
-import { ShareDataType, DailyDataItemType } from '@/shared/types/budgetCalendarType';
+import { DailyDataItemType } from '@/shared/types/budgetCalendarType';
 
 import { returnDate } from '@/shared/utils/dateUtils';
 import { cn } from '@/shared/utils/twMerge';
@@ -14,7 +14,7 @@ type CalendarProps = {
   year: number;
   month: number;
   dailyData?: DailyDataItemType[];
-  shareData?: ShareDataType;
+  shareData?: DailyDataItemType[];
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
@@ -72,6 +72,7 @@ const Calendar = ({ year, month, dailyData, shareData, onClick }: CalendarProps)
               </FlexBox>
             )}
             {/* 달력 */}
+
             <div className='mb-20 grid grid-cols-7'>
               {week.weekDates.map((item, idx) => {
                 const handleDateClick =
@@ -93,7 +94,7 @@ const Calendar = ({ year, month, dailyData, shareData, onClick }: CalendarProps)
                         )}
                       >
                         {item.date && item.date.getDate()}
-                        {shareData && item.imgSrc && (
+                        {shareData && item.reactions && (
                           // 반응체크 보여주는 부분 api 확인 후 수정 필요
                           <span className='ml-2 h-[0.4rem] w-[0.4rem] animate-ping rounded-full bg-primary'></span>
                         )}
