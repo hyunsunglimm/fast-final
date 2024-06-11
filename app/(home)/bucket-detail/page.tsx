@@ -79,7 +79,7 @@ const DetailBucketPage = () => {
           <Text sizes='18' weight='600' className='text-white'>
             {bucket?.target_amount}원
           </Text>
-          <div className='rounded-bucketlist w-[7.8rem] bg-white px-8 py-[0.4rem]'>
+          <div className='w-[7.8rem] rounded-bucketlist bg-white px-8 py-[0.4rem]'>
             <Text sizes='12'>상품 {bucket?.my_saving_product.length}개 연결</Text>
           </div>
         </FlexBox>
