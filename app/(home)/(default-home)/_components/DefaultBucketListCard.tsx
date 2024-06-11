@@ -13,10 +13,10 @@ const DefaultBucketListCard = () => {
   const userData = useUserSession();
 
   return (
-    <Card className='flex aspect-square flex-col justify-between p-20'>
+    <Card className='flex min-h-[33.9rem] w-full flex-col justify-between p-24'>
       <CardHeader>
         <Text sizes='16' weight='600' className='text-primary'>
-          반가워요, {userData?.name} 님
+          반가워요, {userData?.name ? userData?.name + '님' : ''}
         </Text>
         <Text sizes='20' weight='700'>
           버킷리스트를 만들고 <br /> 목돈을 모으세요!

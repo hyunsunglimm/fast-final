@@ -35,7 +35,7 @@ const BucketListCard = ({ bucket }: { bucket: BucketResponseType }) => {
       </ListContent>
       <ListFooter
         targetAmount={deleteCommaReturnNumber(bucket.target_amount)}
-        currentAmount={deleteCommaReturnNumber(bucket.savings_amount)} // 요일마다 입금하는 것은 미구현
+        currentAmount={deleteCommaReturnNumber(bucket.savings_amount)}
       />
     </ListCard>
   );

@@ -59,5 +59,9 @@ export const categoryImgConfig: Record<number, CategoryListType> = {
   14: {
     imgSrc: '/icons/categories/background/categories-14.svg',
     category: '미분류'
+  },
+  15: {
+    imgSrc: '/icons/categories/background/categories-16.svg',
+    category: '수입/이체'
   }
 };

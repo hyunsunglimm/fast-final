@@ -38,7 +38,7 @@ const ExpenseDetailBottomSheet = ({
     }
 
     if (isChangingCategory) {
-      return <ChangeCategoryList />;
+      return <ChangeCategoryList expenseDetailData={expenseDetailData} />;
     }
     return (
       <ExpenseDetails
