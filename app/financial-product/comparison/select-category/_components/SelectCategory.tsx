@@ -3,13 +3,11 @@
 import { IsBackHeader } from '@/components/header';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
-import { useEffect, useTransition } from 'react';
+import { useEffect } from 'react';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
-import { useQueryClient } from '@tanstack/react-query';
 import BottomButton from '../../_components/BottomButton';
 import CategoryCard from './CategoryCard';
-import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 import { CardResponseType } from '@/shared/types/response/card';
 
 const QUERY_KEY = 'category';
@@ -20,8 +18,6 @@ type SelectCategoryProps = {
 
 const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
   const { searchParams, router, pathname, queryValues, params } = useQueryString();
-  const queryClient = useQueryClient();
-  const [isPending, startTransition] = useTransition();
 
   const selectedCategories = queryValues(QUERY_KEY);
 
@@ -45,17 +41,6 @@ const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
   };
 
   const handleNavigateToResultPage = async () => {
-    startTransition(async () => {
-      await queryClient.prefetchQuery({
-        queryKey: ['comparedCards', ...queryValues('card')],
-        queryFn: async () => {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/comparison/result?card=${queryValues('card')}`
-          );
-          return await res.json();
-        }
-      });
-    });
     router.push(`${pathname}/result?${searchParams.toString()}`);
   };
 
@@ -68,7 +53,6 @@ const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
 
   return (
     <>
-      {isPending && <LoadingBackdrop />}
       <IsBackHeader href={`./?${searchParams.toString()}`} defaultColor='#f2f4f6' />
       <main className='bg-gray-50 px-20 pb-[13.2rem]'>
         <FlexBox flexDirection='col' className='gap-8'>
@@ -101,7 +85,6 @@ const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
           <BottomButton
             onClick={handleNavigateToResultPage}
             path='/financial-product/comparison/select-category/result'
-            isLoading={isPending}
           >
             결과보기
           </BottomButton>

@@ -9,11 +9,8 @@ import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import BenefitCircle from './BenefitCircle';
 import { IsBackHeader } from '@/components/header';
-import { useQuery } from '@tanstack/react-query';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-import { CardSkeleton, SqureSkeleton } from '@/components/ui/skeleton';
 import { CardResponseType } from '@/shared/types/response/card';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import ResultCardImage from './ResultCardImage';
@@ -93,32 +90,12 @@ const cafeBenefitInfo = [
   }
 ];
 
-const ComparisonResult = () => {
-  const { searchParams, queryValues } = useQueryString();
-  const { data: comparedCards, isLoading } = useQuery<CardResponseType[]>({
-    queryKey: ['comparedCards', ...queryValues('card')],
-    queryFn: async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/comparison/result?card=${queryValues('card')}`
-      );
-      return await res.json();
-    }
-  });
+const ComparisonResult = ({ comparedCards }: { comparedCards: CardResponseType[] }) => {
+  const { searchParams } = useQueryString();
 
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
-  if (isLoading) {
-    return (
-      <div className='relative flex h-dvh flex-col justify-between px-20 py-16'>
-        <LoadingBackdrop />
-        <CardSkeleton />
-        <SqureSkeleton />
-        <CardSkeleton />
-      </div>
-    );
-  }
-
-  const currentCard = comparedCards![currentCardIndex];
+  const currentCard = comparedCards[currentCardIndex];
 
   const { discount_limit: discountLimit } = currentCard;
 
