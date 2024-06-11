@@ -21,7 +21,8 @@ const CardResponseFilde = `{
   "image_vertical": image_vertical.asset->url,
   "name": name,
   "type": type,
-  "totalBenefits": count(benefits[].benefitDetails[])
+  "allBenefits": benefits[].benefitDetails[],
+  "benefitCategories": benefits[].category
 }`;
 
 export const getComparedCards = (): Promise<CardResponseType[]> => {
@@ -83,4 +84,10 @@ export const getFilteredCards = async (
   }
 
   return result;
+};
+
+export const getSelectedCardsById = async (cardIds: string[]) => {
+  return await client.fetch(`
+    *[_type == "card" && _id in ${JSON.stringify(cardIds)}]${CardResponseFilde}
+  `);
 };

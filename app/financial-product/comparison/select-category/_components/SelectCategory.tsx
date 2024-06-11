@@ -7,14 +7,18 @@ import { useEffect, useTransition } from 'react';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import { useQueryClient } from '@tanstack/react-query';
-import { getComparedCards } from '@/service/api/financial-product/cards';
 import BottomButton from '../../_components/BottomButton';
 import CategoryCard from './CategoryCard';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
+import { CardResponseType } from '@/shared/types/response/card';
 
 const QUERY_KEY = 'category';
 
-const SelectCategory = () => {
+type SelectCategoryProps = {
+  comparisonCards: CardResponseType[];
+};
+
+const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
   const { searchParams, router, pathname, queryValues, params } = useQueryString();
   const queryClient = useQueryClient();
   const [isPending, startTransition] = useTransition();
@@ -43,12 +47,24 @@ const SelectCategory = () => {
   const handleNavigateToResultPage = async () => {
     startTransition(async () => {
       await queryClient.prefetchQuery({
-        queryKey: ['comparedCards'],
-        queryFn: getComparedCards
+        queryKey: ['comparedCards', ...queryValues('card')],
+        queryFn: async () => {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/comparison/result?card=${queryValues('card')}`
+          );
+          return await res.json();
+        }
       });
     });
     router.push(`${pathname}/result?${searchParams.toString()}`);
   };
+
+  const firstCardBenefits = comparisonCards[0].benefitCategories;
+  const secondCardBenefits = comparisonCards[1].benefitCategories;
+
+  const comparableCategories = firstCardBenefits.filter((category) =>
+    secondCardBenefits.includes(category)
+  );
 
   return (
     <>
@@ -64,8 +80,9 @@ const SelectCategory = () => {
           </Text>
         </FlexBox>
         <ul className='mt-28 grid grid-cols-3 gap-12'>
-          {CARD_BENEFIT_CATEGORIES.map(({ title_kr, iconPath }) => {
+          {CARD_BENEFIT_CATEGORIES.map(({ title_kr, title_en, iconPath }) => {
             const isSelected = selectedCategories.some((c) => c === title_kr);
+            const isSelectable = comparableCategories.includes(title_en);
 
             return (
               <li key={title_kr}>
@@ -74,12 +91,13 @@ const SelectCategory = () => {
                   iconPath={iconPath}
                   isSelected={isSelected}
                   onSelect={onSelect}
+                  disabled={!isSelectable}
                 />
               </li>
             );
           })}
         </ul>
-        {selectedCategories.length >= 2 && (
+        {selectedCategories.length >= 1 && (
           <BottomButton
             onClick={handleNavigateToResultPage}
             path='/financial-product/comparison/select-category/result'
