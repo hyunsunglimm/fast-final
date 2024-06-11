@@ -64,6 +64,7 @@ const ConsumptionWeather = ({ selectedProfile }: SharedCalendarProps) => {
       <WeatherInfoBottomSheet
         setOpenWeatherInfo={setOpenWeatherInfo}
         openWeatherInfo={openWeatherInfo}
+        title='소비 날씨'
       />
     </>
   );
