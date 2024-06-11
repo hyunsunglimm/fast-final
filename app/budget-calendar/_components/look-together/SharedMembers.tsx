@@ -38,7 +38,7 @@ const SharedMembers = ({ viewMode, selectedProfile, setSelectedProfile }: Shared
     return <LoadingBackdrop />;
   }
   return (
-    <section className='py-40 text-12'>
+    <section className='pb-40 pt-16 text-12'>
       <FlexBox alignItems='center' justifyContent='between' className='mb-16 px-20'>
         <Title title='공유한 멤버'>
           <p className='text-14 font-500 text-gray-700'>{items?.friendCount}명</p>
