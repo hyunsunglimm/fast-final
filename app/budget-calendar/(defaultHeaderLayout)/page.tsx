@@ -12,12 +12,14 @@ const BudgetCalendarPage = ({ searchParams }: BudgetCalendarPageProps) => {
 
   return (
     <main className='min-h-full bg-white pb-[13.2rem]'>
-      <Tab
-        pageParams={viewMode}
-        array={['혼자봐요', '함께봐요']}
-        type='underline'
-        tabKey='viewMode'
-      />
+      <div className='sticky top-0 z-20 bg-white'>
+        <Tab
+          pageParams={viewMode}
+          array={['혼자봐요', '함께봐요']}
+          type='underline'
+          tabKey='viewMode'
+        />
+      </div>
       {viewMode === '혼자봐요' && <LookAloneContainer />}
       {viewMode === '함께봐요' && <LookTogetherContainer viewMode={viewMode} />}
     </main>

@@ -12,7 +12,7 @@ const CalendarLayout = ({ children }: CalendarLayoutProps) => {
   return (
     <>
       <Popup />
-      <DefaultHeader title='가계부' defaultColor='#fff' />
+      <DefaultHeader title='가계부' defaultColor='#fff' isFixed={false} />
       <SubmitEmojiProvider>{children}</SubmitEmojiProvider>
     </>
   );
