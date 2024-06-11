@@ -1,4 +1,4 @@
-import { DateInfo, DailyDataItemType, ShareDataType } from '@/shared/types/budgetCalendarType';
+import { DateInfo, DailyDataItemType } from '@/shared/types/budgetCalendarType';
 import { returnDate } from '@/shared/utils/dateUtils';
 export const generateMergeData = (
   weeks: {
@@ -6,7 +6,7 @@ export const generateMergeData = (
     isCurrentWeek: boolean;
   }[],
   dailyData: DailyDataItemType[] | undefined,
-  shareData: ShareDataType | undefined
+  shareData?: DailyDataItemType[] | undefined
 ) => {
   return weeks.map((week) => {
     const weekDates = week.weekDates.map((dateInfo) => {
@@ -20,7 +20,7 @@ export const generateMergeData = (
           });
         const shareInfo =
           shareData &&
-          shareData.daily.find((data) => {
+          shareData.find((data) => {
             const { day: shareInfoDay } = returnDate(data.date);
             return shareInfoDay === infoDay;
           });
@@ -36,7 +36,9 @@ export const generateMergeData = (
         if (shareInfo) {
           return {
             ...dateInfo,
-            imgSrc: shareInfo.weatherId && `/icons/weather/weather-${shareInfo.weatherId}.svg`
+            imgSrc:
+              shareInfo.weatherImageNo && `/icons/weather/weather-${shareInfo.weatherImageNo}.svg`,
+            reactions: shareInfo.reactions
           };
         }
       }

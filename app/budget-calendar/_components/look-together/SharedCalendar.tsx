@@ -22,22 +22,13 @@ const SharedCalendar = ({ selectedProfile }: SharedCalendarProps) => {
     useSubmitEmojiContext();
 
   const totalCount = useMemo(() => {
-    return shareData.daily.reduce((total, item) => {
-      const itemCount = item.reactions.reduce(
-        (sum, reaction) => sum + reaction.memberIds.length,
-        0
-      );
+    return shareData.reduce((total, item) => {
+      const itemCount =
+        item.reactions?.reduce((sum, reaction) => sum + reaction.memberIds.length, 0) || 0;
       return total + itemCount;
     }, 0);
   }, [shareData]);
 
-  // 달력 날짜
-  // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  // const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  // const handleYearMonthSelect = (year: number, month: number) => {
-  //   setSelectedYear(year);
-  //   setSelectedMonth(month);
-  // };
   const { selectedYear, selectedMonth, setSelectedYearMonth } = useYearMonthStore();
   const handleYearMonthSelect: (year: number, month: number) => void = (year, month) => {
     setSelectedYearMonth(year, month);
