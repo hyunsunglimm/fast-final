@@ -62,7 +62,7 @@ const getStyle = (type: 'box' | 'underline', isSelcted: boolean) => {
     if (isSelcted) {
       className += ' bg-black text-white';
     } else {
-      className += ' h-[3.4rem] border border-gray-400';
+      className += ' h-[3.4rem] border border-gray-400 text-gray-400';
     }
   }
 
