@@ -15,36 +15,6 @@ import { CardResponseType } from '@/shared/types/response/card';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import ResultCardImage from './ResultCardImage';
 
-const comparedResultA = [
-  {
-    title: '카드 A',
-    imgPath: '/images/financial-product/kakao-shinhan-time.webp',
-    categories: '시내버스, 지하철, 택시',
-    benefits: ['10% 할인', '월 최대 1만원']
-  },
-  {
-    title: '카드 B',
-    imgPath: '/images/financial-product/shinhan-mrlife.webp',
-    categories: '시내버스, 지하철',
-    benefits: ['건별 200월 할인', '월 최대 5천원']
-  }
-];
-
-const comparedResultB = [
-  {
-    title: '카드 A',
-    imgPath: '/images/financial-product/kakao-shinhan-time.webp',
-    categories: '투썸플레이스, 스타벅스, 커피빈, 폴바셋',
-    benefits: ['50% 할인', '월 최대 1만원']
-  },
-  {
-    title: '카드 B',
-    imgPath: '/images/financial-product/shinhan-mrlife.webp',
-    categories: '투썸플레이스, 스타벅스',
-    benefits: ['60% 할인', '월 최대 1만원']
-  }
-];
-
 const cafeBenefitInfo = [
   {
     id: 'c1',
@@ -91,7 +61,7 @@ const cafeBenefitInfo = [
 ];
 
 const ComparisonResult = ({ comparedCards }: { comparedCards: CardResponseType[] }) => {
-  const { searchParams } = useQueryString();
+  const { searchParams, queryValues } = useQueryString();
 
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
@@ -107,21 +77,21 @@ const ComparisonResult = ({ comparedCards }: { comparedCards: CardResponseType[]
         <section className='pt-[14.4rem]'>
           <SwiperWrapper arrow setIndex={setCurrentCardIndex}>
             <ResultCardImage
-              imageUrl={comparedCards![0].image_horizontal}
-              alt='신한 카드 비교 결과 이미지'
+              imageUrl={comparedCards[0].image_horizontal}
+              alt={`${comparedCards[0].name} 카드 이미지`}
             />
             <ResultCardImage
-              imageUrl={comparedCards![1].image_horizontal}
-              alt='신한 카드 비교 결과 이미지'
+              imageUrl={comparedCards[1].image_horizontal}
+              alt={`${comparedCards[1].name} 카드 이미지`}
             />
           </SwiperWrapper>
         </section>
         <CurrentCardInfo id={currentCardIndex} currentCard={currentCard} />
         <StandardComparison
-          difference='더 많은 가맹점'
-          standard={0}
+          difference='월 5천원'
+          standard={queryValues('category')[0]}
           id={currentCardIndex}
-          comporisonResult={comparedResultA}
+          comporisonResult={comparedCards}
           content={
             <FlexBox justifyContent='center' className='my-28 gap-[4rem]' alignItems='end'>
               <FlexBox flexDirection='col' className='gap-16'>
@@ -140,10 +110,10 @@ const ComparisonResult = ({ comparedCards }: { comparedCards: CardResponseType[]
           }
         />
         <StandardComparison
-          difference='2개의 가맹점'
-          standard={1}
+          difference='원 5천원'
+          standard='카페'
           id={currentCardIndex}
-          comporisonResult={comparedResultB}
+          comporisonResult={comparedCards}
           content={
             <div className='relative my-28 h-[24.5rem] w-full'>
               {cafeBenefitInfo.map(({ id, title, rate, color, positionClass }) => {
