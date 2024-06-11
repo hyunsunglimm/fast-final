@@ -49,14 +49,16 @@ const BudgetCalendarPage = () => {
 
   return (
     <>
-      <DefaultHeader title='가계부' defaultColor='#fff' />
+      <DefaultHeader title='가계부' defaultColor='#fff' isFixed={false} />
       <main className='min-h-full bg-white pb-[13.2rem]'>
-        <Tab
-          array={['혼자봐요', '함께봐요']}
-          type='underline'
-          tabKey='viewMode'
-          onTabChange={handleViewModeChange}
-        />
+        <div className='sticky top-0 z-20 h-[4.4rem] bg-white'>
+          <Tab
+            array={['혼자봐요', '함께봐요']}
+            type='underline'
+            tabKey='viewMode'
+            onTabChange={handleViewModeChange}
+          />
+        </div>
         {viewMode === '혼자봐요' && <LookAloneContainer />}
         {viewMode === '함께봐요' && <LookTogetherContainer viewMode={viewMode} />}
       </main>
