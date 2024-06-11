@@ -6,8 +6,8 @@ export const initialTogetherData: ShareDataType = {
       date: '2024-06-01',
       weatherId: 1,
       reactions: [
-        { stickerOrEmoticonID: '😆', memberIds: [1, 2, 4] },
-        { stickerOrEmoticonID: '🤘', memberIds: [2, 4] },
+        { stickerOrEmoticonID: '😆', memberIds: Array.from({ length: 9999 }, (_, i) => i + 1) },
+        { stickerOrEmoticonID: '🤘', memberIds: Array.from({ length: 999 }, (_, i) => i + 1) },
         { stickerOrEmoticonID: '😍', memberIds: [4] }
       ]
     },
