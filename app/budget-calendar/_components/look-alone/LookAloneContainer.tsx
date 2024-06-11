@@ -7,9 +7,9 @@ import Line from '../common/Line';
 import BudgetBanner from '../common/BudgetBanner';
 import ExpensCalendarBox from './ExpensCalendarBox';
 import ManagementBottomSheet from './ManagementBottomSheet';
-import TargetModifyBottomSheet from './TargetModifyBottomSheet';
-const ExpensListBox = dynamic(() => import('./ExpensListBox'));
-const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'));
+const TargetModifyBottomSheet = dynamic(() => import('./TargetModifyBottomSheet'), { ssr: false });
+const ExpensListBox = dynamic(() => import('./ExpensListBox'), { ssr: false });
+const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'), { ssr: false });
 
 const LookAloneContainer = () => {
   const pathname = usePathname();
@@ -64,7 +64,7 @@ const LookAloneContainer = () => {
         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
       }
     }
-  }, [headerHeight]);
+  }, [headerHeight, pathname, router, searchParams]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);

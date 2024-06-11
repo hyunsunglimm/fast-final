@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 import Tab from '@/components/ui/Tab';
-import LookAloneContainer from '../_components/look-alone/LookAloneContainer';
 import LookTogetherContainer from '../_components/look-together/LookTogetherContainer';
 import { currentUserSession } from '@/shared/actions/auth';
-
+const LookAloneContainer = dynamic(() => import('../_components/look-alone/LookAloneContainer'), {
+  ssr: false
+});
 type BudgetCalendarPageProps = {
   searchParams: Record<string, string | undefined>;
 };
