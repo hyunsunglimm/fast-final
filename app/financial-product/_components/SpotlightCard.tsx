@@ -44,7 +44,9 @@ const SpotlightCard = ({
           {name}
         </Text>
         <Text sizes='16' weight='700' className='mb-[1rem]'>
-          월 최대 혜택 {discount_limit.toLocaleString()}원
+          {discount_limit === 0
+            ? '최대 할인 한도가 없는 카드'
+            : `월 최대 혜택 ${discount_limit.toLocaleString()}원`}
         </Text>
         <Text
           sizes='12'

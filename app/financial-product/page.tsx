@@ -6,7 +6,7 @@ import FinancialProductSection from './_components/FinancialProductSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PORKO | 금융상품 탐색',
+  title: 'PORKO 금융상품 탐색',
   description: 'PORKO 금융상품 탐색 페이지'
 };
 

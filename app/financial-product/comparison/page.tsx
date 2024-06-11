@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'PORKO | 상품 비교',
+  title: 'PORKO 상품 비교',
   description: 'PORKO 상품 비교 페이지'
 };
 

@@ -1,3 +1,11 @@
+import { requestFetch } from '../fetchOptions';
+import { client } from '@/sanity/lib/client';
+import { BenefitCategories, CardCompany, CardResponseType } from '@/shared/types/response/card';
+import {
+  CARD_BENEFIT_CATEGORIES,
+  CARD_COMPANIES
+} from '@/shared/utils/financial-product/staticData';
+
 const CardResponseFilde = `{
   "id": _id,
   "company": company,
@@ -13,15 +21,8 @@ const CardResponseFilde = `{
   "image_vertical": image_vertical.asset->url,
   "name": name,
   "type": type,
+  "totalBenefits": count(benefits[].benefitDetails[])
 }`;
-
-import { requestFetch } from '../fetchOptions';
-import { client } from '@/sanity/lib/client';
-import { BenefitCategories, CardCompany, CardResponseType } from '@/shared/types/response/card';
-import {
-  CARD_BENEFIT_CATEGORIES,
-  CARD_COMPANIES
-} from '@/shared/utils/financial-product/staticData';
 
 export const getComparedCards = (): Promise<CardResponseType[]> => {
   return requestFetch('/api/cards/comparison/result');
@@ -29,10 +30,12 @@ export const getComparedCards = (): Promise<CardResponseType[]> => {
 
 export const getSpotlightCards = async (type: 'credit' | 'check') => {
   const optionQuery =
-    type === 'credit' ? '&& (discount_limit >= 25000 || count(benefit) >= 3)' : '';
+    type === 'credit'
+      ? '&& (discount_limit >= 25000 || count(benefit) >= 3 || count(benefits[].benefitDetails[]) >= 10)'
+      : '&& (discount_limit == 0 || count(benefit) >= 3 || count(benefits[].benefitDetails[]) >= 10)';
 
   return await client.fetch(`
-  *[_type == "card" && type == "${type}" ${optionQuery}]${CardResponseFilde}
+  *[_type == "card" && type == "${type}" ${optionQuery}] | order(count(benefits[].benefitDetails[]) desc)${CardResponseFilde}
 `);
 };
 

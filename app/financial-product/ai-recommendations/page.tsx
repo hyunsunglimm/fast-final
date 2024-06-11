@@ -5,7 +5,7 @@ import SpendingHabitsCardSection from './_components/SpendingHabitsCardSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PORKO | AI 맞춤 추천',
+  title: 'PORKO AI 맞춤 추천',
   description: 'PORKO AI 맞춤 추천 페이지'
 };
 
