@@ -3,7 +3,7 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type CustomNavigationCardProps = {
   recommendationInfo: {
@@ -12,17 +12,20 @@ type CustomNavigationCardProps = {
     href: string;
     color: string;
   };
+  dragging: boolean;
 };
 
 const CustomNavigationCard = ({
-  recommendationInfo: { title, subTitle, href, color }
+  recommendationInfo: { title, subTitle, href, color },
+  dragging
 }: CustomNavigationCardProps) => {
   const imageUrl = href.split('?')[0];
+  const router = useRouter();
 
   return (
-    <Link
+    <div
       style={{ backgroundColor: color }}
-      href={`/financial-product/${href}`}
+      onClick={() => !dragging && router.push(`/financial-product/${href}`)}
       aria-label={`${title} 이동`}
       className='h-[30.9rem] w-[25.1rem] shrink-0 rounded-[2rem] px-24 py-28 text-white'
     >
@@ -42,7 +45,7 @@ const CustomNavigationCard = ({
           className='pointer-events-none h-[14.2rem] w-auto'
         />
       </FlexBox>
-    </Link>
+    </div>
   );
 };
 

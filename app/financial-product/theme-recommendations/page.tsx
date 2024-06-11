@@ -6,7 +6,7 @@ import { THEMES } from '@/shared/utils/financial-product/staticData';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PORKO | 테마별 추천',
+  title: 'PORKO 테마별 추천',
   description: 'PORKO 테마별 추천 페이지'
 };
 

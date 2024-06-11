@@ -2,26 +2,14 @@ import Icon from '@/components/Icon';
 import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
+import { CardResponseType } from '@/shared/types/response/card';
 
 type CurrentCardInfoProps = {
   id: number;
-  name: string;
-  monthlyBenefit: number;
-  discountLimit: string;
-  annualFee: string;
-  prevMonthPerformance: string;
-  benefits: string[];
+  currentCard: CardResponseType;
 };
 
-const CurrentCardInfo = ({
-  id,
-  name,
-  monthlyBenefit,
-  discountLimit,
-  annualFee,
-  prevMonthPerformance,
-  benefits
-}: CurrentCardInfoProps) => {
+const CurrentCardInfo = ({ id, currentCard }: CurrentCardInfoProps) => {
   return (
     <>
       <section className='relative bg-white px-20 pb-40 pt-[4.4rem]'>
@@ -35,7 +23,7 @@ const CurrentCardInfo = ({
           </Text>
         </FlexBox>
         <Text sizes='20' weight='700'>
-          {name}
+          {currentCard.name}
         </Text>
         <FlexBox
           flexDirection='col'
@@ -46,27 +34,27 @@ const CurrentCardInfo = ({
             <Icon src='/icons/system-icon/info.svg' alt='정보 아이콘' size='16' />
           </FlexBox>
           <Text sizes='24' weight='800'>
-            {monthlyBenefit.toLocaleString()}원
+            {currentCard.discount_limit.toLocaleString()}원
           </Text>
         </FlexBox>
         <div className='rounded-sm border border-[#edf0f5] px-20'>
           <FlexBox justifyContent='between' className='border-b border-[#edf0f5] py-20'>
             <Text>최대 할인 한도</Text>
             <Text sizes='16' weight='700'>
-              {discountLimit}
+              {currentCard.discount_limit}
             </Text>
           </FlexBox>
           <FlexBox justifyContent='between' className='border-b border-[#edf0f5] py-20'>
             <Text>연회비</Text>
             <Text sizes='16' weight='700'>
-              {annualFee}
+              {currentCard.annual_fee}
             </Text>
           </FlexBox>
           <FlexBox justifyContent='between' className='py-20'>
             <Text>전월 실적</Text>
             <FlexBox alignItems='center'>
               <Text sizes='16' weight='700' className='mr-[0.4rem]'>
-                {prevMonthPerformance}
+                {currentCard.prev_month_performance}
               </Text>
               <Icon src='/icons/system-icon/arrow/arrow-down.svg' alt='드롭다운 아이콘' size='16' />
             </FlexBox>
@@ -86,20 +74,17 @@ const CurrentCardInfo = ({
           </Text>
         </FlexBox>
         <ul className='scroll-hidden hide-scrollbar mb-40 flex flex-nowrap gap-8 overflow-x-scroll px-20'>
-          {benefits.map((benefit) => {
+          {currentCard.benefits.map(({ category, benefitDetails }) => {
             return (
-              <li key={benefit} className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>
-                <Text weight='700'>{benefit.split(' ')[0]}</Text>{' '}
-                <Text>{benefit.split(' ')[1]}</Text>
+              <li key={category} className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>
+                <ul>
+                  {benefitDetails.map((benefit) => (
+                    <Text key={benefit}>{benefit}</Text>
+                  ))}
+                </ul>
               </li>
             );
           })}
-          <Text className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>1만원 머시기</Text>
-          <Text className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>1만원 머시기</Text>
-          <Text className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>1만원 머시기</Text>
-          <Text className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>1만원 머시기</Text>
-          <Text className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>1만원 머시기</Text>
-          <Text className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>1만원 머시기</Text>
         </ul>
         <FlexBox justifyContent='center' className='pb-40'>
           <Button size='sm' styled='outline' className='rounded-full'>

@@ -5,7 +5,7 @@ import SpendingHabitsCardSection from './_components/SpendingHabitsCardSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PORKO | AI 맞춤 추천',
+  title: 'PORKO AI 맞춤 추천',
   description: 'PORKO AI 맞춤 추천 페이지'
 };
 
@@ -13,7 +13,7 @@ const AiRecommendationsPage = () => {
   return (
     <>
       <IsBackHeader title='AI 맞춤' href='./?tab=신용카드' defaultColor='#f2f4f6' />
-      <main className='bg-gray-50'>
+      <main className='min-h-dvh bg-gray-50'>
         <AiBanner />
         <PerfectFinancialProductSection />
         <SpendingHabitsCardSection />

@@ -2,7 +2,6 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
-import React from 'react';
 
 type SavingCardProps = {
   saving: {

@@ -29,15 +29,17 @@ const weatherInfoData = [
 type WeatherInfoBottomSheetProps = {
   openWeatherInfo: boolean;
   setOpenWeatherInfo: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
 };
 
 const WeatherInfoBottomSheet = ({
   openWeatherInfo,
-  setOpenWeatherInfo
+  setOpenWeatherInfo,
+  title
 }: WeatherInfoBottomSheetProps) => {
   return (
     <BottomSheet
-      title='소비 날씨'
+      title={title}
       buttonLabel=''
       isButtonShow={false}
       isOpen={openWeatherInfo}

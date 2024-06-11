@@ -7,10 +7,11 @@ type SelectFilteringType = {
   onSelect: (item: string) => void;
 };
 
-const filterings = [
+export const FILTERINGS = [
   '쇼핑',
   '카페',
   '편의점',
+  '대중교통',
   '마트',
   '문화',
   '백화점',
@@ -18,12 +19,7 @@ const filterings = [
   '주유',
   '여행',
   '온라인',
-  '구독',
-  '영화',
-  '식음료',
-  '공과금',
-  '의료/건강',
-  '간편결제'
+  '구독'
 ];
 
 const SelectFiltering = ({ items, onSelect }: SelectFilteringType) => {
@@ -33,7 +29,7 @@ const SelectFiltering = ({ items, onSelect }: SelectFilteringType) => {
         원하는 혜택항목을 선택해보세요
       </Text>
       <ul className='mt-28 flex flex-wrap gap-8'>
-        {filterings.map((filtering) => {
+        {FILTERINGS.map((filtering) => {
           const isSelected = items.includes(filtering);
           return (
             <li key={filtering}>

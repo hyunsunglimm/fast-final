@@ -2,19 +2,7 @@ import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { CardCompany } from './FilteringSection';
-
-export const cardCompanies = [
-  { title: 'KB국민카드', iconPath: '/icons/logos/bank/bank-kb.svg' },
-  { title: 'BC카드', iconPath: '/icons/logos/bank/bank-bc.svg' },
-  { title: 'IBK기업은행', iconPath: '/icons/logos/bank/bank-ibk.svg' },
-  { title: '신한카드', iconPath: '/icons/logos/bank/bank-shinhan.svg' },
-  { title: 'NH농협카드', iconPath: '/icons/logos/bank/bank-nh.svg' },
-  { title: '현대카드', iconPath: '/icons/logos/bank/bank-hyundai.svg' },
-  { title: '우리카드', iconPath: '/icons/logos/bank/bank-woori.svg' },
-  { title: '삼성카드', iconPath: '/icons/logos/bank/bank-samsung.svg' },
-  { title: '하나카드', iconPath: '/icons/logos/bank/bank-hana.svg' },
-  { title: '롯데카드', iconPath: '/icons/logos/bank/bank-lotte.svg' }
-];
+import { CARD_COMPANIES } from '@/shared/utils/financial-product/staticData';
 
 type SelectCardCompanyProps = {
   items: CardCompany[];
@@ -28,7 +16,7 @@ const SelectCardCompany = ({ items, onSelect }: SelectCardCompanyProps) => {
         원하는 카드사를 선택해보세요
       </Text>
       <ul className='mt-28 grid grid-cols-3 gap-8'>
-        {cardCompanies.map(({ title, iconPath }) => {
+        {CARD_COMPANIES.map(({ title, iconPath }) => {
           const isSelected = items.findIndex((item) => item.title === title) > -1;
 
           return (

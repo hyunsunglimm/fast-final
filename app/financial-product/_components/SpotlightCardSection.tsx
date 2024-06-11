@@ -6,18 +6,23 @@ import Text from '@/components/ui/Text';
 import SpotlightCardItem from './SpotlightCard';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/Icon';
-import { getSpotlightCards } from '@/service/api/financial-product/cards';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '@/components/Spinner';
+import { CardResponseType } from '@/shared/types/response/card';
 
 const SpotlightCardSection = () => {
   const { queryValue } = useQueryString();
   const type = queryValue('tab');
 
-  const { data: spotlightCards, isLoading } = useQuery({
+  const { data: spotlightCards, isPending } = useQuery<CardResponseType[]>({
     queryKey: ['spotlightCard', type],
-    queryFn: () => getSpotlightCards(type)
+    queryFn: async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SANITY_BASE_URL}/api/cards/spotlight?type=${type}`
+      );
+      return await res.json();
+    }
   });
 
   return (
@@ -38,7 +43,7 @@ const SpotlightCardSection = () => {
       <div className='mb-24 mt-16'>
         <Tab array={['신용카드', '체크카드']} type='box' tabKey='tab' />
       </div>
-      {isLoading ? (
+      {isPending ? (
         <FlexBox justifyContent='center'>
           <Spinner />
         </FlexBox>
@@ -46,7 +51,7 @@ const SpotlightCardSection = () => {
         <ul className='mb-24 flex flex-col gap-[1.2rem]'>
           {spotlightCards?.map((card, index) => {
             return (
-              <li key={card.title}>
+              <li key={card.id}>
                 <SpotlightCardItem card={card} count={index + 1} />
               </li>
             );

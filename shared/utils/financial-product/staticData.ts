@@ -3,7 +3,7 @@ export const FINANCIAL_PRODUCT_NAVIGATION = [
   {
     title: 'AI 맞춤 추천',
     subTitle: '꼭 맞는 상품 여기있어요',
-    href: 'ai-recommendations?tab=예적금',
+    href: 'ai-recommendations?tab=예적금+4',
     color: '#597BFF'
   },
   {
@@ -87,18 +87,90 @@ export const THEMES = [
   }
 ];
 
-// /financial-product/comparison/select-category
-export const COMPARISON_STANDARD = [
-  { title: '대중교통', iconPath: '/icons/product/product-traffic.svg' },
-  { title: '쇼핑', iconPath: '/icons/product/product-shopping.svg' },
-  { title: '카페', iconPath: '/icons/product/product-cafe.svg' },
-  { title: '편의점', iconPath: '/icons/product/product-cvs.svg' },
-  { title: '마트', iconPath: '/icons/product/product-mart.svg' },
-  { title: '문화', iconPath: '/icons/product/product-culture.svg' },
-  { title: '백화점', iconPath: '/icons/product/product-stores.svg' },
-  { title: '통신비', iconPath: '/icons/product/product-communication.svg' },
-  { title: '주유', iconPath: '/icons/product/product-oiling.svg' },
-  { title: '여행', iconPath: '/icons/product/product-travel.svg' },
-  { title: '온라인', iconPath: '/icons/product/product-online.svg' },
-  { title: '구독', iconPath: '/icons/product/product-subscribe.svg' }
+export const CARD_BENEFIT_CATEGORIES = [
+  {
+    title_kr: '쇼핑',
+    title_en: 'shopping',
+    iconPath: '/icons/product/product-shopping.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/shopping.svg'
+  },
+  {
+    title_kr: '카페',
+    title_en: 'cafe',
+    iconPath: '/icons/product/product-cafe.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/cafe.svg'
+  },
+  {
+    title_kr: '편의점',
+    title_en: 'convenience_store',
+    iconPath: '/icons/product/product-cvs.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/convenience-store.svg'
+  },
+  {
+    title_kr: '대중교통',
+    title_en: 'public_transport',
+    iconPath: '/icons/product/product-traffic.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/public-transport.svg'
+  },
+  {
+    title_kr: '마트',
+    title_en: 'mart',
+    iconPath: '/icons/product/product-mart.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/mart.svg'
+  },
+  {
+    title_kr: '문화',
+    title_en: 'culture',
+    iconPath: '/icons/product/product-culture.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/culture.svg'
+  },
+  {
+    title_kr: '백화점',
+    title_en: 'department_store',
+    iconPath: '/icons/product/product-stores.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/department-store.svg'
+  },
+  {
+    title_kr: '통신비',
+    title_en: 'communication_cost',
+    iconPath: '/icons/product/product-communication.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/communication-cost.svg'
+  },
+  {
+    title_kr: '주유',
+    title_en: 'oiling',
+    iconPath: '/icons/product/product-oiling.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/oiling.svg'
+  },
+  {
+    title_kr: '여행',
+    title_en: 'travel',
+    iconPath: '/icons/product/product-travel.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/travel.svg'
+  },
+  {
+    title_kr: '온라인',
+    title_en: 'online',
+    iconPath: '/icons/product/product-online.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/online.svg'
+  },
+  {
+    title_kr: '구독',
+    title_en: 'subscribe',
+    iconPath: '/icons/product/product-subscribe.svg',
+    lineIconPath: '/icons/financial-product/benefit-line/subscribe.svg'
+  }
+];
+
+export const CARD_COMPANIES = [
+  { title: 'KB국민카드', iconPath: '/icons/logos/bank/bank-kb.svg' },
+  { title: 'BC카드', iconPath: '/icons/logos/bank/bank-bc.svg' },
+  { title: 'IBK기업은행', iconPath: '/icons/logos/bank/bank-ibk.svg' },
+  { title: '신한카드', iconPath: '/icons/logos/bank/bank-shinhan.svg' },
+  { title: 'NH농협카드', iconPath: '/icons/logos/bank/bank-nh.svg' },
+  { title: '현대카드', iconPath: '/icons/logos/bank/bank-hyundai.svg' },
+  { title: '우리카드', iconPath: '/icons/logos/bank/bank-woori.svg' },
+  { title: '삼성카드', iconPath: '/icons/logos/bank/bank-samsung.svg' },
+  { title: '하나카드', iconPath: '/icons/logos/bank/bank-hana.svg' },
+  { title: '롯데카드', iconPath: '/icons/logos/bank/bank-lotte.svg' }
 ];
