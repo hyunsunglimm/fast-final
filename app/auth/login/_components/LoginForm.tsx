@@ -49,7 +49,6 @@ const LoginForm = () => {
         setError(result.error);
         return;
       }
-      window.location.href = '/';
     });
   });
 

@@ -4,7 +4,7 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import { CardResponseType } from '@/shared/types/response/card';
 import Image from 'next/image';
-
+import sanityLoader from '@/shared/utils/sanityLoader';
 type SpotlightCardProps = {
   card: CardResponseType;
   count: number;
@@ -33,6 +33,7 @@ const SpotlightCard = ({
         </Text>
       </FlexBox>
       <Image
+        loader={sanityLoader}
         src={image_vertical}
         alt={`${name}의 카드 이미지`}
         width={400}

@@ -6,26 +6,35 @@ import FlexBox from '@/components/ui/FlexBox';
 import SwiperWrapper from '@/components/SwiperWrapper';
 import Icon from '@/components/Icon';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import { usePopupStore } from '@/store/popupStore';
 const Popup = () => {
+  const { openPopUp, setStorage } = usePopupStore();
   const [index, setIndex] = useState(0);
-  const [openPopUp, setOpenPopup] = useState(true);
   const ref = useRef<{ next: () => void } | null>(null);
 
   const handleNextClick = () => {
     if (index === 0 && ref.current) {
       ref.current.next();
     } else if (index === 1) {
-      setOpenPopup(false);
+      setStorage(false);
     }
   };
 
   useEffect(() => {
     if (openPopUp) {
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('max-h-dvh');
+      document.body.classList.add('overflow-hidden');
+      document.body.classList.remove('overflow-y-scroll');
     } else {
-      document.body.style.overflow = '';
+      document.body.classList.remove('max-h-dvh');
+      document.body.classList.remove('overflow-hidden');
+      document.body.classList.add('overflow-y-scroll');
     }
+    return () => {
+      document.body.classList.remove('max-h-dvh');
+      document.body.classList.remove('overflow-hidden');
+      document.body.classList.add('overflow-y-scroll');
+    };
   }, [openPopUp]);
 
   return (
