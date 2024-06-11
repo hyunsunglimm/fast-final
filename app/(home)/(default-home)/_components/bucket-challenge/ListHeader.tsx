@@ -11,7 +11,7 @@ type ListHeaderProps = {
 
 export const ListHeader = ({ badgeText, headerText, subHeaderText }: ListHeaderProps) => {
   return (
-    <CardHeader className='p-[1.6rem] pb-0'>
+    <CardHeader className='p-24 pb-0'>
       <FlexBox justifyContent='between' alignItems='center' className='mb-[1.2rem]'>
         <div className=' w-fit rounded-full bg-black/20 px-[0.8rem] py-[0.5rem]'>
           <Text sizes='12' weight='700'>

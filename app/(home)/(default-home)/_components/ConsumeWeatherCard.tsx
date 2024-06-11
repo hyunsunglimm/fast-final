@@ -78,7 +78,7 @@ const ConsumeWeatherCard = () => {
       href='/budget-calendar'
       aria-label='가계부로 이동'
       tabIndex={0}
-      className={cardVariants({ className: 'mb-16 block w-full p-24' })}
+      className={cardVariants({ className: 'mb-12 block w-full p-24' })}
     >
       <CardContent alignItems='center' className='gap-x-20'>
         <FlexBox className='relative h-[12.589rem] w-[8.2rem]'>

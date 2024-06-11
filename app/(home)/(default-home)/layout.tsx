@@ -34,8 +34,8 @@ const HomeLayout = async ({
         <main className='relative bg-gray-50 pb-[13.2rem]'>
           {children}
           {session && widgetSection}
-          <section className='flex flex-col gap-16 px-20 pt-[2.6rem]'>
-            <Text variant='h2' sizes='20' weight='700'>
+          <section className='px-20'>
+            <Text variant='h2' sizes='20' weight='700' className='mb-16'>
               추천서비스
             </Text>
             <HomeBucketBannerCard />

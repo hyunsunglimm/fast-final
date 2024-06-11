@@ -29,7 +29,7 @@ export const DefaultHeader = ({
   const headerColor = useTransform(
     scrollY,
     [0, 1],
-    [`${defaultColor || 'transparent'}`, '#ffffffd0']
+    [`${defaultColor || 'transparent'}`, '#ffffff']
   );
   const fixedClass = isFixed ? 'sticky top-0 z-20' : '';
   return (
