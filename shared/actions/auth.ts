@@ -1,7 +1,7 @@
 'use server';
 import * as z from 'zod';
 import { loginSchema } from '@/app/auth/schema/loginSchema';
-import { signIn, auth } from '@/auth';
+import { signIn, auth, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 
 /**
@@ -42,4 +42,8 @@ export const signInWithCredentials = async (data: z.infer<typeof loginSchema>) =
 
     throw error;
   }
+};
+
+export const logout = async () => {
+  await signOut();
 };

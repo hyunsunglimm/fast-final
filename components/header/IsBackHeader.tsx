@@ -45,12 +45,12 @@ export const IsBackHeader = ({
           justifyContent: 'between',
           alignItems: 'center'
         }),
-        `${fixedClass} h-[5.6rem] px-20 backdrop-filter`
+        `${fixedClass} h-[5.6rem] px-20`
       )}
     >
       {!isClose ? (
         <Icon
-          className='cursor-pointer'
+          className='cursor-pointer active:scale-95 active:ring-1 active:ring-active active:ring-offset-1'
           role='link'
           onClick={() => (href ? router.push(href) : router.back())}
           aria-label='뒤로 가기 링크'
@@ -67,7 +67,10 @@ export const IsBackHeader = ({
         </Text>
       </FlexBox>
       {isClose ? (
-        <IconButton asChild>
+        <IconButton
+          asChild
+          className='cursor-pointer active:scale-95 active:ring-1 active:ring-active active:ring-offset-1'
+        >
           <Link href={linkUrl || '/'} aria-label={`${linkUrl}로 이동`}>
             <Icon src='/icons/system-icon/x.svg' alt='취소 아이콘' size='20' aria-hidden />
           </Link>
