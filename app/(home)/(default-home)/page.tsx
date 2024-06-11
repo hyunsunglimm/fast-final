@@ -25,10 +25,14 @@ const HomePage = async () => {
         <HomeTopBannerCard />
       </section>
       <section className='mb-24 px-20'>
-        <SwiperWrapper dots>
-          {bucket ? <BucketListCard bucket={bucket} /> : <DefaultBucketListCard />}
-          <ChallengeCard />
-        </SwiperWrapper>
+        {!session ? (
+          <DefaultBucketListCard />
+        ) : (
+          <SwiperWrapper dots>
+            {bucket ? <BucketListCard bucket={bucket} /> : <DefaultBucketListCard />}
+            <ChallengeCard />
+          </SwiperWrapper>
+        )}
       </section>
     </>
   );

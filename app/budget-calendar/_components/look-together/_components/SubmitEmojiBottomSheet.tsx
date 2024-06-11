@@ -38,7 +38,7 @@ const SubmitEmojiBottomSheet = () => {
       </Text>
 
       {/* 남긴 반응 이모지 */}
-      <div className='mt-16 h-[11rem] overflow-hidden'>
+      <div className='mt-16 h-[11rem] w-full overflow-hidden'>
         <div className='hide-scrollbar flex h-full w-full flex-wrap content-start gap-8 overflow-y-scroll'>
           {daily.map((item) => {
             const currentDate = new Date(item.date).getDate() === reactionDay;
