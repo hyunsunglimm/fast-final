@@ -101,6 +101,7 @@ export type TargetModifyBottomSheetProps = {
   modifyPopup: boolean;
   setModifyPopup: React.Dispatch<React.SetStateAction<boolean>>;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
 };
 
 export type TargetBudgetBottomSheetProps = {

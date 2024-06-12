@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 import BottomSheet from '@/components/BottomSheet';
 import BottomSheetTitle from '../common/BottomSheetTitle';
@@ -12,9 +12,11 @@ import { formatNumber } from '@/shared/utils/formatNumber';
 const TargetModifyBottomSheet = ({
   modifyPopup,
   setModifyPopup,
-  setShowPopup
+  setShowPopup,
+  onClose
 }: TargetModifyBottomSheetProps) => {
   const methods = useForm<FormValues>();
+  const queryClient = useQueryClient();
   const [inputValue, setInputValue] = useState('');
 
   const handleButtonClick = async () => {
@@ -22,7 +24,10 @@ const TargetModifyBottomSheet = ({
     if (isValid) {
       const numericValue = parseInt(inputValue.replace(/,/g, ''), 10);
       await patchBudget(numericValue);
-      setModifyPopup(false);
+      onClose();
+      queryClient.removeQueries({ queryKey: ['budgetManagement'] });
+      queryClient.removeQueries({ queryKey: ['getCalendar'] });
+      document.body.style.overflow = '';
     }
   };
 

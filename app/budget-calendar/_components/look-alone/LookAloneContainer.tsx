@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import Tab from '@/components/ui/Tab';
 import Line from '../common/Line';
@@ -8,7 +9,6 @@ import BudgetBanner from '../common/BudgetBanner';
 import ExpensCalendarBox from './ExpensCalendarBox';
 import ManagementBottomSheet from './ManagementBottomSheet';
 import { getBudgetInquiry } from '@/service/api/budget';
-import { useQuery } from '@tanstack/react-query';
 import { BudgetInquiryResponse } from '@/shared/types/response/targetBudget';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 const TargetModifyBottomSheet = dynamic(() => import('./TargetModifyBottomSheet'), { ssr: false });
@@ -51,6 +51,11 @@ const LookAloneContainer = () => {
       refetch();
     }
   }, [budgetSet, refetch]);
+
+  const handleModifyPopupClose = () => {
+    setModifyPopup(false);
+    refetch(); // 목표 예산 수정 후 데이터 다시 가져오기
+  };
 
   // 탭 변경
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -162,6 +167,7 @@ const LookAloneContainer = () => {
           modifyPopup={modifyPopup}
           setModifyPopup={setModifyPopup}
           setShowPopup={setShowPopup}
+          onClose={handleModifyPopupClose}
         />
       )}
     </>
