@@ -1,12 +1,16 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import Tab from '@/components/ui/Tab';
 import Line from '../common/Line';
 import BudgetBanner from '../common/BudgetBanner';
 import ExpensCalendarBox from './ExpensCalendarBox';
 import ManagementBottomSheet from './ManagementBottomSheet';
+import { getBudgetInquiry } from '@/service/api/budget';
+import { BudgetInquiryResponse } from '@/shared/types/response/targetBudget';
+import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
 const TargetModifyBottomSheet = dynamic(() => import('./TargetModifyBottomSheet'), { ssr: false });
 const ExpensListBox = dynamic(() => import('./ExpensListBox'), { ssr: false });
 const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'), { ssr: false });
@@ -16,14 +20,44 @@ const LookAloneContainer = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialDisplayMode = searchParams.get('displayMode') || '캘린더 보기';
+
   // 상태 관리
   const [budgetSet, setBudgetSet] = useState(false); // 예산 목표가 설정되었는지 여부
-  const [budgetUsed, setBudgetUsed] = useState(0.5); // 예산 사용 비율 (0.5는 50%를 의미)
   const [showPopup, setShowPopup] = useState(false);
   const [modifyPopup, setModifyPopup] = useState(false);
-
   const [displayMode, setDisplayMode] = useState(initialDisplayMode); // 현재 표시 모드
 
+  // year, month
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+
+  const handleYearMonthSelect = (year: number, month: number) => {
+    setSelectedYear(year);
+    setSelectedMonth(month);
+  };
+
+  const {
+    data: cost,
+    refetch,
+    isLoading
+  } = useQuery<BudgetInquiryResponse>({
+    retry: 1,
+    queryKey: ['getBudgetInquiry', selectedYear, selectedMonth],
+    queryFn: () => getBudgetInquiry(selectedYear, selectedMonth)
+  });
+
+  useEffect(() => {
+    if (budgetSet) {
+      refetch();
+    }
+  }, [budgetSet, refetch]);
+
+  const handleModifyPopupClose = () => {
+    setModifyPopup(false);
+    refetch(); // 목표 예산 수정 후 데이터 다시 가져오기
+  };
+
+  // 탭 변경
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
   const headerHeight =
@@ -73,6 +107,10 @@ const LookAloneContainer = () => {
     };
   }, [handleScroll]);
 
+  if (isLoading) {
+    return <LoadingBackdrop />;
+  }
+
   return (
     <>
       <div className='sticky top-[4.4rem] z-20 bg-white px-20 pb-24 pt-16'>
@@ -85,10 +123,10 @@ const LookAloneContainer = () => {
         />
       </div>
       <div className='px-20 text-12' ref={calendarRef}>
-        {budgetSet ? (
+        {cost ? (
           <BudgetBanner
             icon={true}
-            text={`목표 예산 중 ${budgetUsed * 100}%를 썼어요`}
+            text={`목표 예산 중 ${cost.used}%를 썼어요`}
             showArrow={true}
             onClick={() => setShowPopup(true)}
           />
@@ -100,13 +138,18 @@ const LookAloneContainer = () => {
             onClick={() => setShowPopup(true)}
           />
         )}
-        <ExpensCalendarBox />
+        <ExpensCalendarBox
+          budgetSet={budgetSet}
+          selectedYear={selectedYear}
+          selectedMonth={selectedMonth}
+          handleYearMonthSelect={handleYearMonthSelect}
+        />
       </div>
       <Line />
       <div ref={listRef}>
         <ExpensListBox />
       </div>
-      {budgetSet ? (
+      {cost ? (
         <ManagementBottomSheet
           showPopup={showPopup}
           setShowPopup={setShowPopup}
@@ -124,6 +167,7 @@ const LookAloneContainer = () => {
           modifyPopup={modifyPopup}
           setModifyPopup={setModifyPopup}
           setShowPopup={setShowPopup}
+          onClose={handleModifyPopupClose}
         />
       )}
     </>

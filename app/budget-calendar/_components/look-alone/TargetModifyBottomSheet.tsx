@@ -1,22 +1,33 @@
 import { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 import BottomSheet from '@/components/BottomSheet';
 import BottomSheetTitle from '../common/BottomSheetTitle';
 import TargetManagementInput from '../common/TargetManagementInput';
 import { FormValues, TargetModifyBottomSheetProps } from '@/shared/types/budgetCalendarType';
+import { LastMonthInquiryResponse } from '@/shared/types/response/targetBudget';
+import { patchBudget, getLastMonthInquiry } from '@/service/api/calendar';
+import { formatNumber } from '@/shared/utils/formatNumber';
 
 const TargetModifyBottomSheet = ({
   modifyPopup,
   setModifyPopup,
-  setShowPopup
+  setShowPopup,
+  onClose
 }: TargetModifyBottomSheetProps) => {
   const methods = useForm<FormValues>();
+  const queryClient = useQueryClient();
   const [inputValue, setInputValue] = useState('');
 
   const handleButtonClick = async () => {
     const isValid = await methods.trigger('amount');
     if (isValid) {
-      setModifyPopup(false);
+      const numericValue = parseInt(inputValue.replace(/,/g, ''), 10);
+      await patchBudget(numericValue);
+      onClose();
+      queryClient.removeQueries({ queryKey: ['budgetManagement'] });
+      queryClient.removeQueries({ queryKey: ['getCalendar'] });
+      document.body.style.overflow = '';
     }
   };
 
@@ -25,6 +36,11 @@ const TargetModifyBottomSheet = ({
       handleButtonClick();
     }
   };
+
+  const { data: amount } = useQuery<LastMonthInquiryResponse>({
+    queryKey: ['getLastMonthInquiry'],
+    queryFn: getLastMonthInquiry
+  });
 
   return (
     <FormProvider {...methods}>
@@ -43,7 +59,7 @@ const TargetModifyBottomSheet = ({
       >
         <BottomSheetTitle
           title='목표 예산을 얼마로 바꿀까요?'
-          description='저번 달에 1,000,000원 썼어요'
+          description={`저번 달에 ${formatNumber(amount?.used ?? 0)}원 썼어요`}
         />
         <TargetManagementInput
           inputValue={inputValue}
