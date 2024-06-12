@@ -121,18 +121,18 @@ export default ComparisonSection;
 
 const Warning = () => {
   return (
-    <section className='flex flex-col items-center pb-[6rem]'>
+    <section className='px-20 pb-[6rem]'>
+      <Text variant='h6' sizes='20' weight='700' className='mb-4'>
+        조회된 카드가 없어요!
+      </Text>
+      <Text className='text-gray-500'>카드사와 필터링을 다시 선택해주세요</Text>
       <Image
-        src='/images/not-found-porko.webp'
+        src='/images/not-found-porko-gray.webp'
         alt='not found porko'
         width={400}
         height={183}
-        className='mx-auto mb-20 w-[18.3rem]'
+        className='mx-auto mb-20 mt-40 w-[18.3rem]'
       />
-      <Text sizes='20' weight='700'>
-        조회된 카드가 없어요!
-      </Text>
-      <Text className='mt-8 text-center text-gray-500'>카드사와 필터링을 다시 선택해주세요</Text>
     </section>
   );
 };

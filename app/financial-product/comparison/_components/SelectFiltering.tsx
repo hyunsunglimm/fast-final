@@ -32,7 +32,7 @@ const SelectFiltering = ({ items, onSelect }: SelectFilteringType) => {
         {FILTERINGS.map((filtering) => {
           const isSelected = items.includes(filtering);
           return (
-            <li key={filtering}>
+            <li key={filtering} className='cursor-pointer'>
               <FlexBox
                 alignItems='center'
                 className={`gap-6 rounded-xs border px-12 py-[0.8rem] ${isSelected ? 'border-primary' : 'border-gray-300'}`}
