@@ -26,7 +26,7 @@ const ComparisonResultPage = async ({ searchParams }: ComparisonResultPageProps)
 
   if (
     Array.isArray(searchParams.category) &&
-    searchParams.category.every((c) => categories.includes(c))
+    !searchParams.category.every((c) => categories.includes(c))
   ) {
     return redirect(redirectUrl);
   }

@@ -4,7 +4,6 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import { CardResponseType } from '@/shared/types/response/card';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
-import sanityLoader from '@/shared/utils/sanityLoader';
 import Image from 'next/image';
 
 type CardsToCompareProps = {
@@ -23,7 +22,6 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
     >
       <FlexBox>
         <Image
-          loader={sanityLoader}
           src={card.image_vertical}
           alt={`${card.name} 카드 이미지`}
           width={100}
