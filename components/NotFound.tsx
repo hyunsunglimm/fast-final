@@ -19,6 +19,7 @@ const NotFound = () => {
           size='24'
           alt='뒤로가기'
           src='/icons/system-icon/arrow/arrow-prev.svg'
+          className='cursor-pointer'
         />
       </header>
       <main className=''>
