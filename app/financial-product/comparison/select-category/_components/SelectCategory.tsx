@@ -64,7 +64,11 @@ const SelectCategory = ({ comparisonCards }: SelectCategoryProps) => {
           </Text>
         </FlexBox>
         <ul className='mt-28 grid grid-cols-3 gap-12'>
-          {CARD_BENEFIT_CATEGORIES.map(({ title_kr, title_en, iconPath }) => {
+          {CARD_BENEFIT_CATEGORIES.sort((a, b) => {
+            const aIsSelectable = comparableCategories.includes(a.title_en) ? 1 : 0;
+            const bIsSelectable = comparableCategories.includes(b.title_en) ? 1 : 0;
+            return bIsSelectable - aIsSelectable;
+          }).map(({ title_kr, title_en, iconPath }) => {
             const isSelected = selectedCategories.some((c) => c === title_kr);
             const isSelectable = comparableCategories.includes(title_en);
 
