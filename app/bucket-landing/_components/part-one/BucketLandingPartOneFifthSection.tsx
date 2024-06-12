@@ -40,7 +40,7 @@ const BucketLandingPartOneFifthSection = () => {
           <Icon src='/icons/bucket-landing/url.svg' alt='링크 공유' size='60' />
         </FlexBox>
       </FlexBox>
-      <BottomButton styled='fill_blue' path='/create-bucket'>
+      <BottomButton isGradationWhite styled='fill_blue' path='/create-bucket'>
         <Text sizes='16' weight='600'>
           버킷리스트 생성하기
         </Text>

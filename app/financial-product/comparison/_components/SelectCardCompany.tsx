@@ -20,7 +20,7 @@ const SelectCardCompany = ({ items, onSelect }: SelectCardCompanyProps) => {
           const isSelected = items.findIndex((item) => item.title === title) > -1;
 
           return (
-            <li key={title} className='relative'>
+            <li key={title} className='relative cursor-pointer'>
               <FlexBox
                 flexDirection='col'
                 alignItems='center'

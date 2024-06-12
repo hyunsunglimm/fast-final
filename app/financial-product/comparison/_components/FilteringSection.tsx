@@ -104,6 +104,7 @@ const FilteringSection = () => {
                       src={iconPath}
                       alt={title}
                       size='32'
+                      className='cursor-pointer'
                       onClick={() => {
                         params.delete('card-company', title);
                         router.push(pathname + '?' + params.toString());
@@ -138,6 +139,7 @@ const FilteringSection = () => {
                       src='/icons/financial-product/close-icon.svg'
                       alt='close icon'
                       size='16'
+                      className='cursor-pointer'
                       onClick={() => {
                         params.delete('filtering', filter);
                         router.push(pathname + '?' + params.toString());
