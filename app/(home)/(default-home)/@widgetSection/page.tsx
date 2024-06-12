@@ -37,7 +37,7 @@ const WidgeSectionPage = async () => {
     CURRENT_MONTH_CARD_USAGE: WidgetCardPerformance,
     MY_CHALLENGE: WidgetMyChallenge,
     CREDIT_SCORE: WidgetMyCredit,
-    DAILY_EXPENSES: WidgetSpentEveryMonth
+    MONTHLY_EXPENSES: WidgetSpentEveryMonth
   };
   return (
     <>
