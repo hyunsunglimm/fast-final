@@ -7,7 +7,7 @@ type ResultCardImageProps = {
 
 const ResultCardImage = ({ imageUrl, alt }: ResultCardImageProps) => {
   return (
-    <div className='relative mx-auto mb-[6rem] flex h-[28.5rem] w-[33.5rem] items-center justify-center'>
+    <div className='relative mx-auto mb-[6rem] flex h-[28.5rem] w-[33.5rem] cursor-grab items-center justify-center'>
       <Image
         src={imageUrl}
         alt={alt}

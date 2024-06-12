@@ -11,7 +11,7 @@ import { CardResponseType } from '@/shared/types/response/card';
 import { Card } from '@/components/ui/card';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-import sanityLoader from '@/shared/utils/sanityLoader';
+import { formatCurrency } from '@/shared/utils/financial-product/unitConverter';
 
 const SpendingHabitsCardSection = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -30,18 +30,17 @@ const SpendingHabitsCardSection = () => {
   });
 
   const highlightText = (text: string) => {
-    const regex = /(\d+%|\d+[천만억]?원)/g;
+    const separatedText = text.split(' ');
 
-    const parts = text.split(regex);
-
-    return parts.map((part, index) => {
+    return separatedText.map((text, index) => {
+      const isHighlight = text.includes('%') || text.includes('원');
       return (
         <Text
           key={index}
           weight='700'
-          className={`${regex.test(part) ? 'text-primary' : 'text-gray-700'}`}
+          className={`${isHighlight ? 'text-primary' : 'text-gray-700'}`}
         >
-          {part}
+          {text}{' '}
         </Text>
       );
     });
@@ -78,7 +77,6 @@ const SpendingHabitsCardSection = () => {
             {spendingHabitsCards.map(({ id, image_horizontal, name }) => {
               return (
                 <Image
-                  loader={sanityLoader}
                   key={id}
                   src={image_horizontal}
                   alt={`${name} 카드 이미지`}
@@ -102,12 +100,14 @@ const SpendingHabitsCardSection = () => {
           <ul className='mb-20 flex gap-8'>
             <li className='rounded-[10rem] bg-gray-50 px-12 py-8'>
               <Text sizes='12' weight='500' className='text-gray-700'>
-                전월실적 {currentCard?.prev_month_performance.toLocaleString()}원 이상
+                {currentCard?.prev_month_performance === 0
+                  ? '전월 실적 없음'
+                  : `전월실적 ${formatCurrency(currentCard?.prev_month_performance)} 이상`}
               </Text>
             </li>
             <li className='rounded-[10rem] bg-gray-50 px-12 py-8'>
               <Text sizes='12' weight='500' className='text-gray-700'>
-                연회비 {currentCard?.annual_fee.toLocaleString()}원
+                연회비 {formatCurrency(currentCard?.annual_fee)}
               </Text>
             </li>
           </ul>

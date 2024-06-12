@@ -3,6 +3,7 @@ import Button from '@/components/ui/Button';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { CardResponseType } from '@/shared/types/response/card';
+import { formatCurrency } from '@/shared/utils/financial-product/unitConverter';
 
 type CurrentCardInfoProps = {
   id: number;
@@ -41,20 +42,20 @@ const CurrentCardInfo = ({ id, currentCard }: CurrentCardInfoProps) => {
           <FlexBox justifyContent='between' className='border-b border-[#edf0f5] py-20'>
             <Text>최대 할인 한도</Text>
             <Text sizes='16' weight='700'>
-              {currentCard.discount_limit}
+              {formatCurrency(currentCard.discount_limit)}
             </Text>
           </FlexBox>
           <FlexBox justifyContent='between' className='border-b border-[#edf0f5] py-20'>
             <Text>연회비</Text>
             <Text sizes='16' weight='700'>
-              {currentCard.annual_fee}
+              {formatCurrency(currentCard.annual_fee)}
             </Text>
           </FlexBox>
           <FlexBox justifyContent='between' className='py-20'>
             <Text>전월 실적</Text>
             <FlexBox alignItems='center'>
               <Text sizes='16' weight='700' className='mr-[0.4rem]'>
-                {currentCard.prev_month_performance}
+                최소 {formatCurrency(currentCard.prev_month_performance)}
               </Text>
               <Icon src='/icons/system-icon/arrow/arrow-down.svg' alt='드롭다운 아이콘' size='16' />
             </FlexBox>
@@ -73,15 +74,11 @@ const CurrentCardInfo = ({ id, currentCard }: CurrentCardInfoProps) => {
             목록이에요!
           </Text>
         </FlexBox>
-        <ul className='scroll-hidden hide-scrollbar mb-40 flex flex-nowrap gap-8 overflow-x-scroll px-20'>
-          {currentCard.benefits.map(({ category, benefitDetails }) => {
+        <ul className='hide-scrollbar mb-40 flex cursor-grab flex-nowrap gap-8 overflow-x-scroll px-20'>
+          {currentCard.allBenefits.map((benefit) => {
             return (
-              <li key={category} className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>
-                <ul>
-                  {benefitDetails.map((benefit) => (
-                    <Text key={benefit}>{benefit}</Text>
-                  ))}
-                </ul>
+              <li key={benefit} className='shrink-0 rounded-xs bg-gray-50 px-12 py-[0.8rem]'>
+                <Text>{benefit}</Text>
               </li>
             );
           })}

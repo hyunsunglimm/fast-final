@@ -4,7 +4,6 @@ import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
 import { CardResponseType } from '@/shared/types/response/card';
 import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
-import sanityLoader from '@/shared/utils/sanityLoader';
 import Image from 'next/image';
 
 type CardsToCompareProps = {
@@ -18,12 +17,11 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
 
   return (
     <Card
-      className={`p-24 ${isSelected && 'relative ring-1 ring-primary'}`}
+      className={`p-24 ${isSelected && 'relative ring-1 ring-primary'} cursor-pointer`}
       onClick={() => onSelect(card.id)}
     >
       <FlexBox>
         <Image
-          loader={sanityLoader}
           src={card.image_vertical}
           alt={`${card.name} 카드 이미지`}
           width={100}
@@ -42,7 +40,7 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
               return (
                 <li key={category} className='flex shrink-0 items-center gap-2'>
                   <Icon
-                    src={categoryInfo?.iconPath || ''}
+                    src={categoryInfo?.lineIconPath || ''}
                     alt={`${categoryInfo?.title_kr} icon`}
                     size='12'
                     className='shrink-0'

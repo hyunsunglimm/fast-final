@@ -41,6 +41,6 @@ export type CardResponseType = {
   image_vertical: string;
   name: string;
   type: string;
-  allBenefits: string;
+  allBenefits: string[];
   benefitCategories: string[];
 };

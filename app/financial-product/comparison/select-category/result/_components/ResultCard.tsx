@@ -1,44 +1,50 @@
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';
 import { Card } from '@/components/ui/card';
+import { CardResponseType } from '@/shared/types/response/card';
+import { CARD_BENEFIT_CATEGORIES } from '@/shared/utils/financial-product/staticData';
 import Image from 'next/image';
 
 type ResultCardProps = {
-  cardInfo: { title: string; imgPath: string; categories: string; benefits: string[] };
+  cardInfo: CardResponseType;
+  index: number;
+  standard: string;
 };
 
-const ResultCard = ({ cardInfo: { title, imgPath, categories, benefits } }: ResultCardProps) => {
+const ResultCard = ({ cardInfo, index, standard }: ResultCardProps) => {
+  const benefitsByStandard = cardInfo.benefits.find((b) => {
+    return CARD_BENEFIT_CATEGORIES.find((c) => c.title_en === b.category)?.title_kr === standard;
+  });
   return (
     <Card className='flex w-full border border-gray-100 p-16'>
       <Image
-        src={imgPath}
-        alt={title === '카드 A' ? '카드 A 이미지' : '카드 B 이미지'}
+        src={cardInfo.image_vertical}
+        alt={`${cardInfo.name} 카드 이미지`}
         width={200}
         height={82}
         className='mr-16 w-[5.3rem]'
       />
-      <FlexBox flexDirection='col'>
-        <Text
-          weight='700'
-          className={`mb-[1rem] ${title === '카드 A' ? 'text-active' : 'text-warning'}`}
-        >
-          {title}
+      <FlexBox flexDirection='col' className='w-[23rem] shrink-0'>
+        <Text weight='700' className={`mb-[1rem] ${index === 0 ? 'text-active' : 'text-warning'}`}>
+          {cardInfo.name}
         </Text>
-        <Text className='mb-[0.6rem]'>{categories}</Text>
-        <FlexBox className='gap-6'>
-          {benefits.map((benefit) => {
-            return (
-              <Text
-                key={benefit}
-                sizes='12'
-                weight='700'
-                className='rounded-[0.6rem] bg-gray-50 px-[0.8rem] py-[0.4rem]'
-              >
-                {benefit}
-              </Text>
-            );
-          })}
-        </FlexBox>
+        <Text className='mb-[0.6rem]'>{standard}</Text>
+        <div className='hide-scrollbar w-full overflow-x-scroll'>
+          <ul className='flex gap-6'>
+            {benefitsByStandard?.benefitDetails.map((benefit) => {
+              return (
+                <li
+                  key={benefit}
+                  className='shrink-0 rounded-[0.6rem] bg-gray-50 px-[0.8rem] py-[0.4rem]'
+                >
+                  <Text sizes='12' weight='700'>
+                    {benefit}
+                  </Text>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </FlexBox>
     </Card>
   );
