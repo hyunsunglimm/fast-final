@@ -30,13 +30,12 @@ const BucketLandingPartOneFirstSection = () => {
         </Text>
         <Text weight='500'>돈을 모을 수 있는 목표와</Text>
         <Text weight='500'>목표 금액을 설정해요</Text>
-        {/* 추후 이미지 변동 */}
         <Image
           src='/images/bucket-landing/travel-to-europe.webp'
           alt='유럽 여행가기 카드'
           width={400}
           height={124}
-          className='mt-28 w-[30rem]'
+          className='mb-16 mt-28 w-[30rem]'
         />
         <Image
           src='/images/bucket-landing/parents-gift.webp'

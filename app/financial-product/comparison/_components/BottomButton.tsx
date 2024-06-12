@@ -11,6 +11,7 @@ type BottomButtonProps = {
   isPopup?: boolean;
   disabled?: boolean;
   isLoading?: boolean;
+  isGradationWhite?: boolean;
   onClick?: () => void;
   styled?: 'fill_black' | 'fill_blue';
   children: React.ReactNode;
@@ -21,6 +22,7 @@ const BottomButton = ({
   isPopup = false,
   disabled = false,
   isLoading = false,
+  isGradationWhite = false,
   onClick,
   styled = 'fill_black',
   children
@@ -41,7 +43,11 @@ const BottomButton = ({
         </div>
       )}
       <Image
-        src='/images/financial-product/bottom-gradation.webp'
+        src={
+          isGradationWhite
+            ? '/images/bucket-landing/bottom-gradation-white.webp'
+            : '/images/financial-product/bottom-gradation.webp'
+        }
         alt='바텀 그라데이션'
         width={500}
         height={125}
