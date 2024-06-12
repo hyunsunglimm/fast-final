@@ -29,14 +29,14 @@ const BucketLandingPartOneSecondSection = () => {
           alt='계좌 연결 슬라이드 1'
           width={1000}
           height={380}
-          className='h-[38rem]'
+          className='h-[40rem] w-full'
         />
         <Image
           src='/images/bucket-landing/part1-slide-2.webp'
           alt='계좌 연결 슬라이드 2'
           width={1000}
           height={380}
-          className='h-[38rem]'
+          className='h-[40rem] w-full'
         />
       </SwiperWrapper>
     </section>
