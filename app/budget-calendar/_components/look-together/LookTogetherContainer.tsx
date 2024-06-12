@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Line from '../common/Line';
 import SharedCalendar from './SharedCalendar';
 import SharedMembers from './SharedMembers';
@@ -8,8 +8,8 @@ import ConsumptionWeather from '../shared/ConsumptionWeather';
 import RegretSpending from '../shared/RegretSpending';
 import ReactionBottomSheet from './_components/ReactionBottomSheet';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
-import { Friend } from '@/shared/types/budgetCalendarType';
 import { User } from 'next-auth';
+import { useSubmitEmojiContext } from '../../context/SubmitEmojiProvider';
 
 const SubmitEmojiBottomSheet = dynamic(() => import('./_components/SubmitEmojiBottomSheet'), {
   ssr: false
@@ -22,7 +22,8 @@ type LookTogetherContainerProps = {
 
 const LookTogetherContainer = ({ viewMode, userData }: LookTogetherContainerProps) => {
   // 선택중인 프로필
-  const [selectedProfile, setSelectedProfile] = useState<Friend | null>(null);
+  const { selectedProfile, setSelectedProfile } = useSubmitEmojiContext();
+
   useEffect(() => {
     if (userData !== null && userData !== undefined) {
       setSelectedProfile({
@@ -31,7 +32,7 @@ const LookTogetherContainer = ({ viewMode, userData }: LookTogetherContainerProp
         profileImageUrl: userData.image || '/icons/profile/profile.svg'
       });
     }
-  }, [userData]);
+  }, [userData, setSelectedProfile]);
 
   if (selectedProfile === null) {
     return <LoadingBackdrop />;

@@ -5,14 +5,11 @@ import FlexBox from '@/components/ui/FlexBox';
 import Title from '../common/Title';
 import Icon from '@/components/Icon';
 import { Friend } from '@/shared/types/budgetCalendarType';
+import { useQuery } from '@tanstack/react-query';
+import { getConsumptionWeather } from '@/service/api/calendar/share';
+import { SqureSkeleton } from '@/components/ui/skeleton';
+import { useYearMonthStore } from '@/store/yearMonthStore';
 const WeatherInfoBottomSheet = dynamic(() => import('./WeatherInfoBottomSheet'));
-// 소비 날씨
-const weatherData = [
-  { src: '/icons/weather/weather-3.svg', alt: '흐림', days: '11일' },
-  { src: '/icons/weather/weather-2.svg', alt: '맑음', days: '9일' },
-  { src: '/icons/weather/weather-5.svg', alt: '천둥번개', days: '5일' },
-  { src: '/icons/weather/weather-1.svg', alt: '무지개', days: '2일' }
-];
 
 type SharedCalendarProps = {
   selectedProfile: Friend;
@@ -20,10 +17,19 @@ type SharedCalendarProps = {
 
 const ConsumptionWeather = ({ selectedProfile }: SharedCalendarProps) => {
   const [openWeatherInfo, setOpenWeatherInfo] = useState(false);
+  const { selectedYear, selectedMonth } = useYearMonthStore();
+  const { data, isLoading } = useQuery({
+    queryKey: ['consumptionweather', selectedYear, selectedMonth, selectedProfile.memberId],
+    queryFn: () => getConsumptionWeather(selectedYear, selectedMonth, selectedProfile.memberId)
+  });
+  if (isLoading) {
+    return <SqureSkeleton />;
+  }
+  const bgClass = data && data?.weather[0].weatherImageNo > 3 ? 'bg-gray-300' : 'bg-select';
   return (
     <>
       <section className='px-20 py-32 text-12'>
-        <Title title={`${selectedProfile.name}님의 소비 날씨는?`}>
+        <Title title={`${selectedProfile?.name}님의 소비 날씨는?`}>
           <Icon
             role='button'
             size='16'
@@ -33,30 +39,32 @@ const ConsumptionWeather = ({ selectedProfile }: SharedCalendarProps) => {
             onClick={() => setOpenWeatherInfo(true)}
           />
         </Title>
-        <FlexBox justifyContent='between' className='my-40 rounded-md bg-gray-300 p-24'>
+        <FlexBox justifyContent='between' className={`my-40 rounded-md ${bgClass} p-24`}>
           <div>
             <h4 className='mb-8 flex h-[5.4rem] items-center text-14 font-700'>
-              지출 비가 내린 날이
+              {data?.weather[0].weatherName}이
               <br />
-              15일로 가장 많았어요
+              {data?.weather[0].count}일로 가장 많았어요
             </h4>
-            <p className='text-gray-600'>목표 예산에서 평균 80% 썼어요</p>
+            <p className='text-gray-600'>목표 예산에서 평균 {data?.used}% 썼어요</p>
           </div>
           <Icon
-            src='/icons/weather/consumption/weather-4.svg'
+            src={`/icons/weather/weather-${data?.weather[0].weatherImageNo}.svg`}
             alt='비 날씨'
             className='h-[8rem] w-[8rem]'
           />
         </FlexBox>
         <FlexBox justifyContent='center' className='gap-24 text-center'>
-          {weatherData.map((weather, index) => {
-            return (
-              <div key={index}>
-                <Icon src={weather.src} alt={weather.alt} size='48' />
-                <p className='mt-4'>{weather.days}</p>
-              </div>
-            );
-          })}
+          {data &&
+            data.weather.slice(1, 5).map((weather, index) => {
+              const imgSrc = `/icons/weather/weather-${weather.weatherImageNo}.svg`;
+              return (
+                <FlexBox flexDirection='col' alignItems='center' key={index}>
+                  <Icon src={imgSrc} alt={weather.weatherName} size='48' />
+                  <span className='mt-4 font-700 text-gray-700'>{weather.count}일</span>
+                </FlexBox>
+              );
+            })}
         </FlexBox>
       </section>
 

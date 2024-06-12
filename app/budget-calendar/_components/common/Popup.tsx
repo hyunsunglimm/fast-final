@@ -59,9 +59,9 @@ const Popup = () => {
               <StepTwo />
             </SwiperWrapper>
             <Button
-              size='sm'
+              size='md'
               styled='fill_black'
-              className='mt-32 w-full'
+              className='mt-32 w-full self-end'
               onClick={handleNextClick}
             >
               {index === 0 ? '다음' : '모두 확인했어요'}

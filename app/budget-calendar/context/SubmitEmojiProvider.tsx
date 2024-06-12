@@ -1,12 +1,14 @@
 'use client';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { initialTogetherData } from '../_components/look-together/data';
-import { DailyDataItemType } from '@/shared/types/budgetCalendarType';
+import { DailyDataItemType, Friend } from '@/shared/types/budgetCalendarType';
 import { useYearMonthStore } from '@/store/yearMonthStore';
 import { useQuery } from '@tanstack/react-query';
 import { getCalendar } from '@/service/api/calendar';
 import { returnDate } from '@/shared/utils/dateUtils';
+
 export const MY_MEMBER_ID = 1;
+
 type ValueType = {
   openTotalReactionSheet: boolean;
   openAddEmojiSheet: boolean;
@@ -16,7 +18,10 @@ type ValueType = {
   setOpenAddEmojiSheet: React.Dispatch<React.SetStateAction<boolean>>;
   setReactionDate: React.Dispatch<React.SetStateAction<string>>;
   handleAddEmojiClick: (e: React.MouseEvent<HTMLButtonElement>, date?: string) => void;
+  selectedProfile: Friend | null;
+  setSelectedProfile: React.Dispatch<React.SetStateAction<Friend | null>>;
 };
+
 const SubmitEmojiContext = createContext<ValueType>({
   openTotalReactionSheet: false,
   openAddEmojiSheet: false,
@@ -25,7 +30,13 @@ const SubmitEmojiContext = createContext<ValueType>({
   reactionDate: '',
   shareData: [],
   setReactionDate: () => {},
-  handleAddEmojiClick: () => {}
+  handleAddEmojiClick: () => {},
+  selectedProfile: {
+    memberId: 0,
+    name: '',
+    profileImageUrl: ''
+  },
+  setSelectedProfile: () => {}
 });
 
 const SubmitEmojiProvider = ({ children }: { children: React.ReactNode }) => {
@@ -33,10 +44,12 @@ const SubmitEmojiProvider = ({ children }: { children: React.ReactNode }) => {
   const [openAddEmojiSheet, setOpenAddEmojiSheet] = useState(false);
   const [reactionDate, setReactionDate] = useState('');
   const [shareData, setShareData] = useState<DailyDataItemType[]>([]);
+  const [selectedProfile, setSelectedProfile] = useState<Friend | null>(null);
   const { selectedYear, selectedMonth } = useYearMonthStore();
+
   const { data: dailyData = [] } = useQuery<DailyDataItemType[]>({
-    queryKey: ['getCalendar', selectedYear, selectedMonth],
-    queryFn: () => getCalendar(selectedYear, selectedMonth)
+    queryKey: ['getCalendar', selectedYear, selectedMonth, selectedProfile?.memberId],
+    queryFn: () => getCalendar(selectedYear, selectedMonth, selectedProfile?.memberId)
   });
 
   useEffect(() => {
@@ -120,7 +133,9 @@ const SubmitEmojiProvider = ({ children }: { children: React.ReactNode }) => {
     shareData,
     reactionDate,
     setReactionDate,
-    handleAddEmojiClick
+    handleAddEmojiClick,
+    selectedProfile,
+    setSelectedProfile
   };
 
   return <SubmitEmojiContext.Provider value={value}>{children}</SubmitEmojiContext.Provider>;

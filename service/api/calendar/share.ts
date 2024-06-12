@@ -1,3 +1,4 @@
+import { ConsumptionWeatherResponse } from '@/shared/types/response/consumptionWeather';
 import { requestFetch } from '../fetchOptions';
 import { FriendData } from '@/shared/types/budgetCalendarType';
 import { RegretSpendingResponse } from '@/shared/types/response/regretSpending';
@@ -22,5 +23,18 @@ export const getConsumptionRegret = (
   const url = memberId
     ? `/consumption/regret?year=${year}&month=${month}&memberId=${memberId}`
     : `/consumption/regret?year=${year}&month=${month}`;
+  return requestFetch(url, {}, BASE_URL);
+};
+
+/**
+ *
+ * @returns 소비 날씨 통계
+ */
+export const getConsumptionWeather = (
+  year: number,
+  month: number,
+  memberId?: number
+): Promise<ConsumptionWeatherResponse> => {
+  const url = `/consumption/weather?year=${year}&month=${month}&memberId=${memberId}`;
   return requestFetch(url, {}, BASE_URL);
 };
