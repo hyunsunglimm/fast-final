@@ -36,11 +36,11 @@ const LookAloneContainer = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('displayMode', newDisplayMode);
     router.prefetch(`${pathname}?${params.toString()}`);
-    // if (newDisplayMode === '캘린더 보기' && calendarRef.current) {
-    //   window.scrollTo({ top: calendarRef.current.offsetTop - headerHeight, behavior: 'smooth' });
-    // } else if (newDisplayMode === '내역 보기' && listRef.current) {
-    //   window.scrollTo({ top: listRef.current.offsetTop - headerHeight, behavior: 'smooth' });
-    // }
+    if (newDisplayMode === '캘린더 보기' && calendarRef.current) {
+      window.scrollTo({ top: calendarRef.current.offsetTop - headerHeight, behavior: 'smooth' });
+    } else if (newDisplayMode === '내역 보기' && listRef.current) {
+      window.scrollTo({ top: listRef.current.offsetTop - headerHeight, behavior: 'smooth' });
+    }
   };
 
   // const handleScroll = useCallback(() => {
