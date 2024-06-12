@@ -17,7 +17,7 @@ const CardsToCompare = ({ isSelected, onSelect, card }: CardsToCompareProps) => 
 
   return (
     <Card
-      className={`p-24 ${isSelected && 'relative ring-1 ring-primary'}`}
+      className={`p-24 ${isSelected && 'relative ring-1 ring-primary'} cursor-pointer`}
       onClick={() => onSelect(card.id)}
     >
       <FlexBox>

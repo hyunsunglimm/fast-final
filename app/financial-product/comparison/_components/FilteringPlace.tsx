@@ -22,7 +22,7 @@ const FilteringPlace = ({
   return (
     <div className={`flex items-center px-20 py-16 ${borderBottom && 'border-b border-gray-100'}`}>
       <div
-        className='relative flex shrink-0 gap-[0.6rem] rounded-xs border border-gray-200 px-[1rem] py-[0.7rem]'
+        className='relative flex shrink-0 cursor-pointer gap-[0.6rem] rounded-xs border border-gray-200 px-[1rem] py-[0.7rem]'
         onClick={() => setOption(option)}
       >
         <Icon src='/icons/financial-product/filter-icon.svg' alt='filter icon' size='16' />
