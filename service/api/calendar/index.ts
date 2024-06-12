@@ -5,6 +5,7 @@ import type {
   SpendingDetailResponse,
   Element
 } from '@/shared/types/response/calendarHistroy';
+import { LastMonthInquiryResponse } from '@/shared/types/response/targetBudget';
 
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
@@ -54,4 +55,19 @@ export const getCalendar = (
     : `/history/calendar?year=${year}&month=${month}`;
 
   return requestFetch(url, {}, BASE_URL);
+};
+
+/**
+ * @returns 목표 예산 설정
+ */
+export const postBudget = (cost: number) => {
+  const requestBody = { cost };
+  return requestFetch('/budget', { method: 'post', body: JSON.stringify(requestBody) }, BASE_URL);
+};
+
+/**
+ * @returns 목표 예산 설정 (저번 달 지출 금액 조회)
+ */
+export const getLastMonthInquiry = (): Promise<LastMonthInquiryResponse> => {
+  return requestFetch('/budget/lastused', {}, BASE_URL);
 };

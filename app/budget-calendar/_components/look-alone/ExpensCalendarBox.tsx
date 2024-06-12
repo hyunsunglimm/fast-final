@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Title from '../common/Title';
 import Icon from '@/components/Icon';
@@ -11,19 +11,29 @@ import WeatherInfoBottomSheet from '../shared/WeatherInfoBottomSheet';
 import { getCalendar } from '@/service/api/calendar';
 import { DailyDataItemType } from '@/shared/types/budgetCalendarType';
 
-const ExpensCalendarBox = () => {
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+type ExpensCalendarBoxProps = {
+  budgetSet: boolean;
+  selectedYear: number;
+  selectedMonth: number;
+  handleYearMonthSelect: (year: number, month: number) => void;
+};
 
-  const handleYearMonthSelect = (year: number, month: number) => {
-    setSelectedYear(year);
-    setSelectedMonth(month);
-  };
-
-  const { data: dailyData = [] } = useQuery<DailyDataItemType[]>({
+const ExpensCalendarBox = ({
+  budgetSet,
+  selectedYear,
+  selectedMonth,
+  handleYearMonthSelect
+}: ExpensCalendarBoxProps) => {
+  const { data: dailyData = [], refetch } = useQuery<DailyDataItemType[]>({
     queryKey: ['getCalendar', selectedYear, selectedMonth],
     queryFn: () => getCalendar(selectedYear, selectedMonth)
   });
+
+  useEffect(() => {
+    if (budgetSet) {
+      refetch();
+    }
+  }, [budgetSet, refetch]);
 
   const [openWeatherInfo, setOpenWeatherInfo] = useState(false);
 
