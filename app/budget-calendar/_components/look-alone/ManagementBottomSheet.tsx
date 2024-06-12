@@ -1,8 +1,12 @@
+import { useQuery } from '@tanstack/react-query';
 import BottomSheet from '@/components/BottomSheet';
 import Text from '@/components/ui/Text';
 import FlexBox from '@/components/ui/FlexBox';
 import Icon from '@/components/Icon';
 import BottomSheetTitle from '../common/BottomSheetTitle';
+import { getBudgetManagement } from '@/service/api/calendar';
+import { formatNumber } from '@/shared/utils/formatNumber';
+import { BudgetManagement } from '@/shared/types/response/targetBudget';
 
 type ManagementBottomSheetProps = {
   showPopup: boolean;
@@ -19,6 +23,12 @@ const ManagementBottomSheet = ({
     setShowPopup(false);
     setModifyPopup(true);
   };
+
+  const { data } = useQuery<BudgetManagement>({
+    queryKey: ['budgetManagement'],
+    queryFn: getBudgetManagement
+  });
+
   return (
     <BottomSheet
       title='목표 관리'
@@ -28,8 +38,8 @@ const ManagementBottomSheet = ({
       onClick={handleButtonClick}
     >
       <BottomSheetTitle
-        title='목표 예산까지 && 400,000원 남았어요'
-        description='하루에 10,000원씩 써야 해요'
+        title={`목표 예산까지 && ${formatNumber(data?.goalCost ?? 0)}원 남았어요`}
+        description={`하루에 ${formatNumber(data?.dailyCost ?? 0)}원씩 써야 해요`}
       />
       <FlexBox className='mt-48 gap-16 text-center' justifyContent='around'>
         <div>
@@ -43,7 +53,7 @@ const ManagementBottomSheet = ({
             예산 초과한 날
           </Text>
           <Text variant='h4' sizes='18' weight='700'>
-            00일
+            {data?.overSpend}일
           </Text>
         </div>
         <div>
@@ -57,7 +67,7 @@ const ManagementBottomSheet = ({
             무지출한 날
           </Text>
           <Text variant='h4' sizes='18' weight='700'>
-            00일
+            {data?.zeroSpend}일
           </Text>
         </div>
       </FlexBox>

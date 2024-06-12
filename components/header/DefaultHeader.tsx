@@ -2,6 +2,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { HTMLAttributes, useState } from 'react';
 import { User } from 'next-auth';
+import { useQueryClient } from '@tanstack/react-query';
 import FlexBox, { flexBoxVariants } from '../ui/FlexBox';
 import Text from '../ui/Text';
 import Image from 'next/image';
@@ -34,8 +35,14 @@ export const DefaultHeader = ({
     [`${defaultColor || 'transparent'}`, '#ffffff']
   );
   const router = useRouter();
+  const queryClient = useQueryClient();
   const fixedClass = isFixed ? 'sticky top-0 z-20' : '';
   const [openDropdown, setOpenDropdown] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    queryClient.removeQueries();
+  };
 
   return (
     <motion.header
@@ -96,7 +103,7 @@ export const DefaultHeader = ({
                 aria-labelledby='menu-button'
               >
                 <TextButton
-                  onClick={() => (userData ? logout() : router.push('/auth/login'))}
+                  onClick={() => (userData ? handleLogout() : router.push('/auth/login'))}
                   type='button'
                   role='menuitem'
                   className='min-w-fit text-14'
