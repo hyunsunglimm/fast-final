@@ -5,7 +5,7 @@ import React from 'react';
 
 const BucketLandingPartOneFourthSection = () => {
   return (
-    <section className='bg-gray-50 pb-[6.4rem]'>
+    <section className='bg-gray-50 pb-[5rem]'>
       <FlexBox flexDirection='col' alignItems='center' className='pt-[6.4rem]'>
         <Image
           src='/images/bucket-landing/part1-speech-bubble-4.webp'
@@ -27,7 +27,7 @@ const BucketLandingPartOneFourthSection = () => {
           alt='상품 선택'
           width={400}
           height={46}
-          className='mt-40 w-[30rem]'
+          className='mt-28 w-[40rem]'
         />
       </FlexBox>
     </section>
