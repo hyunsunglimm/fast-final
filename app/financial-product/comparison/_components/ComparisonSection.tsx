@@ -1,7 +1,7 @@
 'use client';
 
 import Text from '@/components/ui/Text';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useQueryString } from '@/shared/hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '@/components/Spinner';
@@ -10,6 +10,8 @@ import CardsToCompare from './CardsToCompare';
 import BottomButton from './BottomButton';
 import { CardResponseType } from '@/shared/types/response/card';
 import Image from 'next/image';
+import InvalidPopup from './InvalidPopup';
+import ValidPopup from './ValidPopup';
 
 const QUERY_KEY = 'card';
 
@@ -38,6 +40,8 @@ const ComparisonSection = () => {
     }
   });
 
+  const [popupType, setPopupType] = useState<'' | 'valid' | 'invalid'>('');
+
   const selectedCards = queryValues(QUERY_KEY);
 
   const selectedCardsInfo = cardsToCompare?.filter((card) => selectedCards.includes(card.id));
@@ -49,7 +53,22 @@ const ComparisonSection = () => {
     secondCardInfo?.includes(category)
   );
 
-  const isIncomparable = selectedCards.length === 2 && comparableCategories?.length === 0;
+  const isIncomparable =
+    selectedCards.length === 2 && comparableCategories && comparableCategories.length === 0;
+
+  const isComparable =
+    selectedCards.length === 2 && comparableCategories && comparableCategories.length > 0;
+
+  useEffect(() => {
+    if (isIncomparable) setPopupType('invalid');
+    if (isComparable) setPopupType('valid');
+
+    const timer = setTimeout(() => {
+      setPopupType('');
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, [isIncomparable, isComparable]);
 
   useEffect(() => {
     if (selectedCards.length > 2) {
@@ -106,9 +125,13 @@ const ComparisonSection = () => {
           </ul>
         </section>
       )}
+      <InvalidPopup isOpen={popupType === 'invalid'} />
+      <ValidPopup
+        isOpen={popupType === 'valid' && isComparable}
+        count={comparableCategories?.length || 0}
+      />
       <BottomButton
         disabled={selectedCards.length < 2 || isIncomparable}
-        isPopup={isIncomparable}
         path='/financial-product/comparison/select-category'
       >
         비교하기
