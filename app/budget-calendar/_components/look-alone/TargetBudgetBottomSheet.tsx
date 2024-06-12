@@ -7,6 +7,7 @@ import TargetManagementInput from '../common/TargetManagementInput';
 import BottomSheetTitle from '../common/BottomSheetTitle';
 import { getLastMonthInquiry, postBudget } from '@/service/api/calendar';
 import { LastMonthInquiryResponse } from '@/shared/types/response/targetBudget';
+import { formatNumber } from '@/shared/utils/formatNumber';
 
 const TargetBudgetBottomSheet = ({
   showPopup,
@@ -49,7 +50,7 @@ const TargetBudgetBottomSheet = ({
       >
         <BottomSheetTitle
           title='목표 예산을 얼마로 세울까요?'
-          description={`저번 달에 ${amount?.used}원 썼어요`}
+          description={`저번 달에 ${formatNumber(amount?.used ?? 0)}원 썼어요`}
         />
         <TargetManagementInput
           inputValue={inputValue}
