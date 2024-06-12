@@ -39,8 +39,12 @@ const ReactionBottomSheet = () => {
         return (
           <FlexBox key={item.date} className='my-24 w-full gap-x-16'>
             <Icon
-              src={`/icons/weather/weather-${item.weatherImageNo}.svg`}
-              alt='날씨 아이콘'
+              src={
+                item.weatherImageNo
+                  ? `/icons/weather/weather-${item.weatherImageNo}.svg`
+                  : '/icons/weather/weather-none.svg'
+              }
+              alt={item.weatherImageNo ? '날씨 아이콘' : '날씨 없음'}
               size='48'
               className='shrink-0'
             />
