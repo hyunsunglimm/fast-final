@@ -2,6 +2,7 @@ import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type BucketLandingPopupProps = {
   isOpen: boolean;
@@ -44,10 +45,12 @@ const BucketLandingPopup = ({ isOpen, onClose }: BucketLandingPopupProps) => {
             <Text className='mb-40 text-center'>
               나만의 규칙은 버킷리스트를 생성하신 후<br /> 이용이 가능해요
             </Text>
-            <Button className='mb-16'>
-              <Text sizes='18' weight='700'>
-                버킷리스트 생성하기
-              </Text>
+            <Button asChild className='mb-16'>
+              <Link href='/create-bucket'>
+                <Text sizes='18' weight='700'>
+                  버킷리스트 생성하기
+                </Text>
+              </Link>
             </Button>
             <Button styled='fill_gray' onClick={onClose}>
               <Text sizes='18' weight='700'>

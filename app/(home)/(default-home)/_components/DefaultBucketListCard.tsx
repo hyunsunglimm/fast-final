@@ -33,7 +33,7 @@ const DefaultBucketListCard = async () => {
       </CardContent>
       <CardFooter>
         <Button asChild size='md' className='text-16 font-600'>
-          <Link href='/bucket-landing' aria-label='버킷 리스트 랜딩페이지로 이동'>
+          <Link href='/bucket-landing?tab=저축생활+1편' aria-label='버킷 리스트 랜딩페이지로 이동'>
             시작하기
           </Link>
         </Button>

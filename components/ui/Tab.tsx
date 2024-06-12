@@ -11,10 +11,11 @@ type TabProps = {
   array: string[];
   type: 'box' | 'underline';
   tabKey: string;
+  srollTop?: boolean;
   onTabChange?: (newViewMode: string) => void;
 };
 
-const Tab = ({ pageParams, array, type, tabKey, onTabChange }: TabProps) => {
+const Tab = ({ pageParams, array, type, tabKey, srollTop = false, onTabChange }: TabProps) => {
   const { searchParams, pathname, queryValue } = useQueryString();
 
   const selectedTab = queryValue(tabKey) || pageParams;
@@ -36,7 +37,7 @@ const Tab = ({ pageParams, array, type, tabKey, onTabChange }: TabProps) => {
       {array.map((label) => {
         return (
           <Link
-            scroll={false}
+            scroll={srollTop}
             href={pathname + '?' + createQueryString(tabKey, label)}
             key={label}
             className={getStyle(type, label === selectedTab)}
