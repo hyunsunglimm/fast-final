@@ -5,7 +5,7 @@ import type {
   SpendingDetailResponse,
   Element
 } from '@/shared/types/response/calendarHistroy';
-import { LastMonthInquiryResponse } from '@/shared/types/response/targetBudget';
+import { BudgetManagement, LastMonthInquiryResponse } from '@/shared/types/response/targetBudget';
 
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
@@ -70,4 +70,11 @@ export const postBudget = (cost: number) => {
  */
 export const getLastMonthInquiry = (): Promise<LastMonthInquiryResponse> => {
   return requestFetch('/budget/lastused', {}, BASE_URL);
+};
+
+/**
+ * @returns 목표 예산 관리
+ */
+export const getBudgetManagement = (): Promise<BudgetManagement> => {
+  return requestFetch('/budget/management', {}, BASE_URL);
 };

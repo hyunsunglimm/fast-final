@@ -7,3 +7,10 @@ export type BudgetInquiryResponse = {
 export type LastMonthInquiryResponse = {
   used: number;
 };
+
+export type BudgetManagement = {
+  goalCost: number;
+  dailyCost: number;
+  overSpend: number;
+  zeroSpend: number;
+};
