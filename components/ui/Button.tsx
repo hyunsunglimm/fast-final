@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/twMerge';
 import { VariantProps, cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-export const buttonVariants = cva('flex items-center justify-center active:opacity-90', {
+export const buttonVariants = cva('flex items-center justify-center active:opacity-90 transition', {
   variants: {
     size: {
       xs: 'h-[3.2rem] rounded-xs px-12 text-12',
