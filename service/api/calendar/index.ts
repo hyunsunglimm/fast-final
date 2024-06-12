@@ -78,3 +78,11 @@ export const getLastMonthInquiry = (): Promise<LastMonthInquiryResponse> => {
 export const getBudgetManagement = (): Promise<BudgetManagement> => {
   return requestFetch('/budget/management', {}, BASE_URL);
 };
+
+/**
+ * @returns 목표 예산 수정
+ */
+export const patchBudget = (cost: number) => {
+  const requestBody = { cost };
+  return requestFetch('/budget', { method: 'PATCH', body: JSON.stringify(requestBody) }, BASE_URL);
+};
