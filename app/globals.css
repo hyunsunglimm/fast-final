@@ -1,7 +1,36 @@
 @tailwind base;
+@font-face {
+  font-family: 'Suit';
+  src: url('https://d1i4t0v3ws2guw.cloudfront.net/font/SUIT-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Suit';
+  src: url('https://d1i4t0v3ws2guw.cloudfront.net/font/SUIT-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Suit';
+  src: url('https://d1i4t0v3ws2guw.cloudfront.net/font/SUIT-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Suit';
+  src: url('https://d1i4t0v3ws2guw.cloudfront.net/font/SUIT-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Suit';
+  src: url('https://d1i4t0v3ws2guw.cloudfront.net/font/SUIT-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
 @tailwind components;
 @tailwind utilities;
-
 * {
   box-sizing: border-box;
 }

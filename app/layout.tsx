@@ -3,7 +3,6 @@ import './globals.css';
 import QueryProviders from '@/shared/context/queryProvider';
 import AuthProvider from '@/shared/context/authProvider';
 import Navbar from '@/components/Navbar';
-import { suit } from './font';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
@@ -18,9 +17,7 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang='ko' className='hide-scrollbar bg-gray-200'>
-      <body
-        className={`${suit.className} relative mx-auto overflow-y-scroll tracking-tight text-black xs:w-[520px]`}
-      >
+      <body className='relative mx-auto overflow-y-scroll font-suit tracking-tight text-black xs:w-[520px]'>
         <AuthProvider>
           <QueryProviders>
             {children}
