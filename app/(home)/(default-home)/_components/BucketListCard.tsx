@@ -28,6 +28,8 @@ const BucketListCard = ({ bucket }: { bucket: BucketResponseType }) => {
           alt='버킷리스트'
           title='버킷리스트 이미지'
           priority
+          decoding='async'
+          fetchPriority='high'
           onLoad={onLoadImage}
           quality={onload ? '100' : '10'}
           className='pointer-events-none h-[15.5rem] w-[15.5rem]'
