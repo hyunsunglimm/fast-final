@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm, FormProvider } from 'react-hook-form';
 import BottomSheet from '@/components/BottomSheet';
 import { FormValues, TargetBudgetBottomSheetProps } from '@/shared/types/budgetCalendarType';
@@ -15,6 +15,7 @@ const TargetBudgetBottomSheet = ({
   setBudgetSet
 }: TargetBudgetBottomSheetProps) => {
   const methods = useForm<FormValues>();
+  const queryClient = useQueryClient();
   const [inputValue, setInputValue] = useState('');
 
   const handleButtonClick = async () => {
@@ -24,6 +25,10 @@ const TargetBudgetBottomSheet = ({
       await postBudget(numericValue);
       setShowPopup(false);
       setBudgetSet(true);
+
+      queryClient.removeQueries({ queryKey: ['budgetManagement'] });
+      queryClient.removeQueries({ queryKey: ['getCalendar'] });
+      queryClient.refetchQueries({ queryKey: ['consumptionweather'] });
     }
   };
 
