@@ -46,7 +46,7 @@ const YearMonthDropdown = ({ selectedYear, selectedMonth, onSelect }: YearMonthD
         <li
           key={`${year}-${month}`}
           onClick={() => handleYearMonthSelect(year, month)}
-          className='py-4'
+          className='cursor-pointer py-4'
         >
           {String(year).slice(2)}년 {month}월
         </li>
@@ -56,7 +56,11 @@ const YearMonthDropdown = ({ selectedYear, selectedMonth, onSelect }: YearMonthD
 
   return (
     <div className='relative' ref={dropdownRef}>
-      <FlexBox alignItems='center' onClick={handleToggleDropdown} className='text-16 font-700'>
+      <FlexBox
+        alignItems='center'
+        onClick={handleToggleDropdown}
+        className='cursor-pointer text-16 font-700'
+      >
         {selectedYear !== new Date().getFullYear() ? `${String(selectedYear).slice(2)}년 ` : null}
         {selectedMonth}월
         <Icon

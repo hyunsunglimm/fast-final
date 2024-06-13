@@ -54,6 +54,8 @@ const ExpenseItem = ({ data, onClick }: ExpenseItemProps) => {
         };
       });
 
+      queryClient.removeQueries({ queryKey: ['regret'] });
+
       queryClient.setQueryData(['calendarHistory'], {
         pages: updatedPages,
         pageParams: previousRegret.pageParams

@@ -27,6 +27,8 @@ const DefaultBucketListCard = async () => {
           alt='버킷리스트'
           title='버킷리스트 이미지'
           priority
+          decoding='async'
+          fetchPriority='high'
           quality={100}
           className='pointer-events-none absolute bottom-8 right-0 h-[17.5rem] w-[17.4rem]'
         />
