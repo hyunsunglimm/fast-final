@@ -11,6 +11,7 @@ import ManagementBottomSheet from './ManagementBottomSheet';
 import { getBudgetInquiry } from '@/service/api/budget';
 import { BudgetInquiryResponse } from '@/shared/types/response/targetBudget';
 import LoadingBackdrop from '@/components/ui/LoadingBackdrop';
+import useThrottle from '@/shared/hooks/useThrottle';
 const TargetModifyBottomSheet = dynamic(() => import('./TargetModifyBottomSheet'), { ssr: false });
 const ExpensListBox = dynamic(() => import('./ExpensListBox'), { ssr: false });
 const TargetBudgetBottomSheet = dynamic(() => import('./TargetBudgetBottomSheet'), { ssr: false });
@@ -77,32 +78,35 @@ const LookAloneContainer = () => {
     }
   };
 
-  const handleScroll = useCallback(() => {
-    if (calendarRef.current && listRef.current) {
-      const calendarTop = calendarRef.current.getBoundingClientRect().top;
-      const listTop = listRef.current.getBoundingClientRect().top;
-      const tabHeight = headerHeight; // 헤더 높이
+  const handleScroll = useThrottle(
+    useCallback(() => {
+      if (calendarRef.current && listRef.current) {
+        const calendarTop = calendarRef.current.getBoundingClientRect().top;
+        const listTop = listRef.current.getBoundingClientRect().top;
+        const tabHeight = headerHeight; // 헤더 높이
 
-      if (
-        calendarTop <= tabHeight &&
-        calendarTop >= -calendarRef.current.offsetHeight + tabHeight
-      ) {
-        setDisplayMode('캘린더 보기');
-        if (displayMode !== '캘린더 보기') {
-          const params = new URLSearchParams(searchParams.toString());
-          params.set('displayMode', '캘린더 보기');
-          router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-        }
-      } else if (listTop <= tabHeight && listTop >= -listRef.current.offsetHeight + tabHeight) {
-        setDisplayMode('내역 보기');
-        if (displayMode !== '내역보기') {
-          const params = new URLSearchParams(searchParams.toString());
-          params.set('displayMode', '내역 보기');
-          router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+        if (
+          calendarTop <= tabHeight &&
+          calendarTop >= -calendarRef.current.offsetHeight + tabHeight
+        ) {
+          setDisplayMode('캘린더 보기');
+          if (displayMode !== '캘린더 보기') {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set('displayMode', '캘린더 보기');
+            router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+          }
+        } else if (listTop <= tabHeight && listTop >= -listRef.current.offsetHeight + tabHeight) {
+          setDisplayMode('내역 보기');
+          if (displayMode !== '내역보기') {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set('displayMode', '내역 보기');
+            router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+          }
         }
       }
-    }
-  }, [displayMode, headerHeight, pathname, router, searchParams]);
+    }, [displayMode, headerHeight, pathname, router, searchParams]),
+    300
+  );
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);

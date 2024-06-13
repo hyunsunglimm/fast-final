@@ -6,6 +6,7 @@ import type {
   Element
 } from '@/shared/types/response/calendarHistroy';
 import { BudgetManagement, LastMonthInquiryResponse } from '@/shared/types/response/targetBudget';
+import { returnDate } from '@/shared/utils/dateUtils';
 
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
@@ -13,8 +14,13 @@ const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
  * @returns 가계부 소비내역 리스트
  */
 export const getCalendarHistroy = (page: number): Promise<CalendarHistroyResponse> => {
+  const { year, month, day } = returnDate();
+
+  const curentMonth = month < 10 ? `0${month}` : month;
+  const currentDay = day < 10 ? '0{day}' : day;
+
   return requestFetch(
-    `/history?startDate=2024-01-01&endDate=2024-06-30&page=${page}&size=10`,
+    `/history?startDate=2024-01-01&endDate=${year}-${curentMonth}-${currentDay}&page=${page}&size=10`,
     {},
     BASE_URL
   );
