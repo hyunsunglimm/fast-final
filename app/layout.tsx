@@ -21,12 +21,12 @@ const RootLayout = async ({
         <AuthProvider>
           <QueryProviders>
             {children}
+            <SpeedInsights />
             <Navbar />
             <ReactQueryDevtools />
           </QueryProviders>
         </AuthProvider>
       </body>
-      <SpeedInsights />
     </html>
   );
 };
