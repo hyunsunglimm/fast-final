@@ -14,13 +14,13 @@ const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
  * @returns 가계부 소비내역 리스트
  */
 export const getCalendarHistroy = (page: number): Promise<CalendarHistroyResponse> => {
-  const { month, day } = returnDate();
+  const { year, month, day } = returnDate();
 
   const curentMonth = month < 10 ? `0${month}` : month;
   const currentDay = day < 10 ? '0{day}' : day;
 
   return requestFetch(
-    `/history?startDate=2024-01-01&endDate=2024-${curentMonth}-${currentDay}&page=${page}&size=10`,
+    `/history?startDate=2024-01-01&endDate=${year}-${curentMonth}-${currentDay}&page=${page}&size=10`,
     {},
     BASE_URL
   );
