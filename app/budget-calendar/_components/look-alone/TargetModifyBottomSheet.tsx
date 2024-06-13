@@ -27,6 +27,7 @@ const TargetModifyBottomSheet = ({
       onClose();
       queryClient.removeQueries({ queryKey: ['budgetManagement'] });
       queryClient.removeQueries({ queryKey: ['getCalendar'] });
+      queryClient.refetchQueries({ queryKey: ['consumptionweather'] });
       document.body.style.overflow = '';
     }
   };

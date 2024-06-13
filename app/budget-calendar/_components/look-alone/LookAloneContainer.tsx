@@ -119,6 +119,9 @@ const LookAloneContainer = () => {
     return <LoadingBackdrop />;
   }
 
+  const isCurrentMonth =
+    selectedYear === new Date().getFullYear() && selectedMonth === new Date().getMonth() + 1;
+
   return (
     <>
       <div className='sticky top-[4.4rem] z-20 bg-white px-20 pb-24 pt-16'>
@@ -139,12 +142,14 @@ const LookAloneContainer = () => {
             onClick={() => setShowPopup(true)}
           />
         ) : (
-          <BudgetBanner
-            icon={true}
-            text='목표 예산을 설정할까요?'
-            showArrow={true}
-            onClick={() => setShowPopup(true)}
-          />
+          isCurrentMonth && (
+            <BudgetBanner
+              icon={true}
+              text='목표 예산을 설정할까요?'
+              showArrow={true}
+              onClick={() => setShowPopup(true)}
+            />
+          )
         )}
         <ExpensCalendarBox
           budgetSet={budgetSet}
