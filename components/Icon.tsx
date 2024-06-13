@@ -93,6 +93,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
         )}
         {...divProps}
         ref={ref}
+        role='img'
       >
         <Image
           aria-hidden
