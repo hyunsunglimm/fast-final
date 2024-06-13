@@ -4,6 +4,8 @@ import QueryProviders from '@/shared/context/queryProvider';
 import AuthProvider from '@/shared/context/authProvider';
 import Navbar from '@/components/Navbar';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'PORKO',
@@ -23,6 +25,8 @@ const RootLayout = async ({
             {children}
             <Navbar />
             <ReactQueryDevtools />
+            <SpeedInsights />
+            <Analytics />
           </QueryProviders>
         </AuthProvider>
       </body>
