@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    loader: 'custom',
+    unoptimized: true,
     minimumCacheTTL: 86400,
     path: '',
-    loaderFile: './shared/utils/imageLoader.ts',
     remotePatterns: [
       {
         protocol: 'https',
