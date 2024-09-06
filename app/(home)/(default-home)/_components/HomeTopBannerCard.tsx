@@ -66,7 +66,7 @@ const Banner = ({ headText, content, icon }: BannerProps) => {
           height={94}
           priority
           quality='90'
-          className='pointer-events-none '
+          className='pointer-events-none'
         />
       </FlexBox>
     </Card>
