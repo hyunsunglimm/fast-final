@@ -163,14 +163,14 @@ export const CARD_BENEFIT_CATEGORIES = [
 ];
 
 export const CARD_COMPANIES = [
-  { title: 'KB국민카드', iconPath: '/images/financial-product/card-company-logo/logo-kb.webp' },
-  { title: 'BC카드', iconPath: '/images/financial-product/card-company-logo/logo-bc.webp' },
-  { title: 'IBK기업은행', iconPath: '/images/financial-product/card-company-logo/logo-ibk.webp' },
-  { title: '신한카드', iconPath: '/images/financial-product/card-company-logo/logo-shinhan.webp' },
-  { title: 'NH농협카드', iconPath: '/images/financial-product/card-company-logo/logo-nh.webp' },
-  { title: '현대카드', iconPath: '/images/financial-product/card-company-logo/logo-hyundai.webp' },
-  { title: '우리카드', iconPath: '/images/financial-product/card-company-logo/logo-woori.webp' },
-  { title: '삼성카드', iconPath: '/images/financial-product/card-company-logo/logo-samsung.webp' },
-  { title: '하나카드', iconPath: '/images/financial-product/card-company-logo/logo-hana.webp' },
-  { title: '롯데카드', iconPath: '/images/financial-product/card-company-logo/logo-lotte.webp' }
+  { title: 'KB국민카드', iconPath: '/images/financial-product/card-company-logo/logo-kb.png' },
+  { title: 'BC카드', iconPath: '/images/financial-product/card-company-logo/logo-bc.png' },
+  { title: 'IBK기업은행', iconPath: '/images/financial-product/card-company-logo/logo-ibk.png' },
+  { title: '신한카드', iconPath: '/images/financial-product/card-company-logo/logo-shinhan.png' },
+  { title: 'NH농협카드', iconPath: '/images/financial-product/card-company-logo/logo-nh.png' },
+  { title: '현대카드', iconPath: '/images/financial-product/card-company-logo/logo-hyundai.png' },
+  { title: '우리카드', iconPath: '/images/financial-product/card-company-logo/logo-woori.png' },
+  { title: '삼성카드', iconPath: '/images/financial-product/card-company-logo/logo-samsung.png' },
+  { title: '하나카드', iconPath: '/images/financial-product/card-company-logo/logo-hana.png' },
+  { title: '롯데카드', iconPath: '/images/financial-product/card-company-logo/logo-lotte.png' }
 ];

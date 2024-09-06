@@ -31,7 +31,7 @@ const BottomButton = ({
         src={
           isGradationWhite
             ? '/images/bucket-landing/bottom-gradation-white.webp'
-            : '/images/financial-product/bottom-gradation.webp'
+            : '/images/financial-product/bottom-gradation.png'
         }
         alt='바텀 그라데이션'
         width={500}

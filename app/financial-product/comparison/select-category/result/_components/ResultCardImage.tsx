@@ -17,7 +17,7 @@ const ResultCardImage = ({ imageUrl, alt }: ResultCardImageProps) => {
         priority
       />
       <Image
-        src='/images/financial-product/shadow.webp'
+        src='/images/financial-product/shadow.png'
         alt='카드 그림자 이미지'
         width={400}
         height={288}

@@ -65,10 +65,10 @@ const SwiperWrapper = forwardRef<{ next: () => void }, SwiperWrapperProps>(
             justifyContent='between'
             className='absolute top-1/2 z-10 w-full translate-y-[-5rem] px-20'
           >
-            <div onClick={() => sliderRef.current?.slidePrev()}>
+            <div onClick={() => sliderRef.current?.slidePrev()} className='cursor-pointer'>
               <Icon src='/icons/system-icon/arrow/arrow-left.svg' alt='이전 버튼' />
             </div>
-            <div onClick={() => sliderRef.current?.slideNext()}>
+            <div onClick={() => sliderRef.current?.slideNext()} className='cursor-pointer'>
               <Icon src='/icons/system-icon/arrow/arrow-right.svg' alt='다음 버튼' />
             </div>
           </FlexBox>
