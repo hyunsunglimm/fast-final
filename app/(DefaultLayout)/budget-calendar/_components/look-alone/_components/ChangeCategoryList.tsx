@@ -1,8 +1,8 @@
 import Text from '@/components/ui/Text';
 import Icon from '@/components/Icon';
-import { categoryImgConfig } from '@/app/budget-calendar/utils/categoryImgConfig';
 import { useState } from 'react';
 import { SpendingDetailResponse } from '@/shared/types/response/calendarHistroy';
+import { categoryImgConfig } from '../../../utils/categoryImgConfig';
 
 type ChangeCategoryListProps = {
   expenseDetailData: SpendingDetailResponse | undefined;

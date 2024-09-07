@@ -1,5 +1,4 @@
-import RoundedSkeleton from '@/app/create-bucket/_components/RoundedSkeleton';
-import React from 'react';
+import RoundedSkeleton from '@/app/(DefaultLayout)/create-bucket/_components/RoundedSkeleton';
 
 const ExpensListSkeleton = () => {
   return (

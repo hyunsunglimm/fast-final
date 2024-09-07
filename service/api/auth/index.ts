@@ -1,8 +1,8 @@
 import * as z from 'zod';
 import { requestFetch } from '../fetchOptions';
-import { loginSchema } from '@/app/auth/schema/loginSchema';
 import { LoginResponse, CheckEmailDuplicateResponse } from '@/shared/types/response/auth';
-import { signupSchema } from '@/app/auth/schema/signupSchema';
+import { loginSchema } from '@/app/(DefaultLayout)/auth/schema/loginSchema';
+import { signupSchema } from '@/app/(DefaultLayout)/auth/schema/signupSchema';
 const BASE_URL = process.env.NEXT_PUBLIC_DEV_URL || '';
 
 export const checkEmailDuplicate = (id: string): Promise<CheckEmailDuplicateResponse> => {

@@ -1,8 +1,8 @@
 'use server';
 import * as z from 'zod';
-import { loginSchema } from '@/app/auth/schema/loginSchema';
 import { signIn, auth, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
+import { loginSchema } from '@/app/(DefaultLayout)/auth/schema/loginSchema';
 
 /**
  *

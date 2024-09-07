@@ -1,8 +1,8 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import Input from '@/components/ui/Input';
-import ClearInputValueIcon from '@/app/auth/_components/ClearInputValueIcon';
 import Text from '@/components/ui/Text';
 import { TargetManagementInputProps, FormValues } from '@/shared/types/budgetCalendarType';
+import ClearInputValueIcon from '@/app/(DefaultLayout)/auth/_components/ClearInputValueIcon';
 
 const MAX_AMOUNT = 50000000;
 

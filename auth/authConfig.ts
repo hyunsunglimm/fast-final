@@ -1,7 +1,7 @@
 import { type NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { loginSchema } from '@/app/auth/schema/loginSchema';
 import { login } from '@/service/api/auth';
+import { loginSchema } from '@/app/(DefaultLayout)/auth/schema/loginSchema';
 
 export default {
   providers: [

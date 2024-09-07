@@ -1,6 +1,6 @@
 import { client } from '@/sanity/lib/client';
 import { requestFetch } from '../fetchOptions';
-import { StateType } from '@/app/create-bucket/types';
+import { StateType } from '@/app/(DefaultLayout)/create-bucket/types';
 
 export const spendBookQueryFn = () => {
   return requestFetch('/api/bucket/spendbook');

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import '@/app/globals.css';
 import QueryProviders from '@/shared/context/queryProvider';
 import AuthProvider from '@/shared/context/authProvider';
 import Navbar from '@/components/Navbar';

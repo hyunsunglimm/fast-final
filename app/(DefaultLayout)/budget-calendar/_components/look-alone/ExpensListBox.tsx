@@ -9,7 +9,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getCalendarHistroy } from '@/service/api/calendar';
 import ExpensDetailBottomSheet from './_components/ExpensDetailBottomSheet';
 import ExpensListSkeleton from './_components/ExpensListSkeleton';
-import RoundedSkeleton from '@/app/create-bucket/_components/RoundedSkeleton';
+import RoundedSkeleton from '@/app/(DefaultLayout)/create-bucket/_components/RoundedSkeleton';
 
 const ExpensListBox = () => {
   const {

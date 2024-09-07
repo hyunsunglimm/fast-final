@@ -2,9 +2,9 @@ import { useState } from 'react';
 import BottomSheet from '@/components/BottomSheet';
 import { useQuery } from '@tanstack/react-query';
 import { getSpendingDetail } from '@/service/api/calendar';
-import MyWalletSkeleton from '@/app/(home)/(default-home)/_components/MyWalletSkeleton';
 import ChangeCategoryList from './ChangeCategoryList';
 import ExpenseDetails from './ExpenseDetails';
+import MyWalletSkeleton from '@/app/(DefaultLayout)/(home)/(default-home)/_components/MyWalletSkeleton';
 
 type ExpenseDetailBottomSheetProps = {
   historyId: string;

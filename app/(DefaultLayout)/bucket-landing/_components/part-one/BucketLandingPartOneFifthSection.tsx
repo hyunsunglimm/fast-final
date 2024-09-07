@@ -1,4 +1,4 @@
-import BottomButton from '@/app/financial-product/comparison/_components/BottomButton';
+import BottomButton from '@/app/(DefaultLayout)/financial-product/comparison/_components/BottomButton';
 import Icon from '@/components/Icon';
 import FlexBox from '@/components/ui/FlexBox';
 import Text from '@/components/ui/Text';

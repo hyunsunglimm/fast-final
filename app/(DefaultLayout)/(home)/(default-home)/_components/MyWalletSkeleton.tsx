@@ -1,4 +1,4 @@
-import RoundedSkeleton from '@/app/create-bucket/_components/RoundedSkeleton';
+import RoundedSkeleton from '@/app/(DefaultLayout)/create-bucket/_components/RoundedSkeleton';
 
 const MyWalletSkeleton = () => {
   return (

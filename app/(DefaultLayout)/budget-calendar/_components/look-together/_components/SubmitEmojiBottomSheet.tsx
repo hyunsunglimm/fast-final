@@ -1,4 +1,3 @@
-import React from 'react';
 import BottomSheet from '@/components/BottomSheet';
 import * as unicodeEmoji from 'unicode-emoji';
 import Text from '@/components/ui/Text';
@@ -9,9 +8,10 @@ import { returnDate } from '@/shared/utils/dateUtils';
 import {
   useSubmitEmojiContext,
   MY_MEMBER_ID
-} from '@/app/budget-calendar/context/SubmitEmojiProvider';
+} from '@/app/(DefaultLayout)/budget-calendar/context/SubmitEmojiProvider';
 
 import { cn } from '@/shared/utils/twMerge';
+import React from 'react';
 
 const SubmitEmojiBottomSheet = () => {
   const groupBy = 'category';
