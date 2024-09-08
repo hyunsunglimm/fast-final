@@ -70,17 +70,14 @@ const ComparisonSection = () => {
     return () => clearTimeout(timer);
   }, [isIncomparable, isComparable]);
 
-  useEffect(() => {
-    if (selectedCards.length > 2) {
-      params.delete(QUERY_KEY, selectedCards[0]);
-      router.push(pathname + '?' + params.toString(), { scroll: false });
-    }
-  }, [selectedCards, pathname, router, params]);
-
   const onSelect = (cardId: string) => {
-    if (selectedCards.includes(cardId)) {
+    const isSelected = selectedCards.includes(cardId);
+
+    if (isSelected) {
       params.delete(QUERY_KEY, cardId);
     } else {
+      if (selectedCards.length >= 2) params.delete(QUERY_KEY, selectedCards[0]);
+
       params.append(QUERY_KEY, cardId);
     }
 
