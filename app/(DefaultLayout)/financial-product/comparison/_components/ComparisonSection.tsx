@@ -150,7 +150,7 @@ const Warning = () => {
       </Text>
       <Text className='text-gray-500'>카드사와 필터링을 다시 선택해주세요</Text>
       <Image
-        src='/images/not-found-porko-gray.webp'
+        src='/images/not-found-porko-gray.png'
         alt='not found porko'
         width={400}
         height={183}
